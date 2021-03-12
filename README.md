@@ -35,3 +35,6 @@ https://www.youtube.com/channel/UCvVI-89_pIrYlT4Dex7vtfA
 
 Contact
 dannygaray60@gmail.com
+
+#Note:
+Only Source code is under MIT license. The assets (images, music, sprites etc) aren't free
