@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/xandria_damage3.wav-9e8cb8ad055a0ac658c495bb77b8dcdb.sample"
+
+[deps]
+
+source_file="res://assets/voice/xandria_damage3.wav"
+dest_files=[ "res://.import/xandria_damage3.wav-9e8cb8ad055a0ac658c495bb77b8dcdb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

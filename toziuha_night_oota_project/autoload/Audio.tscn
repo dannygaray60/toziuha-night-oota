@@ -1,0 +1,101 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://assets/sfx/jump.wav" type="AudioStream" id=1]
+[ext_resource path="res://autoload/Audio.gd" type="Script" id=2]
+[ext_resource path="res://assets/sfx/foot_floor.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/bgm/nameless_symphony_loop.ogg" type="AudioStream" id=4]
+[ext_resource path="res://assets/sfx/slide.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sfx/chains.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/voice/xandria_attack1.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/voice/xandria_attack_up.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/voice/xandria_attack_fast.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/voice/xandria_attack2.wav" type="AudioStream" id=10]
+[ext_resource path="res://assets/voice/xandria_damage1.wav" type="AudioStream" id=11]
+[ext_resource path="res://assets/voice/xandria_damage2.wav" type="AudioStream" id=12]
+[ext_resource path="res://assets/voice/xandria_damage3.wav" type="AudioStream" id=13]
+[ext_resource path="res://assets/sfx/hit_player.wav" type="AudioStream" id=14]
+[ext_resource path="res://assets/voice/xandria_death_large.wav" type="AudioStream" id=15]
+
+[node name="Audio" type="Node"]
+script = ExtResource( 2 )
+
+[node name="sfx" type="Node" parent="."]
+
+[node name="jump" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 1 )
+volume_db = 2.0
+bus = "Effects"
+
+[node name="whip_woosh" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 1 )
+volume_db = 2.0
+pitch_scale = 0.8
+bus = "Effects"
+
+[node name="backdash" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 1 )
+volume_db = 2.0
+pitch_scale = 0.7
+bus = "Effects"
+
+[node name="slide" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 5 )
+bus = "Effects"
+
+[node name="foot_floor" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 3 )
+pitch_scale = 0.7
+bus = "Effects"
+
+[node name="chains" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 6 )
+volume_db = 1.0
+bus = "Effects"
+
+[node name="hit-player" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 14 )
+pitch_scale = 0.86
+bus = "Effects"
+
+[node name="music" type="Node" parent="."]
+
+[node name="nameless_symphony" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 4 )
+volume_db = 2.5
+bus = "Music"
+
+[node name="voice" type="Node" parent="."]
+
+[node name="xandria-attack1" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 7 )
+bus = "Voice"
+
+[node name="xandria-attack2" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 10 )
+bus = "Voice"
+
+[node name="xandria-attackfast" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 9 )
+bus = "Voice"
+
+[node name="xandria-up" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 8 )
+bus = "Voice"
+
+[node name="xandria-damage1" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 11 )
+bus = "Voice"
+
+[node name="xandria-damage2" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 12 )
+volume_db = -1.0
+bus = "Voice"
+
+[node name="xandria-damage3" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 13 )
+volume_db = -2.0
+bus = "Voice"
+
+[node name="xandria-death" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 15 )
+bus = "Voice"

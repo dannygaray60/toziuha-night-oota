@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/xandria_attack2.wav-f3946d634b6311f0fb3d74f2b41fae81.sample"
+
+[deps]
+
+source_file="res://assets/voice/xandria_attack2.wav"
+dest_files=[ "res://.import/xandria_attack2.wav-f3946d634b6311f0fb3d74f2b41fae81.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/foot_floor.wav-6c240f49cdcec6abad19438b843ae767.sample"
+
+[deps]
+
+source_file="res://assets/sfx/foot_floor.wav"
+dest_files=[ "res://.import/foot_floor.wav-6c240f49cdcec6abad19438b843ae767.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

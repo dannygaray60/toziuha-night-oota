@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/xandria_yes.wav-7b0c0ecf44639a8541405bdc8d83ef46.sample"
+
+[deps]
+
+source_file="res://assets/voice/xandria_yes.wav"
+dest_files=[ "res://.import/xandria_yes.wav-7b0c0ecf44639a8541405bdc8d83ef46.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

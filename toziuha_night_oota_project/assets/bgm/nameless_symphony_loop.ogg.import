@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/nameless_symphony_loop.ogg-1ccec391f36ee3c96ce2a09860a98551.oggstr"
+
+[deps]
+
+source_file="res://assets/bgm/nameless_symphony_loop.ogg"
+dest_files=[ "res://.import/nameless_symphony_loop.ogg-1ccec391f36ee3c96ce2a09860a98551.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

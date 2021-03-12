@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/xandria_not_for_me.wav-d0daa5c21c6641ba6c6ba0e8ad5f4e56.sample"
+
+[deps]
+
+source_file="res://assets/voice/xandria_not_for_me.wav"
+dest_files=[ "res://.import/xandria_not_for_me.wav-d0daa5c21c6641ba6c6ba0e8ad5f4e56.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

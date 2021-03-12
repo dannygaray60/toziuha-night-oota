@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/xandria_no_way.wav-30625e080f29765a9c4e722da0997afc.sample"
+
+[deps]
+
+source_file="res://assets/voice/xandria_no_way.wav"
+dest_files=[ "res://.import/xandria_no_way.wav-30625e080f29765a9c4e722da0997afc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
