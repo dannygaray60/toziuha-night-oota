@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://fonts_tres/DamageIndicatorPlayer.tres" type="DynamicFont" id=1]
+[ext_resource path="res://objects/ui/DamageIndicator.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="DamageIndicator" type="Node2D"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+z_index = 2
+script = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/show = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Txt" type="Label" parent="."]
+margin_left = -49.0
+margin_top = -29.0
+margin_right = 49.0
+margin_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 1 )
+text = "00"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

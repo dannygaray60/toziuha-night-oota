@@ -7,6 +7,7 @@ offsets = PoolRealArray( 0, 0.493421, 1 )
 colors = PoolColorArray( 1, 0, 0, 1, 0.480469, 0.00187683, 0.00187683, 1, 0.9375, 0.0256348, 0.0256348, 1 )
 
 [node name="BloodParticle" type="CPUParticles2D"]
+z_index = 1
 emitting = false
 amount = 40
 one_shot = true

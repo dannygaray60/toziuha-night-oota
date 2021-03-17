@@ -303,9 +303,9 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=19]
-length = 0.9
+length = 1.35
 loop = true
-step = 0.01
+step = 0.09
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -313,7 +313,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.06, 0.12, 0.18, 0.24, 0.3, 0.36, 0.42, 0.48, 0.54, 0.6, 0.66, 0.72, 0.78, 0.84 ),
+"times": PoolRealArray( 0, 0.09, 0.18, 0.27, 0.36, 0.45, 0.54, 0.63, 0.72, 0.81, 0.9, 0.99, 1.08, 1.17, 1.26 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 ]
@@ -572,7 +572,11 @@ graph_offset = Vector2( 59.7339, -577.702 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=91]
 
-[node name="Xandria" type="KinematicBody2D"]
+[node name="Xandria" type="KinematicBody2D" groups=[
+"player",
+]]
+z_index = 1
+collision_mask = 46
 script = ExtResource( 1 )
 __meta__ = {
 "_editor_description_": ".05 accel"
@@ -589,7 +593,6 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 vframes = 16
 hframes = 16
-frame = 32
 
 [node name="RayCastRampFront" type="RayCast2D" parent="Sprite"]
 position = Vector2( 5.921, 28.943 )
@@ -597,6 +600,7 @@ rotation = -1.5708
 scale = Vector2( 0.291, 0.616 )
 enabled = true
 cast_to = Vector2( 0, 5.421 )
+collision_mask = 14
 
 [node name="RayCastRampBack" type="RayCast2D" parent="Sprite"]
 position = Vector2( -6.033, 28.943 )
@@ -604,6 +608,7 @@ rotation = 1.5708
 scale = Vector2( 0.291, 0.616 )
 enabled = true
 cast_to = Vector2( 0, 5.421 )
+collision_mask = 14
 
 [node name="RayCastUp" type="RayCast2D" parent="Sprite"]
 position = Vector2( 0, 2.35 )
@@ -611,6 +616,13 @@ rotation = 3.14159
 scale = Vector2( 0.732, 1 )
 enabled = true
 cast_to = Vector2( 0, 4.562 )
+collision_mask = 14
+
+[node name="RayCastDown" type="RayCast2D" parent="Sprite"]
+position = Vector2( 0, 32.63 )
+scale = Vector2( 0.772, 0.304 )
+enabled = true
+collision_mask = 14
 
 [node name="XandriaWeapon" parent="Sprite" instance=ExtResource( 3 )]
 position = Vector2( 18.491, 16.474 )
@@ -648,6 +660,11 @@ shape = SubResource( 1 )
 position = Vector2( -0.023, -14.465 )
 shape = SubResource( 2 )
 disabled = true
+
+[node name="Tween" type="Tween" parent="."]
+__meta__ = {
+"_editor_description_": "para darle una animacion de moverse hacia arriba al morir"
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack = SubResource( 3 )

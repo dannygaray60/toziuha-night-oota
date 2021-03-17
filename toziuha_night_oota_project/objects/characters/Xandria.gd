@@ -1,7 +1,14 @@
 extends KinematicBody2D
 
+signal dead
+signal damaged
+signal stamina_loss
+
 var blood_particle = preload("res://objects/particles/BloodParticle.tscn")
 var blood_particle_instance = null
+
+var damage_indicator = preload("res://objects/ui/DamageIndicator.tscn")
+var damage_indicator_instance = null
 
 const FLOOR_NORMAL = Vector2.UP
 const SNAP_DIRECTION = Vector2.DOWN
@@ -70,8 +77,6 @@ func _ready():
 	set_body_collision()
 	anim_state_machine = $AnimationTree.get("parameters/playback")
 	anim_current = anim_state_machine.get_current_node()
-	
-	Input.add_joy_mapping("030000004c0500006802000000000000,Generic PS3 Controller Custom,platform:Windows,a:b14,b:b13,x:b15,y:b12,back:b1,start:b2,leftstick:-a0,rightstick:+a2,leftshoulder:b10,rightshoulder:b11,dpup:b4,dpdown:b6,dpleft:b7,dpright:b5,-leftx:+a1,+leftx:+a0,-lefty:-a1,-rightx:-a2,righty:a3,lefttrigger:b8,righttrigger:b9,", true)
 
 #debug
 func _process(_delta):
@@ -84,6 +89,8 @@ func _process(_delta):
 	ScreenDebugger.dict["Facing"] = str( facing )
 	ScreenDebugger.dict["Scale_X"] = str( $Sprite.scale.x )
 	ScreenDebugger.dict["OnFloor"] = str( is_on_floor() )
+	ScreenDebugger.dict["OnWall"] = str( is_on_wall() )
+	ScreenDebugger.dict["RycastDown"] = str( $Sprite/RayCastDown.is_colliding() )
 	
 
 
@@ -107,13 +114,21 @@ func _physics_process(delta):
 	#movimiento general en Y
 	velocity.y = move_and_slide_with_snap(velocity,snap_vector,FLOOR_NORMAL,stop_on_slope,4,SLOPE_THRESHOLD).y
 	
+	#nota: por alguna razón raycastdown funciona al revés no tengo idea
+	
 	#movimiento automatico en backdash
 	if state == "backdash" and is_on_floor():
-		velocity.x -= (40 * facing) + abs(velocity.y)
-		
+		if !$Sprite/RayCastDown.is_colliding():
+			velocity.x -= (40 * facing)
+		else:
+			velocity.x -= (15 * facing)
+			
 	#y movimiento para slide
 	if state == "slide" and is_on_floor():
-		velocity.x += (40 * facing) - abs(velocity.y)
+		if !$Sprite/RayCastDown.is_colliding():
+			velocity.x += (40 * facing)
+		else:
+			velocity.x += (8 * facing)
 		
 	_check_states()
 	
@@ -139,9 +154,7 @@ func _physics_process(delta):
 		
 		if collision.collider.is_in_group("enemies"):
 			var cpos = collision.collider.get_position()
-			#hurt(collision.collider.id,cpos)
-#		if collision.collider.is_in_group("enemy"):
-#			pass
+			hurt(collision.collider.id,cpos)
 
 
 func _get_input():
@@ -171,9 +184,13 @@ func _get_input():
 	if Input.is_action_just_pressed("ui_cancel"):
 		_attack()
 		
+	#accion para arroja un item curativo
+	if Input.is_action_pressed("ui_up") and Input.is_action_just_pressed("ui_accept"):
+		_throw_health_item()
+		
 		
 	#salto
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_accept") and !Input.is_action_pressed("ui_up"):
 		_jump()
 	else:
 		#si no pulsamos btn salto, hay snap para pegar al jugador al suelo inclinado
@@ -190,11 +207,7 @@ func _get_input():
 			position = Vector2(position.x,position.y+1)
 		elif can_slide:
 			_slide()
-		
-	#provocar herida manualmente
-	if Input.is_action_just_pressed("ui_focus_next"):
-		hurt()
-		
+
 	#provocar muerte
 	if Input.is_action_just_pressed("ui_focus_next") and Input.is_action_pressed("ui_up"):
 		death()
@@ -224,7 +237,11 @@ func _move():
 	#si hay pulsacion
 	elif direction.x != 0:
 		velocity.x = lerp(velocity.x,direction.x*(speed*run_vel_multiplier),acceleration)
-		
+
+func _throw_health_item():
+#	state = "attack"
+#	anim_state_machine.start("attack")
+	pass		
 
 func _backdash():
 	if state != "slide" and state != "attack-crouch" and is_on_floor() and state != "backdash" and state != "crouch" and anim_current != "backdash" and anim_current != "pos-backdash" and can_backdash:
@@ -313,6 +330,9 @@ func _check_states():
 			change_state("idle")
 	else:
 		
+		if state == "idle" and anim_current == "hurt":
+			change_state("idle")
+		
 		#corregir estado hurt, manteniendo abajo presionado y tocando el suelo
 		if state == "hurt" and Input.is_action_pressed("ui_down") and is_on_floor():
 			change_state("idle")
@@ -332,18 +352,61 @@ func _check_states():
 		if !is_on_floor() and velocity.y>0 and state!="fall":
 			change_state("fall")
 
-func hurt():
+#variable id del colisionador y posicion del mismo
+func hurt(enemy_id=null,hurt_pos=null):
 	
 	if state == "hurt" or $TimerNoHurt.get_time_left() != 0:
 		return
 		
+	Audio.play_sfx("hit-player")
+		
+	$Sprite/XandriaWeapon.cancel()	
+	
+	var damage = 0
+	#calculo de daño y mostrarlo
+	if enemy_id != null:
+		damage = Vars.enemy[enemy_id]["atk"] - Vars.player["def"]
+		#evitar valores negativos
+		if damage < 0:
+			damage = 0
+		#establecer daño en hp
+		Vars.player["hp_now"] = Functions.get_value(Vars.player["hp_now"],"-",damage)
+	
+	#emitir señal de daño luego de haberlo calculado
+	emit_signal("damaged")
+	
 	#screen shake
 	get_node("PlayerCamera").add_trauma(0.5)
+	
+	#muerte del jugador el resto del codigo no se ejecutará
+	if Vars.player["hp_now"] < 1:
+		death()
+		emit_signal("dead")
+		return
+	
+	damage_indicator_instance = damage_indicator.instance()
+	damage_indicator_instance.set_damage(damage)
+	damage_indicator_instance.position = $Sprite/BloodPosition/Pos6.global_position
+	get_parent().add_child(damage_indicator_instance)
 		
+	#dar invencibilidad
+	nohurt()
+
 	emit_blood()
 	
-	nohurt()
-	$Sprite/XandriaWeapon.cancel()
+	#empujamos al jugador en posicion contraria al del enemigo
+	velocity.x = 0
+	direction.x = 0
+	
+	if hurt_pos.x > get_position().x:
+		facing = 1
+		$Sprite.scale.x = 1
+		velocity.x += (70 * -1)
+	else:
+		facing = -1
+		$Sprite.scale.x = -1
+		velocity.x += (70 * 1)
+	
 	#la animacion solo será cuando no estemos agachados y tocando techo
 	if !$Sprite/RayCastUp.is_colliding():
 		change_state("hurt")
@@ -352,9 +415,6 @@ func hurt():
 		snap_vector = Vector2.ZERO
 		velocity += Vector2.UP * 240
 	
-	velocity.x = 0
-	velocity.x -= (70 * facing)
-	
 	#sonido
 	var voices = ["xandria-damage1","xandria-damage2","xandria-damage3"]
 	var selected_voice = 0
@@ -362,9 +422,11 @@ func hurt():
 	selected_voice = randi() % 3
 	Audio.play_voice(voices[selected_voice])
 	
-	Audio.play_sfx("hit-player")
 	
 func death():
+	
+	enable_collision_with_danger(false)
+	
 	Audio.play_voice("xandria-death")
 	
 	#tomado de hurt()
@@ -376,11 +438,34 @@ func death():
 	set_physics_process(false)
 	set_process_input(false)
 	set_process(false)
+	
+	var end_pos = position
+	end_pos.y -= 50
+	$Tween.interpolate_property(self,"position",position,end_pos,5,
+	Tween.TRANS_LINEAR,Tween.TRANS_LINEAR)
+	$Tween.start()
 
-#tiempo de invisibilidad
-func nohurt():
-	$TimerNoHurt.start()
+#activar invencibilidad por x tiempo en segundos
+func nohurt(time=1.5):
+	$TimerNoHurt.start(time)
 	$Sprite.self_modulate.a = .5
+	enable_collision_with_danger(false)
+	
+#funcion para activar o desactivar colissions que hacen daño al jugador
+func enable_collision_with_danger(v=true):
+	var enemies=get_tree().get_nodes_in_group("enemies")
+#	var proyectiles=get_tree().get_nodes_in_group("proyectiles")
+	#desactivamos o activamos colision contra enemigos
+	#por ejemplo, si el bit (en el editor) es 1, en codigo sera 0
+	set_collision_mask_bit(2,v)
+	#proyectiles
+	for en in enemies:
+		if is_instance_valid(en):
+			en.set_collision_mask_bit(0,v)
+#	for pr in proyectiles:
+#		if is_instance_valid(pr):
+##			pr.set_collision_mask_bit(7,v)
+#			pass
 
 #cambiar estado manualmente
 func change_state(new_state):
@@ -500,3 +585,4 @@ func _on_TimerAttack_timeout():
 #se acaba el tiempo de invisibilidad
 func _on_TimerNoHurt_timeout():
 	$Sprite.self_modulate.a = 1
+	enable_collision_with_danger()

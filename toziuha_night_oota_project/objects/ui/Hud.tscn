@@ -1,26 +1,30 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/sprites/hud.png" type="Texture" id=1]
-[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=2]
-
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 2 )
+[ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/sprites/hp_bar.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/sp_bar.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/ep_bar.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/potion.png" type="Texture" id=6]
+[ext_resource path="res://objects/ui/Hud.gd" type="Script" id=7]
 
 [node name="Hud" type="CanvasLayer"]
+script = ExtResource( 7 )
 
-[node name="Control" type="Control" parent="."]
+[node name="Main" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": false,
+"_editor_description_": "dejar en editor modulate alpha de main en 0 para que no estorbe a la hora de hacer niveles"
 }
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
-self_modulate = Color( 1, 1, 1, 0 )
+[node name="Texture" type="TextureRect" parent="Main"]
 margin_left = 3.0
 margin_top = 5.0
-margin_right = 153.0
-margin_bottom = 45.0
+margin_right = 105.0
+margin_bottom = 110.0
 rect_scale = Vector2( 2, 2 )
 texture = ExtResource( 1 )
 stretch_mode = 3
@@ -28,32 +32,61 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Control/TextureRect"]
-visible = false
-margin_left = 104.854
-margin_top = -0.849733
-margin_right = 144.854
-margin_bottom = 13.1503
-custom_fonts/font = SubResource( 1 )
-text = "000"
-
-[node name="Label2" type="Label" parent="Control/TextureRect"]
-visible = false
-margin_left = 105.236
-margin_top = 14.8832
-margin_right = 145.237
-margin_bottom = 28.8832
-custom_fonts/font = SubResource( 1 )
-text = "000"
-
-[node name="Label3" type="Label" parent="Control/TextureRect"]
-margin_left = 4.25757
-margin_top = 1.40727
-margin_right = 176.258
-margin_bottom = 30.4073
-custom_fonts/font = SubResource( 1 )
-text = "X: Jump   / C : Attack  / Down+X: Slide
-A: Backdash / D: Hurt animation"
+[node name="LblItemNum" type="Label" parent="Main/Texture"]
+margin_left = 11.0
+margin_top = 26.0
+margin_right = 23.0
+margin_bottom = 39.0
+custom_fonts/font = ExtResource( 2 )
+text = "00"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HPBar" type="TextureProgress" parent="Main/Texture"]
+margin_left = 29.0
+margin_top = 2.5
+margin_right = 102.0
+margin_bottom = 7.5
+max_value = 50.0
+value = 30.0
+rounded = true
+texture_progress = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SPBar" type="TextureProgress" parent="Main/Texture"]
+margin_left = 32.2227
+margin_top = 11.1125
+margin_right = 102.223
+margin_bottom = 16.1125
+max_value = 50.0
+value = 40.0
+rounded = true
+texture_progress = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EPBar" type="TextureProgress" parent="Main/Texture"]
+margin_left = 4.54171
+margin_top = 32.708
+margin_right = 9.54171
+margin_bottom = 104.708
+max_value = 50.0
+value = 35.0
+rounded = true
+texture_progress = ExtResource( 5 )
+fill_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Main/Texture"]
+margin_left = 23.0
+margin_top = 16.0
+margin_right = 44.0
+margin_bottom = 39.0
+texture = ExtResource( 6 )
+stretch_mode = 4

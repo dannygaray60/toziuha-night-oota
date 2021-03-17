@@ -27,7 +27,9 @@ config/icon="res://icon.png"
 [autoload]
 
 ScreenDebugger="*res://addons/screen_debugger/S_ScreenDebugger.gd"
+Functions="*res://scripts/functions.gd"
 Audio="*res://autoload/Audio.tscn"
+Vars="*res://scripts/vars.gd"
 
 [display]
 
@@ -117,6 +119,15 @@ ui_end={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="danger"
+2d_physics/layer_3="enemy"
+2d_physics/layer_4="floor_wall"
+2d_physics/layer_5="player_weapon"
+2d_physics/layer_6="enemy_weapon"
 
 [rendering]
 
