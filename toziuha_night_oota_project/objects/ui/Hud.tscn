@@ -1,18 +1,18 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/sprites/hud.png" type="Texture" id=1]
-[ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/sprites/hp_bar.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/sp_bar.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/ep_bar.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/potion.png" type="Texture" id=6]
 [ext_resource path="res://objects/ui/Hud.gd" type="Script" id=7]
+[ext_resource path="res://assets/sprites/hud_status_panel.png" type="Texture" id=8]
+[ext_resource path="res://fonts_tres/DamageIndicatorPlayer.tres" type="DynamicFont" id=9]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource( 7 )
 
 [node name="Main" type="Control" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
@@ -32,12 +32,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LblItemNum" type="Label" parent="Main/Texture"]
+[node name="LblPotionNum" type="Label" parent="Main/Texture"]
 margin_left = 11.0
 margin_top = 26.0
 margin_right = 23.0
 margin_bottom = 39.0
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 9 )
 text = "00"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -69,7 +69,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EPBar" type="TextureProgress" parent="Main/Texture"]
+[node name="EMBar" type="TextureProgress" parent="Main/Texture"]
 margin_left = 4.54171
 margin_top = 32.708
 margin_right = 9.54171
@@ -83,10 +83,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Main/Texture"]
+[node name="TextureHealthItem" type="TextureRect" parent="Main/Texture"]
 margin_left = 23.0
 margin_top = 16.0
 margin_right = 44.0
 margin_bottom = 39.0
 texture = ExtResource( 6 )
 stretch_mode = 4
+
+[node name="TextureStatusPanel" type="TextureRect" parent="Main/Texture"]
+margin_left = 8.70955
+margin_top = 39.0
+margin_right = 53.7096
+margin_bottom = 52.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LblStatus" type="Label" parent="Main/Texture/TextureStatusPanel"]
+margin_top = -1.0
+margin_right = 41.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 9 )
+text = "Healing"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}

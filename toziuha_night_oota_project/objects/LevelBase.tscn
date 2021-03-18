@@ -24,6 +24,6 @@ __meta__ = {
 }
 
 [node name="TimerStaminaRecover" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.02
 [connection signal="tween_all_completed" from="FadeBlack/Tween" to="." method="_on_Tween_tween_all_completed"]
 [connection signal="timeout" from="TimerStaminaRecover" to="." method="_on_TimerStaminaRecover_timeout"]

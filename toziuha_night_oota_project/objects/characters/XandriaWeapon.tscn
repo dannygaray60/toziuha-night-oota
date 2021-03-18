@@ -64,14 +64,13 @@ extents = Vector2( 36.0448, 6.05615 )
 
 [node name="XandriaWeapon" type="Node2D"]
 script = ExtResource( 2 )
-lvl = 2
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 7.49321, -0.486957 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 4
-frame = 2
+frame = 9
 region_rect = Rect2( 0, 0, 512, 256 )
 
 [node name="Animation" type="AnimationPlayer" parent="."]
@@ -87,3 +86,5 @@ collision_mask = 44
 [node name="CollisionLvl2" type="CollisionShape2D" parent="Area"]
 position = Vector2( 12.5949, -0.148651 )
 shape = SubResource( 3 )
+disabled = true
+[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

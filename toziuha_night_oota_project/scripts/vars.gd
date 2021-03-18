@@ -6,19 +6,32 @@ func _ready():
 #------ Variables globales que también podrán guardarse en archivos de partidas
 
 var player = {
-	"atk" : 5,
+	#condicion: good, poison, cursed, healing
+	"condition":"good",
+	#money
+	"money":0,
+	#attack and defense
+	"atk" : 10,
 	"def" : 0,
+	#level of weapon
+	"weapon_lvl":2,
 	#health points
 	"hp_now" : 50,
 	"hp_max" : 50,
 	#stamina points
-	"sp_now" : 50,
-	"sp_max" : 50,
-	#elemental points
-	"ep_now" : 0,
-	"ep_max" : 10,
+	"sp_now" : 100,
+	"sp_max" : 100,
+	#elemental materials, munition to throw subweapon
+	"em_now" : 5,
+	"em_max" : 10,
 	#hacia qué lado mira el jugador: -1 : izquierda, 1 : derecha
 	"facing" : 1,
+	#cantidad maxima de pociones para llevar
+	"potion_max": 5,
+	#y la cantidad actual
+	"potion_now": 0,
+	#cantidad de hp que puede dar la pocion
+	"potion_healing_hp": 2,
 	#habilidad para dar un doble salto
 	"hability_double_jump" : true,
 	#correr al doble de velocidad al hacer doble pulsacion en izq o der
@@ -37,7 +50,7 @@ var enemy = {
 	"skeleton":{
 		"name": "Skeleton",
 		"atk": 40,
-		"hp_max": 50,
+		"hp_max": 20,
 		"description": "Description..."
 		#y aqui una lista de objetos que puede dejar al morir...
 	}

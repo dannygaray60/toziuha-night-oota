@@ -51,6 +51,6 @@ func _on_TimerStaminaRecover_timeout():
 		$TimerStaminaRecover.stop()
 		return
 
-	if player.state in ["idle","crouch","run","fall"]:
+	if player.state in ["idle","crouch","fall","run"]:
 		Vars.player["sp_now"] += 1
 		$Hud.update_stats()

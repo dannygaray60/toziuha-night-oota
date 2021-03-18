@@ -2,13 +2,14 @@ extends KinematicBody2D
 
 signal dead
 signal damaged
+# warning-ignore:unused_signal
 signal stamina_loss
 
 var blood_particle = preload("res://objects/particles/BloodParticle.tscn")
 var blood_particle_instance = null
 
-var damage_indicator = preload("res://objects/ui/DamageIndicator.tscn")
-var damage_indicator_instance = null
+#var damage_indicator = preload("res://objects/ui/DamageIndicator.tscn")
+#var damage_indicator_instance = null
 
 const FLOOR_NORMAL = Vector2.UP
 const SNAP_DIRECTION = Vector2.DOWN
@@ -150,11 +151,14 @@ func _physics_process(delta):
 #				var tile_name = collision.collider.tile_set.tile_get_name(tile_id)
 				#si estamos sobre un tile con onewaycolision
 				is_on_onewaycol = collision.collider.tile_set.tile_get_shape_one_way(tile_id,0)
-		
-		
+
 		if collision.collider.is_in_group("enemies"):
 			var cpos = collision.collider.get_position()
 			hurt(collision.collider.id,cpos)
+			
+		if collision.collider.is_in_group("poison"):
+			Vars.player["condition"] = "poison"
+			emit_signal("stamina_loss")
 
 
 func _get_input():
@@ -186,7 +190,7 @@ func _get_input():
 		
 	#accion para arroja un item curativo
 	if Input.is_action_pressed("ui_up") and Input.is_action_just_pressed("ui_accept"):
-		_throw_health_item()
+		_use_health_item()
 		
 		
 	#salto
@@ -238,14 +242,23 @@ func _move():
 	elif direction.x != 0:
 		velocity.x = lerp(velocity.x,direction.x*(speed*run_vel_multiplier),acceleration)
 
-func _throw_health_item():
-#	state = "attack"
-#	anim_state_machine.start("attack")
-	pass		
+func _use_health_item():
+	#si tenemos al menos una pocion y no nos estamos curando
+	if Vars.player["potion_now"] > 0 and Vars.player["condition"] != "healing":
+		Vars.player["condition"] = "healing"
+		Audio.play_sfx("potion_use")
+		Vars.player["potion_now"] = Functions.get_value(Vars.player["potion_now"],"-",1)
+		$PotionUse/AnimationPlayer.play("show")
+		#iniciar timers
+		$TimerHeal.start()
+		$TimerHealingEnd.start()
+		emit_signal("stamina_loss")
 
 func _backdash():
 	if state != "slide" and state != "attack-crouch" and is_on_floor() and state != "backdash" and state != "crouch" and anim_current != "backdash" and anim_current != "pos-backdash" and can_backdash:
 		$TimerBackdash.start()
+		Vars.player["sp_now"] = Functions.get_value(Vars.player["sp_now"],"-",30)
+		emit_signal("stamina_loss")
 		$Sprite/XandriaWeapon.cancel()
 		Audio.play_voice("xandria-up")
 		Audio.play_sfx("backdash")
@@ -255,6 +268,8 @@ func _slide():
 	if is_on_floor() and state == "crouch" and anim_current != "attack" and can_slide:
 		if anim_current == "backdash":
 			return
+		Vars.player["sp_now"] = Functions.get_value(Vars.player["sp_now"],"-",30)
+		emit_signal("stamina_loss")
 		$TimerSlide.start()
 		Audio.play_sfx("slide")
 		change_state("slide")
@@ -273,6 +288,8 @@ func _jump():
 	if (!can_double_jump and num_jumps == 0) or (can_double_jump and num_jumps <= 1):
 		Audio.play_sfx("jump")
 		if num_jumps > 0:
+			Vars.player["sp_now"] = Functions.get_value(Vars.player["sp_now"],"-",30)
+			emit_signal("stamina_loss")
 			anim_state_machine.start("jump2")
 
 		change_state("jump")
@@ -381,13 +398,9 @@ func hurt(enemy_id=null,hurt_pos=null):
 	#muerte del jugador el resto del codigo no se ejecutará
 	if Vars.player["hp_now"] < 1:
 		death()
-		emit_signal("dead")
 		return
-	
-	damage_indicator_instance = damage_indicator.instance()
-	damage_indicator_instance.set_damage(damage)
-	damage_indicator_instance.position = $Sprite/BloodPosition/Pos6.global_position
-	get_parent().add_child(damage_indicator_instance)
+
+	Functions.show_damage_indicator(damage,$Sprite/BloodPosition/Pos6.global_position,"black")
 		
 	#dar invencibilidad
 	nohurt()
@@ -424,7 +437,7 @@ func hurt(enemy_id=null,hurt_pos=null):
 	
 	
 func death():
-	
+	emit_signal("dead")
 	enable_collision_with_danger(false)
 	
 	Audio.play_voice("xandria-death")
@@ -470,10 +483,18 @@ func enable_collision_with_danger(v=true):
 #cambiar estado manualmente
 func change_state(new_state):
 	
-	if state == new_state and new_state != "attack" or (state == "hurt" and !is_on_floor()) or (new_state == "idle" and $Sprite/RayCastUp.is_colliding()):
+	#evitar que se cambie a idle mientras estamos en slide
+	if new_state == "idle" and state == "dead":
+		return
+	
+	if state == new_state and new_state != "attack"  or (state == "hurt" and !is_on_floor()) or (new_state == "idle" and $Sprite/RayCastUp.is_colliding()):
 		return
 
 	state = new_state
+	
+	#quitar healing en los siguientes estados
+	if Vars.player["condition"] == "healing" and state in ["attack","attack-crouch","backdash","hurt","slide"]:
+		_on_TimerHealingEnd_timeout()
 	
 	if state in ["crouch","slide","attack-crouch"]:
 		set_body_collision("crouch")
@@ -483,7 +504,7 @@ func change_state(new_state):
 	
 	if state == "jump" and num_jumps > 0:
 		pass
-	elif state in ["backdash","attack","hurt"]:
+	elif state in ["backdash","attack","hurt","dead"]:
 		anim_state_machine.start(new_state)
 	else:
 		#arreglar error al atacar agachado (y que termine el ataque) 
@@ -586,3 +607,24 @@ func _on_TimerAttack_timeout():
 func _on_TimerNoHurt_timeout():
 	$Sprite.self_modulate.a = 1
 	enable_collision_with_danger()
+
+
+#curar de poco a poco
+func _on_TimerHeal_timeout():
+	
+	if Vars.player["hp_now"] < Vars.player["hp_max"]:
+		Vars.player["hp_now"] += Vars.player["potion_healing_hp"]
+		Functions.show_damage_indicator(Vars.player["potion_healing_hp"],$Sprite/BloodPosition/Pos6.global_position,"blue")
+	#eliminar excedente
+	if Vars.player["hp_now"] > Vars.player["hp_max"]:
+		Vars.player["hp_now"] = Vars.player["hp_max"]
+	#si se ha llegado el topo de hp max
+	if (Vars.player["hp_now"] == Vars.player["hp_max"]) or state in ["hurt","dead"]:
+		_on_TimerHealingEnd_timeout()
+	#enviar señal para actualizar hud
+	emit_signal("stamina_loss")
+	
+func _on_TimerHealingEnd_timeout():
+	Vars.player["condition"] = "good"
+	$TimerHeal.stop()
+	emit_signal("stamina_loss")

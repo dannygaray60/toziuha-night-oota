@@ -1,9 +1,26 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=98 format=2]
 
 [ext_resource path="res://objects/characters/Xandria.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/xandria_beta.png" type="Texture" id=2]
 [ext_resource path="res://objects/characters/XandriaWeapon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/PlayerCamera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sprites/Vfx_potion_use.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=92]
+resource_name = "show"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.97 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+}
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.92596, 21.2475 )
@@ -568,7 +585,7 @@ states/slide/position = Vector2( -160.424, -665.873 )
 transitions = [ "idle", "pre-run", SubResource( 39 ), "pre-run", "run", SubResource( 40 ), "run", "pos-run", SubResource( 41 ), "changedir", "run", SubResource( 42 ), "pre-run", "changedir", SubResource( 43 ), "fall", "jump2", SubResource( 44 ), "fall", "jump", SubResource( 45 ), "jump", "jump2", SubResource( 46 ), "changedir", "idle", SubResource( 47 ), "pos-run", "idle", SubResource( 48 ), "pre-run", "pos-run", SubResource( 49 ), "pos-run", "pre-run", SubResource( 50 ), "run", "changedir", SubResource( 51 ), "pos-run", "changedir", SubResource( 52 ), "jump", "pos-jump", SubResource( 53 ), "pos-jump", "fall", SubResource( 54 ), "jump2", "pos-jump", SubResource( 55 ), "idle", "jump", SubResource( 56 ), "pos-run", "jump", SubResource( 57 ), "pre-run", "jump", SubResource( 58 ), "run", "jump", SubResource( 59 ), "fall", "run", SubResource( 60 ), "pos-jump", "run", SubResource( 61 ), "changedir", "jump", SubResource( 62 ), "pos-jump", "pos-run", SubResource( 63 ), "pre-run", "crouch", SubResource( 64 ), "crouch", "idle", SubResource( 65 ), "changedir", "crouch", SubResource( 66 ), "fall", "crouch", SubResource( 67 ), "pos-jump", "crouch", SubResource( 68 ), "pos-jump", "jump", SubResource( 69 ), "idle", "backdash", SubResource( 70 ), "backdash", "pos-backdash", SubResource( 71 ), "pos-backdash", "idle", SubResource( 72 ), "pos-backdash", "jump", SubResource( 73 ), "pos-backdash", "crouch", SubResource( 74 ), "crouch", "slide", SubResource( 75 ), "slide", "pos-slide", SubResource( 76 ), "pos-slide", "slide", SubResource( 77 ), "pos-slide", "idle", SubResource( 78 ), "slide", "pos-jump", SubResource( 79 ), "slide", "pre-run", SubResource( 80 ), "idle", "attack", SubResource( 81 ), "attack", "idle", SubResource( 82 ), "crouch", "attack-crouch", SubResource( 83 ), "attack-crouch", "pos-slide", SubResource( 84 ), "pos-slide", "attack-crouch", SubResource( 85 ), "changedir", "pre-run", SubResource( 86 ), "idle", "hurt", SubResource( 87 ), "hurt", "pos-run", SubResource( 88 ), "idle", "dead", SubResource( 89 ) ]
 start_node = "idle"
 end_node = "dead"
-graph_offset = Vector2( 59.7339, -577.702 )
+graph_offset = Vector2( -103.872, -1003.13 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=91]
 
@@ -588,11 +605,26 @@ can_backdash = true
 [node name="PlayerCamera" parent="." instance=ExtResource( 4 )]
 target = NodePath("..")
 
+[node name="PotionUse" type="Node2D" parent="."]
+position = Vector2( 0.0783129, -24 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PotionUse"]
+anims/show = SubResource( 92 )
+
+[node name="Sprite" type="Sprite" parent="PotionUse"]
+position = Vector2( 0.0783129, 0 )
+z_index = 1
+texture = ExtResource( 5 )
+vframes = 3
+hframes = 5
+frame = 10
+
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 vframes = 16
 hframes = 16
+frame = 4
 
 [node name="RayCastRampFront" type="RayCast2D" parent="Sprite"]
 position = Vector2( 5.921, 28.943 )
@@ -716,7 +748,22 @@ one_shot = true
 __meta__ = {
 "_editor_description_": "tiempo en el que el personaje no colisiona con enemigos y peligros"
 }
+
+[node name="TimerHeal" type="Timer" parent="."]
+wait_time = 0.5
+__meta__ = {
+"_editor_description_": "tiempo para recibir x cantidad de hp"
+}
+
+[node name="TimerHealingEnd" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+__meta__ = {
+"_editor_description_": "cantidad de tiempo total para recibir healing"
+}
 [connection signal="timeout" from="TimerBackdash" to="." method="_on_TimerBackdash_timeout"]
 [connection signal="timeout" from="TimerSlide" to="." method="_on_TimerSlide_timeout"]
 [connection signal="timeout" from="TimerAttack" to="." method="_on_TimerAttack_timeout"]
 [connection signal="timeout" from="TimerNoHurt" to="." method="_on_TimerNoHurt_timeout"]
+[connection signal="timeout" from="TimerHeal" to="." method="_on_TimerHeal_timeout"]
+[connection signal="timeout" from="TimerHealingEnd" to="." method="_on_TimerHealingEnd_timeout"]
