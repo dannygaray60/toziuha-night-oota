@@ -1,0 +1,14 @@
+[gd_scene format=2]
+
+[node name="Timers" type="Node"]
+__meta__ = {
+"_editor_description_": "timers persistentes"
+}
+
+[node name="AutomaticChangeToGoodCondition" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+__meta__ = {
+"_editor_description_": "al estar en una condicion
+\"poison\" o \"cursed\" cambiar a good automaticamente"
+}

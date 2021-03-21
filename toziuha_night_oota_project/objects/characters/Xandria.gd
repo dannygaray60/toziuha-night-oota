@@ -75,9 +75,13 @@ var was_on_floor = true
 var is_on_onewaycol = false
 
 func _ready():
+	
 	set_body_collision()
+	
 	anim_state_machine = $AnimationTree.get("parameters/playback")
 	anim_current = anim_state_machine.get_current_node()
+	
+	Timers.get_node("AutomaticChangeToGoodCondition").connect("timeout",self,"_return_to_good_condition")
 
 #debug
 func _process(_delta):
@@ -97,6 +101,11 @@ func _process(_delta):
 
 func _physics_process(delta):
 	
+	if is_on_floor() and (get_floor_velocity().x!=0 or get_floor_velocity().y!=0):
+		stop_on_slope = false
+	else:
+		stop_on_slope = true
+	
 	was_on_floor = is_on_floor()
 	
 	anim_current = anim_state_machine.get_current_node()
@@ -113,10 +122,9 @@ func _physics_process(delta):
 	velocity.y += gravity*delta
 	
 	#movimiento general en Y
-	velocity.y = move_and_slide_with_snap(velocity,snap_vector,FLOOR_NORMAL,stop_on_slope,4,SLOPE_THRESHOLD).y
+	velocity = move_and_slide_with_snap(velocity,snap_vector,FLOOR_NORMAL,stop_on_slope,4,SLOPE_THRESHOLD)
 	
 	#nota: por alguna razón raycastdown funciona al revés no tengo idea
-	
 	#movimiento automatico en backdash
 	if state == "backdash" and is_on_floor():
 		if !$Sprite/RayCastDown.is_colliding():
@@ -157,8 +165,7 @@ func _physics_process(delta):
 			hurt(collision.collider.id,cpos)
 			
 		if collision.collider.is_in_group("poison"):
-			Vars.player["condition"] = "poison"
-			emit_signal("stamina_loss")
+			change_condition("poison")
 
 
 func _get_input():
@@ -571,6 +578,12 @@ func emit_blood(random=false):
 	get_parent().add_child(blood_particle_instance)
 	blood_particle_instance.emit()
 
+func change_condition(new_condition="good"):
+	if new_condition in ["poison","cursed"]:
+		Timers.get_node("AutomaticChangeToGoodCondition").start()
+	Vars.player["condition"] = new_condition
+	emit_signal("stamina_loss")
+
 #al acabarse el backdash
 func _on_TimerBackdash_timeout():
 	if state != "hurt" or state != "dead":
@@ -628,3 +641,8 @@ func _on_TimerHealingEnd_timeout():
 	Vars.player["condition"] = "good"
 	$TimerHeal.stop()
 	emit_signal("stamina_loss")
+
+#pasado un tiempo luego de estar poison o cursed se regresará a good
+func _return_to_good_condition():
+	if Vars.player["condition"] in ["poison","cursed"]:
+		Vars.player["condition"] = "good"

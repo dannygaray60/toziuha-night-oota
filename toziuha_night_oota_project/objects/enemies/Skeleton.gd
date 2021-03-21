@@ -83,8 +83,7 @@ func _physics_process(delta):
 			collision.collider.hurt(id,position)
 			#si este cuerpo lleva veneno
 			if self.is_in_group("poison"):
-				Vars.player["condition"] = "poison"
-				collision.collider.emit_signal("stamina_loss")
+				collision.collider.change_condition("poison")
 
 func change_state(new_state):
 	if state != new_state:
