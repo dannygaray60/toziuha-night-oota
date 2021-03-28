@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://screens/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/img/temporal_background.jpg" type="Texture" id=2]
+[ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://fonts_tres/DamageIndicatorPlayer.tres" type="DynamicFont" id=4]
+[ext_resource path="res://screens/ui_elements/SocialAndSupportLinks.tscn" type="PackedScene" id=5]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.36737
+margin_top = 1.12247
+margin_right = 3.36737
+margin_bottom = 1.12247
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 341, 192 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnStart" type="Button" parent="."]
+margin_right = 172.0
+margin_bottom = 38.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+text = "Start Scene 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnStart2" type="Button" parent="."]
+margin_left = 180.793
+margin_right = 352.793
+margin_bottom = 38.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_fonts/font = SubResource( 1 )
+text = "Start Scene 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 17.0
+margin_top = -114.0
+margin_right = 156.0
+margin_bottom = -5.0
+custom_fonts/font = ExtResource( 4 )
+text = "Move =              Arrow Keys
+X =                  Jump
+C =                  Attack
+Up + Jump =        Use potion
+A =                  Backdash
+Down + Jump =     Slide
+Up + D = 	           Return to Menu
+P = 			              	  Show/Hide Debug panel"
+
+[node name="VBoxContainer" parent="." instance=ExtResource( 5 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -226.0
+margin_top = -224.0
+margin_right = -26.0
+margin_bottom = -48.0
+[connection signal="pressed" from="BtnStart" to="." method="_on_BtnStart_pressed"]
+[connection signal="pressed" from="BtnStart2" to="." method="_on_BtnStart2_pressed"]

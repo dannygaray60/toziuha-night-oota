@@ -89,6 +89,10 @@ scale = Vector2( 5.71704, 4.29111 )
 [node name="TimerToChangeFacing" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="TimerHurt" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 [connection signal="animation_finished" from="Vfx_TornadoStatic/AnimationPlayer" to="." method="_on_Vfx_TornadoStatic_AnimationPlayer_animation_finished"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

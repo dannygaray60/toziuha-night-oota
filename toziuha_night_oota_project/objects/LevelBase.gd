@@ -1,8 +1,15 @@
 extends Node
 
+export(String, "silence","rondo_of_darkness","nameless_symphony", "cave_theme") var music
+
 var player = null
 
 func _ready():
+	
+	if music == "silence":
+		Audio.stop_music()
+	else:
+		Audio.play_music(music)
 	
 	#obtener al jugador
 	player = get_tree().get_nodes_in_group("player")
@@ -17,15 +24,15 @@ func _ready():
 	#connect signals
 	player.connect("damaged",self,"_on_player_damage")
 	player.connect("dead",self,"_on_player_death")
-	player.connect("stamina_loss",self,"_on_stamina_loss")
+	player.connect("stats_changed",self,"_on_stats_changed")
 	
 	#comprobar stamina al inicio y recuperarla
 	if Vars.player["sp_now"] < Vars.player["sp_max"]:
-		_on_stamina_loss()
+		_on_stats_changed()
 
 
 #cuando jugador pierde stamina
-func _on_stamina_loss():
+func _on_stats_changed():
 	$Hud.update_stats()
 	$TimerStaminaRecover.start()
 

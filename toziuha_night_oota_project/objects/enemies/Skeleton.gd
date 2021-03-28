@@ -92,16 +92,17 @@ func change_state(new_state):
 
 
 func hurt(damage,weapon_position):
-	
-	Audio.play_sfx("hit1")
-	var indicator_position = Vector2(global_position.x,weapon_position.y)
-	Functions.show_damage_indicator(damage,indicator_position,"red")
-	
-	#damage calcule
-	hp_now -= damage
-	
-	if hp_now <= 0:
-		die()
+	if $TimerHurt.get_time_left() == 0:
+		$TimerHurt.start()
+		Audio.play_sfx("hit1")
+		var indicator_position = Vector2(global_position.x,weapon_position.y)
+		Functions.show_damage_indicator(damage,indicator_position,"red")
+		
+		#damage calcule
+		hp_now -= damage
+		
+		if hp_now <= 0:
+			die()
 
 
 func die():

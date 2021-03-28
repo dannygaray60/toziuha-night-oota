@@ -1,0 +1,136 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/img/social_icons/twitter.png" type="Texture" id=1]
+[ext_resource path="res://assets/img/social_icons/youtube.png" type="Texture" id=2]
+[ext_resource path="res://assets/img/social_icons/discord.png" type="Texture" id=3]
+[ext_resource path="res://assets/img/social_icons/kofi.png" type="Texture" id=4]
+[ext_resource path="res://assets/img/social_icons/patreon2.png" type="Texture" id=5]
+[ext_resource path="res://assets/img/social_icons/github.png" type="Texture" id=6]
+[ext_resource path="res://assets/img/social_icons/facebook.png" type="Texture" id=7]
+[ext_resource path="res://screens/ui_elements/SocialAndSupportLinks.gd" type="Script" id=8]
+[ext_resource path="res://assets/img/social_icons/itchio.png" type="Texture" id=9]
+
+[node name="SocialAndSupportLinks" type="VBoxContainer"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 18.0
+margin_top = -192.0
+margin_right = 218.0
+margin_bottom = -16.0
+mouse_filter = 2
+custom_constants/separation = 12
+alignment = 1
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Support" type="VBoxContainer" parent="."]
+margin_right = 200.0
+margin_bottom = 122.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/separation = 1
+
+[node name="TextureButton3" type="TextureButton" parent="Support"]
+margin_right = 200.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture_normal = ExtResource( 9 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureButton4" type="TextureButton" parent="Support"]
+margin_top = 41.0
+margin_right = 200.0
+margin_bottom = 81.0
+rect_min_size = Vector2( 0, 40 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture_normal = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+
+[node name="TextureButton2" type="TextureButton" parent="Support"]
+margin_top = 82.0
+margin_right = 200.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 0, 40 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+texture_normal = ExtResource( 5 )
+expand = true
+stretch_mode = 5
+
+[node name="Social" type="HBoxContainer" parent="."]
+margin_top = 134.0
+margin_right = 200.0
+margin_bottom = 176.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureButton" type="TextureButton" parent="Social"]
+margin_right = 36.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource( 7 )
+expand = true
+stretch_mode = 4
+
+[node name="TextureButton2" type="TextureButton" parent="Social"]
+margin_left = 40.0
+margin_right = 77.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource( 1 )
+expand = true
+stretch_mode = 4
+
+[node name="TextureButton3" type="TextureButton" parent="Social"]
+margin_left = 81.0
+margin_right = 118.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource( 2 )
+expand = true
+stretch_mode = 4
+
+[node name="TextureButton4" type="TextureButton" parent="Social"]
+margin_left = 122.0
+margin_right = 159.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource( 3 )
+expand = true
+stretch_mode = 4
+
+[node name="TextureButton5" type="TextureButton" parent="Social"]
+margin_left = 163.0
+margin_right = 200.0
+margin_bottom = 42.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource( 6 )
+expand = true
+stretch_mode = 4
+[connection signal="pressed" from="Support/TextureButton3" to="." method="go_url" binds= [ "https://dannygaray60.itch.io/toziuha-night-order-of-the-alchemists?password=xandria" ]]
+[connection signal="pressed" from="Support/TextureButton4" to="." method="go_url" binds= [ "https://ko-fi.com/dannygaray60" ]]
+[connection signal="pressed" from="Support/TextureButton2" to="." method="go_url" binds= [ "https://www.patreon.com/dannygaray60" ]]
+[connection signal="pressed" from="Social/TextureButton" to="." method="go_url" binds= [ "https://www.facebook.com/toziuhanight/" ]]
+[connection signal="pressed" from="Social/TextureButton2" to="." method="go_url" binds= [ "https://twitter.com/dannygaray60" ]]
+[connection signal="pressed" from="Social/TextureButton3" to="." method="go_url" binds= [ "https://www.youtube.com/channel/UCvVI-89_pIrYlT4Dex7vtfA" ]]
+[connection signal="pressed" from="Social/TextureButton4" to="." method="go_url" binds= [ "https://discord.gg/jygdDzjdya" ]]
+[connection signal="pressed" from="Social/TextureButton5" to="." method="go_url" binds= [ "https://github.com/dannygaray60/toziuha-night-oota" ]]

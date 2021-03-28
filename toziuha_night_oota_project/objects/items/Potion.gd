@@ -11,7 +11,7 @@ func _on_AreaPick_body_entered(body):
 		else:
 			Vars.player["potion_now"] += 1
 			Audio.play_sfx("item_pick1")
-			#la señal stamina_loss del jugador hace que los valores del hud se actualicen
+			#la señal stats_changed del jugador hace que los valores del hud se actualicen
 			#por lo que lo usaremos para mostrar la cantidad de pociones
-			body.emit_signal("stamina_loss")
+			body.emit_signal("stats_changed")
 			queue_free()

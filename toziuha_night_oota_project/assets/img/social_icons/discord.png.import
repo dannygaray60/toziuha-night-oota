@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/xandria_beta.png-788d0e925bac07eec2f445b265cfd4ac.stex"
+path="res://.import/discord.png-817cdd5f7c90ff79c6f7fabcc3ffa235.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/xandria_beta.png"
-dest_files=[ "res://.import/xandria_beta.png-788d0e925bac07eec2f445b265cfd4ac.stex" ]
+source_file="res://assets/img/social_icons/discord.png"
+dest_files=[ "res://.import/discord.png-817cdd5f7c90ff79c6f7fabcc3ffa235.stex" ]
 
 [params]
 
@@ -20,9 +20,9 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
-flags/anisotropic=false
+flags/anisotropic=true
 flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false

@@ -1,6 +1,7 @@
 extends Node
 
 func _ready():
+	#arreglo para mi control generico de PS2
 	Input.add_joy_mapping("030000004c0500006802000000000000,Generic PS3 Controller Custom,platform:Windows,a:b14,b:b13,x:b15,y:b12,back:b1,start:b2,leftstick:-a0,rightstick:+a2,leftshoulder:b10,rightshoulder:b11,dpup:b4,dpdown:b6,dpleft:b7,dpright:b5,-leftx:+a1,+leftx:+a0,-lefty:-a1,-rightx:-a2,righty:a3,lefttrigger:b8,righttrigger:b9,", true)
 
 #------ Variables globales que también podrán guardarse en archivos de partidas
@@ -11,10 +12,10 @@ var player = {
 	#money
 	"money":0,
 	#attack and defense
-	"atk" : 10,
+	"atk" : 5,
 	"def" : 0,
 	#level of weapon
-	"weapon_lvl":2,
+	"weapon_lvl":1,
 	#health points
 	"hp_now" : 50,
 	"hp_max" : 50,
@@ -41,6 +42,10 @@ var player = {
 }
 
 #----- variables globales, no necesarias en un archivo de partida
+
+#guardar hacia que lado mira el jugador (izq: -1 . der: 1)
+#si se deja en cero, el facing será el predeterminado en el script del player
+var player_facing = 0
 
 #el jugador esta en una plataforma que permite bajarse de ella? (one way collision)
 var is_on_onewaycollisionplatform = false

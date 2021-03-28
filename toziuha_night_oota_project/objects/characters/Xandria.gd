@@ -3,18 +3,16 @@ extends KinematicBody2D
 signal dead
 signal damaged
 # warning-ignore:unused_signal
-signal stamina_loss
+signal stats_changed
 
 var blood_particle = preload("res://objects/particles/BloodParticle.tscn")
 var blood_particle_instance = null
-
-#var damage_indicator = preload("res://objects/ui/DamageIndicator.tscn")
-#var damage_indicator_instance = null
 
 const FLOOR_NORMAL = Vector2.UP
 const SNAP_DIRECTION = Vector2.DOWN
 const SNAP_LENGTH = 10#32.0 #se cambio a 10, para evitar que al caer de una baja altura, el cuerpo se pegue inmediatamente al suelo
 #el limite de grados en el que un objeto es considerado suelo
+#despues de 45 será pared...
 const SLOPE_THRESHOLD = deg2rad(46)
 
 #velocidad de movimiento
@@ -43,9 +41,6 @@ export var speed = 100
 #cantidad de saltos realizados
 var num_jumps = 0
 
-#cantidad de ataques realizados, un máximo de 3
-var num_attacks = 0
-
 export var acceleration = 0.1
 export var friction = 0.2
 
@@ -67,20 +62,37 @@ var anim_state_machine
 var anim_current
 
 #hacia cual direccion mira el jugador
-var facing = 1
+export(int,-1,1) var facing = 1
 
 var was_on_floor = true
 
 #el jugador está en una plataforma semisolida?
 var is_on_onewaycol = false
 
+#limites de camara
+export var limit_left_camera = -10000000
+export var limit_top_camera = -10000000
+export var limit_right_camera = 10000000
+export var limit_bottom_camera = 10000000
+
 func _ready():
+
+	#establecer hacia qué lado mira el jugador
+	if Vars.player_facing != 0:
+		facing = Vars.player_facing
+	
+	#colocar limites de camara al nodo camera
+	$PlayerCamera.limit_left = limit_left_camera
+	$PlayerCamera.limit_top = limit_top_camera
+	$PlayerCamera.limit_right = limit_right_camera
+	$PlayerCamera.limit_bottom = limit_bottom_camera
 	
 	set_body_collision()
 	
 	anim_state_machine = $AnimationTree.get("parameters/playback")
 	anim_current = anim_state_machine.get_current_node()
 	
+	# warning-ignore:return_value_discarded
 	Timers.get_node("AutomaticChangeToGoodCondition").connect("timeout",self,"_return_to_good_condition")
 
 #debug
@@ -95,7 +107,8 @@ func _process(_delta):
 	ScreenDebugger.dict["Scale_X"] = str( $Sprite.scale.x )
 	ScreenDebugger.dict["OnFloor"] = str( is_on_floor() )
 	ScreenDebugger.dict["OnWall"] = str( is_on_wall() )
-	ScreenDebugger.dict["RycastDown"] = str( $Sprite/RayCastDown.is_colliding() )
+	ScreenDebugger.dict["RyCstUp"] = str( $Sprite/RayCastUp.is_colliding() )
+	ScreenDebugger.dict["snap_vector"] = str( snap_vector )
 	
 
 
@@ -121,23 +134,21 @@ func _physics_process(delta):
 	#gravedad
 	velocity.y += gravity*delta
 	
-	#movimiento general en Y
-	velocity = move_and_slide_with_snap(velocity,snap_vector,FLOOR_NORMAL,stop_on_slope,4,SLOPE_THRESHOLD)
+
 	
 	#nota: por alguna razón raycastdown funciona al revés no tengo idea
 	#movimiento automatico en backdash
 	if state == "backdash" and is_on_floor():
-		if !$Sprite/RayCastDown.is_colliding():
-			velocity.x -= (40 * facing)
-		else:
-			velocity.x -= (15 * facing)
+#		velocity.x -= (40 * facing)
+		velocity.x = (-170 * facing)
 			
 	#y movimiento para slide
 	if state == "slide" and is_on_floor():
-		if !$Sprite/RayCastDown.is_colliding():
-			velocity.x += (40 * facing)
-		else:
-			velocity.x += (8 * facing)
+#		velocity.x += (40 * facing)
+		velocity.x = (170 * facing)
+
+	#movimiento general en Y
+	velocity.y = move_and_slide_with_snap(velocity,snap_vector,FLOOR_NORMAL,stop_on_slope,4,SLOPE_THRESHOLD).y
 		
 	_check_states()
 	
@@ -219,9 +230,9 @@ func _get_input():
 		elif can_slide:
 			_slide()
 
-	#provocar muerte
+	#regresar  menu principal
 	if Input.is_action_just_pressed("ui_focus_next") and Input.is_action_pressed("ui_up"):
-		death()
+		SceneChanger.change_scene("res://screens/MainMenu.tscn")
 
 	#------- Jump Physics -----------
 	#Player is falling
@@ -259,24 +270,20 @@ func _use_health_item():
 		#iniciar timers
 		$TimerHeal.start()
 		$TimerHealingEnd.start()
-		emit_signal("stamina_loss")
+		emit_signal("stats_changed")
 
 func _backdash():
 	if state != "slide" and state != "attack-crouch" and is_on_floor() and state != "backdash" and state != "crouch" and anim_current != "backdash" and anim_current != "pos-backdash" and can_backdash:
 		$TimerBackdash.start()
-		Vars.player["sp_now"] = Functions.get_value(Vars.player["sp_now"],"-",30)
-		emit_signal("stamina_loss")
 		$Sprite/XandriaWeapon.cancel()
 		Audio.play_voice("xandria-up")
 		Audio.play_sfx("backdash")
 		change_state("backdash")
 
 func _slide():
-	if is_on_floor() and state == "crouch" and anim_current != "attack" and can_slide:
+	if is_on_floor() and state == "crouch" and anim_current != "attack" and anim_current in ["crouch","pos-slide"] and can_slide:
 		if anim_current == "backdash":
 			return
-		Vars.player["sp_now"] = Functions.get_value(Vars.player["sp_now"],"-",30)
-		emit_signal("stamina_loss")
 		$TimerSlide.start()
 		Audio.play_sfx("slide")
 		change_state("slide")
@@ -295,8 +302,6 @@ func _jump():
 	if (!can_double_jump and num_jumps == 0) or (can_double_jump and num_jumps <= 1):
 		Audio.play_sfx("jump")
 		if num_jumps > 0:
-			Vars.player["sp_now"] = Functions.get_value(Vars.player["sp_now"],"-",30)
-			emit_signal("stamina_loss")
 			anim_state_machine.start("jump2")
 
 		change_state("jump")
@@ -535,20 +540,19 @@ func set_body_collision(pose="stand"):
 		$CollisionStand.disabled = false
 		$CollisionCrouch.disabled = true
 		#posicion del arma
-		$Sprite/XandriaWeapon.position = Vector2(18.501,0.483)
+		$Sprite/XandriaWeapon.position = Vector2(21.034,8)
 	elif pose == "crouch":
 		$Sprite/RayCastUp.enabled = true
 		$CollisionStand.disabled = true
 		$CollisionCrouch.disabled = false
 		#posicion del arma
-		$Sprite/XandriaWeapon.position = Vector2(18.491,16.474)
+		$Sprite/XandriaWeapon.position = Vector2(13.094,16.004)
 
 func change_direction(new_dir):
 	
 	#bajo estas condiciones no se permite cambiar la direccion
-	if facing == new_dir:# or (anim_current == "pos-run" and state in ["idle","run"]):
-		return
-			
+	if facing == new_dir:
+		return	
 	#en los siguientes estados no se puede cambiar direccion
 	if state in ["crouch","backdash","slide","attack","attack-crouch"]:
 		return
@@ -557,7 +561,6 @@ func change_direction(new_dir):
 		anim_state_machine.start("changedir")
 
 	#se agregó conidcion para evitar mostrar volteado una animacion antes de changedir
-	#if anim_current != "pos-run":#or anim_current != "slide":
 	$Sprite.scale.x = new_dir
 
 func emit_blood(random=false):
@@ -582,7 +585,7 @@ func change_condition(new_condition="good"):
 	if new_condition in ["poison","cursed"]:
 		Timers.get_node("AutomaticChangeToGoodCondition").start()
 	Vars.player["condition"] = new_condition
-	emit_signal("stamina_loss")
+	emit_signal("stats_changed")
 
 #al acabarse el backdash
 func _on_TimerBackdash_timeout():
@@ -635,14 +638,20 @@ func _on_TimerHeal_timeout():
 	if (Vars.player["hp_now"] == Vars.player["hp_max"]) or state in ["hurt","dead"]:
 		_on_TimerHealingEnd_timeout()
 	#enviar señal para actualizar hud
-	emit_signal("stamina_loss")
+	emit_signal("stats_changed")
 	
 func _on_TimerHealingEnd_timeout():
 	Vars.player["condition"] = "good"
 	$TimerHeal.stop()
-	emit_signal("stamina_loss")
+	emit_signal("stats_changed")
 
 #pasado un tiempo luego de estar poison o cursed se regresará a good
 func _return_to_good_condition():
 	if Vars.player["condition"] in ["poison","cursed"]:
 		Vars.player["condition"] = "good"
+
+
+func _on_Xandria_tree_exiting():
+	#antes de salir del escenario, guardar
+	#hacia qué lado estaba viendo
+	Vars.player_facing = facing

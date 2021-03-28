@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Audio.gd" type="Script" id=2]
@@ -19,6 +19,9 @@
 [ext_resource path="res://assets/sfx/enemy_die1.wav" type="AudioStream" id=17]
 [ext_resource path="res://assets/sfx/item_pick1.wav" type="AudioStream" id=18]
 [ext_resource path="res://assets/sfx/potion_use.wav" type="AudioStream" id=19]
+[ext_resource path="res://assets/sfx/enemy_damage.wav" type="AudioStream" id=20]
+[ext_resource path="res://assets/bgm/cave-theme.ogg" type="AudioStream" id=21]
+[ext_resource path="res://assets/bgm/rondo_of_darkness.ogg" type="AudioStream" id=22]
 
 [node name="Audio" type="Node"]
 script = ExtResource( 2 )
@@ -77,11 +80,25 @@ bus = "Effects"
 stream = ExtResource( 19 )
 bus = "Effects"
 
+[node name="torch_destroyed" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 20 )
+volume_db = 3.714
+pitch_scale = 1.6
+bus = "Effects"
+
 [node name="music" type="Node" parent="."]
 
 [node name="nameless_symphony" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 4 )
 volume_db = 2.5
+bus = "Music"
+
+[node name="cave_theme" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 21 )
+bus = "Music"
+
+[node name="rondo_of_darkness" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 22 )
 bus = "Music"
 
 [node name="voice" type="Node" parent="."]

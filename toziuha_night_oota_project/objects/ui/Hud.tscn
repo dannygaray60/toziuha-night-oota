@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/sprites/hud.png" type="Texture" id=1]
-[ext_resource path="res://assets/sprites/hp_bar.png" type="Texture" id=3]
-[ext_resource path="res://assets/sprites/sp_bar.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/hp_bar_good.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/ep_bar.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/potion.png" type="Texture" id=6]
 [ext_resource path="res://objects/ui/Hud.gd" type="Script" id=7]
@@ -51,20 +50,7 @@ margin_bottom = 7.5
 max_value = 50.0
 value = 30.0
 rounded = true
-texture_progress = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SPBar" type="TextureProgress" parent="Main/Texture"]
-margin_left = 32.2227
-margin_top = 11.1125
-margin_right = 102.223
-margin_bottom = 16.1125
-max_value = 50.0
-value = 40.0
-rounded = true
-texture_progress = ExtResource( 4 )
+texture_progress = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -90,6 +76,9 @@ margin_right = 44.0
 margin_bottom = 39.0
 texture = ExtResource( 6 )
 stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureStatusPanel" type="TextureRect" parent="Main/Texture"]
 margin_left = 8.70955

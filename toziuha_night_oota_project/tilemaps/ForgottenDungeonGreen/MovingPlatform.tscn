@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sprites/forgottendungeon/forgotten_dungeon_green.png" type="Texture" id=1]
-[ext_resource path="res://tilemaps/ForgottenDungeonGreen/MovingPlatform.gd" type="Script" id=2]
+[ext_resource path="res://scripts/MovingPlatform.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 24, 8.19975 )
@@ -11,7 +11,7 @@ _data = {
 "points": PoolVector2Array(  )
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "LoopPathFollow"
 loop = true
 tracks/0/type = "value"
@@ -27,8 +27,7 @@ tracks/0/keys = {
 "values": [ 0.0, 0.99 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "PingPongPathFollow"
+[sub_resource type="Animation" id=4]
 length = 2.0
 loop = true
 tracks/0/type = "value"
@@ -74,5 +73,5 @@ remote_path = NodePath("../../../KinematicBody2D")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
-anims/LoopPathFollow = SubResource( 4 )
-anims/PingPongPathFollow = SubResource( 3 )
+anims/LoopPathFollow = SubResource( 3 )
+anims/PingPongPathFollow = SubResource( 4 )

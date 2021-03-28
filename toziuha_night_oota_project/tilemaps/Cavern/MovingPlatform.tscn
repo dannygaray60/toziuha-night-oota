@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/sprites/cavern/tilemap.png" type="Texture" id=1]
+[ext_resource path="res://scripts/MovingPlatform.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 5.68029 )
+
+[sub_resource type="Curve2D" id=2]
+_data = {
+"points": PoolVector2Array(  )
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "LoopPathFollow"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/PathFollow2D:unit_offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.99 ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Path2D/PathFollow2D:unit_offset")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.99 ]
+}
+
+[node name="MovingPlatform" type="Path2D"]
+curve = null
+script = ExtResource( 2 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+collision_layer = 8
+collision_mask = 79
+motion/sync_to_physics = true
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D"]
+position = Vector2( -0.0289459, 8 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 128, 16, 64, 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 0, 10.1961 )
+shape = SubResource( 1 )
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource( 2 )
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+rotate = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Path2D/PathFollow2D"]
+remote_path = NodePath("../../../KinematicBody2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
+anims/LoopPathFollow = SubResource( 3 )
+anims/PingPongPathFollow = SubResource( 4 )

@@ -21,11 +21,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Toziuha Night - Order of the Alchemists"
-run/main_scene="res://test/LevelTest1.tscn"
+run/main_scene="res://screens/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
+SceneChanger="*res://autoload/SceneChanger.tscn"
 ScreenDebugger="*res://addons/screen_debugger/S_ScreenDebugger.gd"
 Functions="*res://scripts/functions.gd"
 Audio="*res://autoload/Audio.tscn"

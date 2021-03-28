@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/rondo_of_darkness.ogg-31c9e0daf196e46c4402c32280b02bb6.oggstr"
+
+[deps]
+
+source_file="res://assets/bgm/rondo_of_darkness.ogg"
+dest_files=[ "res://.import/rondo_of_darkness.ogg-31c9e0daf196e46c4402c32280b02bb6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

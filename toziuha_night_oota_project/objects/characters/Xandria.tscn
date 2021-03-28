@@ -1,7 +1,7 @@
-[gd_scene load_steps=98 format=2]
+[gd_scene load_steps=100 format=2]
 
 [ext_resource path="res://objects/characters/Xandria.gd" type="Script" id=1]
-[ext_resource path="res://assets/sprites/xandria_beta.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/xandria.png" type="Texture" id=2]
 [ext_resource path="res://objects/characters/XandriaWeapon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/PlayerCamera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/sprites/Vfx_potion_use.png" type="Texture" id=5]
@@ -30,7 +30,7 @@ extents = Vector2( 4.92596, 14.4614 )
 
 [sub_resource type="Animation" id=4]
 length = 0.5
-step = 0.05
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -38,15 +38,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.4, 0.55 ),
+"times": PoolRealArray( 0, 0.04, 0.1, 0.12, 0.21, 0.35, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 123, 124, 125, 126, 129, 130, 131 ]
+"values": [ 95, 89, 90, 92, 93, 94, 95 ]
 }
 
 [sub_resource type="Animation" id=5]
 length = 0.5
-step = 0.05
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -54,10 +54,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.04, 0.1, 0.119984, 0.209953, 0.35, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 146, 140, 141, 142, 143, 144, 145, 146 ]
+"values": [ 87, 81, 82, 84, 85, 86, 87 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -84,10 +84,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.04, 0.08, 0.12, 0.16, 0.2, 0.24 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.06, 0.12, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 109, 110, 111, 112, 113, 114, 115 ]
+"values": [ 105, 106, 107, 108 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -100,13 +100,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.08, 0.1, 0.12, 0.14 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.02, 0.04, 0.06, 0.09, 0.12, 0.14 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 33, 34, 35, 36, 37, 38, 39, 40 ]
+"values": [ 36, 37, 38, 39, 40, 41, 42 ]
 }
 
 [sub_resource type="Animation" id=8]
+length = 0.9
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -115,10 +116,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.25, 0.45, 0.65, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 87, 88, 89, 90, 91, 92, 93, 94, 95, 99 ]
+"values": [ 64, 65, 66, 67, 68, 69, 70 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -131,10 +132,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 161, 162, 163, 162 ]
+"values": [ 108 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -159,9 +160,21 @@ tracks/1/keys = {
 "method": "emit_blood"
 } ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0.65098, 0.192157, 0.192157, 1 ) ]
+}
 
 [sub_resource type="Animation" id=10]
-length = 0.4
+length = 0.3
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -170,10 +183,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 83, 84, 85, 86 ]
+"values": [ 60, 61, 62 ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -184,14 +197,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.4, 0.6, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 151, 152, 153, 154, 155, 156 ]
+"values": [ 105, 106, 107, 108 ]
 }
 
 [sub_resource type="Animation" id=12]
-length = 2.0
+length = 1.8
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -200,10 +213,22 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 0.4, 0.5, 0.7, 0.9, 1.1, 1.3, 1.5, 1.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.4, 0.9, 1.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+"values": [ 0, 1, 2, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=13]
@@ -216,15 +241,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.28, 0.31, 0.34, 0.39, 0.45, 0.49, 0.6, 0.72 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 55, 61, 50, 51, 52, 53, 54, 56, 57 ]
+"values": [ 44 ]
 }
 
 [sub_resource type="Animation" id=14]
-length = 0.6
-step = 0.05
+length = 0.25
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -232,14 +257,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.03, 0.06, 0.09, 0.12, 0.16, 0.18, 0.2, 0.22, 0.24 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 66, 67, 68, 69, 70, 71, 72, 73, 74, 76, 77, 78 ]
+"values": [ 46, 47, 48, 49, 50, 51, 52, 53, 54, 56 ]
 }
 
 [sub_resource type="Animation" id=15]
-length = 0.3
+length = 0.15
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -248,10 +273,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 44, 45, 46, 47, 48, 49 ]
+"values": [ 32, 33, 34, 30, 31 ]
 }
 
 [sub_resource type="Animation" id=16]
@@ -266,11 +291,12 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 1,
-"values": [ 62, 63, 64 ]
+"values": [ 56, 57, 58 ]
 }
 
 [sub_resource type="Animation" id=17]
-length = 0.6
+length = 0.5
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -278,14 +304,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.35, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 44, 45, 46, 47, 48, 49 ]
+"values": [ 30, 31, 32, 33, 34 ]
 }
 
 [sub_resource type="Animation" id=18]
-length = 0.9
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -293,14 +319,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 91, 92, 93, 94, 95, 96, 97, 98, 99 ]
+"values": [ 67, 68, 69, 70 ]
 }
 
 [sub_resource type="Animation" id=19]
-length = 0.52
+length = 0.43
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -309,16 +335,16 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.09, 0.18, 0.27, 0.36, 0.45, 0.54 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.04, 0.08, 0.11, 0.15, 0.19, 0.24, 0.3, 0.37 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 11, 12, 13, 14, 15, 16, 17 ]
+"values": [ 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
 }
 
 [sub_resource type="Animation" id=20]
-length = 1.35
+length = 0.98
 loop = true
-step = 0.09
+step = 0.07
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -326,10 +352,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.09, 0.18, 0.27, 0.36, 0.45, 0.54, 0.63, 0.72, 0.81, 0.9, 0.99, 1.08, 1.17, 1.26 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.07, 0.14, 0.21, 0.28, 0.35, 0.42, 0.49, 0.56, 0.63, 0.7, 0.77, 0.84, 0.91 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32 ]
+"values": [ 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28 ]
 }
 
 [sub_resource type="Animation" id=21]
@@ -342,10 +368,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.06, 0.11, 0.17, 0.22, 0.29, 0.35, 0.43 ),
+"times": PoolRealArray( 0, 0.07, 0.13, 0.21, 0.27, 0.36, 0.4, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 100, 101, 102, 103, 104, 105, 106, 107 ]
+"values": [ 72, 73, 74, 75, 76, 77, 78, 79 ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=22]
@@ -446,12 +472,15 @@ advance_condition = "state == \"run\""
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=54]
 advance_condition = "state == \"fall\""
+priority = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=55]
 switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=56]
+switch_mode = 2
+auto_advance = true
 priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=57]
@@ -493,6 +522,7 @@ priority = 5
 [sub_resource type="AnimationNodeStateMachineTransition" id=72]
 switch_mode = 2
 auto_advance = true
+priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=73]
 switch_mode = 2
@@ -515,15 +545,18 @@ auto_advance = true
 [sub_resource type="AnimationNodeStateMachineTransition" id=80]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=81]
-priority = 0
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=82]
+priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=83]
 switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=84]
+priority = 3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=85]
 switch_mode = 2
@@ -532,58 +565,63 @@ auto_advance = true
 [sub_resource type="AnimationNodeStateMachineTransition" id=86]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=87]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=88]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=89]
+priority = 7
+disabled = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=90]
+priority = 2
 
-[sub_resource type="AnimationNodeStateMachine" id=91]
+[sub_resource type="AnimationNodeStateMachineTransition" id=91]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=92]
+
+[sub_resource type="AnimationNodeStateMachine" id=93]
 states/attack/node = SubResource( 23 )
 states/attack/position = Vector2( -165.424, -866.371 )
 states/attack-crouch/node = SubResource( 22 )
 states/attack-crouch/position = Vector2( -441.369, -635.873 )
 states/backdash/node = SubResource( 24 )
-states/backdash/position = Vector2( -544.8, -520.862 )
+states/backdash/position = Vector2( -523.8, -540.862 )
 states/changedir/node = SubResource( 25 )
 states/changedir/position = Vector2( 223, -635.873 )
 states/crouch/node = SubResource( 26 )
-states/crouch/position = Vector2( -36, -356.862 )
+states/crouch/position = Vector2( -160.424, -281.862 )
 states/dead/node = SubResource( 27 )
 states/dead/position = Vector2( 303.281, -949.904 )
 states/fall/node = SubResource( 28 )
-states/fall/position = Vector2( -330.424, -472.862 )
+states/fall/position = Vector2( -91.424, -504.862 )
 states/hurt/node = SubResource( 29 )
 states/hurt/position = Vector2( 59, -760.536 )
 states/idle/node = SubResource( 30 )
-states/idle/position = Vector2( 437, -816.873 )
+states/idle/position = Vector2( 533, -831.873 )
 states/jump/node = SubResource( 31 )
-states/jump/position = Vector2( -12, -24.862 )
+states/jump/position = Vector2( -22, -212.862 )
 states/jump2/node = SubResource( 32 )
 states/jump2/position = Vector2( -447, -56.862 )
 states/pos-backdash/node = SubResource( 33 )
-states/pos-backdash/position = Vector2( -52.797, -579.291 )
+states/pos-backdash/position = Vector2( -22, -555.291 )
 states/pos-jump/node = SubResource( 34 )
-states/pos-jump/position = Vector2( -529, -447.862 )
+states/pos-jump/position = Vector2( -543, -404.862 )
 states/pos-run/node = SubResource( 35 )
-states/pos-run/position = Vector2( 223, -478.862 )
+states/pos-run/position = Vector2( 204, -510.862 )
 states/pos-slide/node = SubResource( 36 )
-states/pos-slide/position = Vector2( -380.424, -789.873 )
+states/pos-slide/position = Vector2( -350.424, -777.873 )
 states/pre-run/node = SubResource( 37 )
 states/pre-run/position = Vector2( 576, -510.862 )
 states/run/node = SubResource( 38 )
 states/run/position = Vector2( 526, -356.862 )
 states/slide/node = SubResource( 39 )
-states/slide/position = Vector2( -160.424, -665.873 )
-transitions = [ "idle", "pre-run", SubResource( 40 ), "pre-run", "run", SubResource( 41 ), "run", "pos-run", SubResource( 42 ), "changedir", "run", SubResource( 43 ), "pre-run", "changedir", SubResource( 44 ), "fall", "jump2", SubResource( 45 ), "fall", "jump", SubResource( 46 ), "jump", "jump2", SubResource( 47 ), "changedir", "idle", SubResource( 48 ), "pos-run", "idle", SubResource( 49 ), "pre-run", "pos-run", SubResource( 50 ), "pos-run", "pre-run", SubResource( 51 ), "run", "changedir", SubResource( 52 ), "pos-run", "changedir", SubResource( 53 ), "jump", "pos-jump", SubResource( 54 ), "pos-jump", "fall", SubResource( 55 ), "jump2", "pos-jump", SubResource( 56 ), "idle", "jump", SubResource( 57 ), "pos-run", "jump", SubResource( 58 ), "pre-run", "jump", SubResource( 59 ), "run", "jump", SubResource( 60 ), "fall", "run", SubResource( 61 ), "pos-jump", "run", SubResource( 62 ), "changedir", "jump", SubResource( 63 ), "pos-jump", "pos-run", SubResource( 64 ), "pre-run", "crouch", SubResource( 65 ), "crouch", "idle", SubResource( 66 ), "changedir", "crouch", SubResource( 67 ), "fall", "crouch", SubResource( 68 ), "pos-jump", "crouch", SubResource( 69 ), "pos-jump", "jump", SubResource( 70 ), "idle", "backdash", SubResource( 71 ), "backdash", "pos-backdash", SubResource( 72 ), "pos-backdash", "idle", SubResource( 73 ), "pos-backdash", "jump", SubResource( 74 ), "pos-backdash", "crouch", SubResource( 75 ), "crouch", "slide", SubResource( 76 ), "slide", "pos-slide", SubResource( 77 ), "pos-slide", "slide", SubResource( 78 ), "pos-slide", "idle", SubResource( 79 ), "slide", "pos-jump", SubResource( 80 ), "slide", "pre-run", SubResource( 81 ), "idle", "attack", SubResource( 82 ), "attack", "idle", SubResource( 83 ), "crouch", "attack-crouch", SubResource( 84 ), "attack-crouch", "pos-slide", SubResource( 85 ), "pos-slide", "attack-crouch", SubResource( 86 ), "changedir", "pre-run", SubResource( 87 ), "idle", "hurt", SubResource( 88 ), "hurt", "pos-run", SubResource( 89 ), "idle", "dead", SubResource( 90 ) ]
+states/slide/position = Vector2( -165.424, -660.873 )
+transitions = [ "idle", "pre-run", SubResource( 40 ), "pre-run", "run", SubResource( 41 ), "run", "pos-run", SubResource( 42 ), "changedir", "run", SubResource( 43 ), "pre-run", "changedir", SubResource( 44 ), "fall", "jump2", SubResource( 45 ), "fall", "jump", SubResource( 46 ), "jump", "jump2", SubResource( 47 ), "changedir", "idle", SubResource( 48 ), "pos-run", "idle", SubResource( 49 ), "pre-run", "pos-run", SubResource( 50 ), "pos-run", "pre-run", SubResource( 51 ), "run", "changedir", SubResource( 52 ), "pos-run", "changedir", SubResource( 53 ), "jump", "pos-jump", SubResource( 54 ), "pos-jump", "fall", SubResource( 55 ), "jump2", "pos-jump", SubResource( 56 ), "idle", "jump", SubResource( 57 ), "pos-run", "jump", SubResource( 58 ), "pre-run", "jump", SubResource( 59 ), "run", "jump", SubResource( 60 ), "fall", "run", SubResource( 61 ), "pos-jump", "run", SubResource( 62 ), "changedir", "jump", SubResource( 63 ), "pos-jump", "pos-run", SubResource( 64 ), "pre-run", "crouch", SubResource( 65 ), "crouch", "idle", SubResource( 66 ), "changedir", "crouch", SubResource( 67 ), "fall", "crouch", SubResource( 68 ), "pos-jump", "crouch", SubResource( 69 ), "pos-jump", "jump", SubResource( 70 ), "idle", "backdash", SubResource( 71 ), "backdash", "pos-backdash", SubResource( 72 ), "pos-backdash", "idle", SubResource( 73 ), "pos-backdash", "jump", SubResource( 74 ), "pos-backdash", "crouch", SubResource( 75 ), "crouch", "slide", SubResource( 76 ), "slide", "pos-slide", SubResource( 77 ), "pos-slide", "slide", SubResource( 78 ), "pos-slide", "idle", SubResource( 79 ), "idle", "attack", SubResource( 80 ), "attack", "idle", SubResource( 81 ), "crouch", "attack-crouch", SubResource( 82 ), "attack-crouch", "pos-slide", SubResource( 83 ), "pos-slide", "attack-crouch", SubResource( 84 ), "changedir", "pre-run", SubResource( 85 ), "idle", "hurt", SubResource( 86 ), "hurt", "pos-run", SubResource( 87 ), "idle", "dead", SubResource( 88 ), "pos-backdash", "fall", SubResource( 89 ), "backdash", "crouch", SubResource( 90 ), "backdash", "fall", SubResource( 91 ), "slide", "pos-backdash", SubResource( 92 ) ]
 start_node = "idle"
 end_node = "dead"
-graph_offset = Vector2( -103.872, -1003.13 )
+graph_offset = Vector2( -291.765, -804.073 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=92]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=94]
 
 [node name="Xandria" type="KinematicBody2D" groups=[
 "player",
@@ -599,6 +637,7 @@ can_slide = true
 can_backdash = true
 
 [node name="PlayerCamera" parent="." instance=ExtResource( 4 )]
+limit_smoothed = true
 target = NodePath("..")
 
 [node name="PotionUse" type="Node2D" parent="."]
@@ -618,9 +657,12 @@ frame = 10
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
-vframes = 16
+vframes = 7
 hframes = 16
-frame = 9
+frame = 1
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
 
 [node name="RayCastRampFront" type="RayCast2D" parent="Sprite"]
 position = Vector2( 5.921, 28.943 )
@@ -639,21 +681,24 @@ cast_to = Vector2( 0, 5.421 )
 collision_mask = 14
 
 [node name="RayCastUp" type="RayCast2D" parent="Sprite"]
-position = Vector2( 0, 2.35 )
+position = Vector2( 0, 2.585 )
 rotation = 3.14159
 scale = Vector2( 0.732, 1 )
 enabled = true
-cast_to = Vector2( 0, 4.562 )
+cast_to = Vector2( 0, 13.113 )
 collision_mask = 14
 
 [node name="RayCastDown" type="RayCast2D" parent="Sprite"]
 position = Vector2( 0, 32.63 )
 scale = Vector2( 0.772, 0.304 )
 enabled = true
+cast_to = Vector2( 0, 40 )
 collision_mask = 14
 
-[node name="XandriaWeapon" parent="Sprite" instance=ExtResource( 3 )]
-position = Vector2( 18.491, 16.474 )
+[node name="XandriaWeapon" parent="Sprite" groups=[
+"player_main_weapon",
+] instance=ExtResource( 3 )]
+position = Vector2( 13.0937, 16.0037 )
 
 [node name="BloodPosition" type="Node2D" parent="Sprite"]
 position = Vector2( -0.0256071, 6.11812 )
@@ -715,21 +760,24 @@ anims/run = SubResource( 20 )
 anims/slide = SubResource( 21 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 91 )
+tree_root = SubResource( 93 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 process_mode = 0
-parameters/playback = SubResource( 92 )
+parameters/playback = SubResource( 94 )
 "parameters/conditions/state == \"fall\"" = false
 "parameters/conditions/state == \"run\"" = false
 
 [node name="TimerBackdash" type="Timer" parent="."]
-wait_time = 0.28
+wait_time = 0.2
 one_shot = true
 
 [node name="TimerSlide" type="Timer" parent="."]
-wait_time = 0.48
+wait_time = 0.3
 one_shot = true
+__meta__ = {
+"_editor_description_": ".48"
+}
 
 [node name="TimerAttack" type="Timer" parent="."]
 wait_time = 0.5
@@ -757,6 +805,7 @@ one_shot = true
 __meta__ = {
 "_editor_description_": "cantidad de tiempo total para recibir healing"
 }
+[connection signal="tree_exiting" from="." to="." method="_on_Xandria_tree_exiting"]
 [connection signal="timeout" from="TimerBackdash" to="." method="_on_TimerBackdash_timeout"]
 [connection signal="timeout" from="TimerSlide" to="." method="_on_TimerSlide_timeout"]
 [connection signal="timeout" from="TimerAttack" to="." method="_on_TimerAttack_timeout"]
