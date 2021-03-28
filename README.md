@@ -1,6 +1,9 @@
 # Toziuha Night - Order of the Alchemists
 Free Metroidvania inspired on Castlevania Order of Ecclesia
 
+#Note:
+Only Source code is under MIT license. The assets (images, music, sprites etc) aren't free and some assets rights are properties for their owners
+
 This is a free opensource metroidvania inspired by Castlevania Order of Ecclesia.
 This game still is on development. Please try the game and search bugs or make me feature requests :D
 
@@ -36,5 +39,4 @@ https://www.youtube.com/channel/UCvVI-89_pIrYlT4Dex7vtfA
 Contact
 dannygaray60@gmail.com
 
-#Note:
-Only Source code is under MIT license. The assets (images, music, sprites etc) aren't free
+
