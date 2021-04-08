@@ -1,0 +1,905 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=2]
+[ext_resource path="res://assets/img/violet_trees.png" type="Texture" id=3]
+[ext_resource path="res://objects/ui/SubButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://screens/Options.gd" type="Script" id=6]
+[ext_resource path="res://objects/ui/HSlider.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://assets/sprites/btn_select_icon.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/main_panel2.png" type="Texture" id=10]
+[ext_resource path="res://objects/ui/CheckBox.tscn" type="PackedScene" id=11]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 90, 47 )
+margin_left = 18.9633
+margin_right = 18.9107
+margin_top = 14.0969
+margin_bottom = 14.0
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -7
+extra_spacing_bottom = -7
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 10 )
+region_rect = Rect2( 0, 0, 32, 32 )
+margin_top = 4.00473
+margin_bottom = 4.11544
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.172549, 0, 0, 0.556863 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+extra_spacing_bottom = 8
+font_data = ExtResource( 8 )
+
+[sub_resource type="ButtonGroup" id=6]
+
+[node name="Options" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -101.5
+margin_top = 12.0
+margin_right = 101.5
+margin_bottom = 74.0969
+grow_horizontal = 2
+size_flags_horizontal = 4
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+text = "OPTIONS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -298.0
+custom_constants/margin_right = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBx" type="HBoxContainer" parent="Margin"]
+margin_left = 20.0
+margin_right = 663.0
+margin_bottom = 271.0
+size_flags_vertical = 0
+custom_constants/separation = 43
+
+[node name="VBx" type="VBoxContainer" parent="Margin/HBx"]
+margin_right = 215.0
+margin_bottom = 271.0
+custom_constants/separation = 12
+
+[node name="Panel0" parent="Margin/HBx/VBx" instance=ExtResource( 5 )]
+margin_right = 215.0
+margin_bottom = 57.1202
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 3 )
+
+[node name="Margin" type="MarginContainer" parent="Margin/HBx/VBx/Panel0"]
+margin_top = 4.00473
+margin_right = 215.0
+margin_bottom = 53.0047
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBx" type="VBoxContainer" parent="Margin/HBx/VBx/Panel0/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 205.0
+margin_bottom = 39.0
+
+[node name="BtnMenu" parent="Margin/HBx/VBx/Panel0/Margin/VBx" instance=ExtResource( 4 )]
+margin_right = 195.0
+focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_top = NodePath("../../../../Panel/Margin/VBx/BtnLang")
+focus_neighbour_right = NodePath("../../../../../../..")
+focus_next = NodePath("../../../../../../..")
+focus_previous = NodePath("../../../../../../..")
+toggle_mode = true
+text = "MAINMENU"
+sfx_accept_sound = "btn_cancel"
+
+[node name="Panel" parent="Margin/HBx/VBx" instance=ExtResource( 5 )]
+margin_top = 69.0
+margin_right = 215.0
+margin_bottom = 271.12
+size_flags_vertical = 0
+
+[node name="Margin" type="MarginContainer" parent="Margin/HBx/VBx/Panel"]
+margin_top = 4.00473
+margin_right = 215.0
+margin_bottom = 198.005
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBx" type="VBoxContainer" parent="Margin/HBx/VBx/Panel/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 205.0
+margin_bottom = 184.0
+custom_constants/separation = 0
+
+[node name="BtnVideo" parent="Margin/HBx/VBx/Panel/Margin/VBx" instance=ExtResource( 4 )]
+margin_right = 195.0
+focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_right = NodePath("../../../../../../..")
+focus_next = NodePath("../../../../../../..")
+focus_previous = NodePath("../../../../../../..")
+toggle_mode = true
+text = "GRAPHICS"
+
+[node name="BtnAudio" parent="Margin/HBx/VBx/Panel/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 29.0
+margin_right = 195.0
+margin_bottom = 58.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath("../../../../../../..")
+focus_next = NodePath("../../../../../../..")
+focus_previous = NodePath("../../../../../../..")
+toggle_mode = true
+text = "AUDIO"
+
+[node name="BtnControls" parent="Margin/HBx/VBx/Panel/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 58.0
+margin_right = 195.0
+margin_bottom = 87.0
+focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_right = NodePath("../../../../../../..")
+focus_next = NodePath("../../../../../../..")
+focus_previous = NodePath("../../../../../../..")
+toggle_mode = true
+text = "KEYBOARD"
+
+[node name="BtnGamepad" parent="Margin/HBx/VBx/Panel/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 87.0
+margin_right = 195.0
+margin_bottom = 116.0
+focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_right = NodePath("../../../../../../..")
+focus_next = NodePath("../../../../../../..")
+focus_previous = NodePath("../../../../../../..")
+toggle_mode = true
+text = "GAMEPAD"
+
+[node name="BtnTouchscreen" parent="Margin/HBx/VBx/Panel/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 116.0
+margin_right = 195.0
+margin_bottom = 145.0
+focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_right = NodePath("../../../../../../..")
+focus_next = NodePath("../../../../../../..")
+focus_previous = NodePath("../../../../../../..")
+toggle_mode = true
+text = "TOUCHCONTROL"
+
+[node name="BtnLang" parent="Margin/HBx/VBx/Panel/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 145.0
+margin_right = 195.0
+margin_bottom = 174.0
+focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_right = NodePath("../../../../../../..")
+focus_neighbour_bottom = NodePath("../../../../Panel0/Margin/VBx/BtnMenu")
+focus_next = NodePath("../../../../../../..")
+focus_previous = NodePath("../../../../../../..")
+toggle_mode = true
+text = "LANGUAGE"
+
+[node name="PanelVideo" type="PanelContainer" parent="Margin/HBx"]
+visible = false
+margin_left = 258.0
+margin_right = 602.0
+margin_bottom = 115.0
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 4 )
+
+[node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelVideo"]
+margin_right = 344.0
+margin_bottom = 115.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 5
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 5
+
+[node name="VBx" type="VBoxContainer" parent="Margin/HBx/PanelVideo/Margin"]
+margin_left = 15.0
+margin_top = 5.0
+margin_right = 329.0
+margin_bottom = 110.0
+
+[node name="FullScr" type="HBoxContainer" parent="Margin/HBx/PanelVideo/Margin/VBx"]
+margin_right = 314.0
+margin_bottom = 34.0
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelVideo/Margin/VBx/FullScr"]
+margin_right = 48.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelVideo/Margin/VBx/FullScr"]
+margin_left = 62.0
+margin_right = 252.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 190, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 5 )
+text = "FULLSCREEN"
+align = 1
+valign = 1
+
+[node name="CheckBox" parent="Margin/HBx/PanelVideo/Margin/VBx/FullScr" instance=ExtResource( 11 )]
+margin_left = 266.0
+margin_right = 314.0
+margin_bottom = 34.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../../SubButton")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+
+[node name="Borderless" type="HBoxContainer" parent="Margin/HBx/PanelVideo/Margin/VBx"]
+margin_top = 38.0
+margin_right = 314.0
+margin_bottom = 72.0
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelVideo/Margin/VBx/Borderless"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 48.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelVideo/Margin/VBx/Borderless"]
+margin_left = 62.0
+margin_right = 252.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 190, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 5 )
+text = "BORDERLESS"
+align = 1
+valign = 1
+
+[node name="CheckBox" parent="Margin/HBx/PanelVideo/Margin/VBx/Borderless" instance=ExtResource( 11 )]
+margin_left = 266.0
+margin_right = 314.0
+margin_bottom = 34.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+
+[node name="SubButton" parent="Margin/HBx/PanelVideo/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 76.0
+margin_right = 314.0
+margin_bottom = 105.0
+rect_min_size = Vector2( 190, 0 )
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../FullScr/CheckBox")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+disabled = true
+text = "Filters..."
+align = 1
+
+[node name="PanelAudio" type="PanelContainer" parent="Margin/HBx"]
+visible = false
+margin_left = 258.0
+margin_right = 644.0
+margin_bottom = 174.0
+size_flags_horizontal = 9
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 4 )
+
+[node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelAudio"]
+margin_right = 386.0
+margin_bottom = 174.0
+custom_constants/margin_right = 55
+custom_constants/margin_top = 5
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 5
+
+[node name="VBx" type="VBoxContainer" parent="Margin/HBx/PanelAudio/Margin"]
+margin_left = 15.0
+margin_top = 5.0
+margin_right = 331.0
+margin_bottom = 169.0
+
+[node name="Sfx" type="HBoxContainer" parent="Margin/HBx/PanelAudio/Margin/VBx"]
+margin_right = 316.0
+margin_bottom = 52.0
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelAudio/Margin/VBx/Sfx"]
+margin_right = 48.0
+margin_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelAudio/Margin/VBx/Sfx"]
+margin_left = 62.0
+margin_right = 152.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 90, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 5 )
+text = "EFFECTS"
+align = 1
+valign = 1
+
+[node name="Slider" parent="Margin/HBx/PanelAudio/Margin/VBx/Sfx" instance=ExtResource( 7 )]
+margin_left = 166.0
+margin_right = 316.0
+rect_min_size = Vector2( 150, 0 )
+focus_neighbour_top = NodePath("../../Voice/Slider")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+
+[node name="Bgm" type="HBoxContainer" parent="Margin/HBx/PanelAudio/Margin/VBx"]
+margin_top = 56.0
+margin_right = 316.0
+margin_bottom = 108.0
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelAudio/Margin/VBx/Bgm"]
+margin_right = 48.0
+margin_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelAudio/Margin/VBx/Bgm"]
+margin_left = 62.0
+margin_right = 152.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 90, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 5 )
+text = "MUSIC"
+align = 1
+valign = 1
+
+[node name="Slider" parent="Margin/HBx/PanelAudio/Margin/VBx/Bgm" instance=ExtResource( 7 )]
+margin_left = 166.0
+margin_right = 316.0
+rect_min_size = Vector2( 150, 0 )
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+
+[node name="Voice" type="HBoxContainer" parent="Margin/HBx/PanelAudio/Margin/VBx"]
+margin_top = 112.0
+margin_right = 316.0
+margin_bottom = 164.0
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelAudio/Margin/VBx/Voice"]
+margin_right = 48.0
+margin_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelAudio/Margin/VBx/Voice"]
+margin_left = 62.0
+margin_right = 152.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 90, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 5 )
+text = "VOICE"
+align = 1
+valign = 1
+
+[node name="Slider" parent="Margin/HBx/PanelAudio/Margin/VBx/Voice" instance=ExtResource( 7 )]
+margin_left = 166.0
+margin_right = 316.0
+rect_min_size = Vector2( 150, 0 )
+focus_neighbour_bottom = NodePath("../../Sfx/Slider")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+
+[node name="PanelControls" type="PanelContainer" parent="Margin/HBx"]
+visible = false
+margin_left = 258.0
+margin_right = 559.0
+margin_bottom = 270.0
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 4 )
+
+[node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelControls"]
+margin_right = 301.0
+margin_bottom = 270.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 5
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 5
+
+[node name="VBx" type="VBoxContainer" parent="Margin/HBx/PanelControls/Margin"]
+margin_left = 15.0
+margin_top = 5.0
+margin_right = 286.0
+margin_bottom = 265.0
+
+[node name="BtnJump" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+margin_right = 271.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../BtnRight")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Saltar / Aceptar [X]"
+
+[node name="BtnAttack" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 33.0
+margin_right = 271.0
+margin_bottom = 62.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Ataque / Cancelar [C]"
+
+[node name="BtnBackdash" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 66.0
+margin_right = 271.0
+margin_bottom = 95.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Esquivar [A]"
+
+[node name="BtnStart" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 99.0
+margin_right = 271.0
+margin_bottom = 128.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Start / Pausa [Enter]"
+
+[node name="BtnUp" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 132.0
+margin_right = 271.0
+margin_bottom = 161.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Arriba [Up]"
+
+[node name="BtnDown" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 165.0
+margin_right = 271.0
+margin_bottom = 194.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Abajo [Down]"
+
+[node name="BtnLeft" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 198.0
+margin_right = 271.0
+margin_bottom = 227.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Izquierda [Left]"
+
+[node name="BtnRight" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 231.0
+margin_right = 271.0
+margin_bottom = 260.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../BtnJump")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Derecha [Right]"
+
+[node name="PanelGamepad" type="PanelContainer" parent="Margin/HBx"]
+visible = false
+margin_left = 258.0
+margin_right = 593.0
+margin_bottom = 270.0
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 4 )
+
+[node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelGamepad"]
+margin_right = 335.0
+margin_bottom = 270.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 5
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 5
+
+[node name="VBx" type="VBoxContainer" parent="Margin/HBx/PanelGamepad/Margin"]
+margin_left = 15.0
+margin_top = 5.0
+margin_right = 320.0
+margin_bottom = 265.0
+
+[node name="BtnJump" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+margin_right = 305.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../BtnRight")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Saltar / Aceptar [Joy1]"
+
+[node name="BtnAttack" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 33.0
+margin_right = 305.0
+margin_bottom = 62.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Ataque / Cancelar [Joy2]"
+
+[node name="BtnBackdash" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 66.0
+margin_right = 305.0
+margin_bottom = 95.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Esquivar [Joy3]"
+
+[node name="BtnStart" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 99.0
+margin_right = 305.0
+margin_bottom = 128.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Start / Pausa [Joy4]"
+
+[node name="BtnUp" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 132.0
+margin_right = 305.0
+margin_bottom = 161.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Arriba [Joy5]"
+
+[node name="BtnDown" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 165.0
+margin_right = 305.0
+margin_bottom = 194.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Abajo [Joy6]"
+
+[node name="BtnLeft" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 198.0
+margin_right = 305.0
+margin_bottom = 227.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Izquierda [Joy7]"
+
+[node name="BtnRight" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 231.0
+margin_right = 305.0
+margin_bottom = 260.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../BtnJump")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "Derecha [Joy8]"
+
+[node name="PanelControlsTouchScreen" type="PanelContainer" parent="Margin/HBx"]
+margin_left = 258.0
+margin_right = 602.0
+margin_bottom = 77.0
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 4 )
+
+[node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelControlsTouchScreen"]
+margin_right = 344.0
+margin_bottom = 77.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 5
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 5
+
+[node name="VBx" type="VBoxContainer" parent="Margin/HBx/PanelControlsTouchScreen/Margin"]
+margin_left = 15.0
+margin_top = 5.0
+margin_right = 329.0
+margin_bottom = 72.0
+
+[node name="Show" type="HBoxContainer" parent="Margin/HBx/PanelControlsTouchScreen/Margin/VBx"]
+margin_right = 314.0
+margin_bottom = 34.0
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelControlsTouchScreen/Margin/VBx/Show"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 48.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelControlsTouchScreen/Margin/VBx/Show"]
+margin_left = 62.0
+margin_right = 252.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 190, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 5 )
+text = "SHOWBUTTONS"
+align = 1
+valign = 1
+
+[node name="CheckBox" parent="Margin/HBx/PanelControlsTouchScreen/Margin/VBx/Show" instance=ExtResource( 11 )]
+margin_left = 266.0
+margin_right = 314.0
+margin_bottom = 34.0
+focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_top = NodePath("../../BtnConfigure")
+focus_neighbour_right = NodePath("../../../../../../..")
+focus_next = NodePath("../../BtnConfigure")
+focus_previous = NodePath("../../BtnConfigure")
+
+[node name="BtnConfigure" parent="Margin/HBx/PanelControlsTouchScreen/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 38.0
+margin_right = 314.0
+margin_bottom = 67.0
+focus_neighbour_left = NodePath("../../../../../..")
+focus_neighbour_right = NodePath("../../../../../..")
+focus_neighbour_bottom = NodePath("../Show/CheckBox")
+focus_next = NodePath("../Show/CheckBox")
+focus_previous = NodePath("../Show/CheckBox")
+text = "BUTTONSPOSITION"
+align = 1
+
+[node name="PanelLang" type="PanelContainer" parent="Margin/HBx"]
+visible = false
+margin_left = 258.0
+margin_right = 602.0
+margin_bottom = 120.0
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 4 )
+
+[node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelLang"]
+margin_right = 344.0
+margin_bottom = 120.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 5
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 5
+
+[node name="VBx" type="VBoxContainer" parent="Margin/HBx/PanelLang/Margin"]
+margin_left = 15.0
+margin_top = 5.0
+margin_right = 329.0
+margin_bottom = 115.0
+
+[node name="English" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
+margin_right = 314.0
+margin_bottom = 34.0
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelLang/Margin/VBx/English"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 48.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelLang/Margin/VBx/English"]
+margin_left = 62.0
+margin_right = 252.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 190, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 5 )
+text = "English"
+align = 1
+valign = 1
+
+[node name="CheckBox" parent="Margin/HBx/PanelLang/Margin/VBx/English" instance=ExtResource( 11 )]
+margin_left = 266.0
+margin_right = 314.0
+margin_bottom = 34.0
+focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_top = NodePath("../../PortuguesBR/CheckBox")
+focus_neighbour_right = NodePath("../../../../../../..")
+focus_next = NodePath("../../../../../../..")
+focus_previous = NodePath("../../PortuguesBR/CheckBox")
+group = SubResource( 6 )
+
+[node name="Espanol" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
+margin_top = 38.0
+margin_right = 314.0
+margin_bottom = 72.0
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelLang/Margin/VBx/Espanol"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 48.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelLang/Margin/VBx/Espanol"]
+margin_left = 62.0
+margin_right = 252.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 190, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 5 )
+text = "Español"
+align = 1
+valign = 1
+
+[node name="CheckBox" parent="Margin/HBx/PanelLang/Margin/VBx/Espanol" instance=ExtResource( 11 )]
+margin_left = 266.0
+margin_right = 314.0
+margin_bottom = 34.0
+focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_right = NodePath("../../../../../../..")
+focus_next = NodePath("../../../../../../..")
+focus_previous = NodePath("../../../../../../..")
+group = SubResource( 6 )
+
+[node name="PortuguesBR" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
+margin_top = 76.0
+margin_right = 314.0
+margin_bottom = 110.0
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 48.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR"]
+margin_left = 62.0
+margin_right = 252.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 190, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 5 )
+text = "Português (BR)"
+align = 1
+valign = 1
+
+[node name="CheckBox" parent="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR" instance=ExtResource( 11 )]
+margin_left = 266.0
+margin_right = 314.0
+margin_bottom = 34.0
+focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_right = NodePath("../../../../../../..")
+focus_neighbour_bottom = NodePath("../../English/CheckBox")
+focus_next = NodePath("../../English/CheckBox")
+focus_previous = NodePath("../../Espanol/CheckBox")
+disabled = true
+group = SubResource( 6 )
+[connection signal="pressed" from="Margin/HBx/VBx/Panel0/Margin/VBx/BtnMenu" to="." method="select_section" binds= [ "main_menu" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnVideo" to="." method="select_section" binds= [ "BtnVideo" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnAudio" to="." method="select_section" binds= [ "BtnAudio" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnControls" to="." method="select_section" binds= [ "BtnControls" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnGamepad" to="." method="select_section" binds= [ "BtnGamepad" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnTouchscreen" to="." method="select_section" binds= [ "BtnTouchscreen" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnLang" to="." method="select_section" binds= [ "BtnLang" ]]
+[connection signal="focus_entered" from="Margin/HBx/PanelVideo/Margin/VBx/FullScr/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "FullScr", "Video" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelVideo/Margin/VBx/FullScr/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "FullScr", "Video" ]]
+[connection signal="toggled" from="Margin/HBx/PanelVideo/Margin/VBx/FullScr/CheckBox" to="." method="option_changed" binds= [ "video", "fullscreen" ]]
+[connection signal="focus_entered" from="Margin/HBx/PanelVideo/Margin/VBx/Borderless/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "Borderless", "Video" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelVideo/Margin/VBx/Borderless/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "Borderless", "Video" ]]
+[connection signal="toggled" from="Margin/HBx/PanelVideo/Margin/VBx/Borderless/CheckBox" to="." method="option_changed" binds= [ "video", "borderless" ]]
+[connection signal="focus_entered" from="Margin/HBx/PanelAudio/Margin/VBx/Sfx/Slider" to="." method="_on_ItemPanel_focus_entered" binds= [ "Sfx" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelAudio/Margin/VBx/Sfx/Slider" to="." method="_on_ItemPanel_focus_exited" binds= [ "Sfx" ]]
+[connection signal="value_changed" from="Margin/HBx/PanelAudio/Margin/VBx/Sfx/Slider" to="." method="option_changed" binds= [ "audio", "sfx" ]]
+[connection signal="focus_entered" from="Margin/HBx/PanelAudio/Margin/VBx/Bgm/Slider" to="." method="_on_ItemPanel_focus_entered" binds= [ "Bgm" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelAudio/Margin/VBx/Bgm/Slider" to="." method="_on_ItemPanel_focus_exited" binds= [ "Bgm" ]]
+[connection signal="value_changed" from="Margin/HBx/PanelAudio/Margin/VBx/Bgm/Slider" to="." method="option_changed" binds= [ "audio", "bgm" ]]
+[connection signal="focus_entered" from="Margin/HBx/PanelAudio/Margin/VBx/Voice/Slider" to="." method="_on_ItemPanel_focus_entered" binds= [ "Voice" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelAudio/Margin/VBx/Voice/Slider" to="." method="_on_ItemPanel_focus_exited" binds= [ "Voice" ]]
+[connection signal="value_changed" from="Margin/HBx/PanelAudio/Margin/VBx/Voice/Slider" to="." method="option_changed" binds= [ "audio", "voice" ]]
+[connection signal="focus_entered" from="Margin/HBx/PanelControlsTouchScreen/Margin/VBx/Show/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "Show", "ControlsTouchScreen" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelControlsTouchScreen/Margin/VBx/Show/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "Show", "ControlsTouchScreen" ]]
+[connection signal="toggled" from="Margin/HBx/PanelControlsTouchScreen/Margin/VBx/Show/CheckBox" to="." method="option_changed" binds= [ "touchscreenbutton", "show_buttons" ]]
+[connection signal="pressed" from="Margin/HBx/PanelControlsTouchScreen/Margin/VBx/BtnConfigure" to="." method="_on_BtnConfigure_pressed"]
+[connection signal="focus_entered" from="Margin/HBx/PanelLang/Margin/VBx/English/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "English", "Lang" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelLang/Margin/VBx/English/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "English", "Lang" ]]
+[connection signal="pressed" from="Margin/HBx/PanelLang/Margin/VBx/English/CheckBox" to="." method="option_changed" binds= [ "en", "other", "lang" ]]
+[connection signal="focus_entered" from="Margin/HBx/PanelLang/Margin/VBx/Espanol/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "Espanol", "Lang" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelLang/Margin/VBx/Espanol/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "Espanol", "Lang" ]]
+[connection signal="pressed" from="Margin/HBx/PanelLang/Margin/VBx/Espanol/CheckBox" to="." method="option_changed" binds= [ "es", "other", "lang" ]]
+[connection signal="focus_entered" from="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "PortuguesBR", "Lang" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "PortuguesBR", "Lang" ]]

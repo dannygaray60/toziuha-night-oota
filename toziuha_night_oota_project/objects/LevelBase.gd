@@ -25,16 +25,11 @@ func _ready():
 	player.connect("damaged",self,"_on_player_damage")
 	player.connect("dead",self,"_on_player_death")
 	player.connect("stats_changed",self,"_on_stats_changed")
-	
-	#comprobar stamina al inicio y recuperarla
-	if Vars.player["sp_now"] < Vars.player["sp_max"]:
-		_on_stats_changed()
 
 
 #cuando jugador pierde stamina
 func _on_stats_changed():
 	$Hud.update_stats()
-	$TimerStaminaRecover.start()
 
 #al ser dañado
 func _on_player_damage():
@@ -48,16 +43,10 @@ func _on_player_death():
 
 #cuando terminó el fade al morir
 func _on_Tween_tween_all_completed():
+	Vars.set_vars()
 	# warning-ignore:return_value_discarded
 	get_tree().reload_current_scene()
 
-#recuperar stamina de poco a poco
-func _on_TimerStaminaRecover_timeout():
-	
-	if Vars.player["sp_now"] >= Vars.player["sp_max"]:
-		$TimerStaminaRecover.stop()
-		return
-
-	if player.state in ["idle","crouch","fall","run"]:
-		Vars.player["sp_now"] += 1
-		$Hud.update_stats()
+#mostrar botones tactiles de acuerdo a configuracion
+func _on_LevelBase_ready():
+	ControlsOnscreen.show_buttons_in_game()

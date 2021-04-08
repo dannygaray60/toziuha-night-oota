@@ -39,7 +39,9 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[node name="Torch" type="Area2D"]
+[node name="Torch" type="Area2D" groups=[
+"torch",
+]]
 collision_layer = 0
 collision_mask = 16
 script = ExtResource( 2 )
@@ -58,5 +60,3 @@ hframes = 4
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/destroyed = SubResource( 2 )
 anims/idle = SubResource( 3 )
-[connection signal="area_entered" from="." to="." method="_on_Torch_area_body_entered"]
-[connection signal="body_entered" from="." to="." method="_on_Torch_area_body_entered"]

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/cinematic_hit_enter_to_main_menu.wav-bfdbdbd19956cdae4bba11bc05a327d7.sample"
+
+[deps]
+
+source_file="res://assets/sfx/cinematic_hit_enter_to_main_menu.wav"
+dest_files=[ "res://.import/cinematic_hit_enter_to_main_menu.wav-bfdbdbd19956cdae4bba11bc05a327d7.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

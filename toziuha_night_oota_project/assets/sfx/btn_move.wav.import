@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/btn_move.wav-d478a4fc496cb7ba8f8950ded7b62712.sample"
+
+[deps]
+
+source_file="res://assets/sfx/btn_move.wav"
+dest_files=[ "res://.import/btn_move.wav-d478a4fc496cb7ba8f8950ded7b62712.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

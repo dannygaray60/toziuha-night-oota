@@ -94,6 +94,13 @@ func _ready():
 	
 	# warning-ignore:return_value_discarded
 	Timers.get_node("AutomaticChangeToGoodCondition").connect("timeout",self,"_return_to_good_condition")
+	# warning-ignore:return_value_discarded
+	Timers.get_node("TimerHeal").connect("timeout",self,"_on_TimerHeal_timeout")
+	# warning-ignore:return_value_discarded
+	Timers.get_node("TimerHealingEnd").connect("timeout",self,"_on_TimerHealingEnd_timeout")
+
+	if Vars.player["condition"] == "healing":
+		Timers.get_node("TimerHeal").start()
 
 #debug
 func _process(_delta):
@@ -104,11 +111,11 @@ func _process(_delta):
 	ScreenDebugger.dict["Vel_Y"] = str( round(velocity.y) )
 	ScreenDebugger.dict["Dir_X"] = str( round(direction.x) )
 	ScreenDebugger.dict["Facing"] = str( facing )
-	ScreenDebugger.dict["Scale_X"] = str( $Sprite.scale.x )
-	ScreenDebugger.dict["OnFloor"] = str( is_on_floor() )
-	ScreenDebugger.dict["OnWall"] = str( is_on_wall() )
-	ScreenDebugger.dict["RyCstUp"] = str( $Sprite/RayCastUp.is_colliding() )
-	ScreenDebugger.dict["snap_vector"] = str( snap_vector )
+#	ScreenDebugger.dict["Scale_X"] = str( $Sprite.scale.x )
+#	ScreenDebugger.dict["OnFloor"] = str( is_on_floor() )
+#	ScreenDebugger.dict["OnWall"] = str( is_on_wall() )
+#	ScreenDebugger.dict["RyCstUp"] = str( $Sprite/RayCastUp.is_colliding() )
+#	ScreenDebugger.dict["onewaycol"] = str( is_on_onewaycol )
 	
 
 
@@ -135,16 +142,12 @@ func _physics_process(delta):
 	velocity.y += gravity*delta
 	
 
-	
-	#nota: por alguna razón raycastdown funciona al revés no tengo idea
 	#movimiento automatico en backdash
 	if state == "backdash" and is_on_floor():
-#		velocity.x -= (40 * facing)
 		velocity.x = (-170 * facing)
 			
 	#y movimiento para slide
 	if state == "slide" and is_on_floor():
-#		velocity.x += (40 * facing)
 		velocity.x = (170 * facing)
 
 	#movimiento general en Y
@@ -162,15 +165,21 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		
 		#detectar colision oneway
-		if collision.collider is TileMap:
-			var tile_pos = collision.collider.world_to_map(position)
-			tile_pos -= collision.normal
-			var tile_id = collision.collider.get_cellv(tile_pos)
-			if tile_id >= 0:
+#		if collision.collider is TileMap:
+#			var tile_pos = collision.collider.world_to_map(position)
+#			tile_pos -= collision.normal
+#			var tile_id = collision.collider.get_cellv(tile_pos)
+#			print(str(tile_id))
+#			if tile_id >= 0:
 #				var tile_name = collision.collider.tile_set.tile_get_name(tile_id)
-				#si estamos sobre un tile con onewaycolision
-				is_on_onewaycol = collision.collider.tile_set.tile_get_shape_one_way(tile_id,0)
-
+#				#si estamos sobre un tile con onewaycolision
+#				is_on_onewaycol = collision.collider.tile_set.tile_get_shape_one_way(tile_id,0)
+		
+		if collision.collider.is_in_group("semisolid"):
+			is_on_onewaycol = true
+		else:
+			is_on_onewaycol = false
+		
 		if collision.collider.is_in_group("enemies"):
 			var cpos = collision.collider.get_position()
 			hurt(collision.collider.id,cpos)
@@ -206,7 +215,7 @@ func _get_input():
 	if Input.is_action_just_pressed("ui_cancel"):
 		_attack()
 		
-	#accion para arroja un item curativo
+	#accion para usar un item curativo
 	if Input.is_action_pressed("ui_up") and Input.is_action_just_pressed("ui_accept"):
 		_use_health_item()
 		
@@ -229,10 +238,6 @@ func _get_input():
 			position = Vector2(position.x,position.y+1)
 		elif can_slide:
 			_slide()
-
-	#regresar  menu principal
-	if Input.is_action_just_pressed("ui_focus_next") and Input.is_action_pressed("ui_up"):
-		SceneChanger.change_scene("res://screens/MainMenu.tscn")
 
 	#------- Jump Physics -----------
 	#Player is falling
@@ -268,8 +273,8 @@ func _use_health_item():
 		Vars.player["potion_now"] = Functions.get_value(Vars.player["potion_now"],"-",1)
 		$PotionUse/AnimationPlayer.play("show")
 		#iniciar timers
-		$TimerHeal.start()
-		$TimerHealingEnd.start()
+		Timers.get_node("TimerHeal").start()
+		Timers.get_node("TimerHealingEnd").start()
 		emit_signal("stats_changed")
 
 func _backdash():
@@ -627,10 +632,13 @@ func _on_TimerNoHurt_timeout():
 
 #curar de poco a poco
 func _on_TimerHeal_timeout():
-	
+	var hp_recover = Vars.player["potion_healing_hp"]
 	if Vars.player["hp_now"] < Vars.player["hp_max"]:
-		Vars.player["hp_now"] += Vars.player["potion_healing_hp"]
-		Functions.show_damage_indicator(Vars.player["potion_healing_hp"],$Sprite/BloodPosition/Pos6.global_position,"blue")
+		#al estar agachados recuperamos mas hp
+		if state == "crouch":
+			hp_recover = Vars.player["potion_healing_hp"] * 2
+		Vars.player["hp_now"] += hp_recover
+		Functions.show_damage_indicator(hp_recover,$Sprite/BloodPosition/Pos6.global_position,"blue")
 	#eliminar excedente
 	if Vars.player["hp_now"] > Vars.player["hp_max"]:
 		Vars.player["hp_now"] = Vars.player["hp_max"]
@@ -642,7 +650,7 @@ func _on_TimerHeal_timeout():
 	
 func _on_TimerHealingEnd_timeout():
 	Vars.player["condition"] = "good"
-	$TimerHeal.stop()
+	Timers.get_node("TimerHeal").stop()
 	emit_signal("stats_changed")
 
 #pasado un tiempo luego de estar poison o cursed se regresará a good

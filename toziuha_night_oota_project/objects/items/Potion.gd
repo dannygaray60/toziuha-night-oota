@@ -9,6 +9,7 @@ func _on_AreaPick_body_entered(body):
 		if Vars.player["potion_now"] == Vars.player["potion_max"]:
 			pass
 		else:
+			Functions.show_hud_notif(tr("POTION"))
 			Vars.player["potion_now"] += 1
 			Audio.play_sfx("item_pick1")
 			#la señal stats_changed del jugador hace que los valores del hud se actualicen

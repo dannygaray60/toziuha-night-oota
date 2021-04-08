@@ -3,7 +3,9 @@
 [ext_resource path="res://objects/LevelBase.gd" type="Script" id=1]
 [ext_resource path="res://objects/ui/Hud.tscn" type="PackedScene" id=2]
 
-[node name="LevelBase" type="Node"]
+[node name="LevelBase" type="Node" groups=[
+"level_base",
+]]
 script = ExtResource( 1 )
 music = "silence"
 
@@ -17,14 +19,11 @@ layer = 2
 [node name="ColorRect" type="ColorRect" parent="FadeBlack"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 1
+mouse_filter = 2
 color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_lock_": true,
 "_edit_use_anchors_": false
 }
-
-[node name="TimerStaminaRecover" type="Timer" parent="."]
-wait_time = 0.1
+[connection signal="ready" from="." to="." method="_on_LevelBase_ready"]
 [connection signal="tween_all_completed" from="FadeBlack/Tween" to="." method="_on_Tween_tween_all_completed"]
-[connection signal="timeout" from="TimerStaminaRecover" to="." method="_on_TimerStaminaRecover_timeout"]

@@ -22,7 +22,10 @@ _global_script_class_icons={
 
 config/name="Toziuha Night - Order of the Alchemists"
 run/main_scene="res://screens/MainMenu.tscn"
+config/use_custom_user_dir=true
+config/custom_user_dir_name="ToziuhaNight_OrderOfTheAlchemists"
 config/icon="res://icon.png"
+config/quit_on_go_back=false
 
 [autoload]
 
@@ -32,6 +35,7 @@ Functions="*res://scripts/functions.gd"
 Audio="*res://autoload/Audio.tscn"
 Vars="*res://scripts/vars.gd"
 Timers="*res://autoload/Timers.tscn"
+ControlsOnscreen="*res://objects/ui/ControlsOnscreen.tscn"
 
 [display]
 
@@ -40,11 +44,11 @@ window/size/height=384
 window/size/test_width=1366
 window/size/test_height=768
 window/stretch/mode="viewport"
-window/stretch/aspect="keep_height"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "screen_debugger" )
+enabled=PoolStringArray( "screen_debugger", "swipe-detector" )
 
 [importer_defaults]
 
@@ -131,6 +135,11 @@ pointing/emulate_touch_from_mouse=true
 2d_physics/layer_5="player_weapon"
 2d_physics/layer_6="enemy_weapon"
 2d_physics/layer_7="item_pick"
+
+[locale]
+
+translations=PoolStringArray( "res://text_words.en.translation", "res://text_words.es.translation" )
+locale_filter=[ 0, [  ] ]
 
 [rendering]
 

@@ -12,3 +12,16 @@ __meta__ = {
 "_editor_description_": "al estar en una condicion
 \"poison\" o \"cursed\" cambiar a good automaticamente"
 }
+
+[node name="TimerHeal" type="Timer" parent="."]
+wait_time = 0.5
+__meta__ = {
+"_editor_description_": "tiempo para recibir x cantidad de hp"
+}
+
+[node name="TimerHealingEnd" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+__meta__ = {
+"_editor_description_": "cantidad de tiempo total para recibir healing"
+}

@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://objects/ui/MainButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/ui/SubButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/ui/HSlider.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=4]
+[ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=5]
+
+[node name="Control" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="GridContainer" parent="."]
+margin_left = 14.0
+margin_top = 15.0
+margin_right = 152.0
+margin_bottom = 175.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_bottom = 37.0
+
+[node name="Button2" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_top = 41.0
+margin_bottom = 78.0
+
+[node name="Button3" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_top = 82.0
+margin_bottom = 119.0
+
+[node name="Button4" parent="HBoxContainer" instance=ExtResource( 1 )]
+margin_top = 123.0
+margin_bottom = 160.0
+disabled = true
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 14.0
+margin_top = 200.012
+margin_right = 189.0
+margin_bottom = 361.012
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SubButton" parent="GridContainer" instance=ExtResource( 2 )]
+
+[node name="SubButton2" parent="GridContainer" instance=ExtResource( 2 )]
+margin_top = 33.0
+margin_bottom = 62.0
+
+[node name="SubButton3" parent="GridContainer" instance=ExtResource( 2 )]
+margin_top = 66.0
+margin_bottom = 95.0
+
+[node name="SubButton4" parent="GridContainer" instance=ExtResource( 2 )]
+margin_top = 99.0
+margin_bottom = 128.0
+
+[node name="SubButton5" parent="GridContainer" instance=ExtResource( 2 )]
+margin_top = 132.0
+margin_bottom = 161.0
+disabled = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+margin_left = 237.0
+margin_top = 200.0
+margin_right = 374.0
+margin_bottom = 364.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSlider" parent="VBoxContainer2" instance=ExtResource( 3 )]
+margin_right = 137.0
+size_flags_horizontal = 3
+
+[node name="HSlider2" parent="VBoxContainer2" instance=ExtResource( 3 )]
+margin_top = 56.0
+margin_right = 137.0
+margin_bottom = 108.0
+size_flags_horizontal = 3
+
+[node name="HSlider3" parent="VBoxContainer2" instance=ExtResource( 3 )]
+margin_top = 112.0
+margin_right = 137.0
+margin_bottom = 164.0
+size_flags_horizontal = 3
+
+[node name="PanelContainer" parent="." instance=ExtResource( 4 )]
+margin_left = 187.0
+margin_top = 40.0
+margin_right = 322.0
+margin_bottom = 121.0
+
+[node name="Label" type="Label" parent="PanelContainer"]
+margin_top = 33.0047
+margin_right = 135.0
+margin_bottom = 46.0047
+custom_fonts/font = ExtResource( 5 )
+text = "This is a text..."
+align = 1

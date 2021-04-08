@@ -659,7 +659,7 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 vframes = 7
 hframes = 16
-frame = 1
+frame = 2
 __meta__ = {
 "_editor_description_": "z index : 0"
 }
@@ -792,23 +792,8 @@ one_shot = true
 __meta__ = {
 "_editor_description_": "tiempo en el que el personaje no colisiona con enemigos y peligros"
 }
-
-[node name="TimerHeal" type="Timer" parent="."]
-wait_time = 0.5
-__meta__ = {
-"_editor_description_": "tiempo para recibir x cantidad de hp"
-}
-
-[node name="TimerHealingEnd" type="Timer" parent="."]
-wait_time = 5.0
-one_shot = true
-__meta__ = {
-"_editor_description_": "cantidad de tiempo total para recibir healing"
-}
 [connection signal="tree_exiting" from="." to="." method="_on_Xandria_tree_exiting"]
 [connection signal="timeout" from="TimerBackdash" to="." method="_on_TimerBackdash_timeout"]
 [connection signal="timeout" from="TimerSlide" to="." method="_on_TimerSlide_timeout"]
 [connection signal="timeout" from="TimerAttack" to="." method="_on_TimerAttack_timeout"]
 [connection signal="timeout" from="TimerNoHurt" to="." method="_on_TimerNoHurt_timeout"]
-[connection signal="timeout" from="TimerHeal" to="." method="_on_TimerHeal_timeout"]
-[connection signal="timeout" from="TimerHealingEnd" to="." method="_on_TimerHealingEnd_timeout"]

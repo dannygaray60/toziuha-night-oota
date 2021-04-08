@@ -1,0 +1,248 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://objects/ui/HSlider.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen15.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen6.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen5.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen20.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen13.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen7.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen17.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen16.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen12.png" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen4.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen3.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen1.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen14.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen11.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen2.png" type="Texture" id=16]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen10.png" type="Texture" id=17]
+[ext_resource path="res://objects/ui/SubButton.tscn" type="PackedScene" id=18]
+[ext_resource path="res://screens/EditTouchscreenButtons.gd" type="Script" id=19]
+[ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=20]
+[ext_resource path="res://objects/ui/Hud.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/img/iron_texture.jpg" type="Texture" id=22]
+
+[node name="EditTouchscreenButtons" type="CanvasLayer"]
+script = ExtResource( 19 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color( 0.6, 0.6, 0.6, 0.45098 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 22 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dpad" type="Node2D" parent="."]
+position = Vector2( 136, 248 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ui_left" type="Position2D" parent="Dpad"]
+position = Vector2( -56, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_editor_description_": ""
+}
+
+[node name="Btn" type="TouchScreenButton" parent="Dpad/ui_left"]
+position = Vector2( -40, -48 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 13 )
+pressed = ExtResource( 15 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ui_right" type="Position2D" parent="Dpad"]
+position = Vector2( 57, 1 )
+__meta__ = {
+"_edit_group_": true,
+"_editor_description_": ""
+}
+
+[node name="Btn" type="TouchScreenButton" parent="Dpad/ui_right"]
+position = Vector2( -48, -48 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 16 )
+pressed = ExtResource( 10 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ui_up" type="Position2D" parent="Dpad"]
+position = Vector2( 0, -54 )
+__meta__ = {
+"_edit_group_": true,
+"_editor_description_": ""
+}
+
+[node name="Btn" type="TouchScreenButton" parent="Dpad/ui_up"]
+position = Vector2( -43.8649, -43.5405 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 12 )
+pressed = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ui_down" type="Position2D" parent="Dpad"]
+position = Vector2( 0, 51 )
+__meta__ = {
+"_edit_group_": true,
+"_editor_description_": ""
+}
+
+[node name="Btn" type="TouchScreenButton" parent="Dpad/ui_down"]
+position = Vector2( -43.8649, -48 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 11 )
+pressed = ExtResource( 14 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Btn" type="Node2D" parent="."]
+
+[node name="ui_select" type="Position2D" parent="Btn"]
+position = Vector2( 636.649, 40 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Btn" type="TouchScreenButton" parent="Btn/ui_select"]
+position = Vector2( -29.3514, -30.2433 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 17 )
+pressed = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ui_cancel" type="Position2D" parent="Btn"]
+position = Vector2( 472, 328 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Btn" type="TouchScreenButton" parent="Btn/ui_cancel"]
+position = Vector2( -43.8649, -43.5405 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 4 )
+pressed = ExtResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ui_accept" type="Position2D" parent="Btn"]
+position = Vector2( 576, 304 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Btn" type="TouchScreenButton" parent="Btn/ui_accept"]
+position = Vector2( -43.8649, -43.5405 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 3 )
+pressed = ExtResource( 9 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ui_focus_prev" type="Position2D" parent="Btn"]
+position = Vector2( 624, 203.46 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Btn" type="TouchScreenButton" parent="Btn/ui_focus_prev"]
+position = Vector2( -43.8649, -43.5405 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 7 )
+pressed = ExtResource( 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -87.5
+margin_top = 24.0
+margin_right = 87.5
+margin_bottom = 283.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 13
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnSave" parent="VBoxContainer" instance=ExtResource( 18 )]
+text = "SAVE"
+
+[node name="BtnCancel" parent="VBoxContainer" instance=ExtResource( 18 )]
+margin_top = 42.0
+margin_bottom = 71.0
+text = "CANCEL"
+
+[node name="BtnDefault" parent="VBoxContainer" instance=ExtResource( 18 )]
+margin_top = 84.0
+margin_bottom = 113.0
+text = "DEFAULT"
+
+[node name="Transparency" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 126.0
+margin_right = 175.0
+margin_bottom = 186.0
+custom_constants/separation = -18
+
+[node name="Label" type="Label" parent="VBoxContainer/Transparency"]
+margin_right = 175.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 20 )
+text = "TRANSPARENCY"
+align = 1
+
+[node name="SliderTransparency" parent="VBoxContainer/Transparency" instance=ExtResource( 1 )]
+margin_top = 8.0
+margin_right = 175.0
+margin_bottom = 60.0
+min_value = 0.1
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="Size" type="VBoxContainer" parent="VBoxContainer"]
+margin_top = 199.0
+margin_right = 175.0
+margin_bottom = 259.0
+custom_constants/separation = -18
+
+[node name="Label" type="Label" parent="VBoxContainer/Size"]
+margin_right = 175.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 20 )
+text = "SIZE"
+align = 1
+
+[node name="SliderSize" parent="VBoxContainer/Size" instance=ExtResource( 1 )]
+margin_top = 8.0
+margin_right = 175.0
+margin_bottom = 60.0
+min_value = 0.7
+max_value = 1.0
+step = 0.1
+value = 1.0
+
+[node name="Hud" parent="." instance=ExtResource( 21 )]
+[connection signal="pressed" from="VBoxContainer/BtnSave" to="." method="selected_action" binds= [ "save" ]]
+[connection signal="pressed" from="VBoxContainer/BtnCancel" to="." method="selected_action" binds= [ "cancel" ]]
+[connection signal="pressed" from="VBoxContainer/BtnDefault" to="." method="selected_action" binds= [ "default" ]]
+[connection signal="value_changed" from="VBoxContainer/Transparency/SliderTransparency" to="." method="_on_SliderOpacity_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Size/SliderSize" to="." method="_on_SliderSize_value_changed"]

@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/sprites/slider_grabber.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/slider_grabber_no_focus.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/grabber_area.png" type="Texture" id=3]
+[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://objects/ui/HSlider.gd" type="Script" id=5]
+[ext_resource path="res://assets/sprites/grabber_area_no_focus.png" type="Texture" id=6]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 6 )
+region_rect = Rect2( 0, 0, 16, 8 )
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 16, 8 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 4 )
+
+[node name="HSlider" type="HSlider"]
+margin_right = 16.0
+margin_bottom = 52.0
+custom_icons/grabber_highlight = ExtResource( 1 )
+custom_icons/grabber = ExtResource( 2 )
+custom_styles/slider = SubResource( 1 )
+custom_styles/grabber_area_highlight = SubResource( 2 )
+custom_styles/grabber_area = SubResource( 1 )
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 9.0
+margin_right = 45.0
+custom_fonts/font = SubResource( 3 )
+text = "000"
+align = 1
+valign = 1
+[connection signal="focus_entered" from="." to="." method="_on_HSlider_focus_entered"]
+[connection signal="value_changed" from="." to="." method="_on_HSlider_value_changed"]

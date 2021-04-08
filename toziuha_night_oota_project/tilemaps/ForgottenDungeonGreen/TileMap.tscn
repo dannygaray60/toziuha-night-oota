@@ -382,7 +382,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 8/shape_one_way_margin = 0.0
 8/shapes = [  ]
 8/z_index = 0
-9/name = "oneway_platform"
+9/name = "semisolid_platform"
 9/texture = ExtResource( 1 )
 9/tex_offset = Vector2( 0, 0 )
 9/modulate = Color( 1, 1, 1, 1 )
@@ -425,7 +425,7 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 } ]
 10/z_index = 0
 
-[node name="ForgottenDungeonGreenTileMap" type="TileMap"]
+[node name="Tilemap" type="TileMap"]
 tile_set = SubResource( 28 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8

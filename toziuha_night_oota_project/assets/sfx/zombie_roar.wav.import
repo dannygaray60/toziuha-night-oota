@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/zombie_roar.wav-8b9e1e6f3745387bebc78bee43c78cf6.sample"
+
+[deps]
+
+source_file="res://assets/sfx/zombie_roar.wav"
+dest_files=[ "res://.import/zombie_roar.wav-8b9e1e6f3745387bebc78bee43c78cf6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

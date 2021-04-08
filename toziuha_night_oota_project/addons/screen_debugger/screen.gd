@@ -48,6 +48,9 @@ func _process(_delta):
 func show_screen():
 	$GamepadShowInput.visible = $ChkBtnEnable.pressed
 	$Control.visible = $ChkBtnEnable.pressed
+	$Label.visible = $ChkBtnEnable.pressed
+	$Label2.visible = $ChkBtnEnable.pressed
+	$ChkBtnEnable.visible = $ChkBtnEnable.pressed
 
 func _on_ChkBtnEnable_toggled(_button_pressed):
 	show_screen()

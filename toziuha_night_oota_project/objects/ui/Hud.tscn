@@ -1,23 +1,54 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/sprites/hud.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/hp_bar_good.png" type="Texture" id=2]
+[ext_resource path="res://objects/ui/SubButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://objects/ui/NotificationInGame.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/sprites/ep_bar.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/potion.png" type="Texture" id=6]
 [ext_resource path="res://objects/ui/Hud.gd" type="Script" id=7]
 [ext_resource path="res://assets/sprites/hud_status_panel.png" type="Texture" id=8]
 [ext_resource path="res://fonts_tres/DamageIndicatorPlayer.tres" type="DynamicFont" id=9]
+[ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 10 )
 
 [node name="Hud" type="CanvasLayer"]
+pause_mode = 2
 script = ExtResource( 7 )
 
 [node name="Main" type="Control" parent="."]
+pause_mode = 1
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": "dejar en editor modulate alpha de main en 0 para que no estorbe a la hora de hacer niveles"
 }
+
+[node name="Notif" type="Control" parent="Main"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -341.0
+margin_bottom = -192.0
+rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NotificationInGame" parent="Main/Notif" instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -62.0
+margin_top = 2.0
+margin_right = -4.0
+margin_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 2
 
 [node name="Texture" type="TextureRect" parent="Main"]
 margin_left = 3.0
@@ -25,6 +56,7 @@ margin_top = 5.0
 margin_right = 105.0
 margin_bottom = 110.0
 rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
 texture = ExtResource( 1 )
 stretch_mode = 3
 __meta__ = {
@@ -47,6 +79,7 @@ margin_left = 29.0
 margin_top = 2.5
 margin_right = 102.0
 margin_bottom = 7.5
+mouse_filter = 2
 max_value = 50.0
 value = 30.0
 rounded = true
@@ -60,6 +93,7 @@ margin_left = 4.54171
 margin_top = 32.708
 margin_right = 9.54171
 margin_bottom = 104.708
+mouse_filter = 2
 max_value = 50.0
 value = 35.0
 rounded = true
@@ -74,6 +108,7 @@ margin_left = 23.0
 margin_top = 16.0
 margin_right = 44.0
 margin_bottom = 39.0
+mouse_filter = 2
 texture = ExtResource( 6 )
 stretch_mode = 4
 __meta__ = {
@@ -85,6 +120,7 @@ margin_left = 8.70955
 margin_top = 39.0
 margin_right = 53.7096
 margin_bottom = 52.0
+mouse_filter = 2
 texture = ExtResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -101,3 +137,114 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": "Poison - Healing - Cursed"
 }
+
+[node name="ControlPause" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="ControlPause"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.788235 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlPause"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -49.0
+mouse_filter = 1
+custom_constants/margin_right = 40
+custom_constants/margin_left = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ControlPause/MarginContainer"]
+margin_right = 643.0
+margin_bottom = 49.0
+size_flags_vertical = 3
+custom_constants/separation = 28
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnContinue" parent="ControlPause/MarginContainer/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 79.0
+margin_right = 226.0
+margin_bottom = 49.0
+mouse_filter = 1
+size_flags_horizontal = 1
+text = "CONTINUE"
+
+[node name="BtnSaveAndExit" parent="ControlPause/MarginContainer/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 254.0
+margin_right = 437.0
+margin_bottom = 49.0
+mouse_filter = 1
+size_flags_horizontal = 1
+text = "SAVEANDEXIT"
+
+[node name="BtnHelp" parent="ControlPause/MarginContainer/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 465.0
+margin_right = 564.0
+margin_bottom = 49.0
+mouse_filter = 1
+size_flags_horizontal = 1
+text = "HELP"
+
+[node name="MarginContainer2" type="MarginContainer" parent="ControlPause"]
+anchor_right = 1.0
+margin_bottom = 57.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ControlPause/MarginContainer2"]
+margin_right = 683.0
+margin_bottom = 57.0
+custom_constants/separation = 18
+alignment = 1
+
+[node name="Label" type="Label" parent="ControlPause/MarginContainer2/HBoxContainer"]
+margin_left = 50.0
+margin_top = 12.0
+margin_right = 150.0
+margin_bottom = 44.0
+custom_fonts/font = SubResource( 1 )
+text = "ATK: 00"
+
+[node name="Label2" type="Label" parent="ControlPause/MarginContainer2/HBoxContainer"]
+margin_left = 168.0
+margin_top = 12.0
+margin_right = 316.0
+margin_bottom = 44.0
+custom_fonts/font = SubResource( 1 )
+text = "HP: 000/100"
+
+[node name="Label3" type="Label" parent="ControlPause/MarginContainer2/HBoxContainer"]
+margin_left = 334.0
+margin_top = 12.0
+margin_right = 526.0
+margin_bottom = 44.0
+custom_fonts/font = SubResource( 1 )
+text = "Cordovas: 0000"
+
+[node name="Label4" type="Label" parent="ControlPause/MarginContainer2/HBoxContainer"]
+margin_left = 544.0
+margin_top = 12.0
+margin_right = 632.0
+margin_bottom = 44.0
+custom_fonts/font = SubResource( 1 )
+text = "EM: 00"
+[connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnContinue" to="." method="pause_menu_opt_selected" binds= [ "continue" ]]
+[connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnSaveAndExit" to="." method="pause_menu_opt_selected" binds= [ "saveandexit" ]]
+[connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnHelp" to="." method="pause_menu_opt_selected" binds= [ "help" ]]

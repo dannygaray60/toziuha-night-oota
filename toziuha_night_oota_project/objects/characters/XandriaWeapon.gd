@@ -57,9 +57,14 @@ func _on_Area_body_entered(body):
 				total_atk += 20
 		#daño a la mitad estando envenenado
 		if Vars.player["condition"] == "poison":
-			total_atk = Vars.player["atk"] / 2
+			total_atk = total_atk / 2
 		#camera shake
 		get_parent().get_parent().get_node("PlayerCamera").add_trauma(0.3)
 		#send hurt data to enemy
 		body.hurt(total_atk,global_position)
 		
+
+
+func _on_Area_area_entered(area):
+	if area.is_in_group("torch"):
+		area.destroy()

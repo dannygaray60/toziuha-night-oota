@@ -77,6 +77,9 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 4, 16, 4 )
 [sub_resource type="ConvexPolygonShape2D" id=25]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
 
+[sub_resource type="ConvexPolygonShape2D" id=26]
+points = PoolVector2Array( 16, 12, 0, 12, 0, 0, 16, 0 )
+
 [sub_resource type="ConvexPolygonShape2D" id=27]
 points = PoolVector2Array( 16, 12, 0, 12, 0, 0, 16, 0 )
 
@@ -84,7 +87,7 @@ points = PoolVector2Array( 16, 12, 0, 12, 0, 0, 16, 0 )
 points = PoolVector2Array( 16, 12, 0, 12, 0, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=29]
-points = PoolVector2Array( 16, 12, 0, 12, 0, 0, 16, 0 )
+points = PoolVector2Array( 16, 16, 0, 16, 0, 4, 16, 4 )
 
 [sub_resource type="ConvexPolygonShape2D" id=30]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 4, 16, 4 )
@@ -93,19 +96,19 @@ points = PoolVector2Array( 16, 16, 0, 16, 0, 4, 16, 4 )
 points = PoolVector2Array( 16, 16, 0, 16, 0, 4, 16, 4 )
 
 [sub_resource type="ConvexPolygonShape2D" id=32]
-points = PoolVector2Array( 16, 16, 0, 16, 0, 4, 16, 4 )
+points = PoolVector2Array( 12, 16, 0, 16, 0, 0, 12, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=33]
 points = PoolVector2Array( 12, 16, 0, 16, 0, 0, 12, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=34]
-points = PoolVector2Array( 12, 16, 0, 16, 0, 0, 12, 0 )
-
-[sub_resource type="ConvexPolygonShape2D" id=35]
 points = PoolVector2Array( 16, 12, 16, 12, 12, 12, 12, 16, 0, 16, 0, 0, 16, 0 )
 
-[sub_resource type="ConvexPolygonShape2D" id=36]
+[sub_resource type="ConvexPolygonShape2D" id=35]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 4, 16, 4, 12, 0, 12, 0, 12 )
+
+[sub_resource type="ConvexPolygonShape2D" id=36]
+points = PoolVector2Array( 16, 16, 4, 16, 4, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=37]
 points = PoolVector2Array( 16, 16, 4, 16, 4, 0, 16, 0 )
@@ -117,21 +120,18 @@ points = PoolVector2Array( 16, 16, 4, 16, 4, 0, 16, 0 )
 points = PoolVector2Array( 16, 16, 4, 16, 4, 0, 16, 0 )
 
 [sub_resource type="ConvexPolygonShape2D" id=40]
-points = PoolVector2Array( 16, 16, 4, 16, 4, 0, 16, 0 )
+points = PoolVector2Array( 0, 0, 12, 0, 12, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=41]
 points = PoolVector2Array( 0, 0, 12, 0, 12, 16, 0, 16 )
 
 [sub_resource type="ConvexPolygonShape2D" id=42]
-points = PoolVector2Array( 0, 0, 12, 0, 12, 16, 0, 16 )
-
-[sub_resource type="ConvexPolygonShape2D" id=43]
 points = PoolVector2Array( 0, 0, 0, 0, 12, 0, 12, 4, 16, 4, 16, 16, 0, 16 )
 
-[sub_resource type="ConvexPolygonShape2D" id=44]
+[sub_resource type="ConvexPolygonShape2D" id=43]
 points = PoolVector2Array( 16, 0, 16, 16, 0, 16, 0, 4, 4, 4, 4, 0, 4, 0 )
 
-[sub_resource type="TileSet" id=26]
+[sub_resource type="TileSet" id=44]
 0/name = "wall"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -324,7 +324,7 @@ points = PoolVector2Array( 16, 0, 16, 16, 0, 16, 0, 4, 4, 4, 4, 0, 4, 0 )
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 1/z_index = 0
-2/name = "platform_semisolid"
+2/name = "semisolid_platform"
 2/texture = ExtResource( 1 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
@@ -364,116 +364,116 @@ points = PoolVector2Array( 16, 0, 16, 16, 0, 16, 0, 4, 4, 4, 4, 0, 4, 0 )
 3/navigation_offset = Vector2( 0, 0 )
 3/shape_offset = Vector2( 0, 0 )
 3/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-3/shape = SubResource( 27 )
+3/shape = SubResource( 26 )
 3/shape_one_way = false
 3/shape_one_way_margin = 1.0
 3/shapes = [ {
 "autotile_coord": Vector2( 1, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 27 ),
+"shape": SubResource( 26 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 2, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 28 ),
+"shape": SubResource( 27 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 3, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 29 ),
+"shape": SubResource( 28 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 1, 5 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 30 ),
+"shape": SubResource( 29 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 2, 5 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 31 ),
+"shape": SubResource( 30 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 3, 5 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 32 ),
+"shape": SubResource( 31 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 33 ),
+"shape": SubResource( 32 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 2 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 34 ),
+"shape": SubResource( 33 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 35 ),
+"shape": SubResource( 34 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 4, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 36 ),
+"shape": SubResource( 35 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 4, 1 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 37 ),
+"shape": SubResource( 36 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 4, 2 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 38 ),
+"shape": SubResource( 37 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 4, 3 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 39 ),
+"shape": SubResource( 38 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 4, 4 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 40 ),
+"shape": SubResource( 39 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 3 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 41 ),
+"shape": SubResource( 40 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 4 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 42 ),
+"shape": SubResource( 41 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 0, 5 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 43 ),
+"shape": SubResource( 42 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 }, {
 "autotile_coord": Vector2( 4, 5 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 44 ),
+"shape": SubResource( 43 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 3/z_index = 0
@@ -548,8 +548,8 @@ points = PoolVector2Array( 16, 0, 16, 16, 0, 16, 0, 4, 4, 4, 4, 0, 4, 0 )
 8/shapes = [  ]
 8/z_index = 0
 
-[node name="CavernTileMap" type="TileMap"]
-tile_set = SubResource( 26 )
+[node name="Tilemap" type="TileMap"]
+tile_set = SubResource( 44 )
 cell_size = Vector2( 16, 16 )
 collision_layer = 8
 collision_mask = 119

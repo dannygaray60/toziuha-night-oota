@@ -19,6 +19,8 @@ var state = "idle"
 
 var player = null
 
+var list_items = ["none","none","none","money_10","money_100","money_1","money_1","money_10","money_10"]
+
 #establecer hacia donde mira el enemigo
 #dependiendo de posicion de jugador (debe verlo de frente
 func check_player_position():
@@ -34,6 +36,9 @@ func check_player_position():
 		change_state("walk")
 
 func _ready():
+	
+	randomize()
+	list_items.shuffle()
 	
 	set_physics_process(false)
 	
@@ -55,35 +60,36 @@ func _physics_process(delta):
 	
 	#si el jugador pasa encima o debajo del enemigo
 	#se invertirá el facing mediante timer
-	var distance_to_enemy = player.global_position.x - global_position.x
-	if distance_to_enemy >= -5 and distance_to_enemy <= 5:
-		$TimerToChangeFacing.start(0.5)
-
-	if state!="dead":
+	if player:
+		var distance_to_enemy = player.global_position.x - global_position.x
+		if distance_to_enemy >= -5 and distance_to_enemy <= 5:
+			$TimerToChangeFacing.start(0.5)
 	
-		#gravedad
-		velocity.y += gravity*delta
+	if state=="walk":
+		velocity.x = speed*facing
 	
-		if state=="walk":
-			velocity.x = speed*facing
-		
-		velocity = move_and_slide(velocity, Vector2.UP)
-		
-		if is_on_wall():
-			change_state("idle")
+	#gravedad
+	velocity.y += gravity*delta
+	velocity = move_and_slide(velocity, Vector2.UP)
+	
+	if is_on_wall():
+		change_state("idle")
 #			facing = facing * -1
-			$TimerToChangeFacing.start(1)
+		$TimerToChangeFacing.start(1)
 	
-		$Sprite.scale.x = -1 * facing
+	$Sprite.scale.x = -1 * facing
+
+	
 
 	#-------------- deteccion de colisiones ----------------------
-	for i in get_slide_count():
-		var collision = get_slide_collision(i)
-		if collision.collider.is_in_group("player"):
-			collision.collider.hurt(id,position)
-			#si este cuerpo lleva veneno
-			if self.is_in_group("poison"):
-				collision.collider.change_condition("poison")
+	if state!="dead":
+		for i in get_slide_count():
+			var collision = get_slide_collision(i)
+			if collision.collider.is_in_group("player"):
+				collision.collider.hurt(id,position)
+				#si este cuerpo lleva veneno
+				if self.is_in_group("poison"):
+					collision.collider.change_condition("poison")
 
 func change_state(new_state):
 	if state != new_state:
@@ -106,14 +112,15 @@ func hurt(damage,weapon_position):
 
 
 func die():
-	$CollisionShape2D.shape = null
-	Audio.play_sfx("enemy_die1")
+	velocity.x = 0
+	#spawnear item como recompensa
+	Functions.spawn_drop_item(list_items[0],position)
+	Functions.show_hud_notif(tr(Vars.enemy[id]["name"]))
+	set_collision_mask_bit(0,false)
+	set_collision_mask_bit(4,false)
+	set_collision_layer_bit(2,false)
+	Audio.play_sfx("smash_wood_pieces")
 	change_state("dead")
-	$Vfx_TornadoStatic/AnimationPlayer.play("show")
-
-func _on_Vfx_TornadoStatic_AnimationPlayer_animation_finished(_anim_name):
-	queue_free()
-
 
 func _on_VisibilityNotifier2D_screen_entered():
 	set_physics_process(true)
@@ -125,9 +132,13 @@ func _on_VisibilityNotifier2D_screen_entered():
 func _on_VisibilityNotifier2D_screen_exited():
 	set_physics_process(false)
 	if state != "dead":
-		check_player_position()
 		change_state("idle")
 
 
 func _on_TimerToChangeFacing_timeout():
 	check_player_position()
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "dead":
+		queue_free()

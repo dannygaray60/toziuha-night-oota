@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://assets/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Audio.gd" type="Script" id=2]
@@ -22,8 +22,23 @@
 [ext_resource path="res://assets/sfx/enemy_damage.wav" type="AudioStream" id=20]
 [ext_resource path="res://assets/bgm/cave-theme.ogg" type="AudioStream" id=21]
 [ext_resource path="res://assets/bgm/rondo_of_darkness.ogg" type="AudioStream" id=22]
+[ext_resource path="res://assets/sfx/btn_move_main.wav" type="AudioStream" id=23]
+[ext_resource path="res://assets/sfx/btn_accept.wav" type="AudioStream" id=24]
+[ext_resource path="res://assets/sfx/btn_cancel.wav" type="AudioStream" id=25]
+[ext_resource path="res://assets/sfx/btn_move.wav" type="AudioStream" id=26]
+[ext_resource path="res://assets/sfx/btn_incorrect.wav" type="AudioStream" id=27]
+[ext_resource path="res://assets/bgm/boss_theme.ogg" type="AudioStream" id=28]
+[ext_resource path="res://assets/sfx/btn_accept_main_menu.wav" type="AudioStream" id=29]
+[ext_resource path="res://assets/sfx/slider_change_value.wav" type="AudioStream" id=30]
+[ext_resource path="res://assets/sfx/coin.wav" type="AudioStream" id=31]
+[ext_resource path="res://assets/sfx/knife_stab_body.wav" type="AudioStream" id=32]
+[ext_resource path="res://assets/sfx/zombie_roar.wav" type="AudioStream" id=33]
+[ext_resource path="res://assets/sfx/smash_wood_pieces.wav" type="AudioStream" id=34]
+[ext_resource path="res://assets/sfx/em_drop.wav" type="AudioStream" id=35]
+[ext_resource path="res://assets/sfx/weapon_upgrade.wav" type="AudioStream" id=36]
 
 [node name="Audio" type="Node"]
+pause_mode = 2
 script = ExtResource( 2 )
 
 [node name="sfx" type="Node" parent="."]
@@ -31,6 +46,33 @@ script = ExtResource( 2 )
 [node name="jump" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 1 )
 volume_db = 2.0
+bus = "Effects"
+
+[node name="weapon_upgrade" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 36 )
+volume_db = 5.0
+pitch_scale = 0.7
+bus = "Effects"
+
+[node name="em_drop" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 35 )
+volume_db = 10.0
+pitch_scale = 1.5
+bus = "Effects"
+
+[node name="em_drop2" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 35 )
+volume_db = 7.0
+bus = "Effects"
+
+[node name="coin" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 31 )
+pitch_scale = 1.3
+bus = "Effects"
+
+[node name="coin2" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 31 )
+pitch_scale = 0.5
 bus = "Effects"
 
 [node name="whip_woosh" type="AudioStreamPlayer" parent="sfx"]
@@ -59,16 +101,32 @@ bus = "Effects"
 
 [node name="hit-player" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 14 )
+volume_db = 2.0
 pitch_scale = 0.86
 bus = "Effects"
 
 [node name="hit1" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 16 )
-volume_db = 5.0
+volume_db = 7.0
 bus = "Effects"
 
 [node name="enemy_die1" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 17 )
+bus = "Effects"
+
+[node name="zombie_roar" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 33 )
+pitch_scale = 0.8
+bus = "Effects"
+
+[node name="knife_stab" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 32 )
+volume_db = 5.0
+bus = "Effects"
+
+[node name="smash_wood_pieces" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 34 )
+pitch_scale = 1.5
 bus = "Effects"
 
 [node name="item_pick1" type="AudioStreamPlayer" parent="sfx"]
@@ -86,6 +144,48 @@ volume_db = 3.714
 pitch_scale = 1.6
 bus = "Effects"
 
+[node name="btn_main_menu" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 23 )
+volume_db = 8.0
+bus = "Effects"
+
+[node name="btn_move" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 26 )
+volume_db = 1.0
+pitch_scale = 0.8
+bus = "Effects"
+
+[node name="btn_accept" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 24 )
+volume_db = 7.0
+pitch_scale = 0.8
+bus = "Effects"
+
+[node name="btn_accept_main_menu" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 29 )
+bus = "Effects"
+
+[node name="btn_cancel" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 25 )
+volume_db = 7.0
+pitch_scale = 0.9
+bus = "Effects"
+
+[node name="btn_incorrect" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 27 )
+volume_db = -2.0
+pitch_scale = 1.2
+bus = "Effects"
+
+[node name="slider_change_value" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 30 )
+volume_db = -8.0
+bus = "Effects"
+
+[node name="checkbox_change_value" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 30 )
+bus = "Effects"
+
 [node name="music" type="Node" parent="."]
 
 [node name="nameless_symphony" type="AudioStreamPlayer" parent="music"]
@@ -99,6 +199,12 @@ bus = "Music"
 
 [node name="rondo_of_darkness" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 22 )
+volume_db = -2.0
+bus = "Music"
+
+[node name="boss_theme" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 28 )
+volume_db = 4.0
 bus = "Music"
 
 [node name="voice" type="Node" parent="."]

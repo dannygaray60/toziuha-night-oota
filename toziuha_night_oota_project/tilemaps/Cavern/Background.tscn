@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/sprites/cavern/background.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/cavern/back-walls.png" type="Texture" id=2]
 
-[node name="ParallaxBackground" type="ParallaxBackground"]
+[node name="Background" type="ParallaxBackground"]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0.3, 0.2 )

@@ -1,9 +1,5 @@
 extends Node
 
-
-#func _ready():
-#	$music/nameless_symphony.play()
-
 func play_sfx(name_sfx):
 	get_node("sfx/"+name_sfx).play()
 
