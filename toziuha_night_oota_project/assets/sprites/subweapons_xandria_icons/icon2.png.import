@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/subweapons_xandria_.png-b6943445d1a47a7020060cfb65366f52.stex"
+path="res://.import/icon2.png-2b03451f8147ca83971e5ae460a0bd2b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/subweapons_xandria_.png"
-dest_files=[ "res://.import/subweapons_xandria_.png-b6943445d1a47a7020060cfb65366f52.stex" ]
+source_file="res://assets/sprites/subweapons_xandria_icons/icon2.png"
+dest_files=[ "res://.import/icon2.png-2b03451f8147ca83971e5ae460a0bd2b.stex" ]
 
 [params]
 

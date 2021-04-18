@@ -7,24 +7,28 @@ func _ready():
 	
 	$ButtonListVerticalScroll.elements = [
 		["start",tr("START")],
-		["download",tr("DOWNLOADMISSIONS")],
-		["store",tr("STORE")],
-		["extras",tr("EXTRAS")],
+#		["download",tr("DOWNLOADMISSIONS")],
+#		["store",tr("STORE")],
+#		["extras",tr("EXTRAS")],
 		["options",tr("OPTIONS")],
 		["credits",tr("CREDITS")],
-		["updates",tr("UPDATES")],
+#		["updates",tr("UPDATES")],
 		["exit",tr("EXIT")],
 	]
 	$ButtonListVerticalScroll.update_list()
 	
-	if !Conf.get_conf_value("touchscreenbutton", "show_buttons",false):
-		$BtnUp.visible = false
-		$BtnDown.visible = false
-		$BtnRight.visible = false
+#	if !Conf.get_conf_value("touchscreenbutton", "show_buttons",false):
+#		$BtnUp.visible = false
+#		$BtnDown.visible = false
+#		$BtnRight.visible = false
 
 func _process(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
-		go_to_option($ButtonListVerticalScroll.element)
+		if $ControlSocial.visible:
+			Audio.play_sfx("btn_accept")
+			$ControlSocial.visible = false
+		else:
+			go_to_option($ButtonListVerticalScroll.element)
 
 func go_to_option(opt):
 	
@@ -35,9 +39,11 @@ func go_to_option(opt):
 	Audio.play_sfx("btn_accept_main_menu")
 	match opt:
 		"start":
-			SceneChanger.change_scene("res://test/Test large corridor.tscn")
+			SceneChanger.change_scene("res://test/test ruins abandoned map1/main.tscn")
 		"options":
 			SceneChanger.change_scene("res://screens/Options.tscn")
+		"credits":
+			$ControlSocial.visible = true
 		"exit":
 			get_tree().quit()
 		_:
@@ -53,3 +59,7 @@ func _on_SwipeDetector_swipe_updated(partial_gesture):
 			Input.action_press("ui_up")
 #		_:
 #			Input.action_press("ui_accept")
+
+
+func _on_BtnHideSocialIcons_pressed():
+	$ControlSocial.visible = false

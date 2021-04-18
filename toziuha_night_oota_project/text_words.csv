@@ -1,4 +1,25 @@
 keys;en;es
+DISABLED;Disabled;Desactivado
+ICONS;Icons;Iconos
+VIDEO_FILTERS;Video Filters;Filtros de Video
+OPT_BTN_JUMPANDACCEPT;Jump / Accept;Saltar / Aceptar
+OPT_BTN_ATTACKANDCANCEL;Attack / Cancel;Atacar / Cancelar
+OPT_BTN_START;Start / Pause;Inicio / Pausa
+SELECTNEWBTNICONFORX;Select a new icon for «%s».;Selecciona un nuevo icono para «%s».
+REMAP_MSG_GAMEPAD;Press a new button for «%s» on your gamepad.;Presiona un nuevo botón para «%s» en su gamepad.
+REMAP_MSG_KEYBRD;Press a new key for «%s».;Presiona una nueva tecla para «%s».
+MSG_OR_PRESS_ESC_TO_CLOSE;Or press «Escape» to close.;O presione «Escape» para cerrar.
+UP;Up;Arriba
+DOWN;Down;Abajo
+LEFT;Left;Izquierda
+RIGHT;Right;Derecha
+ATTACK;Attack;Atacar
+JUMP;Jump;Saltar
+ACTIONS_LIST;Action List;Lista de Acciones
+NAVIGATE;Navigate;Navegar
+SELECT;Select;Seleccionar
+RETURN;Return;Regresar
+CHANGE_VOLUME;Change Volume;Cambiar Volumen
 START;Start;Comenzar
 CONTINUE;Continue;Continuar
 DOWNLOADMISSIONS;Download Missions;Descargar Misiones
@@ -29,9 +50,30 @@ SAVE;Save;Guardar
 CANCEL;Cancel;Cancelar
 TRANSPARENCY;Transparency;Transparencia
 SIZE;Size;Tamaño
+CONF_BTN_ICNS;Change Gamepad icons;Cambiar iconos gamepad
+SHOW_GAMPD_ICNS;Gamepad Icons;Iconos Gamepad
+SHOW_KYBRD_ICNS;Keyboard Icons;Iconos Teclado
+HIDE_BTN_ICNS;Hide Icons;Ocultar Iconos
 POTION;Potion;Poción
+USE_POTION;Use Potion;Usar Poción
+SLIDE;Slide;Deslizarse
+BACKWARD;Backward;Retroceder (esquivar)
+THROW_SUBWEAPON;Throw Subweapon;Lanzar Subarma
 SKELETON;Skeleton;Esqueleto
 ZOMBIE;Zombie;Zombi
 IRONPLUS1;Iron +1;Hierro +1
 IRONPLUS5;Iron +5;Hierro +5
 WEAPONLVL;Weapon Lvl%d;Arma Nivel %d
+BRONCEKY;Bronce Key;Llave de Bronce
+SILVERKY;Silver Key;Llave Plateada
+GOLDENKY;Golden Key;Llave Dorada
+SKIP;Skip;Omitir
+HOLD;Hold;Mantén
+PRESS;Press;Presiona
+RELEASE;Release;Suelta
+PHRASE_DOUBLEJUMP;Now you can make a double jump.;Ahora puedes hacer un segundo salto.
+PHRASE_SLIDE;Press «Down» + «Jump» to slide.;Presiona «Abajo» + «Salto» para deslizarte.
+PHRASE_BACKDASH;Go Backward with «Backdash» button.;Retrocede rápidamente con el botón de «Esquivar».
+PHRASE_NEED_BRONCEKY;You need the «Bronce Key» to unlock this door.;Necesitas la «Llave de Bronce» para abrir esta puerta.
+PHRASE_NEED_SILVERKY;You need the «Silver Key» to unlock this door.;Necesitas la «Llave Plateada» para abrir esta puerta.
+PHRASE_NEED_GOLDENKY;You need the «Golden Key» to unlock this door.;Necesitas la «Llave Dorada para abrir esta puerta.

@@ -5,36 +5,42 @@ extends Node
 #guardar hacia que lado mira el jugador (izq: -1 . der: 1)
 #si se deja en cero, el facing será el predeterminado en el script del player
 var player_facing = 0
+#nombre de la puerta en donde aparecera 
+var player_door_spawn = ""
 
 #el jugador esta en una plataforma que permite bajarse de ella? (one way collision)
 var is_on_onewaycollisionplatform = false
 
 #lista de subarmas
-#var subweapons = {
-#	"Shuriken":{
-#		"name": "Shuriken",
-#		"thumb_frame": 1,
-#		"atk": 10,
-#		"mana_use": 1,
-#		"description": "Shuriken ninja.",
-#		"res": "res://objects/subweapon_Shuriken.tscn" #path del objeto
-#	},
-#	"Axe":{
-#		"name": "Hacha",
-#		"thumb_frame": 2,
-#		"atk": 20,
-#		"mana_use": 3,
-#		"description": "Hacha grande.",
-#		"res": "res://objects/subweapon_Axe.tscn"
-#	},
-#}
+var subweapons = {
+	"none":{
+		"name": "None",
+		"atk_add": 0,
+		"em_use": 0,
+		"description": ".",
+	},
+	"shuriken":{
+		"name": "Shuriken",
+		"atk_add": 10,
+		"em_use": 1,
+		"description": "Shuriken ninja.",
+	},
+	
+	"axe":{
+		"name": "Axe",
+		"atk_add": 20,
+		"em_use": 3,
+		"description": "Hacha grande.",
+	},
+}
 
 #lista de enemigos y todos sus stats
 var enemy = {
 	"skeleton":{
 		"name": "SKELETON",
-		"atk": 40,
-		"hp_max": 20,
+		"atk": 17,
+		"def":2,
+		"hp_max": 7,
 		"description": "Description..."
 		#y aqui una lista de objetos que puede dejar al morir...
 	},
@@ -42,6 +48,14 @@ var enemy = {
 		"name": "ZOMBIE",
 		"atk": 10,
 		"hp_max": 5,
+		"description": "Description..."
+		#y aqui una lista de objetos que puede dejar al morir...
+	},
+	"slime":{
+		"name": "Slime",
+		"atk": 15,
+		"def":3,
+		"hp_max": 7,
 		"description": "Description..."
 		#y aqui una lista de objetos que puede dejar al morir...
 	},
@@ -59,8 +73,13 @@ func _ready():
 	set_vars()
 
 func set_vars():
+	
+	player_facing = 0
+	player_door_spawn = ""
 
 	player = {
+		#cual subarma se tiene o "none"
+		"subweapon": "none",
 		#condicion: good, poison, cursed, healing
 		"condition":"good",
 		#money
@@ -85,11 +104,16 @@ func set_vars():
 		#cantidad de hp que puede dar la pocion
 		"potion_healing_hp": 2,
 		#habilidad para dar un doble salto
-		"hability_double_jump" : true,
+		"hability_double_jump" : false,
 		#habilidad para esquivar
-		"hability_backdash" : true,
+		"hability_backdash" : false,
 		#deslizarse en el suelo
-		"hability_slide" : true
+		"hability_slide" : false,
+		#llaves para desbloquear puertas especiales
+		"bronce_key": false,
+		"silver_key": false,
+		"golden_key": false,
+		
 	}
 
 

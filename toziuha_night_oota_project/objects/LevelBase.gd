@@ -1,5 +1,12 @@
 extends Node
 
+#titulo de la habitacion que se mostrará una vez como titulo
+#dejar vacío para no mostrar nada
+export var title_room = ""
+#cada id de habitacion visitada se guardará en la partida de usuario
+#usado para el mapa
+export var id_room = ""
+
 export(String, "silence","rondo_of_darkness","nameless_symphony", "cave_theme") var music
 
 var player = null
@@ -45,7 +52,9 @@ func _on_player_death():
 func _on_Tween_tween_all_completed():
 	Vars.set_vars()
 	# warning-ignore:return_value_discarded
-	get_tree().reload_current_scene()
+#	get_tree().reload_current_scene()
+	SceneChanger.change_scene("res://test/test ruins abandoned map1/main.tscn")
+	
 
 #mostrar botones tactiles de acuerdo a configuracion
 func _on_LevelBase_ready():

@@ -57,22 +57,22 @@ tracks/0/keys = {
 [node name="Zombie" type="KinematicBody2D" groups=[
 "enemies",
 ]]
-position = Vector2( 107.602, 84.0048 )
 collision_layer = 4
 collision_mask = 25
 script = ExtResource( 2 )
 __meta__ = {
 "_editor_description_": "velocity 20"
 }
-speed = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.555, -20.414 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -6, -25 )
+position = Vector2( 0, -25 )
+scale = Vector2( -1, 1 )
 texture = ExtResource( 1 )
+offset = Vector2( 3.659, 0 )
 hframes = 16
 frame = 3
 
@@ -83,8 +83,8 @@ anims/walk = SubResource( 4 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 0, -18.2359 )
-scale = Vector2( 5.71704, 4.29111 )
+position = Vector2( -1.4148, -22.6625 )
+scale = Vector2( 3.25852, 2.76626 )
 __meta__ = {
 "_editor_description_": "dejar el modulate alpha en cero para que no estorbe al editar niveles"
 }
@@ -96,7 +96,13 @@ __meta__ = {
 "_editor_description_": "activado al ser herido, mientras esté activo no podrá ser herido"
 }
 
-[node name="Zombie" type="Sprite" parent="."]
+[node name="TimerChangeFacing" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+__meta__ = {
+"_editor_description_": "mientras esté el timer activo no se podrá voltear"
+}
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="TimerHurt" to="." method="_on_TimerHurt_timeout"]

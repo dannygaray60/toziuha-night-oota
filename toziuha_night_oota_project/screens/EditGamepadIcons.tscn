@@ -1,0 +1,1249 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=2]
+[ext_resource path="res://assets/img/violet_trees.png" type="Texture" id=3]
+[ext_resource path="res://objects/ui/SubButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/sprites/icons_buttons_gamepad_sheet_pressed.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/checkbox_focus2.png" type="Texture" id=7]
+[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://screens/EditGamepadIcons.gd" type="Script" id=9]
+[ext_resource path="res://objects/ui/Panel_Purple.tres" type="StyleBox" id=10]
+[ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=12]
+[ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=13]
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 90, 47 )
+margin_left = 18.9633
+margin_right = 18.9107
+margin_top = 14.0969
+margin_bottom = 14.0
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -7
+extra_spacing_bottom = -7
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxEmpty" id=10]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 8 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.172549, 0, 0, 0.556863 )
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxTexture" id=11]
+content_margin_left = 6.0
+content_margin_right = 0.0
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 32, 32 )
+margin_left = 2.05619
+margin_right = 2.05619
+margin_top = 2.0281
+margin_bottom = 2.0562
+
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[node name="EditGamepadIcons" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -74.5
+margin_top = 7.0
+margin_right = 74.5
+margin_bottom = 69.0969
+grow_horizontal = 2
+size_flags_horizontal = 4
+custom_styles/normal = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
+text = "ICONS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -364.0
+custom_constants/margin_right = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBx" type="HBoxContainer" parent="Margin"]
+margin_left = 20.0
+margin_right = 664.0
+margin_bottom = 454.0
+size_flags_vertical = 0
+custom_constants/separation = 20
+
+[node name="VBx" type="VBoxContainer" parent="Margin/HBx"]
+margin_right = 367.0
+margin_bottom = 454.0
+custom_constants/separation = 12
+
+[node name="Panel0" parent="Margin/HBx/VBx" instance=ExtResource( 5 )]
+margin_right = 155.0
+margin_bottom = 57.1202
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_styles/panel = ExtResource( 10 )
+
+[node name="Margin" type="MarginContainer" parent="Margin/HBx/VBx/Panel0"]
+margin_top = 4.00473
+margin_right = 155.0
+margin_bottom = 53.0047
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBx" type="VBoxContainer" parent="Margin/HBx/VBx/Panel0/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 145.0
+margin_bottom = 39.0
+
+[node name="BtnMenu" parent="Margin/HBx/VBx/Panel0/Margin/VBx" instance=ExtResource( 4 )]
+margin_right = 135.0
+focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_top = NodePath("../../../../Panel/Margin/VBx/BtnLang")
+focus_neighbour_right = NodePath("../../../../../../..")
+focus_next = NodePath("../../../../../../..")
+focus_previous = NodePath("../../../../../../..")
+toggle_mode = true
+text = "OPTIONS"
+sfx_accept_sound = "btn_cancel"
+
+[node name="Panel" parent="Margin/HBx/VBx" instance=ExtResource( 5 )]
+margin_top = 69.0
+margin_right = 367.0
+margin_bottom = 329.12
+size_flags_vertical = 0
+
+[node name="Margin" type="MarginContainer" parent="Margin/HBx/VBx/Panel"]
+margin_top = 4.00473
+margin_right = 367.0
+margin_bottom = 256.005
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBx" type="VBoxContainer" parent="Margin/HBx/VBx/Panel/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 357.0
+margin_bottom = 242.0
+custom_constants/separation = 0
+
+[node name="BtnJump" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
+margin_right = 347.0
+margin_bottom = 29.0
+
+[node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnJump" instance=ExtResource( 4 )]
+margin_right = 327.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+action_mode = 0
+text = "OPT_BTN_JUMPANDACCEPT"
+
+[node name="Icon" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnJump" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_accept"
+
+[node name="BtnAttack" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
+margin_top = 29.0
+margin_right = 347.0
+margin_bottom = 58.0
+
+[node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnAttack" instance=ExtResource( 4 )]
+margin_right = 327.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+action_mode = 0
+text = "OPT_BTN_ATTACKANDCANCEL"
+
+[node name="Icon" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnAttack" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+
+[node name="BtnBackdash" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
+margin_top = 58.0
+margin_right = 347.0
+margin_bottom = 87.0
+
+[node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnBackdash" instance=ExtResource( 4 )]
+margin_right = 327.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+action_mode = 0
+text = "BACKWARD"
+
+[node name="Icon" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnBackdash" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_focus_prev"
+
+[node name="BtnStart" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
+margin_top = 87.0
+margin_right = 347.0
+margin_bottom = 116.0
+
+[node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnStart" instance=ExtResource( 4 )]
+margin_right = 327.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+action_mode = 0
+text = "OPT_BTN_START"
+
+[node name="Icon" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnStart" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_select"
+
+[node name="BtnUp" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
+margin_top = 116.0
+margin_right = 347.0
+margin_bottom = 145.0
+
+[node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnUp" instance=ExtResource( 4 )]
+margin_right = 327.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+action_mode = 0
+text = "UP"
+
+[node name="Icon" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnUp" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_up"
+
+[node name="BtnDown" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
+margin_top = 145.0
+margin_right = 347.0
+margin_bottom = 174.0
+
+[node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnDown" instance=ExtResource( 4 )]
+margin_right = 327.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+action_mode = 0
+text = "DOWN"
+
+[node name="Icon" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnDown" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_down"
+
+[node name="BtnLeft" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
+margin_top = 174.0
+margin_right = 347.0
+margin_bottom = 203.0
+
+[node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnLeft" instance=ExtResource( 4 )]
+margin_right = 327.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+action_mode = 0
+text = "LEFT"
+
+[node name="Icon" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnLeft" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_left"
+
+[node name="BtnRight" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
+margin_top = 203.0
+margin_right = 347.0
+margin_bottom = 232.0
+
+[node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnRight" instance=ExtResource( 4 )]
+margin_right = 327.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+action_mode = 0
+text = "RIGHT"
+
+[node name="Icon" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnRight" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_right"
+
+[node name="HSeparator" type="HSeparator" parent="Margin/HBx/VBx"]
+margin_top = 341.0
+margin_right = 367.0
+margin_bottom = 401.0
+rect_min_size = Vector2( 0, 60 )
+custom_styles/separator = SubResource( 10 )
+
+[node name="PanelLbl" parent="Margin/HBx/VBx" instance=ExtResource( 5 )]
+margin_top = 413.0
+margin_right = 367.0
+margin_bottom = 454.12
+size_flags_vertical = 0
+
+[node name="Margin" type="MarginContainer" parent="Margin/HBx/VBx/PanelLbl"]
+margin_top = 4.00473
+margin_right = 367.0
+margin_bottom = 37.0047
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="Margin/HBx/VBx/PanelLbl/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 357.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 1 )
+text = "SELECTNEWBTNICONFORX"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Margin" type="MarginContainer" parent="Margin/HBx"]
+margin_left = 387.0
+margin_right = 644.0
+margin_bottom = 454.0
+custom_constants/margin_top = 70
+
+[node name="PanelIcons" type="PanelContainer" parent="Margin/HBx/Margin"]
+margin_top = 70.0
+margin_right = 257.0
+margin_bottom = 307.0
+size_flags_vertical = 0
+custom_styles/panel = SubResource( 4 )
+
+[node name="Margin" type="MarginContainer" parent="Margin/HBx/Margin/PanelIcons"]
+margin_right = 257.0
+margin_bottom = 237.0
+custom_constants/margin_right = 15
+custom_constants/margin_top = 5
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 5
+
+[node name="GridBtns" type="GridContainer" parent="Margin/HBx/Margin/PanelIcons/Margin"]
+margin_left = 15.0
+margin_top = 5.0
+margin_right = 242.0
+margin_bottom = 232.0
+custom_constants/vseparation = 7
+custom_constants/hseparation = 7
+columns = 6
+
+[node name="0" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/0"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="1" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 39.0
+margin_right = 71.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/1"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="2" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 78.0
+margin_right = 110.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/2"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="3" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 117.0
+margin_right = 149.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/3"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="4" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 156.0
+margin_right = 188.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/4"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="5" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 195.0
+margin_right = 227.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/5"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="6" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_top = 39.0
+margin_right = 32.0
+margin_bottom = 71.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/6"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="7" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 39.0
+margin_top = 39.0
+margin_right = 71.0
+margin_bottom = 71.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/7"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="8" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 78.0
+margin_top = 39.0
+margin_right = 110.0
+margin_bottom = 71.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/8"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="9" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 117.0
+margin_top = 39.0
+margin_right = 149.0
+margin_bottom = 71.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/9"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="10" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 156.0
+margin_top = 39.0
+margin_right = 188.0
+margin_bottom = 71.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/10"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="11" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 195.0
+margin_top = 39.0
+margin_right = 227.0
+margin_bottom = 71.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/11"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="12" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_top = 78.0
+margin_right = 32.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/12"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="13" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 39.0
+margin_top = 78.0
+margin_right = 71.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/13"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="14" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 78.0
+margin_top = 78.0
+margin_right = 110.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/14"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="15" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 117.0
+margin_top = 78.0
+margin_right = 149.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/15"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="16" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 156.0
+margin_top = 78.0
+margin_right = 188.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/16"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="17" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 195.0
+margin_top = 78.0
+margin_right = 227.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/17"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="18" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_top = 117.0
+margin_right = 32.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/18"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="19" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 39.0
+margin_top = 117.0
+margin_right = 71.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/19"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="20" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 78.0
+margin_top = 117.0
+margin_right = 110.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/20"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="21" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 117.0
+margin_top = 117.0
+margin_right = 149.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/21"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="22" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 156.0
+margin_top = 117.0
+margin_right = 188.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/22"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="23" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 195.0
+margin_top = 117.0
+margin_right = 227.0
+margin_bottom = 149.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/23"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="24" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_top = 156.0
+margin_right = 32.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/24"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="25" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 39.0
+margin_top = 156.0
+margin_right = 71.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/25"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="26" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 78.0
+margin_top = 156.0
+margin_right = 110.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/26"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="27" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 117.0
+margin_top = 156.0
+margin_right = 149.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/27"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="28" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 156.0
+margin_top = 156.0
+margin_right = 188.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/28"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="29" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 195.0
+margin_top = 156.0
+margin_right = 227.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/29"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="30" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_top = 195.0
+margin_right = 32.0
+margin_bottom = 227.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/30"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="31" type="Button" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns"]
+margin_left = 39.0
+margin_top = 195.0
+margin_right = 71.0
+margin_bottom = 227.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/hover = SubResource( 5 )
+custom_styles/pressed = SubResource( 6 )
+custom_styles/focus = SubResource( 11 )
+custom_styles/disabled = SubResource( 8 )
+custom_styles/normal = SubResource( 9 )
+
+[node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/31"]
+position = Vector2( 16, 16 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+vframes = 14
+hframes = 4
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="HBxHelp2" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -181.0
+margin_top = 9.0
+margin_right = -10.0
+margin_bottom = 49.0
+grow_horizontal = 0
+custom_constants/separation = 18
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBxHelp2"]
+margin_left = 41.0
+margin_right = 97.0
+margin_bottom = 40.0
+
+[node name="ButtonKeyGamepadIcon" parent="HBxHelp2/HBoxContainer" instance=ExtResource( 12 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_accept"
+
+[node name="Label" type="Label" parent="HBxHelp2/HBoxContainer"]
+margin_left = 20.0
+margin_top = 13.0
+margin_right = 56.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 1 )
+text = "SELECT"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBxHelp2"]
+margin_left = 115.0
+margin_right = 171.0
+margin_bottom = 40.0
+
+[node name="ButtonKeyGamepadIcon" parent="HBxHelp2/HBoxContainer2" instance=ExtResource( 12 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="HBxHelp2/HBoxContainer2"]
+margin_left = 20.0
+margin_top = 13.0
+margin_right = 56.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 1 )
+text = "RETURN"
+
+[node name="ControlRemap" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="ControlRemap"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.721569 )
+
+[node name="Panel" parent="ControlRemap" instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.5
+margin_top = -15.5
+margin_right = 15.5
+margin_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 414, 0 )
+custom_styles/panel = ExtResource( 10 )
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlRemap/Panel"]
+margin_top = 4.00473
+margin_right = 414.0
+margin_bottom = 55.0047
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 15
+
+[node name="Label" type="Label" parent="ControlRemap/Panel/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 404.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 13 )
+text = "REMAP_MSG"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Button" type="Button" parent="ControlRemap"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 12.0
+margin_bottom = 20.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerRemap" type="Timer" parent="ControlRemap"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Label" type="Label" parent="ControlRemap"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -170.0
+margin_top = -64.0
+margin_right = 170.0
+margin_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 13 )
+text = "MSG_OR_PRESS_ESC_TO_CLOSE"
+align = 1
+valign = 1
+[connection signal="pressed" from="Margin/HBx/VBx/Panel0/Margin/VBx/BtnMenu" to="." method="_on_BtnMenu_pressed"]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnJump/Btn" to="." method="reasign_icon_button" binds= [ "ui_accept", "BtnJump" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnAttack/Btn" to="." method="reasign_icon_button" binds= [ "ui_cancel", "BtnAttack" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnBackdash/Btn" to="." method="reasign_icon_button" binds= [ "ui_focus_prev", "BtnBackdash" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnStart/Btn" to="." method="reasign_icon_button" binds= [ "ui_select", "BtnStart" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnUp/Btn" to="." method="reasign_icon_button" binds= [ "ui_up", "BtnUp" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnDown/Btn" to="." method="reasign_icon_button" binds= [ "ui_down", "BtnDown" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnLeft/Btn" to="." method="reasign_icon_button" binds= [ "ui_left", "BtnLeft" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnRight/Btn" to="." method="reasign_icon_button" binds= [ "ui_right", "BtnRight" ]]

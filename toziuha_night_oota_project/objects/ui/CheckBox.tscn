@@ -6,15 +6,15 @@
 [ext_resource path="res://assets/sprites/checkbox_focus.png" type="Texture" id=4]
 [ext_resource path="res://objects/ui/CheckBox.gd" type="Script" id=5]
 
-[sub_resource type="ImageTexture" id=1]
+[sub_resource type="ImageTexture" id=13]
 
-[sub_resource type="ImageTexture" id=2]
+[sub_resource type="ImageTexture" id=14]
 
-[sub_resource type="ImageTexture" id=3]
+[sub_resource type="ImageTexture" id=15]
 
-[sub_resource type="ImageTexture" id=4]
+[sub_resource type="ImageTexture" id=16]
 
-[sub_resource type="StyleBoxTexture" id=5]
+[sub_resource type="StyleBoxTexture" id=17]
 content_margin_left = 6.0
 content_margin_right = 0.0
 texture = ExtResource( 2 )
@@ -24,7 +24,7 @@ margin_right = 2.05619
 margin_top = 2.0281
 margin_bottom = 2.0562
 
-[sub_resource type="StyleBoxTexture" id=6]
+[sub_resource type="StyleBoxTexture" id=18]
 content_margin_left = 6.0
 content_margin_right = 0.0
 texture = ExtResource( 3 )
@@ -34,7 +34,7 @@ margin_right = 2.05619
 margin_top = 2.0281
 margin_bottom = 2.0562
 
-[sub_resource type="StyleBoxTexture" id=7]
+[sub_resource type="StyleBoxTexture" id=12]
 content_margin_left = 6.0
 content_margin_right = 0.0
 texture = ExtResource( 4 )
@@ -44,7 +44,7 @@ margin_right = 2.05619
 margin_top = 2.0281
 margin_bottom = 2.0562
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=19]
 size = 32
 extra_spacing_top = -3
 font_data = ExtResource( 1 )
@@ -53,15 +53,15 @@ font_data = ExtResource( 1 )
 margin_right = 48.0
 margin_bottom = 26.0
 rect_min_size = Vector2( 48, 26 )
-custom_icons/radio_checked = SubResource( 1 )
-custom_icons/checked = SubResource( 2 )
-custom_icons/radio_unchecked = SubResource( 3 )
-custom_icons/unchecked = SubResource( 4 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 7 )
-custom_styles/hover_pressed = SubResource( 6 )
-custom_styles/normal = SubResource( 5 )
+custom_icons/radio_checked = SubResource( 13 )
+custom_icons/checked = SubResource( 14 )
+custom_icons/radio_unchecked = SubResource( 15 )
+custom_icons/unchecked = SubResource( 16 )
+custom_styles/hover = SubResource( 17 )
+custom_styles/pressed = SubResource( 18 )
+custom_styles/focus = SubResource( 12 )
+custom_styles/hover_pressed = SubResource( 18 )
+custom_styles/normal = SubResource( 17 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -70,7 +70,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 19 )
 text = "OFF"
 align = 1
 valign = 1

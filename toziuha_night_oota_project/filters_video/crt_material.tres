@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=2]
+
+[ext_resource path="res://filters_video/crt_shader.shader" type="Shader" id=1]
+
+[resource]
+shader = ExtResource( 1 )
+shader_param/screen_size = Vector2( 320, 180 )
+shader_param/show_curvature = false
+shader_param/curvature_x_amount = 6.73
+shader_param/curvature_y_amount = 4.0
+shader_param/corner_color = Color( 0, 0, 0, 1 )
+shader_param/show_vignette = true
+shader_param/vignette_opacity = 0.18
+shader_param/show_horizontal_scan_lines = true
+shader_param/horizontal_scan_lines_amount = 180.0
+shader_param/horizontal_scan_lines_opacity = 0.11
+shader_param/show_vertical_scan_lines = false
+shader_param/vertical_scan_lines_amount = 280.1
+shader_param/vertical_scan_lines_opacity = 0.13
+shader_param/boost = 1.1
+shader_param/aberration_amount = 0.0

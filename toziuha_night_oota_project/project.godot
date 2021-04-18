@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node",
+"class": "PhysicsHelper",
+"language": "GDScript",
+"path": "res://scripts/PhysicsHelper.gd"
+}, {
 "base": "Camera2D",
 "class": "ShakeCamera2D",
 "language": "GDScript",
 "path": "res://objects/PlayerCamera.gd"
 } ]
 _global_script_class_icons={
+"PhysicsHelper": "",
 "ShakeCamera2D": ""
 }
 
@@ -29,6 +35,7 @@ config/quit_on_go_back=false
 
 [autoload]
 
+FilterVideo="*res://autoload/FilterVideo.tscn"
 SceneChanger="*res://autoload/SceneChanger.tscn"
 ScreenDebugger="*res://addons/screen_debugger/S_ScreenDebugger.gd"
 Functions="*res://scripts/functions.gd"
@@ -36,6 +43,7 @@ Audio="*res://autoload/Audio.tscn"
 Vars="*res://scripts/vars.gd"
 Timers="*res://autoload/Timers.tscn"
 ControlsOnscreen="*res://objects/ui/ControlsOnscreen.tscn"
+DialogBox="*res://objects/ui/DialogBox.tscn"
 
 [display]
 
@@ -43,6 +51,7 @@ window/size/width=683
 window/size/height=384
 window/size/test_width=1366
 window/size/test_height=768
+window/handheld/orientation="sensor_landscape"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 
@@ -121,10 +130,6 @@ ui_end={
 "deadzone": 0.5,
 "events": [  ]
 }
-
-[input_devices]
-
-pointing/emulate_touch_from_mouse=true
 
 [layer_names]
 

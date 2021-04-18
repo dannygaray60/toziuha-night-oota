@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=2]
@@ -9,8 +9,10 @@
 [ext_resource path="res://objects/ui/HSlider.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://assets/sprites/btn_select_icon.png" type="Texture" id=9]
-[ext_resource path="res://assets/sprites/main_panel2.png" type="Texture" id=10]
+[ext_resource path="res://objects/ui/Panel_Purple.tres" type="StyleBox" id=10]
 [ext_resource path="res://objects/ui/CheckBox.tscn" type="PackedScene" id=11]
+[ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=12]
+[ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=13]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )
@@ -28,21 +30,26 @@ extra_spacing_top = -7
 extra_spacing_bottom = -7
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxTexture" id=3]
-texture = ExtResource( 10 )
-region_rect = Rect2( 0, 0, 32, 32 )
-margin_top = 4.00473
-margin_bottom = 4.11544
-
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.172549, 0, 0, 0.556863 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 extra_spacing_bottom = 8
 font_data = ExtResource( 8 )
 
-[sub_resource type="ButtonGroup" id=6]
+[sub_resource type="ButtonGroup" id=5]
+
+[sub_resource type="DynamicFont" id=6]
+font_data = ExtResource( 8 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 90, 10 )
+
+[sub_resource type="DynamicFont" id=8]
+font_data = ExtResource( 8 )
+
+[sub_resource type="ButtonGroup" id=9]
 
 [node name="Options" type="Control"]
 anchor_right = 1.0
@@ -108,7 +115,7 @@ custom_constants/separation = 12
 margin_right = 215.0
 margin_bottom = 57.1202
 size_flags_vertical = 0
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = ExtResource( 10 )
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/VBx/Panel0"]
 margin_top = 4.00473
@@ -224,16 +231,15 @@ toggle_mode = true
 text = "LANGUAGE"
 
 [node name="PanelVideo" type="PanelContainer" parent="Margin/HBx"]
-visible = false
 margin_left = 258.0
 margin_right = 602.0
-margin_bottom = 115.0
+margin_bottom = 262.0
 size_flags_vertical = 0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelVideo"]
 margin_right = 344.0
-margin_bottom = 115.0
+margin_bottom = 262.0
 custom_constants/margin_right = 15
 custom_constants/margin_top = 5
 custom_constants/margin_left = 15
@@ -243,14 +249,27 @@ custom_constants/margin_bottom = 5
 margin_left = 15.0
 margin_top = 5.0
 margin_right = 329.0
-margin_bottom = 110.0
+margin_bottom = 257.0
+
+[node name="BtnFilters" parent="Margin/HBx/PanelVideo/Margin/VBx" instance=ExtResource( 4 )]
+margin_right = 314.0
+rect_min_size = Vector2( 190, 0 )
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+text = "VIDEO_FILTERS"
+align = 1
 
 [node name="FullScr" type="HBoxContainer" parent="Margin/HBx/PanelVideo/Margin/VBx"]
+margin_top = 33.0
 margin_right = 314.0
-margin_bottom = 34.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 314, 0 )
 custom_constants/separation = 14
 
 [node name="Icon" type="TextureRect" parent="Margin/HBx/PanelVideo/Margin/VBx/FullScr"]
+modulate = Color( 1, 1, 1, 0 )
 margin_right = 48.0
 margin_bottom = 34.0
 grow_horizontal = 2
@@ -266,7 +285,7 @@ margin_right = 252.0
 margin_bottom = 34.0
 rect_min_size = Vector2( 190, 0 )
 size_flags_vertical = 5
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "FULLSCREEN"
 align = 1
 valign = 1
@@ -276,15 +295,15 @@ margin_left = 266.0
 margin_right = 314.0
 margin_bottom = 34.0
 focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath("../../SubButton")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
 
 [node name="Borderless" type="HBoxContainer" parent="Margin/HBx/PanelVideo/Margin/VBx"]
-margin_top = 38.0
+margin_top = 71.0
 margin_right = 314.0
-margin_bottom = 72.0
+margin_bottom = 105.0
+rect_min_size = Vector2( 314, 0 )
 custom_constants/separation = 14
 
 [node name="Icon" type="TextureRect" parent="Margin/HBx/PanelVideo/Margin/VBx/Borderless"]
@@ -304,7 +323,7 @@ margin_right = 252.0
 margin_bottom = 34.0
 rect_min_size = Vector2( 190, 0 )
 size_flags_vertical = 5
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "BORDERLESS"
 align = 1
 valign = 1
@@ -318,32 +337,148 @@ focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
 
-[node name="SubButton" parent="Margin/HBx/PanelVideo/Margin/VBx" instance=ExtResource( 4 )]
-margin_top = 76.0
+[node name="BtnConfIcons" parent="Margin/HBx/PanelVideo/Margin/VBx" instance=ExtResource( 4 )]
+margin_top = 109.0
 margin_right = 314.0
-margin_bottom = 105.0
+margin_bottom = 138.0
 rect_min_size = Vector2( 190, 0 )
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../FullScr/CheckBox")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-disabled = true
-text = "Filters..."
+text = "CONF_BTN_ICNS"
 align = 1
+
+[node name="ShowKeyboardIcons" type="HBoxContainer" parent="Margin/HBx/PanelVideo/Margin/VBx"]
+margin_top = 142.0
+margin_right = 314.0
+margin_bottom = 176.0
+rect_min_size = Vector2( 314, 0 )
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelVideo/Margin/VBx/ShowKeyboardIcons"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 48.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelVideo/Margin/VBx/ShowKeyboardIcons"]
+margin_left = 62.0
+margin_right = 252.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 190, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 4 )
+text = "SHOW_KYBRD_ICNS"
+align = 1
+valign = 1
+
+[node name="CheckBox" parent="Margin/HBx/PanelVideo/Margin/VBx/ShowKeyboardIcons" instance=ExtResource( 11 )]
+margin_left = 266.0
+margin_right = 314.0
+margin_bottom = 34.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+group = SubResource( 5 )
+
+[node name="ShowGamepadIcons" type="HBoxContainer" parent="Margin/HBx/PanelVideo/Margin/VBx"]
+margin_top = 180.0
+margin_right = 314.0
+margin_bottom = 214.0
+rect_min_size = Vector2( 314, 0 )
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelVideo/Margin/VBx/ShowGamepadIcons"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 48.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelVideo/Margin/VBx/ShowGamepadIcons"]
+margin_left = 62.0
+margin_right = 252.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 190, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 4 )
+text = "SHOW_GAMPD_ICNS"
+align = 1
+valign = 1
+
+[node name="CheckBox" parent="Margin/HBx/PanelVideo/Margin/VBx/ShowGamepadIcons" instance=ExtResource( 11 )]
+margin_left = 266.0
+margin_right = 314.0
+margin_bottom = 34.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+group = SubResource( 5 )
+
+[node name="HideBtnIcons" type="HBoxContainer" parent="Margin/HBx/PanelVideo/Margin/VBx"]
+margin_top = 218.0
+margin_right = 314.0
+margin_bottom = 252.0
+rect_min_size = Vector2( 314, 0 )
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelVideo/Margin/VBx/HideBtnIcons"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 48.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelVideo/Margin/VBx/HideBtnIcons"]
+margin_left = 62.0
+margin_right = 252.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 190, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 4 )
+text = "HIDE_BTN_ICNS"
+align = 1
+valign = 1
+
+[node name="CheckBox" parent="Margin/HBx/PanelVideo/Margin/VBx/HideBtnIcons" instance=ExtResource( 11 )]
+margin_left = 266.0
+margin_right = 314.0
+margin_bottom = 34.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+group = SubResource( 5 )
 
 [node name="PanelAudio" type="PanelContainer" parent="Margin/HBx"]
 visible = false
 margin_left = 258.0
 margin_right = 644.0
-margin_bottom = 174.0
+margin_bottom = 194.0
 size_flags_horizontal = 9
 size_flags_vertical = 0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelAudio"]
 margin_right = 386.0
-margin_bottom = 174.0
+margin_bottom = 194.0
 custom_constants/margin_right = 55
 custom_constants/margin_top = 5
 custom_constants/margin_left = 15
@@ -353,7 +488,7 @@ custom_constants/margin_bottom = 5
 margin_left = 15.0
 margin_top = 5.0
 margin_right = 331.0
-margin_bottom = 169.0
+margin_bottom = 189.0
 
 [node name="Sfx" type="HBoxContainer" parent="Margin/HBx/PanelAudio/Margin/VBx"]
 margin_right = 316.0
@@ -376,7 +511,7 @@ margin_right = 152.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 90, 0 )
 size_flags_vertical = 5
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "EFFECTS"
 align = 1
 valign = 1
@@ -411,7 +546,7 @@ margin_right = 152.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 90, 0 )
 size_flags_vertical = 5
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "MUSIC"
 align = 1
 valign = 1
@@ -445,7 +580,7 @@ margin_right = 152.0
 margin_bottom = 52.0
 rect_min_size = Vector2( 90, 0 )
 size_flags_vertical = 5
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "VOICE"
 align = 1
 valign = 1
@@ -458,16 +593,48 @@ focus_neighbour_bottom = NodePath("../../Sfx/Slider")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
 
+[node name="HBxHelp" type="HBoxContainer" parent="Margin/HBx/PanelAudio/Margin/VBx"]
+margin_top = 168.0
+margin_right = 316.0
+margin_bottom = 184.0
+grow_horizontal = 0
+custom_constants/separation = 18
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/HBx/PanelAudio/Margin/VBx/HBxHelp"]
+margin_right = 120.0
+margin_bottom = 16.0
+
+[node name="ButtonKeyGamepadIcon" parent="Margin/HBx/PanelAudio/Margin/VBx/HBxHelp/HBoxContainer" instance=ExtResource( 12 )]
+size_flags_vertical = 4
+action = "ui_left"
+
+[node name="ButtonKeyGamepadIcon2" parent="Margin/HBx/PanelAudio/Margin/VBx/HBxHelp/HBoxContainer" instance=ExtResource( 12 )]
+margin_left = 20.0
+margin_right = 36.0
+size_flags_vertical = 4
+action = "ui_right"
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelAudio/Margin/VBx/HBxHelp/HBoxContainer"]
+margin_left = 40.0
+margin_top = 1.0
+margin_right = 120.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 6 )
+text = "CHANGE_VOLUME"
+
 [node name="PanelControls" type="PanelContainer" parent="Margin/HBx"]
 visible = false
 margin_left = 258.0
-margin_right = 559.0
+margin_right = 635.0
 margin_bottom = 270.0
 size_flags_vertical = 0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelControls"]
-margin_right = 301.0
+margin_right = 377.0
 margin_bottom = 270.0
 custom_constants/margin_right = 15
 custom_constants/margin_top = 5
@@ -477,100 +644,212 @@ custom_constants/margin_bottom = 5
 [node name="VBx" type="VBoxContainer" parent="Margin/HBx/PanelControls/Margin"]
 margin_left = 15.0
 margin_top = 5.0
-margin_right = 286.0
+margin_right = 362.0
 margin_bottom = 265.0
 
-[node name="BtnJump" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
-margin_right = 271.0
+[node name="BtnJump" type="HBoxContainer" parent="Margin/HBx/PanelControls/Margin/VBx"]
+margin_right = 347.0
+margin_bottom = 29.0
+
+[node name="Btn" parent="Margin/HBx/PanelControls/Margin/VBx/BtnJump" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath("../BtnRight")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Saltar / Aceptar [X]"
+action_mode = 0
+text = "OPT_BTN_JUMPANDACCEPT"
 
-[node name="BtnAttack" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+[node name="Icon" parent="Margin/HBx/PanelControls/Margin/VBx/BtnJump" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "keyboard"
+action = "ui_accept"
+
+[node name="pressed" parent="Margin/HBx/PanelControls/Margin/VBx/BtnJump/Icon" index="0"]
+position = Vector2( 8, 11 )
+
+[node name="normal" parent="Margin/HBx/PanelControls/Margin/VBx/BtnJump/Icon" index="1"]
+position = Vector2( 8, 11 )
+
+[node name="Label" parent="Margin/HBx/PanelControls/Margin/VBx/BtnJump/Icon" index="2"]
+margin_top = 3.0
+margin_bottom = 4.0
+
+[node name="BtnAttack" type="HBoxContainer" parent="Margin/HBx/PanelControls/Margin/VBx"]
 margin_top = 33.0
-margin_right = 271.0
+margin_right = 347.0
 margin_bottom = 62.0
+
+[node name="Btn" parent="Margin/HBx/PanelControls/Margin/VBx/BtnAttack" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Ataque / Cancelar [C]"
+action_mode = 0
+text = "OPT_BTN_ATTACKANDCANCEL"
 
-[node name="BtnBackdash" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+[node name="Icon" parent="Margin/HBx/PanelControls/Margin/VBx/BtnAttack" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "keyboard"
+
+[node name="BtnBackdash" type="HBoxContainer" parent="Margin/HBx/PanelControls/Margin/VBx"]
 margin_top = 66.0
-margin_right = 271.0
+margin_right = 347.0
 margin_bottom = 95.0
+
+[node name="Btn" parent="Margin/HBx/PanelControls/Margin/VBx/BtnBackdash" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Esquivar [A]"
+action_mode = 0
+text = "BACKWARD"
 
-[node name="BtnStart" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+[node name="Icon" parent="Margin/HBx/PanelControls/Margin/VBx/BtnBackdash" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "keyboard"
+action = "ui_focus_prev"
+
+[node name="BtnStart" type="HBoxContainer" parent="Margin/HBx/PanelControls/Margin/VBx"]
 margin_top = 99.0
-margin_right = 271.0
+margin_right = 347.0
 margin_bottom = 128.0
+
+[node name="Btn" parent="Margin/HBx/PanelControls/Margin/VBx/BtnStart" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Start / Pausa [Enter]"
+action_mode = 0
+text = "OPT_BTN_START"
 
-[node name="BtnUp" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+[node name="Icon" parent="Margin/HBx/PanelControls/Margin/VBx/BtnStart" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "keyboard"
+action = "ui_select"
+
+[node name="BtnUp" type="HBoxContainer" parent="Margin/HBx/PanelControls/Margin/VBx"]
 margin_top = 132.0
-margin_right = 271.0
+margin_right = 347.0
 margin_bottom = 161.0
+
+[node name="Btn" parent="Margin/HBx/PanelControls/Margin/VBx/BtnUp" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Arriba [Up]"
+action_mode = 0
+text = "UP"
 
-[node name="BtnDown" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+[node name="Icon" parent="Margin/HBx/PanelControls/Margin/VBx/BtnUp" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "keyboard"
+action = "ui_up"
+
+[node name="BtnDown" type="HBoxContainer" parent="Margin/HBx/PanelControls/Margin/VBx"]
 margin_top = 165.0
-margin_right = 271.0
+margin_right = 347.0
 margin_bottom = 194.0
+
+[node name="Btn" parent="Margin/HBx/PanelControls/Margin/VBx/BtnDown" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Abajo [Down]"
+action_mode = 0
+text = "DOWN"
 
-[node name="BtnLeft" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
+[node name="Icon" parent="Margin/HBx/PanelControls/Margin/VBx/BtnDown" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "keyboard"
+action = "ui_down"
+
+[node name="BtnLeft" type="HBoxContainer" parent="Margin/HBx/PanelControls/Margin/VBx"]
 margin_top = 198.0
-margin_right = 271.0
+margin_right = 347.0
 margin_bottom = 227.0
-focus_neighbour_left = NodePath(".")
-focus_neighbour_right = NodePath(".")
-focus_next = NodePath(".")
-focus_previous = NodePath(".")
-text = "Izquierda [Left]"
 
-[node name="BtnRight" parent="Margin/HBx/PanelControls/Margin/VBx" instance=ExtResource( 4 )]
-margin_top = 231.0
-margin_right = 271.0
-margin_bottom = 260.0
+[node name="Btn" parent="Margin/HBx/PanelControls/Margin/VBx/BtnLeft" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../BtnJump")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Derecha [Right]"
+action_mode = 0
+text = "LEFT"
+
+[node name="Icon" parent="Margin/HBx/PanelControls/Margin/VBx/BtnLeft" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "keyboard"
+action = "ui_left"
+
+[node name="BtnRight" type="HBoxContainer" parent="Margin/HBx/PanelControls/Margin/VBx"]
+margin_top = 231.0
+margin_right = 347.0
+margin_bottom = 260.0
+
+[node name="Btn" parent="Margin/HBx/PanelControls/Margin/VBx/BtnRight" instance=ExtResource( 4 )]
+margin_right = 327.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+action_mode = 0
+text = "RIGHT"
+
+[node name="Icon" parent="Margin/HBx/PanelControls/Margin/VBx/BtnRight" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "keyboard"
+action = "ui_right"
 
 [node name="PanelGamepad" type="PanelContainer" parent="Margin/HBx"]
 visible = false
 margin_left = 258.0
-margin_right = 593.0
-margin_bottom = 270.0
+margin_right = 635.0
+margin_bottom = 290.0
 size_flags_vertical = 0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelGamepad"]
-margin_right = 335.0
-margin_bottom = 270.0
+margin_right = 377.0
+margin_bottom = 290.0
 custom_constants/margin_right = 15
 custom_constants/margin_top = 5
 custom_constants/margin_left = 15
@@ -579,95 +858,229 @@ custom_constants/margin_bottom = 5
 [node name="VBx" type="VBoxContainer" parent="Margin/HBx/PanelGamepad/Margin"]
 margin_left = 15.0
 margin_top = 5.0
-margin_right = 320.0
-margin_bottom = 265.0
+margin_right = 362.0
+margin_bottom = 285.0
 
-[node name="BtnJump" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
-margin_right = 305.0
+[node name="BtnJump" type="HBoxContainer" parent="Margin/HBx/PanelGamepad/Margin/VBx"]
+margin_right = 347.0
+margin_bottom = 29.0
+
+[node name="Btn" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnJump" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath("../BtnRight")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Saltar / Aceptar [Joy1]"
+action_mode = 0
+text = "OPT_BTN_JUMPANDACCEPT"
 
-[node name="BtnAttack" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+[node name="Icon" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnJump" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_accept"
+
+[node name="BtnAttack" type="HBoxContainer" parent="Margin/HBx/PanelGamepad/Margin/VBx"]
 margin_top = 33.0
-margin_right = 305.0
+margin_right = 347.0
 margin_bottom = 62.0
+
+[node name="Btn" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnAttack" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Ataque / Cancelar [Joy2]"
+action_mode = 0
+text = "OPT_BTN_ATTACKANDCANCEL"
 
-[node name="BtnBackdash" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+[node name="Icon" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnAttack" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+
+[node name="BtnBackdash" type="HBoxContainer" parent="Margin/HBx/PanelGamepad/Margin/VBx"]
 margin_top = 66.0
-margin_right = 305.0
+margin_right = 347.0
 margin_bottom = 95.0
+
+[node name="Btn" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnBackdash" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Esquivar [Joy3]"
+action_mode = 0
+text = "BACKWARD"
 
-[node name="BtnStart" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+[node name="Icon" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnBackdash" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_focus_prev"
+
+[node name="BtnStart" type="HBoxContainer" parent="Margin/HBx/PanelGamepad/Margin/VBx"]
 margin_top = 99.0
-margin_right = 305.0
+margin_right = 347.0
 margin_bottom = 128.0
+
+[node name="Btn" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnStart" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Start / Pausa [Joy4]"
+action_mode = 0
+text = "OPT_BTN_START"
 
-[node name="BtnUp" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+[node name="Icon" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnStart" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_select"
+
+[node name="BtnUp" type="HBoxContainer" parent="Margin/HBx/PanelGamepad/Margin/VBx"]
 margin_top = 132.0
-margin_right = 305.0
+margin_right = 347.0
 margin_bottom = 161.0
+
+[node name="Btn" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnUp" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Arriba [Joy5]"
+action_mode = 0
+text = "UP"
 
-[node name="BtnDown" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+[node name="Icon" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnUp" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_up"
+
+[node name="BtnDown" type="HBoxContainer" parent="Margin/HBx/PanelGamepad/Margin/VBx"]
 margin_top = 165.0
-margin_right = 305.0
+margin_right = 347.0
 margin_bottom = 194.0
+
+[node name="Btn" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnDown" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Abajo [Joy6]"
+action_mode = 0
+text = "DOWN"
 
-[node name="BtnLeft" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
+[node name="Icon" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnDown" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_down"
+
+[node name="BtnLeft" type="HBoxContainer" parent="Margin/HBx/PanelGamepad/Margin/VBx"]
 margin_top = 198.0
-margin_right = 305.0
+margin_right = 347.0
 margin_bottom = 227.0
-focus_neighbour_left = NodePath(".")
-focus_neighbour_right = NodePath(".")
-focus_next = NodePath(".")
-focus_previous = NodePath(".")
-text = "Izquierda [Joy7]"
 
-[node name="BtnRight" parent="Margin/HBx/PanelGamepad/Margin/VBx" instance=ExtResource( 4 )]
-margin_top = 231.0
-margin_right = 305.0
-margin_bottom = 260.0
+[node name="Btn" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnLeft" instance=ExtResource( 4 )]
+margin_right = 327.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../BtnJump")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
-text = "Derecha [Joy8]"
+action_mode = 0
+text = "LEFT"
+
+[node name="Icon" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnLeft" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_left"
+
+[node name="BtnRight" type="HBoxContainer" parent="Margin/HBx/PanelGamepad/Margin/VBx"]
+margin_top = 231.0
+margin_right = 347.0
+margin_bottom = 260.0
+
+[node name="Btn" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnRight" instance=ExtResource( 4 )]
+margin_right = 327.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+action_mode = 0
+text = "RIGHT"
+
+[node name="Icon" parent="Margin/HBx/PanelGamepad/Margin/VBx/BtnRight" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_right"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Margin/HBx/PanelGamepad/Margin/VBx"]
+margin_top = 264.0
+margin_right = 347.0
+margin_bottom = 280.0
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Margin/HBx/PanelGamepad/Margin/VBx/HBoxContainer"]
+position = Vector2( 0, -2 )
+shape = SubResource( 7 )
+action = "ui_focus_prev"
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelGamepad/Margin/VBx/HBoxContainer"]
+margin_top = 1.0
+margin_right = 29.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 8 )
+text = "Press"
+
+[node name="ButtonKeyGamepadIcon" parent="Margin/HBx/PanelGamepad/Margin/VBx/HBoxContainer" instance=ExtResource( 12 )]
+margin_left = 33.0
+margin_right = 49.0
+show_specific_icon = "keyboard"
+action = "ui_focus_prev"
+
+[node name="Label2" type="Label" parent="Margin/HBx/PanelGamepad/Margin/VBx/HBoxContainer"]
+margin_left = 53.0
+margin_top = 1.0
+margin_right = 341.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 8 )
+text = "(or touch here) to fix issues (if buttons doesn't work)."
 
 [node name="PanelControlsTouchScreen" type="PanelContainer" parent="Margin/HBx"]
+visible = false
 margin_left = 258.0
 margin_right = 602.0
 margin_bottom = 77.0
 size_flags_vertical = 0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelControlsTouchScreen"]
 margin_right = 344.0
@@ -705,7 +1118,7 @@ margin_right = 252.0
 margin_bottom = 34.0
 rect_min_size = Vector2( 190, 0 )
 size_flags_vertical = 5
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "SHOWBUTTONS"
 align = 1
 valign = 1
@@ -738,7 +1151,7 @@ margin_left = 258.0
 margin_right = 602.0
 margin_bottom = 120.0
 size_flags_vertical = 0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelLang"]
 margin_right = 344.0
@@ -776,7 +1189,7 @@ margin_right = 252.0
 margin_bottom = 34.0
 rect_min_size = Vector2( 190, 0 )
 size_flags_vertical = 5
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "English"
 align = 1
 valign = 1
@@ -790,7 +1203,7 @@ focus_neighbour_top = NodePath("../../PortuguesBR/CheckBox")
 focus_neighbour_right = NodePath("../../../../../../..")
 focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../PortuguesBR/CheckBox")
-group = SubResource( 6 )
+group = SubResource( 9 )
 
 [node name="Espanol" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
 margin_top = 38.0
@@ -815,7 +1228,7 @@ margin_right = 252.0
 margin_bottom = 34.0
 rect_min_size = Vector2( 190, 0 )
 size_flags_vertical = 5
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "Español"
 align = 1
 valign = 1
@@ -828,7 +1241,7 @@ focus_neighbour_left = NodePath("../../../../../../..")
 focus_neighbour_right = NodePath("../../../../../../..")
 focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../../../../../..")
-group = SubResource( 6 )
+group = SubResource( 9 )
 
 [node name="PortuguesBR" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
 margin_top = 76.0
@@ -853,7 +1266,7 @@ margin_right = 252.0
 margin_bottom = 34.0
 rect_min_size = Vector2( 190, 0 )
 size_flags_vertical = 5
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 4 )
 text = "Português (BR)"
 align = 1
 valign = 1
@@ -868,7 +1281,139 @@ focus_neighbour_bottom = NodePath("../../English/CheckBox")
 focus_next = NodePath("../../English/CheckBox")
 focus_previous = NodePath("../../Espanol/CheckBox")
 disabled = true
-group = SubResource( 6 )
+group = SubResource( 9 )
+
+[node name="HBxHelp2" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -181.0
+margin_top = 9.0
+margin_right = -10.0
+margin_bottom = 49.0
+grow_horizontal = 0
+custom_constants/separation = 18
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBxHelp2"]
+margin_left = 41.0
+margin_right = 97.0
+margin_bottom = 40.0
+
+[node name="ButtonKeyGamepadIcon" parent="HBxHelp2/HBoxContainer" instance=ExtResource( 12 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_accept"
+
+[node name="Label" type="Label" parent="HBxHelp2/HBoxContainer"]
+margin_left = 20.0
+margin_top = 13.0
+margin_right = 56.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 6 )
+text = "SELECT"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBxHelp2"]
+margin_left = 115.0
+margin_right = 171.0
+margin_bottom = 40.0
+
+[node name="ButtonKeyGamepadIcon" parent="HBxHelp2/HBoxContainer2" instance=ExtResource( 12 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="HBxHelp2/HBoxContainer2"]
+margin_left = 20.0
+margin_top = 13.0
+margin_right = 56.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 6 )
+text = "RETURN"
+
+[node name="ControlRemap" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="ControlRemap"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.721569 )
+
+[node name="Panel" parent="ControlRemap" instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.5
+margin_top = -15.5
+margin_right = 15.5
+margin_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 414, 0 )
+custom_styles/panel = ExtResource( 10 )
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlRemap/Panel"]
+margin_top = 4.00473
+margin_right = 414.0
+margin_bottom = 55.0047
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 15
+
+[node name="Label" type="Label" parent="ControlRemap/Panel/MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 404.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 13 )
+text = "REMAP_MSG"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="Button" type="Button" parent="ControlRemap"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 12.0
+margin_bottom = 20.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimerRemap" type="Timer" parent="ControlRemap"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Label" type="Label" parent="ControlRemap"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -170.0
+margin_top = -64.0
+margin_right = 170.0
+margin_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 13 )
+text = "MSG_OR_PRESS_ESC_TO_CLOSE"
+align = 1
+valign = 1
 [connection signal="pressed" from="Margin/HBx/VBx/Panel0/Margin/VBx/BtnMenu" to="." method="select_section" binds= [ "main_menu" ]]
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnVideo" to="." method="select_section" binds= [ "BtnVideo" ]]
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnAudio" to="." method="select_section" binds= [ "BtnAudio" ]]
@@ -876,12 +1421,23 @@ group = SubResource( 6 )
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnGamepad" to="." method="select_section" binds= [ "BtnGamepad" ]]
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnTouchscreen" to="." method="select_section" binds= [ "BtnTouchscreen" ]]
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnLang" to="." method="select_section" binds= [ "BtnLang" ]]
+[connection signal="pressed" from="Margin/HBx/PanelVideo/Margin/VBx/BtnFilters" to="." method="_on_BtnFilters_pressed"]
 [connection signal="focus_entered" from="Margin/HBx/PanelVideo/Margin/VBx/FullScr/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "FullScr", "Video" ]]
 [connection signal="focus_exited" from="Margin/HBx/PanelVideo/Margin/VBx/FullScr/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "FullScr", "Video" ]]
 [connection signal="toggled" from="Margin/HBx/PanelVideo/Margin/VBx/FullScr/CheckBox" to="." method="option_changed" binds= [ "video", "fullscreen" ]]
 [connection signal="focus_entered" from="Margin/HBx/PanelVideo/Margin/VBx/Borderless/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "Borderless", "Video" ]]
 [connection signal="focus_exited" from="Margin/HBx/PanelVideo/Margin/VBx/Borderless/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "Borderless", "Video" ]]
 [connection signal="toggled" from="Margin/HBx/PanelVideo/Margin/VBx/Borderless/CheckBox" to="." method="option_changed" binds= [ "video", "borderless" ]]
+[connection signal="pressed" from="Margin/HBx/PanelVideo/Margin/VBx/BtnConfIcons" to="." method="_on_BtnConfIcons_pressed"]
+[connection signal="focus_entered" from="Margin/HBx/PanelVideo/Margin/VBx/ShowKeyboardIcons/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "ShowKeyboardIcons", "Video" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelVideo/Margin/VBx/ShowKeyboardIcons/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "ShowKeyboardIcons", "Video" ]]
+[connection signal="toggled" from="Margin/HBx/PanelVideo/Margin/VBx/ShowKeyboardIcons/CheckBox" to="." method="option_changed_icon_visibility" binds= [ "keyboard" ]]
+[connection signal="focus_entered" from="Margin/HBx/PanelVideo/Margin/VBx/ShowGamepadIcons/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "ShowGamepadIcons", "Video" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelVideo/Margin/VBx/ShowGamepadIcons/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "ShowGamepadIcons", "Video" ]]
+[connection signal="toggled" from="Margin/HBx/PanelVideo/Margin/VBx/ShowGamepadIcons/CheckBox" to="." method="option_changed_icon_visibility" binds= [ "gamepad" ]]
+[connection signal="focus_entered" from="Margin/HBx/PanelVideo/Margin/VBx/HideBtnIcons/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "HideBtnIcons", "Video" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelVideo/Margin/VBx/HideBtnIcons/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "HideBtnIcons", "Video" ]]
+[connection signal="toggled" from="Margin/HBx/PanelVideo/Margin/VBx/HideBtnIcons/CheckBox" to="." method="option_changed_icon_visibility" binds= [ "hide" ]]
 [connection signal="focus_entered" from="Margin/HBx/PanelAudio/Margin/VBx/Sfx/Slider" to="." method="_on_ItemPanel_focus_entered" binds= [ "Sfx" ]]
 [connection signal="focus_exited" from="Margin/HBx/PanelAudio/Margin/VBx/Sfx/Slider" to="." method="_on_ItemPanel_focus_exited" binds= [ "Sfx" ]]
 [connection signal="value_changed" from="Margin/HBx/PanelAudio/Margin/VBx/Sfx/Slider" to="." method="option_changed" binds= [ "audio", "sfx" ]]
@@ -891,6 +1447,22 @@ group = SubResource( 6 )
 [connection signal="focus_entered" from="Margin/HBx/PanelAudio/Margin/VBx/Voice/Slider" to="." method="_on_ItemPanel_focus_entered" binds= [ "Voice" ]]
 [connection signal="focus_exited" from="Margin/HBx/PanelAudio/Margin/VBx/Voice/Slider" to="." method="_on_ItemPanel_focus_exited" binds= [ "Voice" ]]
 [connection signal="value_changed" from="Margin/HBx/PanelAudio/Margin/VBx/Voice/Slider" to="." method="option_changed" binds= [ "audio", "voice" ]]
+[connection signal="pressed" from="Margin/HBx/PanelControls/Margin/VBx/BtnJump/Btn" to="." method="remap_to" binds= [ "keyboard", "ui_accept", "BtnJump" ]]
+[connection signal="pressed" from="Margin/HBx/PanelControls/Margin/VBx/BtnAttack/Btn" to="." method="remap_to" binds= [ "keyboard", "ui_cancel", "BtnAttack" ]]
+[connection signal="pressed" from="Margin/HBx/PanelControls/Margin/VBx/BtnBackdash/Btn" to="." method="remap_to" binds= [ "keyboard", "ui_focus_prev", "BtnBackdash" ]]
+[connection signal="pressed" from="Margin/HBx/PanelControls/Margin/VBx/BtnStart/Btn" to="." method="remap_to" binds= [ "keyboard", "ui_select", "BtnStart" ]]
+[connection signal="pressed" from="Margin/HBx/PanelControls/Margin/VBx/BtnUp/Btn" to="." method="remap_to" binds= [ "keyboard", "ui_up", "BtnUp" ]]
+[connection signal="pressed" from="Margin/HBx/PanelControls/Margin/VBx/BtnDown/Btn" to="." method="remap_to" binds= [ "keyboard", "ui_down", "BtnDown" ]]
+[connection signal="pressed" from="Margin/HBx/PanelControls/Margin/VBx/BtnLeft/Btn" to="." method="remap_to" binds= [ "keyboard", "ui_left", "BtnLeft" ]]
+[connection signal="pressed" from="Margin/HBx/PanelControls/Margin/VBx/BtnRight/Btn" to="." method="remap_to" binds= [ "keyboard", "ui_right", "BtnRight" ]]
+[connection signal="pressed" from="Margin/HBx/PanelGamepad/Margin/VBx/BtnJump/Btn" to="." method="remap_to" binds= [ "gamepad", "ui_accept", "BtnJump" ]]
+[connection signal="pressed" from="Margin/HBx/PanelGamepad/Margin/VBx/BtnAttack/Btn" to="." method="remap_to" binds= [ "gamepad", "ui_cancel", "BtnAttack" ]]
+[connection signal="pressed" from="Margin/HBx/PanelGamepad/Margin/VBx/BtnBackdash/Btn" to="." method="remap_to" binds= [ "gamepad", "ui_focus_prev", "BtnBackdash" ]]
+[connection signal="pressed" from="Margin/HBx/PanelGamepad/Margin/VBx/BtnStart/Btn" to="." method="remap_to" binds= [ "gamepad", "ui_select", "BtnStart" ]]
+[connection signal="pressed" from="Margin/HBx/PanelGamepad/Margin/VBx/BtnUp/Btn" to="." method="remap_to" binds= [ "gamepad", "ui_up", "BtnUp" ]]
+[connection signal="pressed" from="Margin/HBx/PanelGamepad/Margin/VBx/BtnDown/Btn" to="." method="remap_to" binds= [ "gamepad", "ui_down", "BtnDown" ]]
+[connection signal="pressed" from="Margin/HBx/PanelGamepad/Margin/VBx/BtnLeft/Btn" to="." method="remap_to" binds= [ "gamepad", "ui_left", "BtnLeft" ]]
+[connection signal="pressed" from="Margin/HBx/PanelGamepad/Margin/VBx/BtnRight/Btn" to="." method="remap_to" binds= [ "gamepad", "ui_right", "BtnRight" ]]
 [connection signal="focus_entered" from="Margin/HBx/PanelControlsTouchScreen/Margin/VBx/Show/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "Show", "ControlsTouchScreen" ]]
 [connection signal="focus_exited" from="Margin/HBx/PanelControlsTouchScreen/Margin/VBx/Show/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "Show", "ControlsTouchScreen" ]]
 [connection signal="toggled" from="Margin/HBx/PanelControlsTouchScreen/Margin/VBx/Show/CheckBox" to="." method="option_changed" binds= [ "touchscreenbutton", "show_buttons" ]]
@@ -903,3 +1475,5 @@ group = SubResource( 6 )
 [connection signal="pressed" from="Margin/HBx/PanelLang/Margin/VBx/Espanol/CheckBox" to="." method="option_changed" binds= [ "es", "other", "lang" ]]
 [connection signal="focus_entered" from="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "PortuguesBR", "Lang" ]]
 [connection signal="focus_exited" from="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "PortuguesBR", "Lang" ]]
+
+[editable path="Margin/HBx/PanelControls/Margin/VBx/BtnJump/Icon"]

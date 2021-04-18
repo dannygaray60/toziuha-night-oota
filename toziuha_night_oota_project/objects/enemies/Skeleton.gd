@@ -99,13 +99,19 @@ func change_state(new_state):
 
 func hurt(damage,weapon_position):
 	if $TimerHurt.get_time_left() == 0:
+		$Sprite.modulate = Color(1,0,0,1)
 		$TimerHurt.start()
-		Audio.play_sfx("hit1")
-		var indicator_position = Vector2(global_position.x,weapon_position.y)
-		Functions.show_damage_indicator(damage,indicator_position,"red")
+		change_state("idle")
+		velocity.x = 0
+		Audio.play_sfx("hit4")
 		
 		#damage calcule
+		#reducir damage gracias a defensa
+		damage = Functions.get_value(damage,"-",Vars.enemy[id]["def"])
 		hp_now -= damage
+		
+		var indicator_position = Vector2(global_position.x,weapon_position.y)
+		Functions.show_damage_indicator(damage,indicator_position,"red")
 		
 		if hp_now <= 0:
 			die()
@@ -142,3 +148,9 @@ func _on_TimerToChangeFacing_timeout():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "dead":
 		queue_free()
+
+
+func _on_TimerHurt_timeout():
+	$Sprite.modulate = Color(1,1,1,1)
+	if state != "dead":
+		change_state("walk")

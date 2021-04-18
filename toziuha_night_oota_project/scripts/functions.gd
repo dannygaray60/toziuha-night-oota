@@ -6,11 +6,24 @@ var blood_particle_instance = null
 var damage_indicator = preload("res://objects/ui/DamageIndicator.tscn")
 var damage_indicator_instance = null
 
+var impact_vfx = preload("res://objects/ui/SimpleImpactVFX.tscn")
+var impact_vfx_instance = null
+
 #precargar objetos que pueden caer de drops de enemigos y antorchas
 var weapon_upgrade = preload("res://objects/items/WeaponUpgrade.tscn")
 var money = preload("res://objects/items/MoneyDrop.tscn")
 var potion = preload("res://objects/items/Potion.tscn")
 var em = preload("res://objects/items/ElementalMaterial.tscn")
+
+
+#y subarmas
+var shuriken_weapon = preload("res://objects/SubweaponShuriken.tscn")
+var axe_weapon = preload("res://objects/SubweaponAxe.tscn")
+
+#item que cambia subarma
+var subweapon_changer = preload("res://objects/SubweaponChanger.tscn")
+
+
 var item_drop_instance = null
 
 #obtener el nodo principal que es la base de un nivel
@@ -96,6 +109,12 @@ func spawn_drop_item(itemname,item_position):
 		elif itemname.begins_with("em_"):
 			item_drop_instance = em.instance()
 			item_drop_instance.num = int(itemname.lstrip("em_"))
+		elif itemname == "axe":
+			item_drop_instance = subweapon_changer.instance()
+			item_drop_instance.subweapon = "axe"
+		elif itemname == "shuriken":
+			item_drop_instance = subweapon_changer.instance()
+			item_drop_instance.subweapon = "shuriken"
 		#set pos
 		item_drop_instance.position = item_position
 		#add to scene
@@ -107,5 +126,11 @@ func show_damage_indicator(damage,position_to_show,color="black"): #black, red, 
 		damage_indicator_instance = damage_indicator.instance()
 		damage_indicator_instance.set_damage(damage,color)
 		damage_indicator_instance.position = position_to_show
-#		lvl_base.add_child(damage_indicator_instance)
+		
+		#agregar efecto de impacto al mostrar indicador
+		if color == "red":
+			impact_vfx_instance = impact_vfx.instance()
+			impact_vfx_instance.position = position_to_show
+			lvl_base.call_deferred("add_child",impact_vfx_instance)
+			
 		lvl_base.call_deferred("add_child",damage_indicator_instance)

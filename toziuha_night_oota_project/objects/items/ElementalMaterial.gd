@@ -1,5 +1,6 @@
 extends RigidBody2D
 
+#la cantidad de em a agregar
 var num = 1
 
 func _ready():
@@ -23,6 +24,9 @@ func _on_AreaPick_body_entered(body):
 				Functions.show_hud_notif(tr("IRONPLUS5"))
 				Vars.player["em_now"] += 5
 				Audio.play_sfx("em_drop2")
+				#quitar excedente
+				if Vars.player["em_now"] > Vars.player["em_max"]:
+					Vars.player["em_now"] = Vars.player["em_max"]
 			#la señal stats_changed del jugador hace que los valores del hud se actualicen
 			#por lo que lo usaremos para mostrar la cantidad de pociones
 			body.emit_signal("stats_changed")

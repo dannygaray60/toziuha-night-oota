@@ -18,17 +18,18 @@ tile_data = PoolIntArray( -1048455, 0, 0, -1048454, 0, 3, -1048453, 0, 4, -10484
 
 [node name="ParallaxBackground" parent="." index="3" instance=ExtResource( 3 )]
 
-[node name="Xandria" parent="." index="4" instance=ExtResource( 2 )]
-position = Vector2( 360.078, 152 )
-limit_left_camera = 344
-limit_bottom_camera = 320
-
-[node name="RoomChanger" parent="." index="5" instance=ExtResource( 5 )]
+[node name="DoorL1" parent="." index="4" instance=ExtResource( 5 )]
 position = Vector2( 328, 114.634 )
 destiny_path = "res://test/test_change_rooms/RoomB.tscn"
+destiny_door = "DoorR1"
 
-[node name="CollisionShape2D" parent="RoomChanger" index="0"]
-position = Vector2( 0, -0.0624008 )
+[node name="PositionSpawn" parent="DoorL1" index="2"]
+position = Vector2( 32.1566, 33.3452 )
+
+[node name="Xandria" parent="." index="5" instance=ExtResource( 2 )]
+position = Vector2( 408, -8 )
+limit_left_camera = 344
+limit_bottom_camera = 320
 
 [node name="Skeleton" parent="." index="6" instance=ExtResource( 6 )]
 position = Vector2( 1904, 224 )
@@ -58,7 +59,7 @@ position = Vector2( 808, 232 )
 position = Vector2( 1648, 208 )
 
 [node name="Skeleton11" parent="." index="15" instance=ExtResource( 6 )]
-position = Vector2( 1480, -143.325 )
+position = Vector2( 1464, -88 )
 
 [node name="Skeleton12" parent="." index="16" instance=ExtResource( 6 )]
 position = Vector2( 1888, -152 )
@@ -85,7 +86,7 @@ money_100_probability = 1
 money_500_probability = 1
 
 [node name="Torch3" parent="." index="22" instance=ExtResource( 9 )]
-position = Vector2( 1328, -204 )
+position = Vector2( 1336, -176 )
 money_1_probability = 4
 money_50_probability = 3
 money_1000_probability = 3
@@ -98,7 +99,6 @@ money_500_probability = 1
 
 [node name="Torch6" parent="." index="24" instance=ExtResource( 9 )]
 position = Vector2( 552, 124.439 )
-em_5_probability = 0
 
 [node name="Torch5" parent="." index="25" instance=ExtResource( 9 )]
 position = Vector2( 394.706, -136 )
@@ -110,4 +110,4 @@ position = Vector2( 512, 99.7641 )
 [node name="Zombie2" parent="." index="27" instance=ExtResource( 8 )]
 position = Vector2( 840, 107 )
 
-[editable path="RoomChanger"]
+[editable path="DoorL1"]

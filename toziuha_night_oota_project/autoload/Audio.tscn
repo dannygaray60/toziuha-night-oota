@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://assets/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Audio.gd" type="Script" id=2]
@@ -36,6 +36,11 @@
 [ext_resource path="res://assets/sfx/smash_wood_pieces.wav" type="AudioStream" id=34]
 [ext_resource path="res://assets/sfx/em_drop.wav" type="AudioStream" id=35]
 [ext_resource path="res://assets/sfx/weapon_upgrade.wav" type="AudioStream" id=36]
+[ext_resource path="res://assets/sfx/text_bip.wav" type="AudioStream" id=37]
+[ext_resource path="res://assets/sfx/enemy_damage2.wav" type="AudioStream" id=38]
+[ext_resource path="res://assets/sfx/door_opening_full.wav" type="AudioStream" id=39]
+[ext_resource path="res://assets/sfx/slap.wav" type="AudioStream" id=40]
+[ext_resource path="res://assets/sfx/slap2.wav" type="AudioStream" id=41]
 
 [node name="Audio" type="Node"]
 pause_mode = 2
@@ -46,6 +51,17 @@ script = ExtResource( 2 )
 [node name="jump" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 1 )
 volume_db = 2.0
+bus = "Effects"
+
+[node name="door_opening" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 39 )
+volume_db = 6.0
+pitch_scale = 0.53
+bus = "Effects"
+
+[node name="text_bip" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 37 )
+volume_db = 5.0
 bus = "Effects"
 
 [node name="weapon_upgrade" type="AudioStreamPlayer" parent="sfx"]
@@ -80,6 +96,11 @@ stream = ExtResource( 1 )
 pitch_scale = 0.8
 bus = "Effects"
 
+[node name="small_woosh" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 1 )
+pitch_scale = 1.79
+bus = "Effects"
+
 [node name="backdash" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 1 )
 volume_db = 2.0
@@ -110,6 +131,23 @@ stream = ExtResource( 16 )
 volume_db = 7.0
 bus = "Effects"
 
+[node name="hit2" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 38 )
+volume_db = 3.0
+pitch_scale = 1.5
+bus = "Effects"
+
+[node name="hit3" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 40 )
+pitch_scale = 0.91
+bus = "Effects"
+
+[node name="hit4" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 41 )
+volume_db = 3.0
+pitch_scale = 0.7
+bus = "Effects"
+
 [node name="enemy_die1" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 17 )
 bus = "Effects"
@@ -132,6 +170,10 @@ bus = "Effects"
 [node name="item_pick1" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 18 )
 pitch_scale = 1.3
+bus = "Effects"
+
+[node name="item_pick2" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 18 )
 bus = "Effects"
 
 [node name="potion_use" type="AudioStreamPlayer" parent="sfx"]

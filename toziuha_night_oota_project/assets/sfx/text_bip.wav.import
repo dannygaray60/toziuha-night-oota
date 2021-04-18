@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/text_bip.wav-07e3277c040eea0bc81f46903ad37663.sample"
+
+[deps]
+
+source_file="res://assets/sfx/text_bip.wav"
+dest_files=[ "res://.import/text_bip.wav-07e3277c040eea0bc81f46903ad37663.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

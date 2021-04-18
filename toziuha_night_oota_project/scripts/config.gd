@@ -1,7 +1,5 @@
 extends Node
 
-#var f = File.new()
-#var d = Directory.new()
 var conf = ConfigFile.new()
 
 #comprobar archivo de configuracion
@@ -15,56 +13,48 @@ func check_configfile(configfile="user://settings.cfg"):
 		
 	# Store a variable if and only if it hasn't been defined yet
 	
-	#-------- seccion de video
+	#-------- seccion de video #disabled
+	check_conf_setting("video", "filter", "scanlines")
 	check_conf_setting("video", "fullscreen", false)
 	check_conf_setting("video", "borderless", false)
+	#iconos de botones: gamepad, keyboard, hide
+	if OS.has_touchscreen_ui_hint(): #si la pantalla es tactil
+		check_conf_setting("video", "icons_buttons", "hide")
+	else:
+		check_conf_setting("video", "icons_buttons", "keyboard")
 	
 	#-------- seccion de audio
 	check_conf_setting("audio", "sfx", 1.0)
 	check_conf_setting("audio", "bgm", 1.0)
 	check_conf_setting("audio", "voice", 1.0)
-		
-	#--------- configuracion de teclado
+	
+	#---- obtener la lista de acciones y sus eventos del inputmap
+	#y guardarlos en archivo de configuracion
+	for action in InputMap.get_actions():
+		for ev in InputMap.get_action_list(action):
+			if ev is InputEventKey:
+				#--------- configuracion de teclado
+				check_conf_setting("keyboard", action, ev.get_scancode_with_modifiers())
+			elif ev is InputEventJoypadButton:
+				#--------- configuracion de gamepad
+				check_conf_setting("gamepad", action, ev.button_index)
+
 	#pausa - enter
-	check_conf_setting("keyboard", "ui_select", 0)
+	check_conf_setting("gamepad_icon", "ui_select", 25)
 	#salto - aceptar
-	check_conf_setting("keyboard", "ui_accept", 0)
+	check_conf_setting("gamepad_icon", "ui_accept", 0)
 	#ataque - cancelar
-	check_conf_setting("keyboard", "ui_cancel", 0)
-	#sin usar
-#	if not conf.has_section_key("keyboard", "ui_focus_next"):
-#		conf.set_conf_value("keyboard", "ui_focus_next", 0)
+	check_conf_setting("gamepad_icon", "ui_cancel", 1)
 	#backdash
-	check_conf_setting("keyboard", "ui_focus_prev", 0)
+	check_conf_setting("gamepad_icon", "ui_focus_prev", 12)
 	#arriba
-	check_conf_setting("keyboard", "ui_up", 0)
+	check_conf_setting("gamepad_icon", "ui_up", 22)
 	#abajo
-	check_conf_setting("keyboard", "ui_down", 0)
+	check_conf_setting("gamepad_icon", "ui_down", 23)
 	#izquierda
-	check_conf_setting("keyboard", "ui_left", 0)
+	check_conf_setting("gamepad_icon", "ui_left", 20)
 	#derecha
-	check_conf_setting("keyboard", "ui_right", 0)
-		
-	#--------- configuracion de gamepad
-	#pausa - enter
-	check_conf_setting("gamepad", "ui_select", 0)
-	#salto - aceptar
-	check_conf_setting("gamepad", "ui_accept", 0)
-	#ataque - cancelar
-	check_conf_setting("gamepad", "ui_cancel", 0)
-	#sin usar
-#	if not conf.has_section_key("gamepad", "ui_focus_next"):
-#		conf.set_conf_value("gamepad", "ui_focus_next", 0)
-	#backdash
-	check_conf_setting("gamepad", "ui_focus_prev", 0)
-	#arriba
-	check_conf_setting("gamepad", "ui_up", 0)
-	#abajo
-	check_conf_setting("gamepad", "ui_down", 0)
-	#izquierda
-	check_conf_setting("gamepad", "ui_left", 0)
-	#derecha
-	check_conf_setting("gamepad", "ui_right", 0)
+	check_conf_setting("gamepad_icon", "ui_right", 21)
 		
 	#configuracion de botones virtuales
 	#opacidad de botones
@@ -136,6 +126,7 @@ func set_conf_value(section,key,value,configfile="user://settings.cfg"):
 
 #aplicar configuraciones
 func apply_conf_setting(section,key,value):
+	var new_event
 	match section:
 		"video":
 			match key:
@@ -151,6 +142,32 @@ func apply_conf_setting(section,key,value):
 					AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"),linear2db(value))
 				"voice":
 					AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Voice"),linear2db(value))
+		"keyboard":#key es action
+			for ev in InputMap.get_action_list(key):
+				if ev is InputEventKey:
+					#eliminar el evento anterior
+					InputMap.action_erase_event(key,ev)
+					#y aplicar el nuevo
+					#primero usamos una variable y la convierto a objeto
+					new_event = InputEventKey.new()
+					#se añade el scancode al objeto
+					new_event.scancode = value
+					#y se aplica
+					InputMap.action_add_event(key,new_event)
+					break
+		"gamepad":#key es action
+			for ev in InputMap.get_action_list(key):
+				if ev is InputEventJoypadButton:
+					#eliminar el evento anterior
+					InputMap.action_erase_event(key,ev)
+					#y aplicar el nuevo
+					#primero usamos una variable y la convierto a objeto
+					new_event = InputEventJoypadButton.new()
+					#se añade el scancode al objeto
+					new_event.button_index = value
+					#y se aplica
+					InputMap.action_add_event(key,new_event)
+					break
 		"other":
 			match key:
 				"lang":

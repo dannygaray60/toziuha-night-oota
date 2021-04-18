@@ -44,11 +44,6 @@ var num_jumps = 0
 export var acceleration = 0.1
 export var friction = 0.2
 
-#------- Habilidades
-export var can_double_jump = false
-export var can_slide = false
-export var can_backdash = false
-
 #multiplica el valor para moverse en horizontal,
 #si es 2, se duplica la velocidad
 var run_vel_multiplier = 1
@@ -68,6 +63,9 @@ var was_on_floor = true
 
 #el jugador está en una plataforma semisolida?
 var is_on_onewaycol = false
+
+#mientras sea true la funcion throw_subweapon spawneará subarma
+var can_throw = false
 
 #limites de camara
 export var limit_left_camera = -10000000
@@ -99,18 +97,17 @@ func _ready():
 	# warning-ignore:return_value_discarded
 	Timers.get_node("TimerHealingEnd").connect("timeout",self,"_on_TimerHealingEnd_timeout")
 
-	if Vars.player["condition"] == "healing":
-		Timers.get_node("TimerHeal").start()
 
 #debug
 func _process(_delta):
-	ScreenDebugger.dict["State"] = state
-	ScreenDebugger.dict["Anim"] = str( anim_current )
-	ScreenDebugger.dict["Jumps"] = str( num_jumps )
-	ScreenDebugger.dict["Vel_X"] = str( round(velocity.x) )
-	ScreenDebugger.dict["Vel_Y"] = str( round(velocity.y) )
-	ScreenDebugger.dict["Dir_X"] = str( round(direction.x) )
-	ScreenDebugger.dict["Facing"] = str( facing )
+	ScreenDebugger.dict["em_now"] = str(Vars.player["em_now"])
+#	ScreenDebugger.dict["State"] = state
+#	ScreenDebugger.dict["Anim"] = str( anim_current )
+#	ScreenDebugger.dict["Jumps"] = str( num_jumps )
+#	ScreenDebugger.dict["Vel_X"] = str( round(velocity.x) )
+#	ScreenDebugger.dict["Vel_Y"] = str( round(velocity.y) )
+#	ScreenDebugger.dict["Dir_X"] = str( round(direction.x) )
+#	ScreenDebugger.dict["Facing"] = str( facing )
 #	ScreenDebugger.dict["Scale_X"] = str( $Sprite.scale.x )
 #	ScreenDebugger.dict["OnFloor"] = str( is_on_floor() )
 #	ScreenDebugger.dict["OnWall"] = str( is_on_wall() )
@@ -190,6 +187,12 @@ func _physics_process(delta):
 
 func _get_input():
 	
+	#mientras haya un dialogo activo no podrá moverse
+	if DialogBox.active:
+		direction.x = 0
+		velocity.x = 0
+		return
+	
 	#movimiento con teclas siempre y cuando no estemos heridos
 	
 	# --------- detectar entrada de tecla izq o der para movimiento horizontal ----------
@@ -213,22 +216,25 @@ func _get_input():
 		
 	#acción de ataque	
 	if Input.is_action_just_pressed("ui_cancel"):
+		#si se presiona arriba y la cantidad de em es menor al em requerido por el subarma
+		if Input.is_action_pressed("ui_up") and Vars.player["subweapon"] != "none" and Vars.player["em_now"] < Vars.subweapons[Vars.player["subweapon"]]["em_use"]:
+			return
 		_attack()
 		
 	#accion para usar un item curativo
-	if Input.is_action_pressed("ui_up") and Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_pressed("ui_down") and Input.is_action_just_pressed("ui_focus_prev"):
 		_use_health_item()
 		
 		
 	#salto
-	if Input.is_action_just_pressed("ui_accept") and !Input.is_action_pressed("ui_up"):
+	if Input.is_action_just_pressed("ui_accept"):
 		_jump()
 	else:
 		#si no pulsamos btn salto, hay snap para pegar al jugador al suelo inclinado
 		snap_vector = SNAP_DIRECTION * SNAP_LENGTH
 	
 	# esquive hacia atrás (backdash)
-	if Input.is_action_just_pressed("ui_focus_prev") and can_backdash:
+	if Input.is_action_just_pressed("ui_focus_prev") and Vars.player["hability_backdash"]:
 		_backdash()
 		
 	#slide
@@ -236,7 +242,7 @@ func _get_input():
 		#bajamos al personaje de plataforma si se encuentra en superficie onewaycollision
 		if is_on_onewaycol:
 			position = Vector2(position.x,position.y+1)
-		elif can_slide:
+		elif Vars.player["hability_slide"]:
 			_slide()
 
 	#------- Jump Physics -----------
@@ -278,7 +284,7 @@ func _use_health_item():
 		emit_signal("stats_changed")
 
 func _backdash():
-	if state != "slide" and state != "attack-crouch" and is_on_floor() and state != "backdash" and state != "crouch" and anim_current != "backdash" and anim_current != "pos-backdash" and can_backdash:
+	if state != "slide" and state != "attack-crouch" and is_on_floor() and state != "backdash" and state != "crouch" and anim_current != "backdash" and anim_current != "pos-backdash" and Vars.player["hability_backdash"]:
 		$TimerBackdash.start()
 		$Sprite/XandriaWeapon.cancel()
 		Audio.play_voice("xandria-up")
@@ -286,7 +292,7 @@ func _backdash():
 		change_state("backdash")
 
 func _slide():
-	if is_on_floor() and state == "crouch" and anim_current != "attack" and anim_current in ["crouch","pos-slide"] and can_slide:
+	if is_on_floor() and state == "crouch" and anim_current != "attack" and anim_current in ["crouch","pos-slide"] and Vars.player["hability_slide"]:
 		if anim_current == "backdash":
 			return
 		$TimerSlide.start()
@@ -301,10 +307,10 @@ func _jump():
 	
 	#evitar saltar si se puede deslizar
 	#o estamos en plataforma oneway
-	if (is_on_floor() and can_slide and Input.is_action_pressed("ui_down")) or state in ["slide","attack","attack-crouch"] or (state == "crouch" and $Sprite/RayCastUp.is_colliding()) or (Input.is_action_pressed("ui_down") and is_on_onewaycol):#or $Sprite/RayCastUp.is_colliding():
+	if (is_on_floor() and Vars.player["hability_slide"] and Input.is_action_pressed("ui_down")) or state in ["slide","attack","attack-crouch"] or (state == "crouch" and $Sprite/RayCastUp.is_colliding()) or (Input.is_action_pressed("ui_down") and is_on_onewaycol):#or $Sprite/RayCastUp.is_colliding():
 		return
 		
-	if (!can_double_jump and num_jumps == 0) or (can_double_jump and num_jumps <= 1):
+	if (!Vars.player["hability_double_jump"] and num_jumps == 0) or (Vars.player["hability_double_jump"] and num_jumps <= 1):
 		Audio.play_sfx("jump")
 		if num_jumps > 0:
 			anim_state_machine.start("jump2")
@@ -490,7 +496,7 @@ func enable_collision_with_danger(v=true):
 	set_collision_mask_bit(2,v)
 	#proyectiles
 	for en in enemies:
-		if is_instance_valid(en):
+		if is_instance_valid(en) and en.state != "dead":
 			en.set_collision_mask_bit(0,v)
 #	for pr in proyectiles:
 #		if is_instance_valid(pr):
@@ -532,24 +538,32 @@ func change_state(new_state):
 		anim_state_machine.travel(new_state)
 		
 	#animacion de ataque
+	can_throw = false
 	if state in ["attack","attack-crouch"]:
-		if Input.is_action_pressed("ui_up") and state == "attack":
-			pass
+		if Input.is_action_pressed("ui_up") and state == "attack" and Vars.player["subweapon"] != "none":
+			Vars.player["em_now"] = Functions.get_value(Vars.player["em_now"],"-",Vars.subweapons[Vars.player["subweapon"]]["em_use"])
+			can_throw = true
+			emit_signal("stats_changed")
 		else:
 			$Sprite/XandriaWeapon.attack()
 
 #cambiar cual colision de cuerpo usar	
+#se ha cambiado la forma de hacer diferentes colisiones
+#ahora se cambia las propiedades del shape de la colision principal
+#en un nodo animationplayer aparte
 func set_body_collision(pose="stand"):
 	if pose == "stand":
 		$Sprite/RayCastUp.enabled = false
-		$CollisionStand.disabled = false
-		$CollisionCrouch.disabled = true
+		$AnimationPlayerCollision.play("stand")
+#		$CollisionStand.disabled = false
+#		$CollisionCrouch.disabled = true
 		#posicion del arma
 		$Sprite/XandriaWeapon.position = Vector2(21.034,8)
 	elif pose == "crouch":
 		$Sprite/RayCastUp.enabled = true
-		$CollisionStand.disabled = true
-		$CollisionCrouch.disabled = false
+		$AnimationPlayerCollision.play("crouch")
+#		$CollisionStand.disabled = true
+#		$CollisionCrouch.disabled = false
 		#posicion del arma
 		$Sprite/XandriaWeapon.position = Vector2(13.094,16.004)
 
@@ -624,7 +638,24 @@ func _on_TimerAttack_timeout():
 				else:
 					change_state("idle")
 
-#se acaba el tiempo de invisibilidad
+
+func throw_subweapon():
+	if can_throw:
+		var lvl_base = Functions.get_main_level_scene()
+		var subweapon_instance = null
+		match Vars.player["subweapon"]:
+			"shuriken":
+				subweapon_instance = Functions.shuriken_weapon.instance()
+				subweapon_instance.direction = facing
+			"axe":
+				subweapon_instance = Functions.axe_weapon.instance()
+				subweapon_instance.direction = facing
+		#posicion de spawneo
+		subweapon_instance.position = $Sprite/XandriaWeapon.global_position
+		if lvl_base != null:
+			lvl_base.call_deferred("add_child",subweapon_instance)
+
+#se acaba el tiempo de invencibilidad
 func _on_TimerNoHurt_timeout():
 	$Sprite.self_modulate.a = 1
 	enable_collision_with_danger()
@@ -657,6 +688,7 @@ func _on_TimerHealingEnd_timeout():
 func _return_to_good_condition():
 	if Vars.player["condition"] in ["poison","cursed"]:
 		Vars.player["condition"] = "good"
+		emit_signal("stats_changed")
 
 
 func _on_Xandria_tree_exiting():

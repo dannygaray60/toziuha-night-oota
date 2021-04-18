@@ -8,7 +8,6 @@ extents = Vector2( 6.19846, 20.1512 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "dead"
-length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -69,7 +68,7 @@ shape = SubResource( 1 )
 position = Vector2( 0, -25 )
 texture = ExtResource( 1 )
 hframes = 15
-frame = 4
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/dead = SubResource( 2 )
@@ -89,7 +88,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="TimerHurt" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 one_shot = true
 __meta__ = {
 "_editor_description_": "activado al ser herido, mientras esté activo no podrá ser herido"
@@ -98,3 +97,4 @@ __meta__ = {
 [connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="TimerToChangeFacing" to="." method="_on_TimerToChangeFacing_timeout"]
+[connection signal="timeout" from="TimerHurt" to="." method="_on_TimerHurt_timeout"]

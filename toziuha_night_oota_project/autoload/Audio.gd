@@ -3,6 +3,9 @@ extends Node
 func play_sfx(name_sfx):
 	get_node("sfx/"+name_sfx).play()
 
+func stop_sfx(name_sfx):
+	get_node("sfx/"+name_sfx).stop()
+
 func play_voice(name_voice):
 	get_node("voice/"+name_voice).play()
 

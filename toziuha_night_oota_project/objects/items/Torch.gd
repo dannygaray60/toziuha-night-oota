@@ -5,11 +5,13 @@ var destroyed = false
 var i = 0 #la vieja confiable
 
 #probabilidades de spawneo
+export var subweapon_shuriken = false
+export var subweapon_axe = false
 export var weapon_lvl2 = false
 export var weapon_lvl3 = false
 export(int,0,10) var potion_probability = 0
-export(int,0,10) var em_1_probability = 1
-export(int,0,10) var em_5_probability = 1
+export(int,0,10) var em_1_probability = 0
+export(int,0,10) var em_5_probability = 0
 export(int,0,10) var money_1_probability = 0
 export(int,0,10) var money_10_probability = 0
 export(int,0,10) var money_50_probability = 0
@@ -22,6 +24,14 @@ var list_items = []
 
 func _ready():
 	$AnimationPlayer.play("idle")
+	
+	if subweapon_shuriken:
+		list_items.push_back("shuriken")
+		return
+	
+	if subweapon_axe:
+		list_items.push_back("axe")
+		return
 	
 	if weapon_lvl2:
 		list_items.push_back("weapon_lvl2")
@@ -92,7 +102,7 @@ func destroy():
 	if !destroyed:
 		if !list_items.empty():
 			Functions.spawn_drop_item(list_items[0],position)
-		Audio.play_sfx("hit1")
+#		Audio.play_sfx("hit1")
 		Audio.play_sfx("torch_destroyed")
 		destroyed = true
 		$AnimationPlayer.play("destroyed")

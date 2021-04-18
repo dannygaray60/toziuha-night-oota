@@ -38,7 +38,9 @@ func shake():
 #	offset.x = max_offset.x * amount * rand_range(-1, 1)
 #	offset.y = max_offset.y * amount * rand_range(-1, 1)
 	
-func add_trauma(amount):
-	#si hay un trauma, no repetiremos la acción
+func add_trauma(amount,_forced=false):
+	#si hay un trauma (y no está forzado), no repetiremos la acción
+#	if trauma == 0 and !forced:
+#		return
 	if trauma == 0:
 		trauma = min(trauma + amount, 1.0)

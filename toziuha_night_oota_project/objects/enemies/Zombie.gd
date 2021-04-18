@@ -13,29 +13,26 @@ var direction = Vector2()
 var facing = -1
 
 export var gravity = 600
-export var speed = 60
+export var speed = 20
 
 var state = "idle"
 
 var player = null
 
-var list_items = ["none","none","none","money_1","money_1","money_1","money_1","money_1","money_10"]
+var list_items = ["none","none","none","none","money_1","money_1","money_1","money_1","money_1","money_10"]
 
 #establecer hacia donde mira el enemigo
 #dependiendo de posicion de jugador (debe verlo de frente
 func check_player_position():
-#	if state == "dead":
-#		return
-#	if player != null:
-#		if player.global_position.x > global_position.x:
-#			change_dir(1)
-#		else:
-#			change_dir(-1)
-#
-#	if state == "idle":
-#		change_state("walk")
-#
-	pass
+	if state == "dead":
+		return
+	if player != null:
+		if player.global_position.x > global_position.x:
+			change_dir(1)
+		else:
+			change_dir(-1)
+	if state == "idle":
+		change_state("walk")
 
 func _ready():
 	
@@ -49,18 +46,14 @@ func _ready():
 	else:
 		player = null
 		
-#	check_player_position()
+	check_player_position()
 	
 	randomize()
 	list_items.shuffle()
 	
 	set_physics_process(false)
 	
-
-	
-
-	
-#	change_state("idle")
+	change_state("idle")
 
 func _physics_process(delta):
 
@@ -81,9 +74,6 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		if collision.collider.is_in_group("player"):
 			collision.collider.hurt(id,position)
-			#si este cuerpo lleva veneno
-			if self.is_in_group("poison"):
-				collision.collider.change_condition("poison")
 				
 
 
@@ -95,6 +85,8 @@ func change_state(new_state):
 
 func hurt(damage,weapon_position):
 	if $TimerHurt.get_time_left() == 0:
+		velocity.x = 0
+		change_state("idle")
 		$TimerHurt.start()
 		Audio.play_sfx("knife_stab")
 		var indicator_position = Vector2(global_position.x,weapon_position.y)
@@ -106,19 +98,16 @@ func hurt(damage,weapon_position):
 		if hp_now <= 0:
 			die()
 
-
-#func _process(_delta):
-#	if Input.is_action_just_pressed("ui_accept"):
-#		change_dir(0)
-
 func change_dir(dir):
+	var new_facing = dir
+	#un valor 0 significa que solo se quiere el facing contrario
 	if dir == 0:
-		scale.x *= -1
-	else:
-		scale.x = dir
-	facing = scale.y
-	
-
+		if facing == 1:
+			new_facing = -1
+		else:
+			new_facing = 1
+	facing = new_facing
+	$Sprite.scale.x = facing
 	
 func die():
 	velocity.x = 0
@@ -146,3 +135,8 @@ func _on_VisibilityNotifier2D_screen_exited():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "dead":
 		queue_free()
+
+
+func _on_TimerHurt_timeout():
+	if state != "dead":
+		change_state("walk")

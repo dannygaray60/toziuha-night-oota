@@ -4,6 +4,12 @@ extends CanvasLayer
 var hp_danger_bar_sprite = preload("res://assets/sprites/hp_bar_danger.png")
 var hp_good_bar_sprite = preload("res://assets/sprites/hp_bar_good.png")
 
+var subweapon_icons = {
+	"none": null,
+	"shuriken": preload("res://assets/sprites/subweapons_xandria_icons/icon1.png"),
+	"axe": preload("res://assets/sprites/subweapons_xandria_icons/icon2.png"),
+}
+
 func _ready():
 	
 	$ControlPause.visible = false
@@ -11,10 +17,13 @@ func _ready():
 	update_stats()
 	
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_select") and !SceneChanger.changing_scene:
+	if Input.is_action_just_pressed("ui_select") and !SceneChanger.changing_scene and !DialogBox.active:
 		pause_game()
 	
 func update_stats():
+	
+	#icono subweapon
+	$Main/Texture/TextureSubweapon.texture = subweapon_icons[Vars.player["subweapon"]]
 	
 	#ocultar el panel del estado del jugador
 	if Vars.player["condition"] == "good":
@@ -37,6 +46,22 @@ func update_stats():
 	$Main/Texture/LblPotionNum.text = str(Vars.player["potion_now"]).pad_zeros(2)
 	$Main/Texture/TextureStatusPanel/LblStatus.text = Vars.player["condition"].capitalize()
 
+
+func update_pause_stats():
+	$ControlPause/MarginContainer2/HBoxContainer/LblAtk.text = "ATK: %s" % [str(Vars.player["atk"]).pad_zeros(2)]
+	$ControlPause/MarginContainer2/HBoxContainer/LblDef.text = "DEF: %s" % [str(Vars.player["def"]).pad_zeros(2)]
+	$ControlPause/MarginContainer2/HBoxContainer/LblHP.text = "HP: %s/%s" % [str(Vars.player["hp_now"]).pad_zeros(2),str(Vars.player["hp_max"]).pad_zeros(2)]
+	$ControlPause/MarginContainer2/HBoxContainer/LblEM.text = "EM: %s/%s" % [str(Vars.player["em_now"]).pad_zeros(2),str(Vars.player["em_max"]).pad_zeros(2)]
+	$ControlPause/MarginContainer2/HBoxContainer/LblCordova.text = "$%s" % [str(Vars.player["money"]).pad_zeros(5)]
+
+	#llaves, cambiar la visibilidad de llaves dependiendo si ya se consiguieron
+	for k in ["bronce_key","silver_key","golden_key"]:
+		if Vars.player[k]:
+			get_node("ControlPause/"+k).modulate = Color(1,1,1,1)
+		else:
+			get_node("ControlPause/"+k).modulate = Color(0.35,0.35,0.35,1)
+	
+
 func pause_menu_opt_selected(opt):
 	match opt:
 		"continue":
@@ -47,18 +72,22 @@ func pause_menu_opt_selected(opt):
 			get_tree().paused = false
 			SceneChanger.change_scene("res://screens/MainMenu.tscn")
 		"help":
-			pass
-
+			$ControlPause/ControlHelp.visible = true
+			$ControlPause/ControlHelp/Margin/HBx/VBx/BtnCloseHelpPanel.grab_focus()
+		"close_help":
+			$ControlPause/ControlHelp.visible = false
+			$ControlPause/MarginContainer/HBoxContainer/BtnContinue.grab_focus()
 func pause_game():
 	#player muerto o con 0 hp no puede pausar juego
 	if Vars.player["hp_now"] < 1 :
 		return
 	if get_tree().paused:
+		$ControlPause/ControlHelp.visible = false
 		Audio.play_sfx("btn_cancel")
 		get_tree().paused = false
 	else:
 		Audio.play_sfx("btn_accept")
 		get_tree().paused = true
-
+	update_pause_stats()
 	$ControlPause.visible = get_tree().paused
 	$ControlPause/MarginContainer/HBoxContainer/BtnContinue.focus()

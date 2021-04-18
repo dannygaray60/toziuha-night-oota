@@ -1,0 +1,79 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/sprites/icons_buttons_gamepad_sheet_normal.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/icons_buttons_gamepad_sheet_pressed.png" type="Texture" id=2]
+[ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.gd" type="Script" id=3]
+[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+extra_spacing_bottom = 3
+font_data = ExtResource( 4 )
+
+[sub_resource type="Animation" id=2]
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("normal:modulate")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:rect_position")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 1 ) ]
+}
+
+[node name="ButtonKeyGamepadIcon" type="Control" groups=[
+"btn_help_icon",
+]]
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+show_specific_icon = "automatic"
+action = "ui_cancel"
+
+[node name="pressed" type="Sprite" parent="."]
+position = Vector2( 8, 8 )
+texture = ExtResource( 2 )
+vframes = 14
+hframes = 4
+
+[node name="normal" type="Sprite" parent="."]
+position = Vector2( 8, 8 )
+texture = ExtResource( 1 )
+vframes = 14
+hframes = 4
+
+[node name="Label" type="Label" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 1.0
+custom_fonts/font = SubResource( 1 )
+text = "X"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/press_anim = SubResource( 2 )

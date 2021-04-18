@@ -1,0 +1,179 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/img/portraits/xandria_normal.png" type="Texture" id=3]
+[ext_resource path="res://assets/img/portraits/rachel_normal.png" type="Texture" id=4]
+[ext_resource path="res://objects/ui/DialogBox.gd" type="Script" id=5]
+[ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/sprites/main_panel.png" type="Texture" id=8]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 8 )
+region_rect = Rect2( 0, 0, 32, 32 )
+margin_top = 4.00473
+margin_bottom = 4.11544
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 7 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 50, 30 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 350, 200 )
+
+[node name="DialogBox" type="CanvasLayer"]
+script = ExtResource( 5 )
+
+[node name="TimerTextVel" type="Timer" parent="."]
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Black" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.435294 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="c1" type="TextureRect" parent="Control"]
+margin_left = 79.0
+margin_top = 20.0
+margin_right = 317.0
+margin_bottom = 258.0
+rect_min_size = Vector2( 238, 238 )
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="c2" type="TextureRect" parent="Control"]
+margin_left = 365.0
+margin_top = 20.0
+margin_right = 603.0
+margin_bottom = 258.0
+rect_min_size = Vector2( 238, 238 )
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -136.0
+grow_horizontal = 2
+grow_vertical = 0
+rect_pivot_offset = Vector2( 0, 136 )
+size_flags_vertical = 0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 10
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" parent="Control/Margin" instance=ExtResource( 1 )]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 663.0
+margin_bottom = 116.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="Margin" type="MarginContainer" parent="Control/Margin/Panel"]
+margin_top = 4.00473
+margin_right = 643.0
+margin_bottom = 101.885
+custom_constants/margin_right = 10
+custom_constants/margin_top = 5
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 5
+
+[node name="VBx" type="VBoxContainer" parent="Control/Margin/Panel/Margin"]
+margin_left = 10.0
+margin_top = 5.0
+margin_right = 633.0
+margin_bottom = 92.0
+alignment = 1
+
+[node name="LblTitle" type="Label" parent="Control/Margin/Panel/Margin/VBx"]
+margin_right = 623.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 2 )
+text = "« Xandria »"
+clip_text = true
+
+[node name="LblMsg" type="Label" parent="Control/Margin/Panel/Margin/VBx"]
+margin_top = 30.0
+margin_right = 623.0
+margin_bottom = 87.0
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+custom_constants/line_spacing = -2
+text = "Este es un mensaje de prueba... Con mucho texto como para partir la línea... Etc... Etc... Con un máximo de 2. El resto de texto se ocultará"
+autowrap = true
+clip_text = true
+
+[node name="BtnContinueIcon" parent="Control" instance=ExtResource( 6 )]
+margin_left = 624.0
+margin_top = 320.0
+margin_right = 640.0
+margin_bottom = 336.0
+rect_scale = Vector2( 2, 2 )
+animated = true
+action = "ui_accept"
+
+[node name="HBxHelp" type="HBoxContainer" parent="Control"]
+modulate = Color( 1, 1, 1, 0.352941 )
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -64.0
+margin_right = -13.0
+margin_bottom = 40.0
+grow_horizontal = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonKeyGamepadIcon" parent="Control/HBxHelp" instance=ExtResource( 6 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_select"
+
+[node name="Label" type="Label" parent="Control/HBxHelp"]
+margin_left = 20.0
+margin_top = 13.0
+margin_right = 44.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 2 )
+text = "SKIP"
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Control"]
+position = Vector2( 592, -8 )
+shape = SubResource( 3 )
+action = "ui_select"
+
+[node name="TouchScreenButton2" type="TouchScreenButton" parent="Control"]
+position = Vector2( -8, 56 )
+shape = SubResource( 4 )
+action = "ui_accept"
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="script_ended" from="." to="." method="_on_DialogBox_script_ended"]
