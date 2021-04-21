@@ -113,6 +113,8 @@ func set_vars():
 		"bronce_key": false,
 		"silver_key": false,
 		"golden_key": false,
+		#id de habitaciones visitadas
+		"visited_rooms": [],
 		
 	}
 

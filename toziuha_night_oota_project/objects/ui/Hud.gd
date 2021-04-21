@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+var can_pause = true
 
 var hp_danger_bar_sprite = preload("res://assets/sprites/hp_bar_danger.png")
 var hp_good_bar_sprite = preload("res://assets/sprites/hp_bar_good.png")
@@ -16,9 +17,25 @@ func _ready():
 	$Main.modulate.a = 1
 	update_stats()
 	
+	
 func _process(_delta):
-	if Input.is_action_just_pressed("ui_select") and !SceneChanger.changing_scene and !DialogBox.active:
+	if can_pause and Input.is_action_just_pressed("ui_select") and !SceneChanger.changing_scene and !DialogBox.active:
 		pause_game()
+		
+#	elif Input.is_action_just_pressed("ui_focus_next"):
+#		show_titleroom()
+		
+func show_titleroom(txt="Name Room"):
+#	can_pause = false
+#	get_tree().paused = true
+	Audio.play_sfx("cinematic_hit_reverse")
+	$Main/ControlTitleRoom/PanelContainer/MarginContainer/Label.text = txt
+	$Main/ControlTitleRoom/AnimationPlayer.play_backwards("hide")
+	$Main/ControlTitleRoom/Timer.start()
+	yield($Main/ControlTitleRoom/Timer,"timeout")
+	$Main/ControlTitleRoom/AnimationPlayer.play("hide")
+#	get_tree().paused = false
+#	can_pause = true
 	
 func update_stats():
 	

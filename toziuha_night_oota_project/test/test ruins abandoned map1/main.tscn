@@ -12,6 +12,8 @@
 [ext_resource path="res://objects/items/Torch.tscn" type="PackedScene" id=10]
 
 [node name="LevelBase" instance=ExtResource( 1 )]
+title_room = "Prologue"
+id_room = "ruins"
 music = "nameless_symphony"
 
 [node name="TileMap" parent="." index="2" instance=ExtResource( 4 )]

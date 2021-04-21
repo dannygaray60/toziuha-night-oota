@@ -240,6 +240,7 @@ script = ExtResource( 2 )
 type_door = "bronce"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
 anims/open = SubResource( 1 )
 anims/opened = SubResource( 2 )
 

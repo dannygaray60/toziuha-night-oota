@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/sprites/hud.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/hp_bar_good.png" type="Texture" id=2]
@@ -14,8 +14,49 @@
 [ext_resource path="res://assets/sprites/relics_keys.png" type="Texture" id=12]
 [ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=13]
 [ext_resource path="res://assets/img/iron_texture.jpg" type="Texture" id=14]
+[ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://assets/sprites/notification_in_game_panel.png" type="Texture" id=16]
+[ext_resource path="res://tilemaps/MapTiles.tscn" type="PackedScene" id=17]
 
-[sub_resource type="StyleBoxLine" id=1]
+[sub_resource type="StyleBoxTexture" id=1]
+content_margin_left = 9.0
+content_margin_right = 9.0
+texture = ExtResource( 16 )
+region_rect = Rect2( 0, 0, 57, 19 )
+margin_left = 15.3423
+margin_right = 14.8467
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 15 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4, 4 ), Vector2( 4, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="StyleBoxLine" id=4]
 color = Color( 1, 1, 1, 0 )
 
 [node name="Hud" type="CanvasLayer"]
@@ -151,8 +192,73 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ControlTitleRoom" type="Control" parent="Main"]
+pause_mode = 2
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -85.5
+margin_top = -48.0
+margin_right = 85.5
+margin_bottom = 48.0
+rect_scale = Vector2( 4, 1e-05 )
+rect_pivot_offset = Vector2( 85, 48 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="Main/ControlTitleRoom"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -47.5
+margin_top = -21.75
+margin_right = 48.5
+margin_bottom = -1.75
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="Main/ControlTitleRoom/PanelContainer"]
+margin_left = 9.0
+margin_right = 87.0
+margin_bottom = 20.0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 2
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 2
+
+[node name="Label" type="Label" parent="Main/ControlTitleRoom/PanelContainer/MarginContainer"]
+margin_left = 5.0
+margin_top = 2.0
+margin_right = 73.0
+margin_bottom = 18.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.890196, 0.890196, 0.890196, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_constants/shadow_offset_x = 1
+custom_constants/shadow_offset_y = 1
+text = "Name Room"
+align = 1
+valign = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Main/ControlTitleRoom"]
+anims/hide = SubResource( 3 )
+
+[node name="Timer" type="Timer" parent="Main/ControlTitleRoom"]
+wait_time = 3.5
+one_shot = true
+
 [node name="ControlPause" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 1
@@ -603,7 +709,7 @@ action = "ui_focus_prev"
 margin_top = 265.0
 margin_right = 446.0
 margin_bottom = 284.0
-custom_styles/separator = SubResource( 1 )
+custom_styles/separator = SubResource( 4 )
 custom_constants/separation = 19
 
 [node name="BtnCloseHelpPanel" parent="ControlPause/ControlHelp/Margin/HBx/VBx" instance=ExtResource( 3 )]
@@ -619,6 +725,10 @@ focus_previous = NodePath(".")
 size_flags_horizontal = 1
 size_flags_vertical = 1
 text = "RETURN"
+
+[node name="MapTiles" parent="ControlPause" instance=ExtResource( 17 )]
+position = Vector2( 207, 151 )
+scale = Vector2( 4, 4 )
 [connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnContinue" to="." method="pause_menu_opt_selected" binds= [ "continue" ]]
 [connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnSaveAndExit" to="." method="pause_menu_opt_selected" binds= [ "saveandexit" ]]
 [connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnHelp" to="." method="pause_menu_opt_selected" binds= [ "help" ]]

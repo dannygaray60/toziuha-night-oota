@@ -59,7 +59,7 @@ func _on_Area_body_entered(body):
 		if Vars.player["condition"] == "poison":
 			total_atk = total_atk / 2
 		#camera shake
-		get_parent().get_parent().get_node("PlayerCamera").add_trauma(0.4,true)
+		get_parent().get_parent().get_node("PlayerCamera").add_trauma(0.3,true)
 		#send hurt data to enemy
 		body.hurt(total_atk,global_position)
 		

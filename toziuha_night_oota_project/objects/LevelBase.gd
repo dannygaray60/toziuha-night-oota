@@ -32,6 +32,14 @@ func _ready():
 	player.connect("damaged",self,"_on_player_damage")
 	player.connect("dead",self,"_on_player_death")
 	player.connect("stats_changed",self,"_on_stats_changed")
+	
+#	yield($Timer,"timeout")
+	if id_room in Vars.player["visited_rooms"]:
+		pass
+	elif id_room != "":
+		Vars.player["visited_rooms"].append(id_room)
+		if title_room != "":
+			$Hud.show_titleroom(title_room)
 
 
 #cuando jugador pierde stamina

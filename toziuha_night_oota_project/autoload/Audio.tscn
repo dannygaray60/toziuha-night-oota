@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://assets/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Audio.gd" type="Script" id=2]
@@ -38,9 +38,11 @@
 [ext_resource path="res://assets/sfx/weapon_upgrade.wav" type="AudioStream" id=36]
 [ext_resource path="res://assets/sfx/text_bip.wav" type="AudioStream" id=37]
 [ext_resource path="res://assets/sfx/enemy_damage2.wav" type="AudioStream" id=38]
-[ext_resource path="res://assets/sfx/door_opening_full.wav" type="AudioStream" id=39]
+[ext_resource path="res://assets/sfx/door_opening.wav" type="AudioStream" id=39]
 [ext_resource path="res://assets/sfx/slap.wav" type="AudioStream" id=40]
 [ext_resource path="res://assets/sfx/slap2.wav" type="AudioStream" id=41]
+[ext_resource path="res://assets/sfx/cinematic_hit_reverse.ogg" type="AudioStream" id=42]
+[ext_resource path="res://assets/sfx/door_closed.wav" type="AudioStream" id=43]
 
 [node name="Audio" type="Node"]
 pause_mode = 2
@@ -53,8 +55,18 @@ stream = ExtResource( 1 )
 volume_db = 2.0
 bus = "Effects"
 
+[node name="cinematic_hit_reverse" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 42 )
+bus = "Effects"
+
 [node name="door_opening" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 39 )
+volume_db = 6.0
+pitch_scale = 0.53
+bus = "Effects"
+
+[node name="door_closed" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 43 )
 volume_db = 6.0
 pitch_scale = 0.53
 bus = "Effects"

@@ -72,6 +72,9 @@ func begin():
 	current_line = 0
 	total_lines = lines.size()-1 #el index
 	emit_signal("script_started")
+	#pausar enemigos
+	for e in get_tree().get_nodes_in_group("enemies"):
+		e.set_physics_process(false)
 	#mostrar escenario
 	next_line()
 
@@ -214,4 +217,6 @@ func hide_panel():
 	active = false
 	set_process(false)
 	ControlsOnscreen.show_buttons_in_game()
+	for e in get_tree().get_nodes_in_group("enemies"):
+		e.set_physics_process(true)
 	emit_signal("dialogbox_closed")

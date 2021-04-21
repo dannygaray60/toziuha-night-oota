@@ -416,7 +416,7 @@ func hurt(enemy_id=null,hurt_pos=null):
 	emit_signal("damaged")
 	
 	#screen shake
-	get_node("PlayerCamera").add_trauma(0.5)
+	get_node("PlayerCamera").add_trauma(0.4)
 	
 	#muerte del jugador el resto del codigo no se ejecutará
 	if Vars.player["hp_now"] < 1:

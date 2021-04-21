@@ -9,8 +9,8 @@ content_margin_left = 9.0
 content_margin_right = 9.0
 texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 57, 19 )
-margin_left = 27.6491
-margin_right = 29.9935
+margin_left = 15.3423
+margin_right = 14.8467
 
 [sub_resource type="DynamicFont" id=2]
 extra_spacing_bottom = 1
