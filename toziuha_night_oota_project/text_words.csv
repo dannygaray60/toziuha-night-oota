@@ -1,4 +1,9 @@
 keys;en;es
+PHRASEDONTDOWNLVLS;You don't have any level downloaded.;Actualmente no ha descargado ningún nivel personalizado.
+EMPTYLIST;Empty List;Lista Vacía
+DOWNLOADLVLS;Download Levels;Descargar Niveles
+STORYMODE;Story Mode;Modo Historia
+CUSTOMLVLS;Custom Levels;Niveles Personalizados
 DISABLED;Disabled;Desactivado
 ICONS;Icons;Iconos
 VIDEO_FILTERS;Video Filters;Filtros de Video
@@ -59,12 +64,14 @@ USE_POTION;Use Potion;Usar Poción
 SLIDE;Slide;Deslizarse
 BACKWARD;Backward;Retroceder (esquivar)
 THROW_SUBWEAPON;Throw Subweapon;Lanzar Subarma
+INFECTEDSLIME;Infected Slime;Slime Infectado
 SKELETON;Skeleton;Esqueleto
+INFECTEDSKELETON;Infected Skeleton;Esqueleto Infectado
 ZOMBIE;Zombie;Zombi
-IRONPLUS1;Iron +1;Hierro +1
-IRONPLUS5;Iron +5;Hierro +5
+IRONPLUS1;Iron (em) +1;Hierro (em) +1
+IRONPLUS5;Iron (em) +5;Hierro (em) +5
 WEAPONLVL;Weapon Lvl%d;Arma Nivel %d
-BRONCEKY;Bronce Key;Llave de Bronce
+BRONZEKY;Bronze Key;Llave de Bronce
 SILVERKY;Silver Key;Llave Plateada
 GOLDENKY;Golden Key;Llave Dorada
 SKIP;Skip;Omitir
@@ -74,6 +81,9 @@ RELEASE;Release;Suelta
 PHRASE_DOUBLEJUMP;Now you can make a double jump.;Ahora puedes hacer un segundo salto.
 PHRASE_SLIDE;Press «Down» + «Jump» to slide.;Presiona «Abajo» + «Salto» para deslizarte.
 PHRASE_BACKDASH;Go Backward with «Backdash» button.;Retrocede rápidamente con el botón de «Esquivar».
-PHRASE_NEED_BRONCEKY;You need the «Bronce Key» to unlock this door.;Necesitas la «Llave de Bronce» para abrir esta puerta.
-PHRASE_NEED_SILVERKY;You need the «Silver Key» to unlock this door.;Necesitas la «Llave Plateada» para abrir esta puerta.
-PHRASE_NEED_GOLDENKY;You need the «Golden Key» to unlock this door.;Necesitas la «Llave Dorada para abrir esta puerta.
+LOCKEDDOOR;Locked Door;Puerta Bloqueada.
+PHRASEATKINCREASED;Your attack power has increased to +%d.;Tu poder de ataque a aumentado a +%d.
+PHRASEDEFINCREASED;Your defense has increased to +%d.;Tu defensa a aumentado a +%d.
+PHRASEHPINCREASED;Your max health points (hp) has increased to +%d.;La máxima capacidad de puntos de salud (hp) a aumentado a +%d.
+PHRASEEMINCREASED;Your max elemental material (em) has increased to +%d.;Tu máxima capacidad de material elemental (em) a aumentado a +%d.
+PHRASEPOTIONINCREASED;Your max of potions that you can have has increased to %d;El máximo de pociones que puedes llevar a aumentado a %d.

@@ -407,8 +407,8 @@ func hurt(enemy_id=null,hurt_pos=null):
 	if enemy_id != null:
 		damage = Vars.enemy[enemy_id]["atk"] - Vars.player["def"]
 		#evitar valores negativos
-		if damage < 0:
-			damage = 0
+		if damage <= 0:
+			damage = 5 #minimo de daño a recibir
 		#establecer daño en hp
 		Vars.player["hp_now"] = Functions.get_value(Vars.player["hp_now"],"-",damage)
 	
@@ -417,6 +417,8 @@ func hurt(enemy_id=null,hurt_pos=null):
 	
 	#screen shake
 	get_node("PlayerCamera").add_trauma(0.4)
+	
+	#Input.start_joy_vibration(0,1,1,1)
 	
 	#muerte del jugador el resto del codigo no se ejecutará
 	if Vars.player["hp_now"] < 1:
@@ -663,6 +665,7 @@ func _on_TimerNoHurt_timeout():
 
 #curar de poco a poco
 func _on_TimerHeal_timeout():
+	Vars.player["potion_healing_hp"] = int(Vars.player["hp_max"]/20)
 	var hp_recover = Vars.player["potion_healing_hp"]
 	if Vars.player["hp_now"] < Vars.player["hp_max"]:
 		#al estar agachados recuperamos mas hp

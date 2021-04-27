@@ -52,9 +52,9 @@ func _on_Area_body_entered(body):
 		#añadir atk dependiendo del nivel del arma
 		match Vars.player["weapon_lvl"]:
 			2:
-				total_atk += 10
+				total_atk += 3
 			3:
-				total_atk += 20
+				total_atk += 50
 		#daño a la mitad estando envenenado
 		if Vars.player["condition"] == "poison":
 			total_atk = total_atk / 2

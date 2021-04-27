@@ -1,0 +1,285 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://assets/img/iron_texture.jpg" type="Texture" id=1]
+[ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=5]
+[ext_resource path="res://objects/ui/Panel_Purple.tres" type="StyleBox" id=6]
+[ext_resource path="res://objects/ui/SubButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=9]
+[ext_resource path="res://screens/SelectMap.gd" type="Script" id=10]
+[ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=11]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 90, 47 )
+margin_left = 18.9633
+margin_right = 18.9107
+margin_top = 14.0969
+margin_bottom = 14.0
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -7
+extra_spacing_bottom = -7
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+extra_spacing_top = -2
+font_data = ExtResource( 4 )
+
+[sub_resource type="StyleBoxLine" id=4]
+color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 8 )
+
+[node name="SelectMap" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="."]
+modulate = Color( 0.494118, 0.494118, 0.494118, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -320.0
+margin_top = 10.0
+margin_right = -21.0
+margin_bottom = 72.0969
+grow_horizontal = 0
+size_flags_horizontal = 4
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+text = "CUSTOMLVLS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="PanelReturn" parent="." instance=ExtResource( 2 )]
+margin_left = 24.0
+margin_top = 17.0
+margin_right = 167.0
+margin_bottom = 74.1202
+size_flags_vertical = 0
+custom_styles/panel = ExtResource( 6 )
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelReturn"]
+margin_top = 4.00473
+margin_right = 143.0
+margin_bottom = 53.0048
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BtnReturn" parent="PanelReturn/MarginContainer" instance=ExtResource( 7 )]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 133.0
+margin_bottom = 39.0
+text = "RETURN"
+
+[node name="PanelBtns" parent="." instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -317.5
+margin_top = -298.0
+margin_right = 317.5
+margin_bottom = -41.0
+
+[node name="Scroll" type="ScrollContainer" parent="PanelBtns"]
+margin_top = 4.00473
+margin_right = 635.0
+margin_bottom = 252.885
+follow_focus = true
+scroll_horizontal_enabled = false
+
+[node name="Margin" type="MarginContainer" parent="PanelBtns/Scroll"]
+margin_right = 635.0
+margin_bottom = 121.0
+mouse_filter = 2
+size_flags_horizontal = 3
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBx" type="VBoxContainer" parent="PanelBtns/Scroll/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 625.0
+margin_bottom = 111.0
+custom_constants/separation = 5
+
+[node name="VBxEmptyList" type="VBoxContainer" parent="PanelBtns/Scroll/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 625.0
+margin_bottom = 111.0
+
+[node name="Label" type="Label" parent="PanelBtns/Scroll/Margin/VBxEmptyList"]
+margin_right = 615.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 3 )
+text = "EMPTYLIST"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelBtns/Scroll/Margin/VBxEmptyList"]
+margin_top = 34.0
+margin_right = 615.0
+margin_bottom = 38.0
+custom_styles/separator = SubResource( 4 )
+
+[node name="Label2" type="Label" parent="PanelBtns/Scroll/Margin/VBxEmptyList"]
+margin_top = 42.0
+margin_right = 615.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 11 )
+text = "PHRASEDONTDOWNLVLS"
+
+[node name="BtnDownloadLvls" parent="PanelBtns/Scroll/Margin/VBxEmptyList" instance=ExtResource( 7 )]
+margin_top = 72.0
+margin_right = 615.0
+margin_bottom = 101.0
+disabled = true
+text = "DOWNLOADLVLS"
+
+[node name="HBxHelp" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -20.0
+margin_top = -40.0
+margin_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+custom_constants/separation = 18
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBxHelp"]
+margin_left = 37.0
+margin_right = 125.0
+margin_bottom = 40.0
+
+[node name="ButtonKeyGamepadIcon" parent="HBxHelp/HBoxContainer" instance=ExtResource( 9 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_up"
+
+[node name="ButtonKeyGamepadIcon2" parent="HBxHelp/HBoxContainer" instance=ExtResource( 9 )]
+margin_left = 20.0
+margin_top = 12.0
+margin_right = 36.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_down"
+
+[node name="Label" type="Label" parent="HBxHelp/HBoxContainer"]
+margin_left = 40.0
+margin_top = 13.0
+margin_right = 88.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 5 )
+text = "NAVIGATE"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="HBxHelp"]
+margin_left = 143.0
+margin_right = 199.0
+margin_bottom = 40.0
+
+[node name="ButtonKeyGamepadIcon" parent="HBxHelp/HBoxContainer3" instance=ExtResource( 9 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_accept"
+
+[node name="Label" type="Label" parent="HBxHelp/HBoxContainer3"]
+margin_left = 20.0
+margin_top = 13.0
+margin_right = 56.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 5 )
+text = "SELECT"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBxHelp"]
+visible = false
+margin_left = 180.0
+margin_right = 236.0
+margin_bottom = 40.0
+
+[node name="ButtonKeyGamepadIcon" parent="HBxHelp/HBoxContainer2" instance=ExtResource( 9 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="HBxHelp/HBoxContainer2"]
+margin_left = 20.0
+margin_top = 13.0
+margin_right = 56.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 5 )
+text = "CANCEL"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Control" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.682353 )
+
+[node name="Panel" parent="Control" instance=ExtResource( 2 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -90.0
+margin_top = -73.5
+margin_right = 90.0
+margin_bottom = 73.5
+[connection signal="pressed" from="PanelReturn/MarginContainer/BtnReturn" to="." method="_on_BtnReturn_pressed"]

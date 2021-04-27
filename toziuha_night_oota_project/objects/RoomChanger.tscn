@@ -3,7 +3,7 @@
 [ext_resource path="res://objects/RoomChanger.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16, 31.9376 )
+extents = Vector2( 11.4711, 43.0878 )
 
 [node name="RoomChanger" type="Area2D"]
 script = ExtResource( 1 )

@@ -30,7 +30,7 @@ func _process(_delta):
 	$Btn/btn_b.visible = Input.is_action_pressed("ui_accept")
 	$Btn/btn_x.visible = Input.is_action_pressed("ui_cancel")
 	
-	$Btn/btn_y.visible = Input.is_action_pressed("ui_y")
+#	$Btn/btn_y.visible = Input.is_action_pressed("ui_y")
 	
 	$Btn/btn_start.visible = Input.is_action_pressed("ui_select")
 #	$Btn/btn_select.visible = Input.is_action_pressed("ui_select")

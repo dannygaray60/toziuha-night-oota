@@ -5,8 +5,17 @@ extends Node
 #guardar hacia que lado mira el jugador (izq: -1 . der: 1)
 #si se deja en cero, el facing será el predeterminado en el script del player
 var player_facing = 0
-#nombre de la puerta en donde aparecera 
+#nombre de la puerta en donde aparecerá
 var player_door_spawn = ""
+
+#la ruta a la carpeta del nivel que se está jugando
+var level_dir_path = ""
+
+#diccionario con las habitaciones del nivel, cada habitacion con un array
+var map_rooms = {}
+
+#variable para almacenar la escena del mapa
+var map_object = null
 
 #el jugador esta en una plataforma que permite bajarse de ella? (one way collision)
 var is_on_onewaycollisionplatform = false
@@ -41,29 +50,54 @@ var enemy = {
 		"atk": 17,
 		"def":2,
 		"hp_max": 7,
-		"description": "Description..."
+		"description": "Description...",
 		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none","none","none","money_10","money_100","money_1","money_1","money_10","money_10"],
 	},
+	"infected_skeleton":{
+		"name": "INFECTEDSKELETON",
+		"atk": 17,
+		"def":2,
+		"hp_max": 7,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none","none","none","money_10","money_100","money_1","money_1","money_10","money_10"],
+	},
+	
 	"zombie":{
 		"name": "ZOMBIE",
 		"atk": 10,
+		"def":0,
 		"hp_max": 5,
-		"description": "Description..."
+		"description": "Description...",
 		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none","none","none","money_10","money_100","money_1","money_1","money_10","money_10"],
 	},
 	"slime":{
 		"name": "Slime",
 		"atk": 15,
 		"def":3,
 		"hp_max": 7,
-		"description": "Description..."
+		"description": "Description...",
 		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none","none","none","money_10","money_100","money_1","money_1","money_10","money_10"],
 	},
+	"infected_slime":{
+		"name": "INFECTEDSLIME",
+		"atk": 15,
+		"def":3,
+		"hp_max": 7,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none","none","none","money_10","money_100","money_1","money_1","money_10","money_10"],
+	},
+	
 }
 
 var player = {}
 
 func _ready():
+	
 	#arreglo para mi control generico de PS2
 	Input.add_joy_mapping("030000004c0500006802000000000000,Generic PS3 Controller Custom,platform:Windows,a:b14,b:b13,x:b15,y:b12,back:b1,start:b2,leftstick:-a0,rightstick:+a2,leftshoulder:b10,rightshoulder:b11,dpup:b4,dpdown:b6,dpleft:b7,dpright:b5,-leftx:+a1,+leftx:+a0,-lefty:-a1,-rightx:-a2,righty:a3,lefttrigger:b8,righttrigger:b9,", true)
 
@@ -102,7 +136,8 @@ func set_vars():
 		#y la cantidad actual
 		"potion_now": 0,
 		#cantidad de hp que puede dar la pocion
-		"potion_healing_hp": 2,
+		#calculado en script del jugador
+		"potion_healing_hp": 0,
 		#habilidad para dar un doble salto
 		"hability_double_jump" : false,
 		#habilidad para esquivar
@@ -110,11 +145,15 @@ func set_vars():
 		#deslizarse en el suelo
 		"hability_slide" : false,
 		#llaves para desbloquear puertas especiales
-		"bronce_key": false,
+		"bronze_key": false,
 		"silver_key": false,
 		"golden_key": false,
+		#id de habitacion en la que se encuentra
+		"current_room": "",
 		#id de habitaciones visitadas
 		"visited_rooms": [],
+		#id de los items que aumentan estadiscicas
+		"upgrade_items": [],
 		
 	}
 

@@ -4,7 +4,10 @@ var player = null
 
 var open = false
 
-export(String, "bronce","silver","golden", "boss") var type_door
+#al cerrarse la puerta no volverá a abrirse hasta la muerte del jefe
+export var boss_lock = false
+
+export(String, "bronze","silver","golden", "boss") var type_door = "bronze"
 
 func _ready():
 	
@@ -14,7 +17,7 @@ func _ready():
 	
 	match type_door:
 		
-		"bronce":
+		"bronze":
 			$door_special_up.frame = 2
 			$door_special_down.frame = 2
 		"silver":
@@ -50,14 +53,8 @@ func _on_Area2D_body_entered(body):
 			return
 		$Timer.start()
 		player = body
-		if type_door in ["bronce","silver","golden"] and !Vars.player[type_door+"_key"]:
-			match type_door:
-				"bronce":
-					DialogBox.lines = [['say','none',tr("PHRASE_NEED_BRONCEKY")],]
-				"silver":
-					DialogBox.lines = [['say','none',tr("PHRASE_NEED_SILVERKY")],]
-				"golden":
-					DialogBox.lines = [['say','none',tr("PHRASE_NEED_GOLDENKY")],]	
+		if type_door in ["bronze","silver","golden"] and !Vars.player[type_door+"_key"]:
+			DialogBox.lines = [['say','none',tr("LOCKEDDOOR")],]	
 			DialogBox.show_panel("purple_light")
 			return
 

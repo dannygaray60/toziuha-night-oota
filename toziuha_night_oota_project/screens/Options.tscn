@@ -1,8 +1,8 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=2]
-[ext_resource path="res://assets/img/violet_trees.png" type="Texture" id=3]
+[ext_resource path="res://assets/img/purple_demon_forest.png" type="Texture" id=3]
 [ext_resource path="res://objects/ui/SubButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://screens/Options.gd" type="Script" id=6]
@@ -29,6 +29,8 @@ outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_top = -7
 extra_spacing_bottom = -7
 font_data = ExtResource( 1 )
+
+[sub_resource type="ButtonGroup" id=10]
 
 [sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.172549, 0, 0, 0.556863 )
@@ -169,9 +171,11 @@ custom_constants/separation = 0
 margin_right = 195.0
 focus_neighbour_left = NodePath("../../../../../../..")
 focus_neighbour_right = NodePath("../../../../../../..")
+focus_neighbour_bottom = NodePath("../BtnAudio")
 focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../../../../../..")
 toggle_mode = true
+group = SubResource( 10 )
 text = "GRAPHICS"
 
 [node name="BtnAudio" parent="Margin/HBx/VBx/Panel/Margin/VBx" instance=ExtResource( 4 )]
@@ -179,10 +183,13 @@ margin_top = 29.0
 margin_right = 195.0
 margin_bottom = 58.0
 focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../BtnVideo")
 focus_neighbour_right = NodePath("../../../../../../..")
+focus_neighbour_bottom = NodePath("../BtnControls")
 focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../../../../../..")
 toggle_mode = true
+group = SubResource( 10 )
 text = "AUDIO"
 
 [node name="BtnControls" parent="Margin/HBx/VBx/Panel/Margin/VBx" instance=ExtResource( 4 )]
@@ -190,10 +197,13 @@ margin_top = 58.0
 margin_right = 195.0
 margin_bottom = 87.0
 focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_top = NodePath("../BtnAudio")
 focus_neighbour_right = NodePath("../../../../../../..")
+focus_neighbour_bottom = NodePath("../BtnGamepad")
 focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../../../../../..")
 toggle_mode = true
+group = SubResource( 10 )
 text = "KEYBOARD"
 
 [node name="BtnGamepad" parent="Margin/HBx/VBx/Panel/Margin/VBx" instance=ExtResource( 4 )]
@@ -201,10 +211,13 @@ margin_top = 87.0
 margin_right = 195.0
 margin_bottom = 116.0
 focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_top = NodePath("../BtnControls")
 focus_neighbour_right = NodePath("../../../../../../..")
+focus_neighbour_bottom = NodePath("../BtnTouchscreen")
 focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../../../../../..")
 toggle_mode = true
+group = SubResource( 10 )
 text = "GAMEPAD"
 
 [node name="BtnTouchscreen" parent="Margin/HBx/VBx/Panel/Margin/VBx" instance=ExtResource( 4 )]
@@ -212,10 +225,13 @@ margin_top = 116.0
 margin_right = 195.0
 margin_bottom = 145.0
 focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_top = NodePath("../BtnGamepad")
 focus_neighbour_right = NodePath("../../../../../../..")
+focus_neighbour_bottom = NodePath("../BtnLang")
 focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../../../../../..")
 toggle_mode = true
+group = SubResource( 10 )
 text = "TOUCHCONTROL"
 
 [node name="BtnLang" parent="Margin/HBx/VBx/Panel/Margin/VBx" instance=ExtResource( 4 )]
@@ -223,23 +239,25 @@ margin_top = 145.0
 margin_right = 195.0
 margin_bottom = 174.0
 focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_top = NodePath("../BtnTouchscreen")
 focus_neighbour_right = NodePath("../../../../../../..")
 focus_neighbour_bottom = NodePath("../../../../Panel0/Margin/VBx/BtnMenu")
 focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../../../../../..")
 toggle_mode = true
+group = SubResource( 10 )
 text = "LANGUAGE"
 
 [node name="PanelVideo" type="PanelContainer" parent="Margin/HBx"]
 margin_left = 258.0
 margin_right = 602.0
-margin_bottom = 262.0
+margin_bottom = 224.0
 size_flags_vertical = 0
 custom_styles/panel = SubResource( 3 )
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelVideo"]
 margin_right = 344.0
-margin_bottom = 262.0
+margin_bottom = 224.0
 custom_constants/margin_right = 15
 custom_constants/margin_top = 5
 custom_constants/margin_left = 15
@@ -249,7 +267,7 @@ custom_constants/margin_bottom = 5
 margin_left = 15.0
 margin_top = 5.0
 margin_right = 329.0
-margin_bottom = 257.0
+margin_bottom = 219.0
 
 [node name="BtnFilters" parent="Margin/HBx/PanelVideo/Margin/VBx" instance=ExtResource( 4 )]
 margin_right = 314.0
@@ -428,6 +446,7 @@ focus_previous = NodePath(".")
 group = SubResource( 5 )
 
 [node name="HideBtnIcons" type="HBoxContainer" parent="Margin/HBx/PanelVideo/Margin/VBx"]
+visible = false
 margin_top = 218.0
 margin_right = 314.0
 margin_bottom = 252.0

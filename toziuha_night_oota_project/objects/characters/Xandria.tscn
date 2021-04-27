@@ -750,12 +750,13 @@ collision_mask = 14
 [node name="RayCastUp" type="RayCast2D" parent="Sprite"]
 position = Vector2( 0, 2.585 )
 rotation = 3.14159
-scale = Vector2( 0.732, 1 )
+scale = Vector2( 4.512, 1 )
 enabled = true
-cast_to = Vector2( 0, 13.113 )
+cast_to = Vector2( 0, 5 )
 collision_mask = 14
 
 [node name="RayCastDown" type="RayCast2D" parent="Sprite"]
+visible = false
 position = Vector2( 0, 32.63 )
 scale = Vector2( 0.772, 0.304 )
 enabled = true

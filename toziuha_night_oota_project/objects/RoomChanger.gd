@@ -1,6 +1,8 @@
 extends Area2D
 
-export var destiny_path = ""
+var f = File.new()
+
+export var destiny_filename = ""
 export var destiny_door = ""
 
 func _ready():
@@ -20,8 +22,14 @@ func _ready():
 
 func _on_RoomChanger_body_entered(body):
 	
-	if body.is_in_group("player") and $TimerDontDetect.get_time_left() == 0:
-		#deshabilitar input (no funciona)
-		#body.set_process_input(false)
-		Vars.player_door_spawn = destiny_door
-		SceneChanger.change_scene(destiny_path)
+	if destiny_filename != "" and body.is_in_group("player") and $TimerDontDetect.get_time_left() == 0:
+		
+		var go_to = "%s/%s.tscn" % [Vars.level_dir_path,destiny_filename]
+		
+		if f.file_exists(go_to):
+			#deshabilitar input (no funciona)
+			#body.set_process_input(false)
+			Vars.player_door_spawn = destiny_door
+			SceneChanger.change_scene(go_to)
+		else:
+			print("The file: %s doesn't exists"%[go_to])

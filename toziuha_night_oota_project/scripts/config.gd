@@ -19,7 +19,7 @@ func check_configfile(configfile="user://settings.cfg"):
 	check_conf_setting("video", "borderless", false)
 	#iconos de botones: gamepad, keyboard, hide
 	if OS.has_touchscreen_ui_hint(): #si la pantalla es tactil
-		check_conf_setting("video", "icons_buttons", "hide")
+		check_conf_setting("video", "icons_buttons", "gamepad")
 	else:
 		check_conf_setting("video", "icons_buttons", "keyboard")
 	

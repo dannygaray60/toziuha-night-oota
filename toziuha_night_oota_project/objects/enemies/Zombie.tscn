@@ -1,14 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/sprites/enemy_zombie.png" type="Texture" id=1]
-[ext_resource path="res://objects/enemies/Zombie.gd" type="Script" id=2]
+[ext_resource path="res://objects/enemies/basic_enemy.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4.54436, 20.4231 )
+extents = Vector2( 6.19846, 20.1512 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "dead"
-length = 3.0
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 113.555, 19.7641 )
+
+[sub_resource type="Animation" id=3]
+length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -16,14 +18,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1.2, 1.7, 2.1, 2.6 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1.5, 1.6, 1.7, 1.8 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 
-[sub_resource type="Animation" id=3]
-length = 0.1
+[sub_resource type="Animation" id=4]
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -34,12 +36,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 3 ]
+"values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "walk"
-length = 2.0
+[sub_resource type="Animation" id=5]
+length = 1.5
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -48,7 +49,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 1.5 ),
+"times": PoolRealArray( 0, 0.4, 0.7, 1.1 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
@@ -58,51 +59,62 @@ tracks/0/keys = {
 "enemies",
 ]]
 collision_layer = 4
-collision_mask = 25
+collision_mask = 29
 script = ExtResource( 2 )
-__meta__ = {
-"_editor_description_": "velocity 20"
-}
+id = "zombie"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.555, -20.414 )
+position = Vector2( -0.44532, -20.2359 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -25 )
-scale = Vector2( -1, 1 )
+position = Vector2( -2, -25 )
 texture = ExtResource( 1 )
-offset = Vector2( 3.659, 0 )
 hframes = 16
-frame = 3
+
+[node name="AreaDetectPlayer" type="Area2D" parent="Sprite"]
+visible = false
+show_behind_parent = true
+position = Vector2( -10, -59 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaDetectPlayer"]
+position = Vector2( -17.5547, 64.7641 )
+shape = SubResource( 2 )
+
+[node name="RayCastFront" type="RayCast2D" parent="Sprite"]
+visible = false
+position = Vector2( -8, -9 )
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 0, 5 )
+collision_mask = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/dead = SubResource( 2 )
-anims/idle = SubResource( 3 )
-anims/walk = SubResource( 4 )
+anims/dead = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/walk = SubResource( 5 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( -1.4148, -22.6625 )
-scale = Vector2( 3.25852, 2.76626 )
-__meta__ = {
-"_editor_description_": "dejar el modulate alpha en cero para que no estorbe al editar niveles"
-}
+position = Vector2( 0, -18.2359 )
+scale = Vector2( 5.71704, 4.29111 )
+process_parent = true
+physics_process_parent = true
+
+[node name="TimerToChangeFacing" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
 
 [node name="TimerHurt" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 one_shot = true
 __meta__ = {
 "_editor_description_": "activado al ser herido, mientras esté activo no podrá ser herido"
 }
-
-[node name="TimerChangeFacing" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
-__meta__ = {
-"_editor_description_": "mientras esté el timer activo no se podrá voltear"
-}
+[connection signal="body_entered" from="Sprite/AreaDetectPlayer" to="." method="_on_AreaDetectPlayer_body_entered"]
+[connection signal="body_exited" from="Sprite/AreaDetectPlayer" to="." method="_on_AreaDetectPlayer_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
+[connection signal="timeout" from="TimerToChangeFacing" to="." method="_on_TimerToChangeFacing_timeout"]
 [connection signal="timeout" from="TimerHurt" to="." method="_on_TimerHurt_timeout"]

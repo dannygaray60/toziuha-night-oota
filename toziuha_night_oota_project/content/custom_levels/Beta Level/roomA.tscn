@@ -7,19 +7,18 @@
 [ext_resource path="res://tilemaps/ExteriorRuins/TileMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/items/Torch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/enemies/Zombie.tscn" type="PackedScene" id=7]
-[ext_resource path="res://test/test ruins abandoned map1/Area2Daboutpotions.gd" type="Script" id=8]
+[ext_resource path="res://content/custom_levels/Beta Level/Area2Daboutpotions.gd" type="Script" id=8]
 [ext_resource path="res://objects/enemies/Skeleton.tscn" type="PackedScene" id=9]
 [ext_resource path="res://objects/enemies/Slime.tscn" type="PackedScene" id=10]
 [ext_resource path="res://objects/enemies/InfectedSkeleton.tscn" type="PackedScene" id=11]
-[ext_resource path="res://test/test ruins abandoned map1/Area2Daboutpoison.gd" type="Script" id=12]
+[ext_resource path="res://content/custom_levels/Beta Level/Area2Daboutpoison.gd" type="Script" id=12]
 [ext_resource path="res://objects/items/RelicKey.tscn" type="PackedScene" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 88 )
 
 [node name="LevelBase" instance=ExtResource( 1 )]
-title_room = "Curse of the Moon"
-id_room = "cursemoon"
+title_room = "Curse of Darkness"
 music = "cave_theme"
 
 [node name="TileMap" parent="." index="2" instance=ExtResource( 5 )]
@@ -36,7 +35,7 @@ limit_bottom_camera = 272
 
 [node name="DoorLeft" parent="." index="5" instance=ExtResource( 2 )]
 position = Vector2( -24, 224 )
-destiny_path = "res://test/test ruins abandoned map1/main.tscn"
+destiny_filename = "main"
 destiny_door = "DoorRight"
 
 [node name="PositionSpawn" parent="DoorLeft" index="2"]
@@ -152,11 +151,9 @@ position = Vector2( 352, 104 )
 
 [node name="Skeleton4" parent="." index="32" instance=ExtResource( 9 )]
 position = Vector2( 523, 100 )
-speed = 68
 
 [node name="Skeleton5" parent="." index="33" instance=ExtResource( 9 )]
 position = Vector2( 735.555, 101.764 )
-speed = 55
 
 [node name="InfectedSkeleton5" parent="." index="34" instance=ExtResource( 11 )]
 position = Vector2( 1384.63, 104 )
@@ -172,7 +169,6 @@ position = Vector2( 1007.55, 104 )
 
 [node name="RelicKey" parent="." index="38" instance=ExtResource( 13 )]
 position = Vector2( 1921.17, 152 )
-item = "double_jump"
 [connection signal="body_entered" from="Area2Daboutpotions" to="Area2Daboutpotions" method="_on_Area2Daboutpotions_body_entered"]
 [connection signal="body_entered" from="Area2Daboutpoison" to="Area2Daboutpoison" method="_on_Area2Daboutpotions_body_entered"]
 

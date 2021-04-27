@@ -17,25 +17,21 @@ func _ready():
 	$Main.modulate.a = 1
 	update_stats()
 	
-	
 func _process(_delta):
 	if can_pause and Input.is_action_just_pressed("ui_select") and !SceneChanger.changing_scene and !DialogBox.active:
 		pause_game()
 		
-#	elif Input.is_action_just_pressed("ui_focus_next"):
-#		show_titleroom()
-		
 func show_titleroom(txt="Name Room"):
-#	can_pause = false
-#	get_tree().paused = true
+	can_pause = false
+	get_tree().paused = true
 	Audio.play_sfx("cinematic_hit_reverse")
 	$Main/ControlTitleRoom/PanelContainer/MarginContainer/Label.text = txt
 	$Main/ControlTitleRoom/AnimationPlayer.play_backwards("hide")
 	$Main/ControlTitleRoom/Timer.start()
 	yield($Main/ControlTitleRoom/Timer,"timeout")
 	$Main/ControlTitleRoom/AnimationPlayer.play("hide")
-#	get_tree().paused = false
-#	can_pause = true
+	get_tree().paused = false
+	can_pause = true
 	
 func update_stats():
 	
@@ -72,7 +68,7 @@ func update_pause_stats():
 	$ControlPause/MarginContainer2/HBoxContainer/LblCordova.text = "$%s" % [str(Vars.player["money"]).pad_zeros(5)]
 
 	#llaves, cambiar la visibilidad de llaves dependiendo si ya se consiguieron
-	for k in ["bronce_key","silver_key","golden_key"]:
+	for k in ["bronze_key","silver_key","golden_key"]:
 		if Vars.player[k]:
 			get_node("ControlPause/"+k).modulate = Color(1,1,1,1)
 		else:

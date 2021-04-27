@@ -6,7 +6,7 @@
 [ext_resource path="res://objects/enemies/InfectedSkeleton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/RoomChanger.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/characters/Xandria.tscn" type="PackedScene" id=6]
-[ext_resource path="res://test/test ruins abandoned map1/AreaShowRachelDialogue.gd" type="Script" id=7]
+[ext_resource path="res://content/custom_levels/Beta Level/AreaShowRachelDialogue.gd" type="Script" id=7]
 [ext_resource path="res://test/rachel demo1.png" type="Texture" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -52,7 +52,7 @@ position = Vector2( -541.925, 265 )
 
 [node name="DoorRight" parent="." index="14" instance=ExtResource( 5 )]
 position = Vector2( 668, 344 )
-destiny_path = "res://test/test ruins abandoned map1/main.tscn"
+destiny_filename = "main"
 destiny_door = "DoorLeft"
 
 [node name="PositionSpawn" parent="DoorRight" index="2"]

@@ -1,7 +1,7 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://screens/MainMenu.gd" type="Script" id=1]
-[ext_resource path="res://assets/img/red_trees.png" type="Texture" id=2]
+[ext_resource path="res://assets/img/red_demon_forest.png" type="Texture" id=2]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen3.png" type="Texture" id=3]
 [ext_resource path="res://fonts_tres/DamageIndicatorPlayer.tres" type="DynamicFont" id=4]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen13.png" type="Texture" id=5]
@@ -17,6 +17,7 @@
 [ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=15]
 [ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=16]
 [ext_resource path="res://objects/ui/SubButton.tscn" type="PackedScene" id=17]
+[ext_resource path="res://screens/ui_elements/ParallaxBackgroundMainMenu.tscn" type="PackedScene" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 160.184, 67.092 )
@@ -63,7 +64,8 @@ D = 	   	 	            Return to Menu
 P = 			              	  Show/Hide Debug panel"
 
 [node name="BG" type="TextureRect" parent="."]
-self_modulate = Color( 0.65098, 0.65098, 0.65098, 1 )
+visible = false
+self_modulate = Color( 0.898039, 0.317647, 0.317647, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -6.0
@@ -311,5 +313,7 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ParallaxBackgroundMainMenu" parent="." instance=ExtResource( 18 )]
 [connection signal="swipe_updated" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_updated"]
 [connection signal="pressed" from="ControlSocial/BtnHideSocialIcons" to="." method="_on_BtnHideSocialIcons_pressed"]

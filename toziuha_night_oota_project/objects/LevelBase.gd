@@ -3,16 +3,17 @@ extends Node
 #titulo de la habitacion que se mostrará una vez como titulo
 #dejar vacío para no mostrar nada
 export var title_room = ""
-#cada id de habitacion visitada se guardará en la partida de usuario
-#usado para el mapa
-export var id_room = ""
 
-export(String, "silence","rondo_of_darkness","nameless_symphony", "cave_theme") var music
+export(String, "silence","rondo_of_darkness","nameless_symphony", "cave_theme") var music = "silence"
 
 var player = null
 
 func _ready():
 	
+	#obtener el path de la escena, luego el archivo, 
+	#despues se elimina la extensión para solo tener el nombre de archivo
+	Vars.player["current_room"] = get_tree().current_scene.filename.get_file().replace(".tscn","")
+
 	if music == "silence":
 		Audio.stop_music()
 	else:
@@ -33,14 +34,22 @@ func _ready():
 	player.connect("dead",self,"_on_player_death")
 	player.connect("stats_changed",self,"_on_stats_changed")
 	
-#	yield($Timer,"timeout")
-	if id_room in Vars.player["visited_rooms"]:
+	#dar un poco de tiempo antes de mostrar cartel
+	$Timer.start()
+	yield($Timer,"timeout")
+	if Vars.player["current_room"] in Vars.player["visited_rooms"]:
 		pass
-	elif id_room != "":
-		Vars.player["visited_rooms"].append(id_room)
+	elif Vars.player["current_room"] != "":
+		#agregar id de habitacion a diccionario de habitaciones visitadas
+		Vars.player["visited_rooms"].append(Vars.player["current_room"])
 		if title_room != "":
 			$Hud.show_titleroom(title_room)
 
+	#comprobar si hay un archivo map.tscn y agregarlo en
+	#ControlPause
+	if Vars.map_object != null:
+		var map_instance = Vars.map_object.instance()
+		$Hud/ControlPause/ControlMap.add_child(map_instance)
 
 #cuando jugador pierde stamina
 func _on_stats_changed():

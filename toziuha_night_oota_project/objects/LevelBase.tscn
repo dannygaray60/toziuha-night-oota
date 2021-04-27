@@ -7,7 +7,6 @@
 "level_base",
 ]]
 script = ExtResource( 1 )
-music = "silence"
 
 [node name="Hud" parent="." instance=ExtResource( 2 )]
 
@@ -27,7 +26,7 @@ __meta__ = {
 }
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.3
 one_shot = true
 [connection signal="ready" from="." to="." method="_on_LevelBase_ready"]
 [connection signal="tween_all_completed" from="FadeBlack/Tween" to="." method="_on_Tween_tween_all_completed"]

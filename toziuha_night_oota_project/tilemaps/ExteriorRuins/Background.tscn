@@ -11,49 +11,49 @@
 scroll_limit_begin = Vector2( 0, -208 )
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0.4, 0.5 )
+motion_scale = Vector2( 0.1, 0.4 )
 motion_mirroring = Vector2( 426, 0 )
 
 [node name="background" type="Sprite" parent="ParallaxLayer"]
-position = Vector2( 216, -21 )
+position = Vector2( 212.433, -91.6209 )
 texture = ExtResource( 1 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0.6, 0 )
+motion_scale = Vector2( 0.3, 0.5 )
 motion_mirroring = Vector2( 426, 0 )
 
 [node name="background" type="Sprite" parent="ParallaxLayer2"]
-position = Vector2( 216, -21 )
+position = Vector2( 212.433, -90.6209 )
 texture = ExtResource( 2 )
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0.7, 0 )
+motion_scale = Vector2( 0.5, 0.6 )
 motion_mirroring = Vector2( 426, 0 )
 
 [node name="background" type="Sprite" parent="ParallaxLayer3"]
-position = Vector2( 216, -5 )
+position = Vector2( 212.433, -95.6209 )
 texture = ExtResource( 3 )
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0.8, 0 )
+motion_scale = Vector2( 0.6, 1 )
 motion_mirroring = Vector2( 426, 0 )
 
 [node name="background" type="Sprite" parent="ParallaxLayer4"]
-position = Vector2( 216, -5 )
+position = Vector2( 212.433, -113.621 )
 texture = ExtResource( 4 )
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 0.9, 0 )
+motion_scale = Vector2( 0.8, 0.7 )
 motion_mirroring = Vector2( 426, 0 )
 
 [node name="background" type="Sprite" parent="ParallaxLayer5"]
-position = Vector2( 216, 9 )
+position = Vector2( 212.433, -139.621 )
 texture = ExtResource( 5 )
 
 [node name="ParallaxLayer6" type="ParallaxLayer" parent="."]
-motion_scale = Vector2( 1, 0.9 )
+motion_scale = Vector2( 0.9, 0.9 )
 motion_mirroring = Vector2( 426, 0 )
 
 [node name="background" type="Sprite" parent="ParallaxLayer6"]
-position = Vector2( 216, 9 )
+position = Vector2( 212.433, -146.621 )
 texture = ExtResource( 6 )

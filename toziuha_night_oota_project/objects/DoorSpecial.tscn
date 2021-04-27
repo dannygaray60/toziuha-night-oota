@@ -237,7 +237,6 @@ extents = Vector2( 24, 40 )
 
 [node name="DoorSpecial" type="Node2D"]
 script = ExtResource( 2 )
-type_door = "bronce"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 2.0

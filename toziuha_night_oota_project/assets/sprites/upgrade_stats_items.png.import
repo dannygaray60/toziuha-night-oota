@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/red_trees.png-eeb85336c49b0f6da14af11088dc1553.stex"
+path="res://.import/upgrade_stats_items.png-5381952d04fcea4843ca74761668d248.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/img/red_trees.png"
-dest_files=[ "res://.import/red_trees.png-eeb85336c49b0f6da14af11088dc1553.stex" ]
+source_file="res://assets/sprites/upgrade_stats_items.png"
+dest_files=[ "res://.import/upgrade_stats_items.png-5381952d04fcea4843ca74761668d248.stex" ]
 
 [params]
 

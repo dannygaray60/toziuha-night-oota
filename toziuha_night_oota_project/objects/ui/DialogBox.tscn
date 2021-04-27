@@ -16,6 +16,7 @@ margin_top = 4.00473
 margin_bottom = 4.11544
 
 [sub_resource type="DynamicFont" id=2]
+size = 32
 font_data = ExtResource( 7 )
 
 [sub_resource type="RectangleShape2D" id=3]
@@ -25,6 +26,7 @@ extents = Vector2( 50, 30 )
 extents = Vector2( 350, 200 )
 
 [node name="DialogBox" type="CanvasLayer"]
+pause_mode = 2
 script = ExtResource( 5 )
 
 [node name="TimerTextVel" type="Timer" parent="."]
@@ -143,9 +145,10 @@ action = "ui_accept"
 modulate = Color( 1, 1, 1, 0.352941 )
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -64.0
-margin_right = -13.0
-margin_bottom = 40.0
+margin_left = -92.0
+margin_top = 2.0
+margin_right = -24.0
+margin_bottom = 42.0
 grow_horizontal = 0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -154,14 +157,23 @@ __meta__ = {
 [node name="ButtonKeyGamepadIcon" parent="Control/HBxHelp" instance=ExtResource( 6 )]
 margin_top = 12.0
 margin_bottom = 28.0
+size_flags_horizontal = 4
 size_flags_vertical = 4
 action = "ui_select"
 
+[node name="pressed" parent="Control/HBxHelp/ButtonKeyGamepadIcon" index="0"]
+position = Vector2( -2, 10 )
+scale = Vector2( 2, 2 )
+
+[node name="normal" parent="Control/HBxHelp/ButtonKeyGamepadIcon" index="1"]
+position = Vector2( -2, 10 )
+scale = Vector2( 2, 2 )
+
 [node name="Label" type="Label" parent="Control/HBxHelp"]
 margin_left = 20.0
-margin_top = 13.0
-margin_right = 44.0
-margin_bottom = 26.0
+margin_top = 7.0
+margin_right = 68.0
+margin_bottom = 33.0
 custom_fonts/font = SubResource( 2 )
 text = "SKIP"
 
@@ -177,3 +189,5 @@ action = "ui_accept"
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="script_ended" from="." to="." method="_on_DialogBox_script_ended"]
+
+[editable path="Control/HBxHelp/ButtonKeyGamepadIcon"]

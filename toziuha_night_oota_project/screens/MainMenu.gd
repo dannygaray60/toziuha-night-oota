@@ -39,7 +39,8 @@ func go_to_option(opt):
 	Audio.play_sfx("btn_accept_main_menu")
 	match opt:
 		"start":
-			SceneChanger.change_scene("res://test/test ruins abandoned map1/main.tscn")
+			SceneChanger.change_scene("res://screens/SelectMap.tscn")
+#			SceneChanger.change_scene("res://test/test ruins abandoned map1/main.tscn")
 		"options":
 			SceneChanger.change_scene("res://screens/Options.tscn")
 		"credits":

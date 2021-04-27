@@ -44,7 +44,6 @@ collision_mask = 8
 mode = 2
 gravity_scale = 3.0
 script = ExtResource( 2 )
-item = "doublejump"
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, -8.128 )
@@ -65,6 +64,6 @@ shape = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 0, -8 )
 frames = SubResource( 8 )
-frame = 4
+frame = 2
 playing = true
 [connection signal="body_entered" from="AreaPick" to="." method="_on_AreaPick_body_entered"]

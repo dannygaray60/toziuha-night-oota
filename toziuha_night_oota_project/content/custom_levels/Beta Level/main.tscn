@@ -12,8 +12,7 @@
 [ext_resource path="res://objects/items/Torch.tscn" type="PackedScene" id=10]
 
 [node name="LevelBase" instance=ExtResource( 1 )]
-title_room = "Prologue"
-id_room = "ruins"
+title_room = "Curse of the Moon"
 music = "nameless_symphony"
 
 [node name="TileMap" parent="." index="2" instance=ExtResource( 4 )]
@@ -22,7 +21,7 @@ tile_data = PoolIntArray( 26, 0, 65536, 27, 0, 65550, 65562, 0, 262144, 65563, 0
 [node name="Background" parent="." index="3" instance=ExtResource( 2 )]
 
 [node name="Xandria" parent="." index="4" instance=ExtResource( 3 )]
-position = Vector2( 32, 220 )
+position = Vector2( 32, 224 )
 limit_left_camera = 0
 limit_top_camera = 64
 limit_right_camera = 684
@@ -33,7 +32,7 @@ position = Vector2( 667, 384 )
 
 [node name="RelicKey" parent="." index="6" instance=ExtResource( 6 )]
 position = Vector2( 272, 576 )
-item = "bronce_key"
+item = "bronze_key"
 
 [node name="Zombie" parent="." index="7" instance=ExtResource( 7 )]
 position = Vector2( 192.555, 255 )
@@ -60,7 +59,7 @@ position = Vector2( 344.555, 568 )
 
 [node name="DoorRight" parent="." index="14" instance=ExtResource( 9 )]
 position = Vector2( 710, 358.586 )
-destiny_path = "res://test/test ruins abandoned map1/roomA.tscn"
+destiny_filename = "roomA"
 destiny_door = "DoorLeft"
 
 [node name="PositionSpawn" parent="DoorRight" index="2"]
@@ -72,7 +71,7 @@ weapon_lvl3 = true
 
 [node name="DoorLeft" parent="." index="16" instance=ExtResource( 9 )]
 position = Vector2( -24, 555 )
-destiny_path = "res://test/test ruins abandoned map1/roomB.tscn"
+destiny_filename = "roomB"
 destiny_door = "DoorRight"
 
 [node name="PositionSpawn" parent="DoorLeft" index="2"]

@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-export(String, "double_jump","backdash","slide", "bronce_key", "silver_key", "golden_key") var item
+export(String, "double_jump","backdash","slide", "bronze_key", "silver_key", "golden_key") var item = "double_jump"
 
 func _ready():
 	
@@ -18,7 +18,7 @@ func _ready():
 			$Sprite.frame = 1
 		"backdash":
 			$Sprite.frame = 2
-		"bronce_key":
+		"bronze_key":
 			$Sprite.frame = 3
 		"silver_key":
 			$Sprite.frame = 4
@@ -49,8 +49,8 @@ func _on_AreaPick_body_entered(body):
 			Audio.play_sfx("em_drop")
 			Vars.player[item] = true
 			match item:
-				"bronce_key":
-					Functions.show_hud_notif(tr("BRONCEKY"))
+				"bronze_key":
+					Functions.show_hud_notif(tr("BRONZEKY"))
 				"silver_key":
 					Functions.show_hud_notif(tr("SILVERKY"))
 				"golden_key":

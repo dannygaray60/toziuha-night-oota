@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/violet_trees.png-05f4acc36108b172c74ab32c9271eee5.stex"
+path="res://.import/bg_demon_forest_0.png-9ea36f1ebe07b07f4ef9aee132ec68d2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/img/violet_trees.png"
-dest_files=[ "res://.import/violet_trees.png-05f4acc36108b172c74ab32c9271eee5.stex" ]
+source_file="res://assets/sprites/bg_demon_forest_0.png"
+dest_files=[ "res://.import/bg_demon_forest_0.png-9ea36f1ebe07b07f4ef9aee132ec68d2.stex" ]
 
 [params]
 

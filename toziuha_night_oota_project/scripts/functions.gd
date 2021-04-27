@@ -52,7 +52,7 @@ func get_value(variable,opt,value):
 	
 	return variable
 
-func show_hud_notif(txt="Notif.",time_show=1):
+func show_hud_notif(txt="Notif.",time_show=2):
 	var panel = get_tree().get_nodes_in_group("hud_notif")
 	if panel.size() > 0:
 		panel = panel[0]
