@@ -3,11 +3,16 @@ extends Control
 var lvl_btn = preload("res://objects/ui/MainButton.tscn")
 var lvl_btn_instance = null
 
+var has_quicksave = false
+var has_savegame = false
+
 var err
 
 var scan_path = ""
 
 var list_levels = {}
+
+var go_to = ""
 
 var dir = Directory.new()
 var file = File.new()
@@ -83,23 +88,73 @@ func scan_levels():
 	return true
 
 func _on_selected_level(_press):
+	Vars.level_dir_path = "%s/%s" % [scan_path,get_focus_owner().dir_name]
+	Vars.level_main_scene = get_focus_owner().main_scene
+	Vars.map_rooms = {} #reiniciar diccionario al elegir nuevo mapa a jugar
+	Vars.map_object = null
 	
-	var go_to = "%s/%s/%s.tscn"%[scan_path,get_focus_owner().dir_name,get_focus_owner().main_scene]
+	go_to = "%s/%s/%s.tscn"%[scan_path,get_focus_owner().dir_name,get_focus_owner().main_scene]
 	#si existe el archivo 
 	if file.file_exists(go_to):
-		
 		Audio.play_sfx("btn_accept")
-		Vars.level_dir_path = "%s/%s" % [scan_path,get_focus_owner().dir_name]
+		has_quicksave = Savedata.has_savefile("quicksave")
+		has_savegame = Savedata.has_savefile("savegame")
+		#deshabilitar botón dependiendo si no hay un archivo relacionado
+		if !has_quicksave:
+			$ControlContinue/Panel/Margin/VBx/VBx/BtnQuickLoad.disabled = true
+		if !has_savegame:
+			$ControlContinue/Panel/Margin/VBx/VBx/BtnSavePoint.disabled = true
+		
+		#y darle focus al botón de mayor interés
+		if has_quicksave:
+			$ControlContinue/Panel/Margin/VBx/VBx/BtnQuickLoad.focus()
+		elif has_savegame:
+			$ControlContinue/Panel/Margin/VBx/VBx/BtnSavePoint.focus()
+		#si no hay ninguno de los archivos de guardado proceder a cargar escenario desde el inicio
+		else:
+			load_level("newgame")
+			return
+
+		$ControlContinue.visible = true
+
+func load_level(mode="newgame"):
+	
+	#si existe una escena del mapa
+	if file.file_exists(Vars.level_dir_path+"/map.tscn"):
+		Vars.map_object = load(Vars.level_dir_path+"/map.tscn")
+	
+	match mode:
+		"newgame":
+			Vars.set_vars()
+			err = OK
+			#eliminar quicksave
+			if has_quicksave:
+				Savedata.delete_savedata("quicksave")
+		"quickload":
+			Vars.set_vars()
+			err = Savedata.load_savedata("quicksave")
+			#una vez cargado se elimina el archivo de cargado rapido
+			if err == OK:
+				Savedata.delete_savedata("quicksave")
+		"savestatue":
+			Vars.set_vars()
+			err = Savedata.load_savedata("savegame")
+			Vars.loaded_from_statue_save = true
+			#una vez cargado se elimina el archivo de cargado rapido (en caso de existir uno)
+			if err == OK:
+				Savedata.delete_savedata("quicksave")	
+		"cancel":
+			Audio.play_sfx("btn_cancel")
+			$ControlContinue.visible = false
+			$PanelReturn/MarginContainer/BtnReturn.focus()
+			return
+	
+	if err == OK:
+		#establecer nueva ruta hacia donde ir al cargar
+		if mode in ["quickload","savestatue"]:
+			go_to = "%s/%s.tscn"%[Vars.level_dir_path,Vars.player["current_room"]]
+		#cambiar escenario
 		SceneChanger.change_scene(go_to)
-		
-		
-		Vars.map_rooms = {} #reiniciar diccionario al elegir nuevo mapa a jugar
-		Vars.map_object = null
-		
-		#si existe una escena del mapa
-		if file.file_exists(Vars.level_dir_path+"/map.tscn"):
-			Vars.map_object = load(Vars.level_dir_path+"/map.tscn")
-		
 
 func _on_BtnReturn_pressed():
 	SceneChanger.change_scene("res://screens/MainMenu.tscn")

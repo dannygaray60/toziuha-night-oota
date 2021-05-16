@@ -144,4 +144,5 @@ text = "Level Designer: Name Designer (name@mail.com)"
 align = 2
 valign = 2
 clip_text = true
+
 [connection signal="focus_entered" from="." to="." method="_on_MainButton_focus_entered"]

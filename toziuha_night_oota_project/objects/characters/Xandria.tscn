@@ -1,10 +1,12 @@
-[gd_scene load_steps=102 format=2]
+[gd_scene load_steps=108 format=2]
 
 [ext_resource path="res://objects/characters/Xandria.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/xandria.png" type="Texture" id=2]
 [ext_resource path="res://objects/characters/XandriaWeapon.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/PlayerCamera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/sprites/Vfx_potion_use.png" type="Texture" id=5]
+[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://objects/characters/XandriaSprite.gd" type="Script" id=7]
 
 [sub_resource type="Animation" id=1]
 resource_name = "show"
@@ -22,13 +24,116 @@ tracks/0/keys = {
 "values": [ 10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="DynamicFont" id=2]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -3
+extra_spacing_bottom = -3
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=3]
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9, 3, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 0.231 ), Vector2( 1, 1 ), Vector2( 1, 1 ), Vector2( 1, 0.231 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 1, 2.9, 3.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform vec2 frame_coords = vec2(0.0,0.0);
+uniform vec2 nb_frames = vec2(0.0,0.0);
+uniform vec2 velocity = vec2(0.0,0.0);
+uniform float velocity_max = 300.0;
+uniform float trail_size = 6.0;
+uniform float alpha_start = 0.8;
+uniform float alpha_tail = 0.2;
+uniform float alpha_factor = 1.2;
+uniform float noise_margin = 0.68;
+uniform sampler2D noise;
+
+
+vec2 get_mid_uv(vec2 coords, vec2 px_size) {
+	// récupérer les UV des milieux de ces px en partant du dernier
+	float px_mid_x = 1.0 - px_size.x / 2.0;
+	float px_mid_y = 1.0 - px_size.y / 2.0;
+	if (coords.x < 1.0)
+		px_mid_x = px_size.x * ( floor(coords.x / px_size.x) + 1.0 / 2.0 );
+	if (coords.y < 1.0)
+		px_mid_y = px_size.y * ( floor(coords.y / px_size.y) + 1.0 / 2.0 ); 
+	return vec2(px_mid_x, px_mid_y);
+}
+
+void fragment() {
+	COLOR = texture(TEXTURE,UV);
+
+	float UV_X = (UV.x * nb_frames.x - frame_coords.x);
+	float UV_Y = (UV.y * nb_frames.y - frame_coords.y);
+	vec2 uv = vec2(UV_X, UV_Y);
+	
+	// Limite velocity à trail_size pixels max 
+	vec2 v_dir = normalize(velocity);
+	float v_length = length(velocity) * trail_size / velocity_max;
+	
+	float alpha_step = (alpha_start - alpha_tail) / trail_size;
+	float alpha = alpha_tail;
+	while (v_length > 0.0) {
+		vec2 velo = v_length * v_dir * TEXTURE_PIXEL_SIZE;
+		vec2 px_mid_uv = get_mid_uv(UV, TEXTURE_PIXEL_SIZE) + velo;
+		float noiseValue = texture(noise, px_mid_uv).r;
+		vec4 new_color = texture(TEXTURE, px_mid_uv);
+		if (noiseValue > noise_margin && new_color.a > 0.0) {
+			if (COLOR.a == 0.0) {
+				COLOR = new_color;
+				COLOR.a = new_color.a * alpha;
+			}
+			break;
+		}
+		v_length -= 0.5;
+		alpha *= alpha_factor;
+		alpha = min(alpha,alpha_start);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+shader_param/frame_coords = Vector2( 0, 0 )
+shader_param/nb_frames = Vector2( 0, 0 )
+shader_param/velocity = Vector2( 0, 0 )
+shader_param/velocity_max = 100.0
+shader_param/trail_size = 7.0
+shader_param/alpha_start = 0.8
+shader_param/alpha_tail = 0.5
+shader_param/alpha_factor = 1.2
+shader_param/noise_margin = 0.68
+
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 4.92596, 21.2475 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 4.92596, 14.4614 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=8]
 length = 0.5
 step = 0.01
 tracks/0/type = "value"
@@ -58,7 +163,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=9]
 length = 0.5
 step = 0.01
 tracks/0/type = "value"
@@ -88,7 +193,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=10]
 length = 0.28
 step = 0.01
 tracks/0/type = "value"
@@ -104,7 +209,7 @@ tracks/0/keys = {
 "values": [ 105, 106, 107, 108 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=11]
 length = 0.16
 step = 0.01
 tracks/0/type = "value"
@@ -120,7 +225,7 @@ tracks/0/keys = {
 "values": [ 36, 37, 38, 39, 40, 41, 42 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=12]
 length = 0.9
 step = 0.05
 tracks/0/type = "value"
@@ -136,7 +241,7 @@ tracks/0/keys = {
 "values": [ 64, 65, 66, 67, 68, 69, 70 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=13]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -186,8 +291,20 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 0.65098, 0.192157, 0.192157, 1 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("CollisionStand:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=14]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -203,7 +320,7 @@ tracks/0/keys = {
 "values": [ 60, 61, 62 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=15]
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -217,7 +334,7 @@ tracks/0/keys = {
 "values": [ 105, 106, 107, 108 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=16]
 length = 1.8
 loop = true
 tracks/0/type = "value"
@@ -245,7 +362,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Animation" id=13]
+[sub_resource type="Animation" id=17]
 length = 0.3
 step = 0.01
 tracks/0/type = "value"
@@ -261,7 +378,7 @@ tracks/0/keys = {
 "values": [ 44 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=18]
 length = 0.25
 step = 0.01
 tracks/0/type = "value"
@@ -277,7 +394,7 @@ tracks/0/keys = {
 "values": [ 46, 47, 48, 49, 50, 51, 52, 53, 54, 56 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=19]
 length = 0.15
 step = 0.05
 tracks/0/type = "value"
@@ -293,7 +410,7 @@ tracks/0/keys = {
 "values": [ 32, 33, 34, 30, 31 ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=20]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -308,7 +425,7 @@ tracks/0/keys = {
 "values": [ 56, 57, 58 ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=21]
 length = 0.5
 step = 0.05
 tracks/0/type = "value"
@@ -324,7 +441,7 @@ tracks/0/keys = {
 "values": [ 30, 31, 32, 33, 34 ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=22]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -339,7 +456,7 @@ tracks/0/keys = {
 "values": [ 67, 68, 69, 70 ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=23]
 length = 0.43
 step = 0.01
 tracks/0/type = "value"
@@ -355,7 +472,7 @@ tracks/0/keys = {
 "values": [ 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=24]
 length = 0.7
 loop = true
 step = 0.05
@@ -372,7 +489,7 @@ tracks/0/keys = {
 "values": [ 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28 ]
 }
 
-[sub_resource type="Animation" id=21]
+[sub_resource type="Animation" id=25]
 length = 0.48
 step = 0.01
 tracks/0/type = "value"
@@ -388,165 +505,155 @@ tracks/0/keys = {
 "values": [ 72, 73, 74, 75, 76, 77, 78, 79 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=22]
+[sub_resource type="AnimationNodeAnimation" id=26]
 animation = "attack-crouch"
 
-[sub_resource type="AnimationNodeAnimation" id=23]
+[sub_resource type="AnimationNodeAnimation" id=27]
 animation = "attack"
 
-[sub_resource type="AnimationNodeAnimation" id=24]
+[sub_resource type="AnimationNodeAnimation" id=28]
 animation = "backdash"
 
-[sub_resource type="AnimationNodeAnimation" id=25]
+[sub_resource type="AnimationNodeAnimation" id=29]
 animation = "changedir"
 
-[sub_resource type="AnimationNodeAnimation" id=26]
+[sub_resource type="AnimationNodeAnimation" id=30]
 animation = "crouch"
 
-[sub_resource type="AnimationNodeAnimation" id=27]
+[sub_resource type="AnimationNodeAnimation" id=31]
 animation = "die"
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=32]
 animation = "fall"
 
-[sub_resource type="AnimationNodeAnimation" id=29]
+[sub_resource type="AnimationNodeAnimation" id=33]
 animation = "hurt"
 
-[sub_resource type="AnimationNodeAnimation" id=30]
+[sub_resource type="AnimationNodeAnimation" id=34]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=31]
+[sub_resource type="AnimationNodeAnimation" id=35]
 animation = "jump"
 
-[sub_resource type="AnimationNodeAnimation" id=32]
+[sub_resource type="AnimationNodeAnimation" id=36]
 animation = "jump2"
 
-[sub_resource type="AnimationNodeAnimation" id=33]
+[sub_resource type="AnimationNodeAnimation" id=37]
 animation = "pos-backdash"
 
-[sub_resource type="AnimationNodeAnimation" id=34]
+[sub_resource type="AnimationNodeAnimation" id=38]
 animation = "pos-jump"
 
-[sub_resource type="AnimationNodeAnimation" id=35]
+[sub_resource type="AnimationNodeAnimation" id=39]
 animation = "pos-run"
 
-[sub_resource type="AnimationNodeAnimation" id=36]
+[sub_resource type="AnimationNodeAnimation" id=40]
 animation = "pos-slide"
 
-[sub_resource type="AnimationNodeAnimation" id=37]
+[sub_resource type="AnimationNodeAnimation" id=41]
 animation = "pre-run"
 
-[sub_resource type="AnimationNodeAnimation" id=38]
+[sub_resource type="AnimationNodeAnimation" id=42]
 animation = "run"
 
-[sub_resource type="AnimationNodeAnimation" id=39]
+[sub_resource type="AnimationNodeAnimation" id=43]
 animation = "slide"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+[sub_resource type="AnimationNodeStateMachineTransition" id=44]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
 switch_mode = 2
 auto_advance = true
 priority = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
-switch_mode = 2
-auto_advance = true
-disabled = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=44]
-priority = 4
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=45]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=46]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=47]
+switch_mode = 2
+auto_advance = true
+disabled = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=48]
-switch_mode = 2
+priority = 4
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=49]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=50]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=53]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=50]
-priority = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=51]
-priority = 0
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=52]
-priority = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=53]
-advance_condition = "state == \"run\""
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=54]
-advance_condition = "state == \"fall\""
 priority = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=55]
+priority = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+priority = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
+advance_condition = "state == \"run\""
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+advance_condition = "state == \"fall\""
+priority = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+[sub_resource type="AnimationNodeStateMachineTransition" id=60]
 switch_mode = 2
 auto_advance = true
 priority = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=57]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=58]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=59]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=60]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=61]
-priority = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=62]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=63]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=64]
-priority = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=65]
-priority = 2
+priority = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=66]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=67]
-priority = 4
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=68]
-priority = 10
+priority = 0
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=69]
+priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=70]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=71]
-priority = 5
+priority = 4
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=72]
-switch_mode = 2
-auto_advance = true
-priority = 2
+priority = 10
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=73]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=74]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=75]
+priority = 5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=76]
+switch_mode = 2
+auto_advance = true
+priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=77]
 switch_mode = 2
@@ -563,82 +670,91 @@ switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=82]
-priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=83]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=84]
-priority = 3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=85]
 switch_mode = 2
 auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=86]
+priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=87]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=88]
+priority = 3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=89]
-priority = 7
-disabled = true
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=90]
-priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=91]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=92]
 
-[sub_resource type="AnimationNodeStateMachine" id=93]
-states/attack/node = SubResource( 23 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=93]
+priority = 7
+disabled = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=94]
+priority = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=95]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=96]
+
+[sub_resource type="AnimationNodeStateMachine" id=97]
+states/attack/node = SubResource( 27 )
 states/attack/position = Vector2( -165.424, -866.371 )
-states/attack-crouch/node = SubResource( 22 )
+states/attack-crouch/node = SubResource( 26 )
 states/attack-crouch/position = Vector2( -441.369, -635.873 )
-states/backdash/node = SubResource( 24 )
+states/backdash/node = SubResource( 28 )
 states/backdash/position = Vector2( -523.8, -540.862 )
-states/changedir/node = SubResource( 25 )
+states/changedir/node = SubResource( 29 )
 states/changedir/position = Vector2( 223, -635.873 )
-states/crouch/node = SubResource( 26 )
+states/crouch/node = SubResource( 30 )
 states/crouch/position = Vector2( -160.424, -281.862 )
-states/dead/node = SubResource( 27 )
+states/dead/node = SubResource( 31 )
 states/dead/position = Vector2( 303.281, -949.904 )
-states/fall/node = SubResource( 28 )
+states/fall/node = SubResource( 32 )
 states/fall/position = Vector2( -91.424, -504.862 )
-states/hurt/node = SubResource( 29 )
+states/hurt/node = SubResource( 33 )
 states/hurt/position = Vector2( 59, -760.536 )
-states/idle/node = SubResource( 30 )
+states/idle/node = SubResource( 34 )
 states/idle/position = Vector2( 533, -831.873 )
-states/jump/node = SubResource( 31 )
+states/jump/node = SubResource( 35 )
 states/jump/position = Vector2( -22, -212.862 )
-states/jump2/node = SubResource( 32 )
+states/jump2/node = SubResource( 36 )
 states/jump2/position = Vector2( -447, -56.862 )
-states/pos-backdash/node = SubResource( 33 )
+states/pos-backdash/node = SubResource( 37 )
 states/pos-backdash/position = Vector2( -22, -555.291 )
-states/pos-jump/node = SubResource( 34 )
+states/pos-jump/node = SubResource( 38 )
 states/pos-jump/position = Vector2( -543, -404.862 )
-states/pos-run/node = SubResource( 35 )
+states/pos-run/node = SubResource( 39 )
 states/pos-run/position = Vector2( 204, -510.862 )
-states/pos-slide/node = SubResource( 36 )
+states/pos-slide/node = SubResource( 40 )
 states/pos-slide/position = Vector2( -350.424, -777.873 )
-states/pre-run/node = SubResource( 37 )
+states/pre-run/node = SubResource( 41 )
 states/pre-run/position = Vector2( 576, -510.862 )
-states/run/node = SubResource( 38 )
+states/run/node = SubResource( 42 )
 states/run/position = Vector2( 526, -356.862 )
-states/slide/node = SubResource( 39 )
+states/slide/node = SubResource( 43 )
 states/slide/position = Vector2( -165.424, -660.873 )
-transitions = [ "idle", "pre-run", SubResource( 40 ), "pre-run", "run", SubResource( 41 ), "run", "pos-run", SubResource( 42 ), "changedir", "run", SubResource( 43 ), "pre-run", "changedir", SubResource( 44 ), "fall", "jump2", SubResource( 45 ), "fall", "jump", SubResource( 46 ), "jump", "jump2", SubResource( 47 ), "changedir", "idle", SubResource( 48 ), "pos-run", "idle", SubResource( 49 ), "pre-run", "pos-run", SubResource( 50 ), "pos-run", "pre-run", SubResource( 51 ), "run", "changedir", SubResource( 52 ), "pos-run", "changedir", SubResource( 53 ), "jump", "pos-jump", SubResource( 54 ), "pos-jump", "fall", SubResource( 55 ), "jump2", "pos-jump", SubResource( 56 ), "idle", "jump", SubResource( 57 ), "pos-run", "jump", SubResource( 58 ), "pre-run", "jump", SubResource( 59 ), "run", "jump", SubResource( 60 ), "fall", "run", SubResource( 61 ), "pos-jump", "run", SubResource( 62 ), "changedir", "jump", SubResource( 63 ), "pos-jump", "pos-run", SubResource( 64 ), "pre-run", "crouch", SubResource( 65 ), "crouch", "idle", SubResource( 66 ), "changedir", "crouch", SubResource( 67 ), "fall", "crouch", SubResource( 68 ), "pos-jump", "crouch", SubResource( 69 ), "pos-jump", "jump", SubResource( 70 ), "idle", "backdash", SubResource( 71 ), "backdash", "pos-backdash", SubResource( 72 ), "pos-backdash", "idle", SubResource( 73 ), "pos-backdash", "jump", SubResource( 74 ), "pos-backdash", "crouch", SubResource( 75 ), "crouch", "slide", SubResource( 76 ), "slide", "pos-slide", SubResource( 77 ), "pos-slide", "slide", SubResource( 78 ), "pos-slide", "idle", SubResource( 79 ), "idle", "attack", SubResource( 80 ), "attack", "idle", SubResource( 81 ), "crouch", "attack-crouch", SubResource( 82 ), "attack-crouch", "pos-slide", SubResource( 83 ), "pos-slide", "attack-crouch", SubResource( 84 ), "changedir", "pre-run", SubResource( 85 ), "idle", "hurt", SubResource( 86 ), "hurt", "pos-run", SubResource( 87 ), "idle", "dead", SubResource( 88 ), "pos-backdash", "fall", SubResource( 89 ), "backdash", "crouch", SubResource( 90 ), "backdash", "fall", SubResource( 91 ), "slide", "pos-backdash", SubResource( 92 ) ]
+transitions = [ "idle", "pre-run", SubResource( 44 ), "pre-run", "run", SubResource( 45 ), "run", "pos-run", SubResource( 46 ), "changedir", "run", SubResource( 47 ), "pre-run", "changedir", SubResource( 48 ), "fall", "jump2", SubResource( 49 ), "fall", "jump", SubResource( 50 ), "jump", "jump2", SubResource( 51 ), "changedir", "idle", SubResource( 52 ), "pos-run", "idle", SubResource( 53 ), "pre-run", "pos-run", SubResource( 54 ), "pos-run", "pre-run", SubResource( 55 ), "run", "changedir", SubResource( 56 ), "pos-run", "changedir", SubResource( 57 ), "jump", "pos-jump", SubResource( 58 ), "pos-jump", "fall", SubResource( 59 ), "jump2", "pos-jump", SubResource( 60 ), "idle", "jump", SubResource( 61 ), "pos-run", "jump", SubResource( 62 ), "pre-run", "jump", SubResource( 63 ), "run", "jump", SubResource( 64 ), "fall", "run", SubResource( 65 ), "pos-jump", "run", SubResource( 66 ), "changedir", "jump", SubResource( 67 ), "pos-jump", "pos-run", SubResource( 68 ), "pre-run", "crouch", SubResource( 69 ), "crouch", "idle", SubResource( 70 ), "changedir", "crouch", SubResource( 71 ), "fall", "crouch", SubResource( 72 ), "pos-jump", "crouch", SubResource( 73 ), "pos-jump", "jump", SubResource( 74 ), "idle", "backdash", SubResource( 75 ), "backdash", "pos-backdash", SubResource( 76 ), "pos-backdash", "idle", SubResource( 77 ), "pos-backdash", "jump", SubResource( 78 ), "pos-backdash", "crouch", SubResource( 79 ), "crouch", "slide", SubResource( 80 ), "slide", "pos-slide", SubResource( 81 ), "pos-slide", "slide", SubResource( 82 ), "pos-slide", "idle", SubResource( 83 ), "idle", "attack", SubResource( 84 ), "attack", "idle", SubResource( 85 ), "crouch", "attack-crouch", SubResource( 86 ), "attack-crouch", "pos-slide", SubResource( 87 ), "pos-slide", "attack-crouch", SubResource( 88 ), "changedir", "pre-run", SubResource( 89 ), "idle", "hurt", SubResource( 90 ), "hurt", "pos-run", SubResource( 91 ), "idle", "dead", SubResource( 92 ), "pos-backdash", "fall", SubResource( 93 ), "backdash", "crouch", SubResource( 94 ), "backdash", "fall", SubResource( 95 ), "slide", "pos-backdash", SubResource( 96 ) ]
 start_node = "idle"
 end_node = "dead"
-graph_offset = Vector2( -291.765, -804.073 )
+graph_offset = Vector2( -643.38, -982.337 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=94]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=98]
 
-[sub_resource type="Animation" id=95]
-resource_name = "crouch"
+[sub_resource type="Animation" id=99]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionStand:shape:extents")
@@ -665,8 +781,7 @@ tracks/1/keys = {
 "values": [ Vector2( -0.023, -14.801 ) ]
 }
 
-[sub_resource type="Animation" id=96]
-resource_name = "stand"
+[sub_resource type="Animation" id=100]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionStand:position")
@@ -717,16 +832,46 @@ anims/show = SubResource( 1 )
 position = Vector2( 0.0783129, 0 )
 z_index = 1
 texture = ExtResource( 5 )
-vframes = 3
 hframes = 5
+vframes = 3
 frame = 10
 
+[node name="QuickNotif" type="Node2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 1, 0.231 )
+
+[node name="Label" type="Label" parent="QuickNotif"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.5
+margin_top = -61.0
+margin_right = 20.5
+margin_bottom = -47.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+custom_fonts/font = SubResource( 2 )
+text = "ATK +10"
+align = 1
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="QuickNotif"]
+anims/show_quick_notif = SubResource( 3 )
+
 [node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 5 )
 position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
-vframes = 7
 hframes = 16
-frame = 1
+vframes = 7
+frame = 2
+script = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": "z index : 0"
 }
@@ -753,7 +898,7 @@ rotation = 3.14159
 scale = Vector2( 4.512, 1 )
 enabled = true
 cast_to = Vector2( 0, 5 )
-collision_mask = 14
+collision_mask = 8
 
 [node name="RayCastDown" type="RayCast2D" parent="Sprite"]
 visible = false
@@ -801,12 +946,12 @@ position = Vector2( 0.10392, 15.0906 )
 [node name="CollisionStand" type="CollisionShape2D" parent="."]
 self_modulate = Color( 0.560784, 0.980392, 0, 1 )
 position = Vector2( -0.0234375, -21.25 )
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 
 [node name="CollisionCrouch" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2( -0.023, -14.465 )
-shape = SubResource( 3 )
+shape = SubResource( 7 )
 disabled = true
 
 [node name="Tween" type="Tween" parent="."]
@@ -815,37 +960,37 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack = SubResource( 4 )
-anims/attack-crouch = SubResource( 5 )
-anims/backdash = SubResource( 6 )
-anims/changedir = SubResource( 7 )
-anims/crouch = SubResource( 8 )
-anims/die = SubResource( 9 )
-anims/fall = SubResource( 10 )
-anims/hurt = SubResource( 11 )
-anims/idle = SubResource( 12 )
-anims/jump = SubResource( 13 )
-anims/jump2 = SubResource( 14 )
-anims/pos-backdash = SubResource( 15 )
-anims/pos-jump = SubResource( 16 )
-anims/pos-run = SubResource( 17 )
-anims/pos-slide = SubResource( 18 )
-anims/pre-run = SubResource( 19 )
-anims/run = SubResource( 20 )
-anims/slide = SubResource( 21 )
+anims/attack = SubResource( 8 )
+anims/attack-crouch = SubResource( 9 )
+anims/backdash = SubResource( 10 )
+anims/changedir = SubResource( 11 )
+anims/crouch = SubResource( 12 )
+anims/die = SubResource( 13 )
+anims/fall = SubResource( 14 )
+anims/hurt = SubResource( 15 )
+anims/idle = SubResource( 16 )
+anims/jump = SubResource( 17 )
+anims/jump2 = SubResource( 18 )
+anims/pos-backdash = SubResource( 19 )
+anims/pos-jump = SubResource( 20 )
+anims/pos-run = SubResource( 21 )
+anims/pos-slide = SubResource( 22 )
+anims/pre-run = SubResource( 23 )
+anims/run = SubResource( 24 )
+anims/slide = SubResource( 25 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 93 )
+tree_root = SubResource( 97 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 process_mode = 0
-parameters/playback = SubResource( 94 )
+parameters/playback = SubResource( 98 )
 "parameters/conditions/state == \"fall\"" = false
 "parameters/conditions/state == \"run\"" = false
 
 [node name="AnimationPlayerCollision" type="AnimationPlayer" parent="."]
-anims/crouch = SubResource( 95 )
-anims/stand = SubResource( 96 )
+anims/crouch = SubResource( 99 )
+anims/stand = SubResource( 100 )
 
 [node name="TimerBackdash" type="Timer" parent="."]
 wait_time = 0.2
@@ -871,6 +1016,7 @@ one_shot = true
 __meta__ = {
 "_editor_description_": "tiempo en el que el personaje no colisiona con enemigos y peligros"
 }
+
 [connection signal="tree_exiting" from="." to="." method="_on_Xandria_tree_exiting"]
 [connection signal="timeout" from="TimerBackdash" to="." method="_on_TimerBackdash_timeout"]
 [connection signal="timeout" from="TimerSlide" to="." method="_on_TimerSlide_timeout"]

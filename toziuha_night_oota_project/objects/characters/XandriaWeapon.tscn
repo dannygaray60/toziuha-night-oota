@@ -253,9 +253,9 @@ script = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 7.98173, -8.00642 )
 texture = ExtResource( 1 )
-vframes = 5
 hframes = 4
-frame = 17
+vframes = 5
+frame = 19
 region_enabled = true
 region_rect = Rect2( 0, 0, 488, 325 )
 
@@ -297,6 +297,7 @@ collision_mask = 44
 
 [node name="Collision1" type="CollisionPolygon2D" parent="AreaLvl3"]
 polygon = PoolVector2Array( -14.0327, -8.44487, -5.33359, -8.30456, 2.80426, -6.90148, 8.9778, -5.07748, 16.4141, -6.05963, 21.3249, -7.74333, 27.6387, -6.48056, 30.1643, -4.09533, 27.6387, -1.14886, 17.8172, 1.09606, 6.17165, 1.37668, 1.6818, -1.28917, -5.19328, -1.71009, -12.0684, -1.99071 )
+
 [connection signal="area_entered" from="AreaLvl1" to="." method="_on_Area_area_entered"]
 [connection signal="body_entered" from="AreaLvl1" to="." method="_on_Area_body_entered"]
 [connection signal="area_entered" from="AreaLvl2" to="." method="_on_Area_area_entered"]

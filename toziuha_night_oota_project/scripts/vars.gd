@@ -11,11 +11,17 @@ var player_door_spawn = ""
 #la ruta a la carpeta del nivel que se está jugando
 var level_dir_path = ""
 
+#nombre de la escena principal del nivel a jugar
+var level_main_scene = ""
+
 #diccionario con las habitaciones del nivel, cada habitacion con un array
 var map_rooms = {}
 
 #variable para almacenar la escena del mapa
 var map_object = null
+
+#el jugador a cargado desde savefile de estatua?
+var loaded_from_statue_save = false
 
 #el jugador esta en una plataforma que permite bajarse de ella? (one way collision)
 var is_on_onewaycollisionplatform = false
@@ -91,6 +97,59 @@ var enemy = {
 		#y aqui una lista de objetos que puede dejar al morir...
 		"item_drop": ["none","none","none","money_10","money_100","money_1","money_1","money_10","money_10"],
 	},
+	"demon_skull_head":{
+		"name": "DEMONSKULLHEAD",
+		"atk": 10,
+		"def":3,
+		"hp_max": 7,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none","none","none"],
+	},
+	"blood_bat":{
+		"name": "BLOODBAT",
+		"atk": 10,
+		"def":3,
+		"hp_max": 7,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none","none","none"],
+	},
+	"bat":{
+		"name": "BAT",
+		"atk": 7,
+		"def":0,
+		"hp_max": 2,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none"],
+	},
+	"cursed_hound":{
+		"name": "CURSEDHOUND",
+		"atk": 7,
+		"def":0,
+		"hp_max": 2,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none"],
+	},
+	"fireball":{
+		"name": "",
+		"atk": 20,
+		"def":0,
+		"hp_max": 0,
+		"description": "",
+		"item_drop": [],
+	},
+	"boss_big_bat":{
+		"name": "BIGBAT",
+		"atk": 30,
+		"def":3,
+		"hp_max": 30,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none"],
+	},
 	
 }
 
@@ -154,6 +213,8 @@ func set_vars():
 		"visited_rooms": [],
 		#id de los items que aumentan estadiscicas
 		"upgrade_items": [],
+		#(nombre de la escena) de los bosses eliminados
+		"defeated_bosses": [],
 		
 	}
 

@@ -235,7 +235,9 @@ extents = Vector2( 8, 19 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 24, 40 )
 
-[node name="DoorSpecial" type="Node2D"]
+[node name="DoorSpecial" type="Node2D" groups=[
+"special_door",
+]]
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -308,6 +310,7 @@ shape = SubResource( 4 )
 wait_time = 0.5
 one_shot = true
 autostart = true
+
 [connection signal="tree_exiting" from="." to="." method="_on_DoorSpecial_tree_exiting"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_started"]

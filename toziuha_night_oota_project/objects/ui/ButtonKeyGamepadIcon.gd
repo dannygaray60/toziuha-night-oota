@@ -26,8 +26,38 @@ func update_icon():
 	
 	var icon = Conf.get_conf_value("gamepad_icon",action,0)
 	
+	#mostrar iconos de botones virtuales
+	if Conf.get_conf_value("touchscreenbutton","show_buttons",true):
+		match action:
+			"ui_select":
+				$normal.frame = 39
+				$pressed.frame = 39
+			"ui_left":
+				$normal.frame = 35
+				$pressed.frame = 35
+			"ui_right":
+				$normal.frame = 36
+				$pressed.frame = 36
+			"ui_up":
+				$normal.frame = 37
+				$pressed.frame = 37
+			"ui_down":
+				$normal.frame = 38
+				$pressed.frame = 38
+			"ui_accept":
+				$normal.frame = 33
+				$pressed.frame = 33
+			"ui_cancel":
+				$normal.frame = 32
+				$pressed.frame = 32
+			"ui_focus_prev":
+				$normal.frame = 34
+				$pressed.frame = 34
+			
+			_:
+				pass
 	#mostrar icono de gamepad
-	if gamepad_icon == "gamepad":
+	elif gamepad_icon == "gamepad":
 		$normal.frame = icon
 		$pressed.frame = icon
 		$Label.visible = false

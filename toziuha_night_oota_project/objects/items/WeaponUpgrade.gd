@@ -19,7 +19,10 @@ func _ready():
 
 func _on_AreaPick_body_entered(body):
 	if body.is_in_group("player"):
-		Functions.show_hud_notif(tr("WEAPONLVL")%[lvl])
+		if body.has_method("show_quick_notif"):
+			body.show_quick_notif(tr("WEAPONLVL")%[lvl])
+		else:
+			Functions.show_hud_notif(tr("WEAPONLVL")%[lvl])
 		Audio.play_sfx("weapon_upgrade")
 		Vars.player["weapon_lvl"] = lvl
 		#saldrá error si en la escena no está el arma del jugador

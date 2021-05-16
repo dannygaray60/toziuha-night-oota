@@ -39,18 +39,34 @@ func _on_AreaPick_body_entered(body):
 		Audio.play_sfx("weapon_upgrade")
 		Vars.player["upgrade_items"].append(name)
 
+		#mostrar habilidad como notificacion rapida
+		if body.has_method("show_quick_notif"):
+			match stat:
+				"atk":
+					body.show_quick_notif(tr("ATK")+" +%d"%[quantity])
+				"def":
+					body.show_quick_notif(tr("DEF")+" +%d"%[quantity])
+				"hp":
+					body.show_quick_notif(tr("HP")+" +%d"%[quantity])
+				"em":
+					body.show_quick_notif(tr("EMLIMIT")+" +%d"%[quantity])
+				"potion":
+					body.show_quick_notif(tr("POTIONLIMIT")+" +%d"%[quantity])
+				
+#			
+
 		#mostrar mensaje al obtener item
-		match stat:
-			"atk":
-				DialogBox.lines = [['say','none',tr("PHRASEATKINCREASED")%[quantity]],]	
-			"def":
-				DialogBox.lines = [['say','none',tr("PHRASEDEFINCREASED")%[quantity]],]	
-			"hp":
-				DialogBox.lines = [['say','none',tr("PHRASEHPINCREASED")%[quantity]],]	
-			"em":
-				DialogBox.lines = [['say','none',tr("PHRASEEMINCREASED")%[quantity]],]	
-			"potion":
-				DialogBox.lines = [['say','none',tr("PHRASEPOTIONINCREASED")%[quantity]],]	
-		DialogBox.show_panel("purple_light")
+#		match stat:
+#			"atk":
+#				DialogBox.lines = [['say','none',tr("PHRASEATKINCREASED")%[quantity]],]	
+#			"def":
+#				DialogBox.lines = [['say','none',tr("PHRASEDEFINCREASED")%[quantity]],]	
+#			"hp":
+#				DialogBox.lines = [['say','none',tr("PHRASEHPINCREASED")%[quantity]],]	
+#			"em":
+#				DialogBox.lines = [['say','none',tr("PHRASEEMINCREASED")%[quantity]],]	
+#			"potion":
+#				DialogBox.lines = [['say','none',tr("PHRASEPOTIONINCREASED")%[quantity]],]	
+#		DialogBox.show_panel("purple_light")
 
 		queue_free()

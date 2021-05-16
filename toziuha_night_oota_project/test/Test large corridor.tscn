@@ -176,7 +176,6 @@ shape = SubResource( 1 )
 
 [node name="RelicKey" parent="." index="46" instance=ExtResource( 10 )]
 position = Vector2( 648.075, 744 )
-item = "double_jump"
 
 [node name="RelicKey2" parent="." index="47" instance=ExtResource( 10 )]
 position = Vector2( 1040, 727.616 )
@@ -215,4 +214,5 @@ type_door = "boss"
 
 [node name="Slime" parent="." index="56" instance=ExtResource( 12 )]
 position = Vector2( 724.788, 744 )
+
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Area2D_body_entered"]

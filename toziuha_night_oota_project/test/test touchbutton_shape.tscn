@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen6.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen16.png" type="Texture" id=2]
+[ext_resource path="res://test/test touchbutton_shape.gd" type="Script" id=3]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+[node name="test touchbutton_shape" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+position = Vector2( 342.071, 194.874 )
+scale = Vector2( 4, 4 )
+polygon = PoolVector2Array( 1.33527, -17.8153, 17.2418, -8.83836, 20.0766, 6.2807, 9.20978, 18.7224, -12.6814, 19.8249, -19.4534, 10.0605, -20.3984, -5.68855, -12.2089, -17.1853 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2( 281.682, 140.841 )
+scale = Vector2( 4, 4 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 2 )
+shape = SubResource( 1 )
+passby_press = true
+action = "ui_accept"

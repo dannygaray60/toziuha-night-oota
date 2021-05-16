@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://assets/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Audio.gd" type="Script" id=2]
@@ -43,6 +43,13 @@
 [ext_resource path="res://assets/sfx/slap2.wav" type="AudioStream" id=41]
 [ext_resource path="res://assets/sfx/cinematic_hit_reverse.ogg" type="AudioStream" id=42]
 [ext_resource path="res://assets/sfx/door_closed.wav" type="AudioStream" id=43]
+[ext_resource path="res://assets/sfx/glass_break.wav" type="AudioStream" id=44]
+[ext_resource path="res://assets/sfx/boss_orb_generated.wav" type="AudioStream" id=45]
+[ext_resource path="res://assets/sfx/boss_orb_heartbeat.wav" type="AudioStream" id=46]
+[ext_resource path="res://assets/sfx/boss_orb_generating.wav" type="AudioStream" id=47]
+[ext_resource path="res://assets/sfx/level_end_jingle.ogg" type="AudioStream" id=48]
+[ext_resource path="res://assets/sfx/boss_defeated_jingle.ogg" type="AudioStream" id=49]
+[ext_resource path="res://assets/sfx/roar1.wav" type="AudioStream" id=50]
 
 [node name="Audio" type="Node"]
 pause_mode = 2
@@ -52,6 +59,33 @@ script = ExtResource( 2 )
 
 [node name="jump" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 1 )
+volume_db = 2.0
+bus = "Effects"
+
+[node name="level_end" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 48 )
+bus = "Effects"
+
+[node name="boss_defeated_jingle" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 49 )
+bus = "Effects"
+
+[node name="boss_orb_generating" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 47 )
+pitch_scale = 0.75
+bus = "Effects"
+
+[node name="boss_orb_generated" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 45 )
+bus = "Effects"
+
+[node name="boss_orb_heartbeat" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 46 )
+volume_db = 4.0
+bus = "Effects"
+
+[node name="glass_break" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 44 )
 volume_db = 2.0
 bus = "Effects"
 
@@ -169,6 +203,18 @@ stream = ExtResource( 33 )
 pitch_scale = 0.8
 bus = "Effects"
 
+[node name="roar" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 50 )
+volume_db = 2.737
+pitch_scale = 1.54
+bus = "Effects"
+
+[node name="roar2" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 50 )
+volume_db = 1.368
+pitch_scale = 2.06
+bus = "Effects"
+
 [node name="knife_stab" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 32 )
 volume_db = 5.0
@@ -196,6 +242,18 @@ bus = "Effects"
 stream = ExtResource( 20 )
 volume_db = 3.714
 pitch_scale = 1.6
+bus = "Effects"
+
+[node name="fireball_enemy" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 20 )
+volume_db = 3.714
+pitch_scale = 2.06
+bus = "Effects"
+
+[node name="fireball_enemy_destroyed" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 20 )
+volume_db = 3.714
+pitch_scale = 2.84
 bus = "Effects"
 
 [node name="btn_main_menu" type="AudioStreamPlayer" parent="sfx"]

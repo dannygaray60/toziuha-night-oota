@@ -26,7 +26,7 @@ var subweapon_changer = preload("res://objects/SubweaponChanger.tscn")
 
 var item_drop_instance = null
 
-#obtener el nodo principal que es la base de un nivel
+#obtener el nodo principal que es la base de un nivel: LevelBase.tscn
 func get_main_level_scene():
 	var lvl_base = get_tree().get_nodes_in_group("level_base")
 	if lvl_base.size() > 0:
@@ -34,8 +34,17 @@ func get_main_level_scene():
 	else:
 		return null
 
+#establecer un facing que apunte hacia el jugador para que el enemigo lo vea de frente
+func get_new_facing_with_player(enemy,player):
+	if enemy != null and player != null:
+		#hacer comprobacion de posicion
+		if player.global_position.x > enemy.global_position.x:
+			return 1
+	return -1
+	
 #para establecer, restar o sumar algo a un valor evitando un valor negativo
 #eliminar-----
+#nota: cambiar nombre de funcion a una más clara
 func get_value(variable,opt,value):
 	
 	match opt:
@@ -52,6 +61,7 @@ func get_value(variable,opt,value):
 	
 	return variable
 
+#mostrar notificacion en esquina superior izquierda
 func show_hud_notif(txt="Notif.",time_show=2):
 	var panel = get_tree().get_nodes_in_group("hud_notif")
 	if panel.size() > 0:
@@ -120,6 +130,7 @@ func spawn_drop_item(itemname,item_position):
 		#add to scene
 		lvl_base.call_deferred("add_child",item_drop_instance)
 
+#mostrar numero de daño al recibirlo
 func show_damage_indicator(damage,position_to_show,color="black"): #black, red, green
 	var lvl_base = get_main_level_scene()
 	if lvl_base != null:

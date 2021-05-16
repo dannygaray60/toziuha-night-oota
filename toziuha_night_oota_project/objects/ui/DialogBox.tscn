@@ -9,24 +9,25 @@
 [ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://assets/sprites/main_panel.png" type="Texture" id=8]
 
-[sub_resource type="StyleBoxTexture" id=1]
+[sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 8 )
 region_rect = Rect2( 0, 0, 32, 32 )
 margin_top = 4.00473
 margin_bottom = 4.11544
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 font_data = ExtResource( 7 )
 
-[sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 50, 30 )
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 90, 30 )
 
-[sub_resource type="RectangleShape2D" id=4]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 350, 200 )
 
 [node name="DialogBox" type="CanvasLayer"]
 pause_mode = 2
+layer = 2
 script = ExtResource( 5 )
 
 [node name="TimerTextVel" type="Timer" parent="."]
@@ -52,6 +53,7 @@ margin_top = 20.0
 margin_right = 317.0
 margin_bottom = 258.0
 rect_min_size = Vector2( 238, 238 )
+mouse_filter = 0
 texture = ExtResource( 4 )
 expand = true
 stretch_mode = 1
@@ -65,6 +67,7 @@ margin_top = 20.0
 margin_right = 603.0
 margin_bottom = 258.0
 rect_min_size = Vector2( 238, 238 )
+mouse_filter = 0
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 1
@@ -94,13 +97,13 @@ margin_left = 20.0
 margin_top = 10.0
 margin_right = 663.0
 margin_bottom = 116.0
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 3 )
 
 [node name="Margin" type="MarginContainer" parent="Control/Margin/Panel"]
 margin_top = 4.00473
 margin_right = 643.0
 margin_bottom = 101.885
-custom_constants/margin_right = 10
+custom_constants/margin_right = 25
 custom_constants/margin_top = 5
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 5
@@ -108,12 +111,12 @@ custom_constants/margin_bottom = 5
 [node name="VBx" type="VBoxContainer" parent="Control/Margin/Panel/Margin"]
 margin_left = 10.0
 margin_top = 5.0
-margin_right = 633.0
+margin_right = 618.0
 margin_bottom = 92.0
 alignment = 1
 
 [node name="LblTitle" type="Label" parent="Control/Margin/Panel/Margin/VBx"]
-margin_right = 623.0
+margin_right = 608.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -123,12 +126,13 @@ clip_text = true
 
 [node name="LblMsg" type="Label" parent="Control/Margin/Panel/Margin/VBx"]
 margin_top = 30.0
-margin_right = 623.0
+margin_right = 608.0
 margin_bottom = 87.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
 custom_constants/line_spacing = -2
 text = "Este es un mensaje de prueba... Con mucho texto como para partir la línea... Etc... Etc... Con un máximo de 2. El resto de texto se ocultará"
+valign = 1
 autowrap = true
 clip_text = true
 
@@ -142,7 +146,7 @@ animated = true
 action = "ui_accept"
 
 [node name="HBxHelp" type="HBoxContainer" parent="Control"]
-modulate = Color( 1, 1, 1, 0.352941 )
+modulate = Color( 1, 1, 1, 0.756863 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -92.0
@@ -174,20 +178,21 @@ margin_left = 20.0
 margin_top = 7.0
 margin_right = 68.0
 margin_bottom = 33.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "SKIP"
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Control"]
-position = Vector2( 592, -8 )
-shape = SubResource( 3 )
+position = Vector2( 550.311, -8 )
+shape = SubResource( 5 )
 action = "ui_select"
 
 [node name="TouchScreenButton2" type="TouchScreenButton" parent="Control"]
 position = Vector2( -8, 56 )
-shape = SubResource( 4 )
+shape = SubResource( 6 )
 action = "ui_accept"
 
 [node name="Tween" type="Tween" parent="."]
+
 [connection signal="script_ended" from="." to="." method="_on_DialogBox_script_ended"]
 
 [editable path="Control/HBxHelp/ButtonKeyGamepadIcon"]

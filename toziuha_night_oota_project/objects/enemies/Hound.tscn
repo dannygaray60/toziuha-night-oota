@@ -1,0 +1,246 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://assets/sprites/enemy_hound.png" type="Texture" id=1]
+[ext_resource path="res://objects/enemies/Hound.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 14.4323, 8.78378 )
+
+[sub_resource type="RayShape2D" id=25]
+length = 10.0
+
+[sub_resource type="Animation" id=4]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.7, 0.8, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 17, 18, 19, 20, 21, 22, 23 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "fall"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 13, 14 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 6.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.3, 0.6, 0.7, 0.8, 1.5, 1.6, 1.7, 2.6, 2.7, 2.8, 3.4, 3.5, 3.6, 3.9, 4.1, 4.7, 4.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 3, 4, 5, 3, 4, 5, 2, 1, 0, 1, 2, 1, 2 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "jump"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 10, 12 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "pos_fall"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 15, 16 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "run"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 9, 10 ]
+}
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 117.246, 68.1332 )
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "dead"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "fall"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "jump"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "pos_fall"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=19]
+states/dead/node = SubResource( 9 )
+states/dead/position = Vector2( 323, 248.333 )
+states/fall/node = SubResource( 10 )
+states/fall/position = Vector2( 809.667, 196.333 )
+states/idle/node = SubResource( 11 )
+states/idle/position = Vector2( 567, 136.333 )
+states/jump/node = SubResource( 12 )
+states/jump/position = Vector2( 755, 80.3333 )
+states/pos_fall/node = SubResource( 21 )
+states/pos_fall/position = Vector2( 640.333, 247.444 )
+states/run/node = SubResource( 13 )
+states/run/position = Vector2( 345.667, 94.1111 )
+transitions = [ "idle", "jump", SubResource( 14 ), "idle", "run", SubResource( 15 ), "run", "idle", SubResource( 16 ), "jump", "fall", SubResource( 17 ), "idle", "dead", SubResource( 22 ), "fall", "pos_fall", SubResource( 23 ), "pos_fall", "idle", SubResource( 24 ) ]
+start_node = "idle"
+end_node = "dead"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=20]
+
+[node name="CursedHound" type="KinematicBody2D" groups=[
+"enemies",
+]]
+collision_layer = 4
+collision_mask = 25
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -8.823 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -0.003, -26.012 )
+texture = ExtResource( 1 )
+hframes = 24
+frame = 5
+
+[node name="AreaDetectObstacle" type="Area2D" parent="Sprite"]
+position = Vector2( -27.7277, 17.7572 )
+collision_layer = 4
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaDetectObstacle"]
+rotation = 1.5708
+shape = SubResource( 25 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/dead = SubResource( 4 )
+anims/fall = SubResource( 5 )
+anims/idle = SubResource( 2 )
+anims/jump = SubResource( 6 )
+anims/pos_fall = SubResource( 8 )
+anims/run = SubResource( 7 )
+
+[node name="AreaDetectPlayer" type="Area2D" parent="."]
+position = Vector2( 0, 35 )
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDetectPlayer"]
+position = Vector2( 0.650543, -0.943878 )
+shape = SubResource( 3 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 19 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+process_mode = 0
+parameters/playback = SubResource( 20 )
+
+[node name="TimerChangeFacing" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( 1.40307, -7.85723 )
+scale = Vector2( 9.67102, 5.32148 )
+
+[node name="TimerHurt" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+__meta__ = {
+"_editor_description_": "activado al ser herido, mientras esté activo no podrá ser herido"
+}
+
+[connection signal="body_entered" from="Sprite/AreaDetectObstacle" to="." method="_on_AreaDetectObstacle_body_entered"]
+[connection signal="body_exited" from="Sprite/AreaDetectObstacle" to="." method="_on_AreaDetectObstacle_body_exited"]
+[connection signal="body_entered" from="AreaDetectPlayer" to="." method="_on_AreaDetectPlayer_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="timeout" from="TimerHurt" to="." method="_on_TimerHurt_timeout"]

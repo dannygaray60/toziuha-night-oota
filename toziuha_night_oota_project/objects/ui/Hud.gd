@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+var can_quicksave = true
+
 var can_pause = true
 
 var hp_danger_bar_sprite = preload("res://assets/sprites/hp_bar_danger.png")
@@ -79,14 +81,26 @@ func pause_menu_opt_selected(opt):
 	match opt:
 		"continue":
 			pause_game()
-		"saveandexit":
+		"exit":
 			ControlsOnscreen.show_buttons(false)
 			Vars.set_vars()
 			get_tree().paused = false
 			SceneChanger.change_scene("res://screens/MainMenu.tscn")
+		"saveandexit":
+			if Savedata.save_savedata("quicksave") == OK:
+				ControlsOnscreen.show_buttons(false)
+				Vars.set_vars()
+				get_tree().paused = false
+				SceneChanger.change_scene("res://screens/MainMenu.tscn")
 		"help":
 			$ControlPause/ControlHelp.visible = true
 			$ControlPause/ControlHelp/Margin/HBx/VBx/BtnCloseHelpPanel.grab_focus()
+		"open_exitpanel":
+			$ControlPause/ControlExit/VBx/VBx/BtnQuickSave.focus()
+			$ControlPause/ControlExit.visible = true
+		"close_exitpanel":
+			$ControlPause/MarginContainer/HBoxContainer/BtnContinue.focus()
+			$ControlPause/ControlExit.visible = false
 		"close_help":
 			$ControlPause/ControlHelp.visible = false
 			$ControlPause/MarginContainer/HBoxContainer/BtnContinue.grab_focus()
@@ -96,11 +110,19 @@ func pause_game():
 		return
 	if get_tree().paused:
 		$ControlPause/ControlHelp.visible = false
+		$ControlPause/ControlExit.visible = false
 		Audio.play_sfx("btn_cancel")
 		get_tree().paused = false
 	else:
 		Audio.play_sfx("btn_accept")
 		get_tree().paused = true
 	update_pause_stats()
+	if can_quicksave:
+		$ControlPause/ControlExit/VBx/VBx/BtnQuickSave.disabled = false
+	else:
+		$ControlPause/ControlExit/VBx/VBx/BtnQuickSave.disabled = true
 	$ControlPause.visible = get_tree().paused
 	$ControlPause/MarginContainer/HBoxContainer/BtnContinue.focus()
+
+func show_flash():
+	$ControlFlash/AnimationPlayer.play("flash")

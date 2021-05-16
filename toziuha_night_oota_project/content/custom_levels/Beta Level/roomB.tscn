@@ -59,7 +59,7 @@ destiny_door = "DoorLeft"
 position = Vector2( -33, 24 )
 
 [node name="Xandria" parent="." index="15" instance=ExtResource( 6 )]
-position = Vector2( -624, -144 )
+position = Vector2( 605.846, 367.839 )
 limit_left_camera = -640
 limit_top_camera = 128
 limit_right_camera = 640
@@ -74,6 +74,7 @@ shape = SubResource( 1 )
 [node name="rachel demo1" type="Sprite" parent="." index="17"]
 position = Vector2( -584, 250 )
 texture = ExtResource( 8 )
+
 [connection signal="body_entered" from="AreaShowRachelDialogue" to="AreaShowRachelDialogue" method="_on_AreaShowRachelDialogue_body_entered"]
 
 [editable path="DoorRight"]

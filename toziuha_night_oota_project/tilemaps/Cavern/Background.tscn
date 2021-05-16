@@ -6,6 +6,7 @@
 [node name="Background" type="ParallaxBackground"]
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+modulate = Color( 0.470588, 0.470588, 0.470588, 1 )
 motion_scale = Vector2( 0.3, 0.2 )
 motion_mirroring = Vector2( 192, 288 )
 
@@ -18,6 +19,7 @@ position = Vector2( 480, 144 )
 texture = ExtResource( 1 )
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+modulate = Color( 0.796078, 0.796078, 0.796078, 1 )
 motion_scale = Vector2( 1, 0 )
 motion_mirroring = Vector2( 512, 0 )
 

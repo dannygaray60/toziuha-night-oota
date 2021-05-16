@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/boss_defeated_jingle.ogg-cc384f80d98ae26de71cb0f6949277e0.oggstr"
+
+[deps]
+
+source_file="res://assets/sfx/boss_defeated_jingle.ogg"
+dest_files=[ "res://.import/boss_defeated_jingle.ogg-cc384f80d98ae26de71cb0f6949277e0.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

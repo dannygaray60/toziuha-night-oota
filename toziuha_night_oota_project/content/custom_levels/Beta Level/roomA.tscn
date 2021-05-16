@@ -27,7 +27,7 @@ tile_data = PoolIntArray( -262019, 0, 65536, -262018, 0, 65550, -196483, 0, 1310
 [node name="Background" parent="." index="3" instance=ExtResource( 3 )]
 
 [node name="Xandria" parent="." index="4" instance=ExtResource( 4 )]
-position = Vector2( 32, 236 )
+position = Vector2( 20.0308, 239.937 )
 limit_left_camera = 0
 limit_top_camera = 0
 limit_right_camera = 2016
@@ -169,6 +169,7 @@ position = Vector2( 1007.55, 104 )
 
 [node name="RelicKey" parent="." index="38" instance=ExtResource( 13 )]
 position = Vector2( 1921.17, 152 )
+
 [connection signal="body_entered" from="Area2Daboutpotions" to="Area2Daboutpotions" method="_on_Area2Daboutpotions_body_entered"]
 [connection signal="body_entered" from="Area2Daboutpoison" to="Area2Daboutpoison" method="_on_Area2Daboutpotions_body_entered"]
 

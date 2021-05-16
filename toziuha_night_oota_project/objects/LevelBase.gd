@@ -6,10 +6,12 @@ export var title_room = ""
 
 export(String, "silence","rondo_of_darkness","nameless_symphony", "cave_theme") var music = "silence"
 
-var player = null
+var player = null	
 
 func _ready():
 	
+	get_player()
+
 	#obtener el path de la escena, luego el archivo, 
 	#despues se elimina la extensión para solo tener el nombre de archivo
 	Vars.player["current_room"] = get_tree().current_scene.filename.get_file().replace(".tscn","")
@@ -18,22 +20,7 @@ func _ready():
 		Audio.stop_music()
 	else:
 		Audio.play_music(music)
-	
-	#obtener al jugador
-	player = get_tree().get_nodes_in_group("player")
-	
-	#si no se ha agredado un solo jugador...
-	if player.size() != 1:
-		print("Please Add a playable character")
-		return
-	
-	#get the player's node
-	player = player[0]
-	#connect signals
-	player.connect("damaged",self,"_on_player_damage")
-	player.connect("dead",self,"_on_player_death")
-	player.connect("stats_changed",self,"_on_stats_changed")
-	
+
 	#dar un poco de tiempo antes de mostrar cartel
 	$Timer.start()
 	yield($Timer,"timeout")
@@ -50,6 +37,23 @@ func _ready():
 	if Vars.map_object != null:
 		var map_instance = Vars.map_object.instance()
 		$Hud/ControlPause/ControlMap.add_child(map_instance)
+		
+#obtener la referencia de player como nodo, o retornará null
+func get_player():
+	if player == null:
+		#obtener al jugador
+		player = get_tree().get_nodes_in_group("player")
+		#si no se ha agredado un solo jugador...
+		if player.size() != 1:
+			print("Please Add a playable character")
+		else:
+			#get the player's node
+			player = player[0]
+			#connect signals
+			player.connect("damaged",self,"_on_player_damage")
+			player.connect("dead",self,"_on_player_death")
+			player.connect("stats_changed",self,"_on_stats_changed")
+	return player
 
 #cuando jugador pierde stamina
 func _on_stats_changed():
@@ -61,16 +65,21 @@ func _on_player_damage():
 
 #al morir
 func _on_player_death():
-	$FadeBlack/Tween.interpolate_property($FadeBlack/ColorRect,"color",Color(0,0,0,0),Color(0,0,0,1),5,
+	$FadeBlack/Tween.interpolate_property($FadeBlack/ColorRect,"color",Color(0,0,0,0),Color(0,0,0,1),3,
 	Tween.TRANS_LINEAR,Tween.TRANS_LINEAR)
 	$FadeBlack/Tween.start()
 
 #cuando terminó el fade al morir
 func _on_Tween_tween_all_completed():
-	Vars.set_vars()
-	# warning-ignore:return_value_discarded
-#	get_tree().reload_current_scene()
-	SceneChanger.change_scene("res://test/test ruins abandoned map1/main.tscn")
+	
+	#si no hay partida guardada (desde estatua) se reinicia el nivel
+	if !Savedata.has_savefile("savegame"):
+		Vars.set_vars()
+		SceneChanger.change_scene("%s/%s.tscn"%[Vars.level_dir_path,Vars.level_main_scene])
+	else:
+		if Savedata.load_savedata("savegame") == OK:
+			Vars.loaded_from_statue_save = true
+			SceneChanger.change_scene("%s/%s.tscn"%[Vars.level_dir_path,Vars.player["current_room"]])
 	
 
 #mostrar botones tactiles de acuerdo a configuracion

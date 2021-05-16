@@ -43,6 +43,7 @@ tracks/1/keys = {
 margin_right = 16.0
 margin_bottom = 16.0
 rect_min_size = Vector2( 16, 16 )
+mouse_filter = 2
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -53,14 +54,14 @@ action = "ui_cancel"
 [node name="pressed" type="Sprite" parent="."]
 position = Vector2( 8, 8 )
 texture = ExtResource( 2 )
-vframes = 14
 hframes = 4
+vframes = 14
 
 [node name="normal" type="Sprite" parent="."]
 position = Vector2( 8, 8 )
 texture = ExtResource( 1 )
-vframes = 14
 hframes = 4
+vframes = 14
 
 [node name="Label" type="Label" parent="."]
 visible = false

@@ -129,6 +129,7 @@ one_shot = true
 __meta__ = {
 "_editor_description_": "activado al ser herido, mientras esté activo no podrá ser herido"
 }
+
 [connection signal="body_entered" from="Sprite/AreaDetectPlayer" to="." method="_on_AreaDetectPlayer_body_entered"]
 [connection signal="body_exited" from="Sprite/AreaDetectPlayer" to="." method="_on_AreaDetectPlayer_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/level_end_jingle.ogg-51a5903d5ee382f7b55751bcf74ea3b5.oggstr"
+
+[deps]
+
+source_file="res://assets/sfx/level_end_jingle.ogg"
+dest_files=[ "res://.import/level_end_jingle.ogg-51a5903d5ee382f7b55751bcf74ea3b5.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

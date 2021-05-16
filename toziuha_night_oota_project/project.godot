@@ -35,13 +35,14 @@ config/quit_on_go_back=false
 
 [autoload]
 
-FilterVideo="*res://autoload/FilterVideo.tscn"
 SceneChanger="*res://autoload/SceneChanger.tscn"
 ScreenDebugger="*res://addons/screen_debugger/S_ScreenDebugger.gd"
 Functions="*res://scripts/functions.gd"
 Audio="*res://autoload/Audio.tscn"
 Vars="*res://scripts/vars.gd"
+Savedata="*res://scripts/savedata.gd"
 Timers="*res://autoload/Timers.tscn"
+FilterVideo="*res://autoload/FilterVideo.tscn"
 ControlsOnscreen="*res://objects/ui/ControlsOnscreen.tscn"
 DialogBox="*res://objects/ui/DialogBox.tscn"
 
@@ -49,8 +50,9 @@ DialogBox="*res://objects/ui/DialogBox.tscn"
 
 window/size/width=683
 window/size/height=384
-window/size/test_width=1366
-window/size/test_height=768
+window/size/test_width=683
+window/size/test_height=384
+window/vsync/vsync_via_compositor=true
 window/handheld/orientation="sensor_landscape"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
@@ -151,8 +153,9 @@ locale_filter=[ 0, [  ] ]
 quality/driver/driver_name="GLES2"
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
-quality/2d/use_pixel_snap=true
+2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_environment="res://default_env.tres"
-2d/snapping/use_gpu_pixel_snap=true
+quality/dynamic_fonts/use_oversampling=false
+quality/2d/use_pixel_snap=true

@@ -1,8 +1,8 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=2]
-[ext_resource path="res://assets/img/violet_trees.png" type="Texture" id=3]
+[ext_resource path="res://assets/img/purple_demon_forest.png" type="Texture" id=3]
 [ext_resource path="res://objects/ui/SubButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/sprites/icons_buttons_gamepad_sheet_pressed.png" type="Texture" id=6]
@@ -10,10 +10,11 @@
 [ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=8]
 [ext_resource path="res://screens/EditGamepadIcons.gd" type="Script" id=9]
 [ext_resource path="res://objects/ui/Panel_Purple.tres" type="StyleBox" id=10]
+[ext_resource path="res://scripts/control_help_icons_screen_set_visible.gd" type="Script" id=11]
 [ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=12]
 [ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=13]
 
-[sub_resource type="StyleBoxTexture" id=2]
+[sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 90, 47 )
 margin_left = 18.9633
@@ -21,7 +22,7 @@ margin_right = 18.9107
 margin_top = 14.0969
 margin_bottom = 14.0
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=2]
 size = 48
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
@@ -29,19 +30,19 @@ extra_spacing_top = -7
 extra_spacing_bottom = -7
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxEmpty" id=10]
+[sub_resource type="StyleBoxEmpty" id=3]
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 8 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.172549, 0, 0, 0.556863 )
-
-[sub_resource type="StyleBoxEmpty" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
-[sub_resource type="StyleBoxTexture" id=11]
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="StyleBoxTexture" id=8]
 content_margin_left = 6.0
 content_margin_right = 0.0
 texture = ExtResource( 7 )
@@ -51,9 +52,9 @@ margin_right = 2.05619
 margin_top = 2.0281
 margin_bottom = 2.0562
 
-[sub_resource type="StyleBoxEmpty" id=8]
-
 [sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=10]
 
 [node name="EditGamepadIcons" type="Control"]
 anchor_right = 1.0
@@ -83,8 +84,8 @@ margin_right = 74.5
 margin_bottom = 69.0969
 grow_horizontal = 2
 size_flags_horizontal = 4
-custom_styles/normal = SubResource( 2 )
-custom_fonts/font = SubResource( 3 )
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "ICONS"
 align = 1
 __meta__ = {
@@ -357,7 +358,7 @@ margin_top = 341.0
 margin_right = 367.0
 margin_bottom = 401.0
 rect_min_size = Vector2( 0, 60 )
-custom_styles/separator = SubResource( 10 )
+custom_styles/separator = SubResource( 3 )
 
 [node name="PanelLbl" parent="Margin/HBx/VBx" instance=ExtResource( 5 )]
 margin_top = 413.0
@@ -379,7 +380,7 @@ margin_left = 10.0
 margin_top = 10.0
 margin_right = 357.0
 margin_bottom = 23.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 4 )
 text = "SELECTNEWBTNICONFORX"
 __meta__ = {
 "_editor_description_": ""
@@ -396,7 +397,7 @@ margin_top = 70.0
 margin_right = 257.0
 margin_bottom = 307.0
 size_flags_vertical = 0
-custom_styles/panel = SubResource( 4 )
+custom_styles/panel = SubResource( 5 )
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/Margin/PanelIcons"]
 margin_right = 257.0
@@ -419,18 +420,18 @@ columns = 6
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/0"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -440,18 +441,18 @@ margin_left = 39.0
 margin_right = 71.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/1"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -461,18 +462,18 @@ margin_left = 78.0
 margin_right = 110.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/2"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -482,18 +483,18 @@ margin_left = 117.0
 margin_right = 149.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/3"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -503,18 +504,18 @@ margin_left = 156.0
 margin_right = 188.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/4"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -524,18 +525,18 @@ margin_left = 195.0
 margin_right = 227.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/5"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -545,18 +546,18 @@ margin_top = 39.0
 margin_right = 32.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/6"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -567,18 +568,18 @@ margin_top = 39.0
 margin_right = 71.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/7"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -589,18 +590,18 @@ margin_top = 39.0
 margin_right = 110.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/8"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -611,18 +612,18 @@ margin_top = 39.0
 margin_right = 149.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/9"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -633,18 +634,18 @@ margin_top = 39.0
 margin_right = 188.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/10"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -655,18 +656,18 @@ margin_top = 39.0
 margin_right = 227.0
 margin_bottom = 71.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/11"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -676,18 +677,18 @@ margin_top = 78.0
 margin_right = 32.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/12"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -698,18 +699,18 @@ margin_top = 78.0
 margin_right = 71.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/13"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -720,18 +721,18 @@ margin_top = 78.0
 margin_right = 110.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/14"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -742,18 +743,18 @@ margin_top = 78.0
 margin_right = 149.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/15"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -764,18 +765,18 @@ margin_top = 78.0
 margin_right = 188.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/16"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -786,18 +787,18 @@ margin_top = 78.0
 margin_right = 227.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/17"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -807,18 +808,18 @@ margin_top = 117.0
 margin_right = 32.0
 margin_bottom = 149.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/18"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -829,18 +830,18 @@ margin_top = 117.0
 margin_right = 71.0
 margin_bottom = 149.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/19"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -851,18 +852,18 @@ margin_top = 117.0
 margin_right = 110.0
 margin_bottom = 149.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/20"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -873,18 +874,18 @@ margin_top = 117.0
 margin_right = 149.0
 margin_bottom = 149.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/21"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -895,18 +896,18 @@ margin_top = 117.0
 margin_right = 188.0
 margin_bottom = 149.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/22"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -917,18 +918,18 @@ margin_top = 117.0
 margin_right = 227.0
 margin_bottom = 149.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/23"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -938,18 +939,18 @@ margin_top = 156.0
 margin_right = 32.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/24"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -960,18 +961,18 @@ margin_top = 156.0
 margin_right = 71.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/25"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -982,18 +983,18 @@ margin_top = 156.0
 margin_right = 110.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/26"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -1004,18 +1005,18 @@ margin_top = 156.0
 margin_right = 149.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/27"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -1026,18 +1027,18 @@ margin_top = 156.0
 margin_right = 188.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/28"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -1048,18 +1049,18 @@ margin_top = 156.0
 margin_right = 227.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/29"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -1069,18 +1070,18 @@ margin_top = 195.0
 margin_right = 32.0
 margin_bottom = 227.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/30"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -1091,18 +1092,18 @@ margin_top = 195.0
 margin_right = 71.0
 margin_bottom = 227.0
 rect_min_size = Vector2( 32, 32 )
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 6 )
-custom_styles/focus = SubResource( 11 )
-custom_styles/disabled = SubResource( 8 )
-custom_styles/normal = SubResource( 9 )
+custom_styles/hover = SubResource( 6 )
+custom_styles/pressed = SubResource( 7 )
+custom_styles/focus = SubResource( 8 )
+custom_styles/disabled = SubResource( 9 )
+custom_styles/normal = SubResource( 10 )
 
 [node name="Sprite" type="Sprite" parent="Margin/HBx/Margin/PanelIcons/Margin/GridBtns/31"]
 position = Vector2( 16, 16 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 14
 hframes = 4
+vframes = 14
 __meta__ = {
 "_editor_description_": ""
 }
@@ -1117,6 +1118,7 @@ margin_bottom = 49.0
 grow_horizontal = 0
 custom_constants/separation = 18
 alignment = 2
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1137,7 +1139,7 @@ margin_left = 20.0
 margin_top = 13.0
 margin_right = 56.0
 margin_bottom = 26.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 4 )
 text = "SELECT"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBxHelp2"]
@@ -1155,7 +1157,7 @@ margin_left = 20.0
 margin_top = 13.0
 margin_right = 56.0
 margin_bottom = 26.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 4 )
 text = "RETURN"
 
 [node name="ControlRemap" type="Control" parent="."]
@@ -1238,6 +1240,7 @@ custom_fonts/font = ExtResource( 13 )
 text = "MSG_OR_PRESS_ESC_TO_CLOSE"
 align = 1
 valign = 1
+
 [connection signal="pressed" from="Margin/HBx/VBx/Panel0/Margin/VBx/BtnMenu" to="." method="_on_BtnMenu_pressed"]
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnJump/Btn" to="." method="reasign_icon_button" binds= [ "ui_accept", "BtnJump" ]]
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnAttack/Btn" to="." method="reasign_icon_button" binds= [ "ui_cancel", "BtnAttack" ]]

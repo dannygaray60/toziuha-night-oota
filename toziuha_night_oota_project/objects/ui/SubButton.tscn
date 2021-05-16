@@ -52,6 +52,7 @@ one_shot = true
 __meta__ = {
 "_editor_description_": "activado cuando hay focus o press"
 }
+
 [connection signal="focus_entered" from="." to="." method="_on_SubButton_focus_entered"]
 [connection signal="focus_exited" from="." to="." method="_on_SubButton_focus_exited"]
 [connection signal="pressed" from="." to="." method="_on_SubButton_pressed"]

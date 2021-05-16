@@ -1,4 +1,15 @@
 keys;en;es
+ATK;Attack;Ataque
+DEF;Defense;Defensa
+HP;Health;Salud
+SKILLDOUBLEJUMP;Skill:\nDouble Jump;Habilidad:\nSalto Doble
+SKILLSLIDE;Skill:\nSlide;Habilidad:\nDeslizarse
+SKILLBACKDASH;Skill:\nBackdash;Habilidad:\nRetropropulsión
+POTIONLIMIT;Potion Limit;Límite de poción
+EMLIMIT;EM Limit;Límite de EM
+SAVEPOINT;Save Point (from statues);Punto de guardado (desde estatuas)
+QUICKLOAD;Quick Load;Cargado rápido
+NEWGAME;New Game;Nueva Partida
 PHRASEDONTDOWNLVLS;You don't have any level downloaded.;Actualmente no ha descargado ningún nivel personalizado.
 EMPTYLIST;Empty List;Lista Vacía
 DOWNLOADLVLS;Download Levels;Descargar Niveles
@@ -48,7 +59,10 @@ MUSIC;Music;Música
 VOICE;Voice;Voz
 SHOWBUTTONS;Show Buttons;Mostrar Botones
 BUTTONSPOSITION;Buttons Position;Posición de Botones
-SAVEANDEXIT;Save & Exit;Guardar y Salir
+SAVEANDEXIT;Quick Save & Exit;Guardar rápido y Salir
+EXITNOSAVE;Exit without save;Salir sin guardar
+EXITANDGOMAINMENU;Exit and go to main menu;Salir de la partida y regresar al menú principal
+SAVEDGAME;Saved Game;Partida Guardada
 HELP;Help;Ayuda
 DEFAULT;Default;Por Defecto
 SAVE;Save;Guardar
@@ -62,12 +76,17 @@ HIDE_BTN_ICNS;Hide Icons;Ocultar Iconos
 POTION;Potion;Poción
 USE_POTION;Use Potion;Usar Poción
 SLIDE;Slide;Deslizarse
-BACKWARD;Backward;Retroceder (esquivar)
+BACKWARD;Backdash;Retropropulsión
+HPRESTORED;Restored Health;Salud Restaurada
 THROW_SUBWEAPON;Throw Subweapon;Lanzar Subarma
 INFECTEDSLIME;Infected Slime;Slime Infectado
 SKELETON;Skeleton;Esqueleto
 INFECTEDSKELETON;Infected Skeleton;Esqueleto Infectado
 ZOMBIE;Zombie;Zombi
+BAT;Bat;Murciélago
+CURSEDHOUND;Cursed Hound;Sabueso Maldito
+DEMONSKULLHEAD;Demon Skull;Calavera Demoníaca
+BLOODBAT;Blood Bat;Múrciélago Sangriento
 IRONPLUS1;Iron (em) +1;Hierro (em) +1
 IRONPLUS5;Iron (em) +5;Hierro (em) +5
 WEAPONLVL;Weapon Lvl%d;Arma Nivel %d
@@ -80,10 +99,13 @@ PRESS;Press;Presiona
 RELEASE;Release;Suelta
 PHRASE_DOUBLEJUMP;Now you can make a double jump.;Ahora puedes hacer un segundo salto.
 PHRASE_SLIDE;Press «Down» + «Jump» to slide.;Presiona «Abajo» + «Salto» para deslizarte.
-PHRASE_BACKDASH;Go Backward with «Backdash» button.;Retrocede rápidamente con el botón de «Esquivar».
+PHRASE_BACKDASH;Go Backward with «Backdash» button.;Retrocede rápidamente con el botón de «Retropropulsión».
 LOCKEDDOOR;Locked Door;Puerta Bloqueada.
 PHRASEATKINCREASED;Your attack power has increased to +%d.;Tu poder de ataque a aumentado a +%d.
 PHRASEDEFINCREASED;Your defense has increased to +%d.;Tu defensa a aumentado a +%d.
 PHRASEHPINCREASED;Your max health points (hp) has increased to +%d.;La máxima capacidad de puntos de salud (hp) a aumentado a +%d.
 PHRASEEMINCREASED;Your max elemental material (em) has increased to +%d.;Tu máxima capacidad de material elemental (em) a aumentado a +%d.
 PHRASEPOTIONINCREASED;Your max of potions that you can have has increased to %d;El máximo de pociones que puedes llevar a aumentado a %d.
+PHRASEWANTLOADORNEWGAME;Do you want continue from a save file or start new game?;¿Desea continuar desde un punto de guardado o comenzar de nuevo?
+PHRASEABOUTQUICKSAVE;Note: The quick save just create a temporal file. If you lose all health points (HP) the last save point (from statues) will be loaded, otherwise the whole level will be restarted.;Nota: El guardado rápido crea un archivo temporal que se elimina al ser cargado. Al perder toda la salud (HP) solo puede regresar a los puntos de guardado realizados con las estatuas, en caso contrario el nivel entero será reiniciado.
+PHRASERESTARTTOAPPLYCHANGES;The game must be restarted to apply changes...;El juego deber ser reiniciado para aplicar los cambios...

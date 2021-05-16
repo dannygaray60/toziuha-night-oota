@@ -32,35 +32,26 @@ var chasing = false
 
 #funcion para comprobar la posicion de personaje y colocar el facing 
 #de frente al jugador
-func check_player_position():
-	#agregar referencia del jugador
-	if player == null:
-		player = get_tree().get_nodes_in_group("player")
-		#si no se ha agredado un solo jugador...
-		if player.size() == 1:
-			#get the player's node
-			player = player[0]
-			#conectar señal de muerte
-			player.connect("dead",self,"on_player_death")
-		else:
-			player = null
-	#hacer comprobacion de posicion
-	if player != null and state != "dead":
-		if player.global_position.x > global_position.x:
-			facing = 1
-		else:
-			facing = -1
+func update_facing():
 
-	#volteo de sprite
-	$Sprite.scale.x = -1 * facing
-	
-	$Sprite/RayCastFront.enabled = false
+	if state != "dead":
 
-	if type_pattern == "chaser":
-		change_state("walk")
+		facing = Functions.get_new_facing_with_player(self,player)
+
+		#volteo de sprite
+		$Sprite.scale.x = -1 * facing
+		
+		$Sprite/RayCastFront.enabled = false
+
+		if type_pattern == "chaser":
+			change_state("walk")
 
 func _ready():
-	check_player_position()
+	
+	player = Functions.get_main_level_scene().get_player()
+	
+	update_facing()
+
 	if type_pattern == "simple":
 		change_state("walk")
 	else:
@@ -109,7 +100,7 @@ func _physics_process(delta):
 			#al chocar poner idle, el enemigo a veces no se mueve
 			#cuando detecta jugador, por eso se desactiva el raycas
 			#y se activa de nuevo al voltear sprite
-			#en check_player_position
+			#en update_facing
 			$Sprite/RayCastFront.enabled = false
 			change_state("idle")
 		else:
@@ -158,8 +149,16 @@ func hurt(damage,weapon_position):
 
 func die():
 	if state != "dead":
-		velocity.x = 0
+		
 		change_state("dead")
+		velocity.x = 0
+		
+		#desactivar colisiones
+		set_collision_layer_bit(2,false)
+		set_collision_mask_bit(0,false)
+		set_collision_mask_bit(4,false)
+		
+		
 		if id in ["skeleton","infected_skeleton"]:
 			Audio.play_sfx("smash_wood_pieces")
 		elif id in ["zombie"]:
@@ -167,22 +166,14 @@ func die():
 		elif id in ["slime","infected_slime"]:
 			Audio.play_sfx("hit3")
 		
-		#spawnear item como recompensa
-		Functions.spawn_drop_item(list_items[0],position)
 		#mostrar el nombre del enemigo eliminado
 		Functions.show_hud_notif(tr(Vars.enemy[id]["name"]))
-		
-		#desactivar colisiones
-		set_collision_layer_bit(2,false)
-		set_collision_mask_bit(0,false)
-		set_collision_mask_bit(4,false)
-		set_collision_layer_bit(2,false)
 		
 		#spawnear item como recompensa
 		if !list_items.empty():
 			randomize()
 			list_items.shuffle()
-			Functions.spawn_drop_item(list_items[0],position)
+			Functions.spawn_drop_item(list_items[randi()%list_items.size()-1],position)
 
 #cambio de estados
 func change_state(new_state):
@@ -198,14 +189,14 @@ func change_state(new_state):
 
 #entra o sale de pantalla (o que este cerca)
 func _on_VisibilityEnabler2D_screen_entered():
-	check_player_position()
+	update_facing()
 
 func _on_VisibilityEnabler2D_screen_exited():
 	pass
 
 #cambiar facing mediante timer activado en physics process
 func _on_TimerToChangeFacing_timeout():
-	check_player_position()
+	update_facing()
 
 #player entró en area de deteccion del enemigo
 func _on_AreaDetectPlayer_body_entered(body):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen1.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen20.png" type="Texture" id=2]
@@ -6,24 +6,27 @@
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen16.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen5.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen10.png" type="Texture" id=6]
-[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen3.png" type="Texture" id=7]
-[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen14.png" type="Texture" id=8]
-[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen13.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen7.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen6.png" type="Texture" id=11]
-[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen12.png" type="Texture" id=12]
-[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen4.png" type="Texture" id=13]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen15.png" type="Texture" id=14]
-[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen2.png" type="Texture" id=15]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen11.png" type="Texture" id=16]
 [ext_resource path="res://objects/ui/ControlsOnscreen.gd" type="Script" id=17]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
 
 [node name="ControlsOnscreen" type="CanvasLayer"]
 layer = 0
 script = ExtResource( 17 )
 
+[node name="DpadButtonShape" type="CollisionPolygon2D" parent="."]
+position = Vector2( 640, -53.4481 )
+polygon = PoolVector2Array( 10.6529, -3.92694, 4.89859, -11.4671, -25.4081, -15.4041, -25.2506, 17.3538, 5.29544, 13.2368, 10.7521, 6.09351, 17.2225, 1.03955 )
+__meta__ = {
+"_editor_description_": "este shape se copiará mediante codigo a cada uno de los shapes de los botones del dpad"
+}
+
 [node name="Dpad" type="Node2D" parent="."]
-position = Vector2( 136, 248 )
+position = Vector2( 116.253, 285.218 )
 
 [node name="ui_left" type="Position2D" parent="Dpad"]
 position = Vector2( -56, 1 )
@@ -31,184 +34,74 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="TextureButton" type="TextureButton" parent="Dpad/ui_left"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -23.0
-margin_right = 20.0
-margin_bottom = 17.0
-rect_min_size = Vector2( 40, 40 )
-rect_scale = Vector2( 3, 3 )
-rect_pivot_offset = Vector2( 20, 20 )
-mouse_filter = 2
-toggle_mode = true
-texture_normal = ExtResource( 1 )
-texture_pressed = ExtResource( 16 )
-texture_hover = ExtResource( 1 )
-expand = true
-stretch_mode = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Btn" type="TouchScreenButton" parent="Dpad/ui_left"]
-visible = false
-modulate = Color( 1, 1, 1, 0.705882 )
 position = Vector2( -40, -48 )
 scale = Vector2( 3, 3 )
 normal = ExtResource( 1 )
 pressed = ExtResource( 16 )
+shape = SubResource( 1 )
+passby_press = true
+action = "ui_left"
 __meta__ = {
 "_editor_description_": ""
 }
-
-[node name="Area2D" type="Area2D" parent="Dpad/ui_left"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dpad/ui_left/Area2D"]
-polygon = PoolVector2Array( 48, -2, 16, -42, 8, -42, 8, -58, -64, -58, -64, 54, 8, 54, 8, 38, 16, 38 )
 
 [node name="ui_right" type="Position2D" parent="Dpad"]
 position = Vector2( 57, 1 )
+scale = Vector2( -1, 1 )
 __meta__ = {
 "_edit_group_": true
-}
-
-[node name="TextureButton" type="TextureButton" parent="Dpad/ui_right"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -21.0
-margin_top = -24.0
-margin_right = 19.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 40, 40 )
-rect_scale = Vector2( 3, 3 )
-rect_pivot_offset = Vector2( 20, 20 )
-mouse_filter = 2
-toggle_mode = true
-texture_normal = ExtResource( 15 )
-texture_pressed = ExtResource( 12 )
-texture_hover = ExtResource( 15 )
-expand = true
-stretch_mode = 3
-__meta__ = {
-"_edit_use_anchors_": false
 }
 
 [node name="Btn" type="TouchScreenButton" parent="Dpad/ui_right"]
-visible = false
-modulate = Color( 1, 1, 1, 0.705882 )
-position = Vector2( -48, -48 )
+position = Vector2( -36.0877, -48 )
 scale = Vector2( 3, 3 )
-normal = ExtResource( 15 )
-pressed = ExtResource( 12 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 16 )
+shape = SubResource( 1 )
+passby_press = true
+action = "ui_right"
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Area2D2" type="Area2D" parent="Dpad/ui_right"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dpad/ui_right/Area2D2"]
-scale = Vector2( -1, 1 )
-polygon = PoolVector2Array( 48, -2, 16, -42, 8, -42, 8, -58, -64, -58, -64, 54, 8, 54, 8, 38, 16, 38 )
-
 [node name="ui_up" type="Position2D" parent="Dpad"]
-position = Vector2( 0, -54 )
+position = Vector2( -3.24265, -56.4749 )
+rotation = 1.5708
 __meta__ = {
 "_edit_group_": true
-}
-
-[node name="TextureButton" type="TextureButton" parent="Dpad/ui_up"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 40, 40 )
-rect_scale = Vector2( 3, 3 )
-rect_pivot_offset = Vector2( 20, 20 )
-mouse_filter = 2
-toggle_mode = true
-texture_normal = ExtResource( 7 )
-texture_pressed = ExtResource( 9 )
-texture_hover = ExtResource( 7 )
-expand = true
-stretch_mode = 3
-__meta__ = {
-"_edit_use_anchors_": false
 }
 
 [node name="Btn" type="TouchScreenButton" parent="Dpad/ui_up"]
-visible = false
-modulate = Color( 1, 1, 1, 0.705882 )
-position = Vector2( -43.6618, -43.544 )
+position = Vector2( -36.0877, -48 )
 scale = Vector2( 3, 3 )
-normal = ExtResource( 7 )
-pressed = ExtResource( 9 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 16 )
+shape = SubResource( 1 )
+passby_press = true
+action = "ui_up"
 __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Area2D3" type="Area2D" parent="Dpad/ui_up"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dpad/ui_up/Area2D3"]
-rotation = 1.5708
-polygon = PoolVector2Array( 48, -2, 16, -42, 8, -42, 8, -58, -64, -58, -64, 54, 8, 54, 8, 38, 16, 38 )
-
 [node name="ui_down" type="Position2D" parent="Dpad"]
-position = Vector2( 0, 51 )
+position = Vector2( 0, 57.1736 )
+rotation = 4.71239
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="TextureButton" type="TextureButton" parent="Dpad/ui_down"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -21.0
-margin_top = -20.0
-margin_right = 19.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 40, 40 )
-rect_scale = Vector2( 3, 3 )
-rect_pivot_offset = Vector2( 20, 20 )
-focus_mode = 0
-mouse_filter = 2
-toggle_mode = true
-texture_normal = ExtResource( 13 )
-texture_pressed = ExtResource( 8 )
-texture_hover = ExtResource( 13 )
-expand = true
-stretch_mode = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Btn" type="TouchScreenButton" parent="Dpad/ui_down"]
-visible = false
-modulate = Color( 1, 1, 1, 0.705882 )
-position = Vector2( -43.6618, -48 )
+position = Vector2( -36.0877, -48 )
 scale = Vector2( 3, 3 )
-normal = ExtResource( 13 )
-pressed = ExtResource( 8 )
+normal = ExtResource( 1 )
+pressed = ExtResource( 16 )
+shape = SubResource( 1 )
+passby_press = true
+action = "ui_down"
 __meta__ = {
 "_editor_description_": ""
 }
-
-[node name="Area2D4" type="Area2D" parent="Dpad/ui_down"]
-position = Vector2( 0, 0.455994 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Dpad/ui_down/Area2D4"]
-rotation = 4.71239
-polygon = PoolVector2Array( 48, -2, 16, -42, 8, -42, 8, -58, -64, -58, -64, 54, 8, 54, 8, 38, 16, 38 )
 
 [node name="Btn" type="Node2D" parent="."]
 
@@ -279,15 +172,3 @@ action = "ui_focus_prev"
 __meta__ = {
 "_editor_description_": ""
 }
-[connection signal="input_event" from="Dpad/ui_left/Area2D" to="." method="_on_Area2D_input_event" binds= [ "left" ]]
-[connection signal="mouse_entered" from="Dpad/ui_left/Area2D" to="." method="_on_Area2D_mouse_entered" binds= [ "left" ]]
-[connection signal="mouse_exited" from="Dpad/ui_left/Area2D" to="." method="_on_Area2D_mouse_exited" binds= [ "left" ]]
-[connection signal="input_event" from="Dpad/ui_right/Area2D2" to="." method="_on_Area2D_input_event" binds= [ "right" ]]
-[connection signal="mouse_entered" from="Dpad/ui_right/Area2D2" to="." method="_on_Area2D_mouse_entered" binds= [ "right" ]]
-[connection signal="mouse_exited" from="Dpad/ui_right/Area2D2" to="." method="_on_Area2D_mouse_exited" binds= [ "right" ]]
-[connection signal="input_event" from="Dpad/ui_up/Area2D3" to="." method="_on_Area2D_input_event" binds= [ "up" ]]
-[connection signal="mouse_entered" from="Dpad/ui_up/Area2D3" to="." method="_on_Area2D_mouse_entered" binds= [ "up" ]]
-[connection signal="mouse_exited" from="Dpad/ui_up/Area2D3" to="." method="_on_Area2D_mouse_exited" binds= [ "up" ]]
-[connection signal="input_event" from="Dpad/ui_down/Area2D4" to="." method="_on_Area2D_input_event" binds= [ "down" ]]
-[connection signal="mouse_entered" from="Dpad/ui_down/Area2D4" to="." method="_on_Area2D_mouse_entered" binds= [ "down" ]]
-[connection signal="mouse_exited" from="Dpad/ui_down/Area2D4" to="." method="_on_Area2D_mouse_exited" binds= [ "down" ]]

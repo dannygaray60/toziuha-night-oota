@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/img/iron_texture.jpg" type="Texture" id=1]
 [ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/control_help_icons_screen_set_visible.gd" type="Script" id=3]
 [ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=5]
 [ext_resource path="res://objects/ui/Panel_Purple.tres" type="StyleBox" id=6]
@@ -37,6 +38,8 @@ color = Color( 1, 1, 1, 1 )
 
 [sub_resource type="DynamicFont" id=5]
 font_data = ExtResource( 8 )
+
+[sub_resource type="ButtonGroup" id=6]
 
 [node name="SelectMap" type="Control"]
 anchor_right = 1.0
@@ -103,6 +106,7 @@ margin_top = 10.0
 margin_right = 133.0
 margin_bottom = 39.0
 text = "RETURN"
+sfx_accept_sound = "btn_cancel"
 
 [node name="PanelBtns" parent="." instance=ExtResource( 2 )]
 anchor_left = 0.5
@@ -185,13 +189,13 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 custom_constants/separation = 18
 alignment = 1
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBxHelp"]
-margin_left = 37.0
-margin_right = 125.0
+margin_right = 88.0
 margin_bottom = 40.0
 
 [node name="ButtonKeyGamepadIcon" parent="HBxHelp/HBoxContainer" instance=ExtResource( 9 )]
@@ -220,8 +224,8 @@ __meta__ = {
 }
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="HBxHelp"]
-margin_left = 143.0
-margin_right = 199.0
+margin_left = 106.0
+margin_right = 162.0
 margin_bottom = 40.0
 
 [node name="ButtonKeyGamepadIcon" parent="HBxHelp/HBoxContainer3" instance=ExtResource( 9 )]
@@ -263,23 +267,129 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Control" type="Control" parent="."]
+[node name="ControlContinue" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="ColorRect" type="ColorRect" parent="Control"]
+[node name="ColorRect" type="ColorRect" parent="ControlContinue"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0.682353 )
 
-[node name="Panel" parent="Control" instance=ExtResource( 2 )]
+[node name="Panel" parent="ControlContinue" instance=ExtResource( 2 )]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -90.0
-margin_top = -73.5
-margin_right = 90.0
-margin_bottom = 73.5
+margin_left = -258.0
+margin_top = -95.5601
+margin_right = 258.0
+margin_bottom = 95.5601
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Margin" type="MarginContainer" parent="ControlContinue/Panel"]
+margin_top = 4.00473
+margin_right = 516.0
+margin_bottom = 217.005
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBx" type="VBoxContainer" parent="ControlContinue/Panel/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 506.0
+margin_bottom = 203.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+alignment = 1
+
+[node name="Label" type="Label" parent="ControlContinue/Panel/Margin/VBx"]
+margin_right = 496.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 11 )
+custom_constants/line_spacing = -5
+text = "PHRASEWANTLOADORNEWGAME"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="HSeparator" type="HSeparator" parent="ControlContinue/Panel/Margin/VBx"]
+margin_top = 30.0
+margin_right = 496.0
+margin_bottom = 37.0
+custom_constants/separation = 7
+
+[node name="VBx" type="VBoxContainer" parent="ControlContinue/Panel/Margin/VBx"]
+margin_left = 168.0
+margin_top = 41.0
+margin_right = 327.0
+margin_bottom = 193.0
+size_flags_horizontal = 4
+custom_constants/separation = 20
+alignment = 1
+
+[node name="BtnQuickLoad" parent="ControlContinue/Panel/Margin/VBx/VBx" instance=ExtResource( 7 )]
+margin_right = 159.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../BtnNewGame")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+group = SubResource( 6 )
+text = "QUICKLOAD"
+align = 1
+
+[node name="BtnSavePoint" parent="ControlContinue/Panel/Margin/VBx/VBx" instance=ExtResource( 7 )]
+margin_top = 41.0
+margin_right = 159.0
+margin_bottom = 70.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../BtnCancel")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+group = SubResource( 6 )
+text = "SAVEPOINT"
+align = 1
+
+[node name="BtnCancel" parent="ControlContinue/Panel/Margin/VBx/VBx" instance=ExtResource( 7 )]
+margin_top = 123.0
+margin_right = 159.0
+margin_bottom = 152.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../BtnNewGame")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+group = SubResource( 6 )
+text = "CANCEL"
+align = 1
+
+[node name="BtnNewGame" parent="ControlContinue/Panel/Margin/VBx/VBx" instance=ExtResource( 7 )]
+margin_top = 82.0
+margin_right = 159.0
+margin_bottom = 111.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../BtnQuickLoad")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+group = SubResource( 6 )
+text = "NEWGAME"
+align = 1
+
 [connection signal="pressed" from="PanelReturn/MarginContainer/BtnReturn" to="." method="_on_BtnReturn_pressed"]
+[connection signal="pressed" from="ControlContinue/Panel/Margin/VBx/VBx/BtnQuickLoad" to="." method="load_level" binds= [ "quickload" ]]
+[connection signal="pressed" from="ControlContinue/Panel/Margin/VBx/VBx/BtnSavePoint" to="." method="load_level" binds= [ "savestatue" ]]
+[connection signal="pressed" from="ControlContinue/Panel/Margin/VBx/VBx/BtnCancel" to="." method="load_level" binds= [ "cancel" ]]
+[connection signal="pressed" from="ControlContinue/Panel/Margin/VBx/VBx/BtnNewGame" to="." method="load_level" binds= [ "newgame" ]]

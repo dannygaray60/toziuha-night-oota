@@ -67,6 +67,9 @@ var is_on_onewaycol = false
 #mientras sea true la funcion throw_subweapon spawneará subarma
 var can_throw = false
 
+#al ser false, el jugador no podrá moverse
+var can_move = true
+
 #limites de camara
 export var limit_left_camera = -10000000
 export var limit_top_camera = -10000000
@@ -99,8 +102,8 @@ func _ready():
 
 
 #debug
-func _process(_delta):
-	ScreenDebugger.dict["em_now"] = str(Vars.player["em_now"])
+#func _process(_delta):
+#	ScreenDebugger.dict["em_now"] = str(Vars.player["em_now"])
 #	ScreenDebugger.dict["State"] = state
 #	ScreenDebugger.dict["Anim"] = str( anim_current )
 #	ScreenDebugger.dict["Jumps"] = str( num_jumps )
@@ -187,6 +190,9 @@ func _physics_process(delta):
 
 func _get_input():
 	
+	if !can_move:
+		return
+	
 	#mientras haya un dialogo activo no podrá moverse
 	if DialogBox.active:
 		direction.x = 0
@@ -272,8 +278,8 @@ func _move():
 		velocity.x = lerp(velocity.x,direction.x*(speed*run_vel_multiplier),acceleration)
 
 func _use_health_item():
-	#si tenemos al menos una pocion y no nos estamos curando
-	if Vars.player["potion_now"] > 0 and Vars.player["condition"] != "healing":
+	#si no tenemos la vida llena, con al menos una pocion y no nos estamos curando
+	if Vars.player["hp_now"] < Vars.player["hp_max"] and Vars.player["potion_now"] > 0 and Vars.player["condition"] != "healing":
 		Vars.player["condition"] = "healing"
 		Audio.play_sfx("potion_use")
 		Vars.player["potion_now"] = Functions.get_value(Vars.player["potion_now"],"-",1)
@@ -656,6 +662,13 @@ func throw_subweapon():
 		subweapon_instance.position = $Sprite/XandriaWeapon.global_position
 		if lvl_base != null:
 			lvl_base.call_deferred("add_child",subweapon_instance)
+
+#mostrar una pequeña notificacion encima del jugador
+func show_quick_notif(txt=""):
+	$QuickNotif/Label.text = txt
+	$QuickNotif/AnimationPlayer.stop(true)
+	$QuickNotif/AnimationPlayer.play("show_quick_notif")
+
 
 #se acaba el tiempo de invencibilidad
 func _on_TimerNoHurt_timeout():

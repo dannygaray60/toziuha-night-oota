@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://objects/ui/Panel_Purple.tres" type="StyleBox" id=1]
 [ext_resource path="res://objects/ui/SubButton.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=9]
 [ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=10]
+[ext_resource path="res://scripts/control_help_icons_screen_set_visible.gd" type="Script" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 7 )
@@ -128,8 +129,8 @@ text = "Gameboy Classic"
 position = Vector2( 60, 32 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 7
 hframes = 16
+vframes = 7
 frame = 1
 __meta__ = {
 "_editor_description_": "z index : 0"
@@ -139,8 +140,8 @@ __meta__ = {
 position = Vector2( 132, 32 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 7
 hframes = 16
+vframes = 7
 frame = 17
 __meta__ = {
 "_editor_description_": "z index : 0"
@@ -150,8 +151,8 @@ __meta__ = {
 position = Vector2( 60, 136 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 7
 hframes = 16
+vframes = 7
 frame = 58
 __meta__ = {
 "_editor_description_": "z index : 0"
@@ -161,8 +162,8 @@ __meta__ = {
 position = Vector2( 132, 110 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-vframes = 7
 hframes = 16
+vframes = 7
 frame = 74
 __meta__ = {
 "_editor_description_": "z index : 0"
@@ -174,6 +175,7 @@ margin_top = 342.0
 margin_right = 232.0
 margin_bottom = 371.0
 color = Color( 0, 0, 0, 0.482353 )
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -264,6 +266,7 @@ __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": ""
 }
+
 [connection signal="pressed" from="VBoxContainer/Panel/Margin/SubButton" to="." method="_on_SubButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/Panel2/Margin/VBx/SubButton" to="." method="change_filter" binds= [ "disabled" ]]
 [connection signal="pressed" from="VBoxContainer/Panel2/Margin/VBx/SubButton2" to="." method="change_filter" binds= [ "scanlines" ]]

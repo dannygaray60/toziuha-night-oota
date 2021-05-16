@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/sprites/hud.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/hp_bar_good.png" type="Texture" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://assets/img/iron_texture.jpg" type="Texture" id=14]
 [ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=15]
 [ext_resource path="res://assets/sprites/notification_in_game_panel.png" type="Texture" id=16]
+[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=17]
+[ext_resource path="res://scripts/control_help_icons_screen_set_visible.gd" type="Script" id=18]
 
 [sub_resource type="StyleBoxTexture" id=1]
 content_margin_left = 9.0
@@ -58,6 +60,32 @@ tracks/1/keys = {
 [sub_resource type="StyleBoxLine" id=4]
 color = Color( 1, 1, 1, 0 )
 
+[sub_resource type="StyleBoxLine" id=5]
+color = Color( 1, 1, 1, 1 )
+
+[sub_resource type="ButtonGroup" id=6]
+
+[sub_resource type="DynamicFont" id=7]
+font_data = ExtResource( 17 )
+
+[sub_resource type="DynamicFont" id=8]
+font_data = ExtResource( 17 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "flash"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.72549 ), Color( 1, 1, 1, 0 ) ]
+}
+
 [node name="Hud" type="CanvasLayer" groups=[
 "hud",
 ]]
@@ -67,7 +95,7 @@ script = ExtResource( 7 )
 
 [node name="Main" type="Control" parent="."]
 pause_mode = 1
-modulate = Color( 1, 1, 1, 0.137255 )
+modulate = Color( 1, 1, 1, 0.196078 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -111,10 +139,10 @@ __meta__ = {
 }
 
 [node name="LblPotionNum" type="Label" parent="Main/Texture"]
-margin_left = 11.0
-margin_top = 26.0
-margin_right = 23.0
-margin_bottom = 39.0
+margin_left = 10.0
+margin_top = 26.481
+margin_right = 22.0
+margin_bottom = 39.481
 custom_fonts/font = ExtResource( 9 )
 text = "00"
 __meta__ = {
@@ -128,7 +156,7 @@ margin_right = 102.0
 margin_bottom = 7.5
 mouse_filter = 2
 max_value = 50.0
-value = 30.0
+value = 50.0
 rounded = true
 texture_progress = ExtResource( 2 )
 __meta__ = {
@@ -136,15 +164,14 @@ __meta__ = {
 }
 
 [node name="EMBar" type="TextureProgress" parent="Main/Texture"]
-margin_left = 4.54171
-margin_top = 32.708
-margin_right = 9.54171
-margin_bottom = 104.708
+margin_left = 31.8811
+margin_top = 8.80135
+margin_right = 108.881
+margin_bottom = 11.8014
 mouse_filter = 2
-max_value = 1.0
+value = 100.0
 rounded = true
 texture_progress = ExtResource( 5 )
-fill_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -162,10 +189,10 @@ __meta__ = {
 }
 
 [node name="TextureStatusPanel" type="TextureRect" parent="Main/Texture"]
-margin_left = 8.70955
-margin_top = 39.0
-margin_right = 53.7096
-margin_bottom = 52.0
+margin_left = 40.0
+margin_top = 16.0
+margin_right = 91.0
+margin_bottom = 29.0
 mouse_filter = 2
 texture = ExtResource( 8 )
 __meta__ = {
@@ -173,8 +200,9 @@ __meta__ = {
 }
 
 [node name="LblStatus" type="Label" parent="Main/Texture/TextureStatusPanel"]
+margin_left = 5.0
 margin_top = -1.0
-margin_right = 41.0
+margin_right = 46.0
 margin_bottom = 12.0
 custom_fonts/font = ExtResource( 9 )
 text = "Healing"
@@ -270,7 +298,7 @@ __meta__ = {
 }
 
 [node name="BG" type="TextureRect" parent="ControlPause"]
-modulate = Color( 0.309804, 0.309804, 0.309804, 1 )
+modulate = Color( 0, 0, 0, 0.682353 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 14 )
@@ -730,7 +758,193 @@ focus_previous = NodePath(".")
 size_flags_horizontal = 1
 size_flags_vertical = 1
 text = "RETURN"
+
+[node name="ControlExit" type="Control" parent="ControlPause"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="TextureRect" parent="ControlPause/ControlExit"]
+modulate = Color( 0.152941, 0.152941, 0.152941, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 7
+
+[node name="VBx" type="VBoxContainer" parent="ControlPause/ControlExit"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 17
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="ControlPause/ControlExit/VBx"]
+margin_right = 212.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 10 )
+text = "EXITANDGOMAINMENU"
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="ControlPause/ControlExit/VBx"]
+margin_top = 43.0
+margin_right = 212.0
+margin_bottom = 82.0
+custom_styles/separator = SubResource( 5 )
+custom_constants/separation = 39
+
+[node name="VBx" type="VBoxContainer" parent="ControlPause/ControlExit/VBx"]
+margin_left = 14.0
+margin_top = 99.0
+margin_right = 197.0
+margin_bottom = 212.0
+size_flags_horizontal = 4
+custom_constants/separation = 13
+
+[node name="BtnQuickSave" parent="ControlPause/ControlExit/VBx/VBx" instance=ExtResource( 3 )]
+margin_right = 183.0
+focus_neighbour_left = NodePath("../../..")
+focus_neighbour_top = NodePath("../BtnCancel")
+focus_neighbour_right = NodePath("../../..")
+focus_next = NodePath("../../..")
+focus_previous = NodePath("../BtnCancel")
+group = SubResource( 6 )
+text = "SAVEANDEXIT"
+
+[node name="BtnExit" parent="ControlPause/ControlExit/VBx/VBx" instance=ExtResource( 3 )]
+margin_top = 42.0
+margin_right = 183.0
+margin_bottom = 71.0
+focus_neighbour_left = NodePath("../../..")
+focus_neighbour_right = NodePath("../../..")
+focus_next = NodePath("../../..")
+focus_previous = NodePath("../../..")
+group = SubResource( 6 )
+text = "EXIT"
+
+[node name="BtnCancel" parent="ControlPause/ControlExit/VBx/VBx" instance=ExtResource( 3 )]
+margin_top = 84.0
+margin_right = 183.0
+margin_bottom = 113.0
+focus_neighbour_left = NodePath("../../..")
+focus_neighbour_right = NodePath("../../..")
+focus_neighbour_bottom = NodePath("../BtnQuickSave")
+focus_next = NodePath("../BtnQuickSave")
+focus_previous = NodePath("../../..")
+group = SubResource( 6 )
+text = "CANCEL"
+sfx_accept_sound = "btn_cancel"
+
+[node name="Label2" type="Label" parent="ControlPause/ControlExit/VBx"]
+margin_top = 229.0
+margin_right = 212.0
+margin_bottom = 242.0
+custom_fonts/font = SubResource( 7 )
+text = "PHRASEABOUTQUICKSAVE"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ControlPause/ControlExit"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -82.5
+margin_top = -41.0
+margin_right = 82.5
+custom_constants/separation = 21
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ControlPause/ControlExit/HBoxContainer"]
+margin_right = 88.0
+margin_bottom = 41.0
+
+[node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlExit/HBoxContainer/HBoxContainer" instance=ExtResource( 13 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_up"
+
+[node name="ButtonKeyGamepadIcon2" parent="ControlPause/ControlExit/HBoxContainer/HBoxContainer" instance=ExtResource( 13 )]
+margin_left = 20.0
+margin_top = 12.0
+margin_right = 36.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_down"
+
+[node name="Label" type="Label" parent="ControlPause/ControlExit/HBoxContainer/HBoxContainer"]
+margin_left = 40.0
+margin_top = 14.0
+margin_right = 88.0
+margin_bottom = 27.0
+custom_fonts/font = SubResource( 8 )
+text = "NAVIGATE"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ControlPause/ControlExit/HBoxContainer"]
+margin_left = 109.0
+margin_right = 165.0
+margin_bottom = 41.0
+
+[node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlExit/HBoxContainer/HBoxContainer2" instance=ExtResource( 13 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_accept"
+
+[node name="Label2" type="Label" parent="ControlPause/ControlExit/HBoxContainer/HBoxContainer2"]
+margin_left = 20.0
+margin_top = 14.0
+margin_right = 56.0
+margin_bottom = 27.0
+custom_fonts/font = SubResource( 8 )
+text = "SELECT"
+
+[node name="ControlFlash" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="ControlFlash"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = 4.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ControlFlash"]
+anims/flash = SubResource( 9 )
+
 [connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnContinue" to="." method="pause_menu_opt_selected" binds= [ "continue" ]]
-[connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnSaveAndExit" to="." method="pause_menu_opt_selected" binds= [ "saveandexit" ]]
+[connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnSaveAndExit" to="." method="pause_menu_opt_selected" binds= [ "open_exitpanel" ]]
 [connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnHelp" to="." method="pause_menu_opt_selected" binds= [ "help" ]]
 [connection signal="pressed" from="ControlPause/ControlHelp/Margin/HBx/VBx/BtnCloseHelpPanel" to="." method="pause_menu_opt_selected" binds= [ "close_help" ]]
+[connection signal="pressed" from="ControlPause/ControlExit/VBx/VBx/BtnQuickSave" to="." method="pause_menu_opt_selected" binds= [ "saveandexit" ]]
+[connection signal="pressed" from="ControlPause/ControlExit/VBx/VBx/BtnExit" to="." method="pause_menu_opt_selected" binds= [ "exit" ]]
+[connection signal="pressed" from="ControlPause/ControlExit/VBx/VBx/BtnCancel" to="." method="pause_menu_opt_selected" binds= [ "close_exitpanel" ]]

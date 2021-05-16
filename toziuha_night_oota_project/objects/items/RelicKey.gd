@@ -27,34 +27,28 @@ func _ready():
 
 func _on_AreaPick_body_entered(body):
 	if body.is_in_group("player"):
+		
 		if item in ["double_jump","slide","backdash"]:
-			
 			Audio.play_sfx("weapon_upgrade")
 			Vars.player["hability_"+item] = true
-			match item:
-				"double_jump":
-					DialogBox.lines = [
-						['say','none',tr("PHRASE_DOUBLEJUMP")],
-					]
-				"slide":
-					DialogBox.lines = [
-						['say','none',tr("PHRASE_SLIDE")],
-					]
-				"backdash":
-					DialogBox.lines = [
-						['say','none',tr("PHRASE_BACKDASH")],
-					]
-			DialogBox.show_panel("purple_light")
 		else:
 			Audio.play_sfx("em_drop")
 			Vars.player[item] = true
+
+		#mostrar habilidad como notificacion rapida
+		if body.has_method("show_quick_notif"):
 			match item:
+				"double_jump":
+					body.show_quick_notif(tr("SKILLDOUBLEJUMP"))
+				"slide":
+					body.show_quick_notif(tr("SKILLSLIDE"))
+				"backdash":
+					body.show_quick_notif(tr("SKILLBACKDASH"))
 				"bronze_key":
-					Functions.show_hud_notif(tr("BRONZEKY"))
+					body.show_quick_notif(tr("BRONZEKY"))
 				"silver_key":
-					Functions.show_hud_notif(tr("SILVERKY"))
+					body.show_quick_notif(tr("SILVERKY"))
 				"golden_key":
-					Functions.show_hud_notif(tr("GOLDENKY"))
-				
+					body.show_quick_notif(tr("GOLDENKY"))
 
 		queue_free()
