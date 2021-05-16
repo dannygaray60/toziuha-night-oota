@@ -1,5 +1,6 @@
 export.cfg
 export_presets.cfg
 *.translation
+*.*.translation
 dev-files/
 .import/
