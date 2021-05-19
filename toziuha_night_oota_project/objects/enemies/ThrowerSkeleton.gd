@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
-export(String, "simple","chaser") var type_pattern = "simple"
+var bone = preload("res://objects/EnemyBoneProyectile.tscn")
+var bone_instance = null
 
 export var id = "skeleton"
 
@@ -34,17 +35,14 @@ var chasing = false
 #de frente al jugador
 func update_facing():
 
-	if state != "dead":
+	if $TimerToChangeFacing.get_time_left() == 0 and state != "dead":
+		
+		$TimerToChangeFacing.start(0.5)
 
 		facing = Functions.get_new_facing_with_player(self,player)
 
 		#volteo de sprite
 		$Sprite.scale.x = -1 * facing
-		
-		$Sprite/RayCastFront.enabled = false
-
-		if type_pattern == "chaser":
-			change_state("walk")
 
 func _ready():
 	
@@ -52,13 +50,7 @@ func _ready():
 	
 	update_facing()
 
-	if type_pattern == "simple":
-		change_state("walk")
-	else:
-		change_state("idle")
-		
-	if id in ["zombie","slime","infected_slime"]:
-		speed = 30
+	change_state("throw")
 	
 	#colocar stats de vida
 	hp_max = Vars.enemy[id]["hp_max"]
@@ -66,49 +58,34 @@ func _ready():
 	#items que deja al morir
 	list_items = Vars.enemy[id]["item_drop"]
 	
-	#no funciona bien esta funcion como debería...
-	if $VisibilityEnabler2D.is_on_screen():
-		print(str(id))
-	
 func _physics_process(delta):
 	
 	#si el jugador pasa encima o debajo del enemigo
 	#se invertirá el facing mediante timer
-	if player and type_pattern != "simple":
+	if player:
 		var distance_to_enemy = player.global_position.x - global_position.x
 		if distance_to_enemy >= -5 and distance_to_enemy <= 5:
 			$TimerToChangeFacing.start(0.5)
 			
-	if state=="walk":
-		velocity.x = speed*facing
+	match state:
+		"walk":
+			velocity.x = speed*facing
+			if $AnimationPlayer.current_animation != "walk":
+				state == "idle"
+				change_state("walk")
+		"idle":
+			velocity.x = 0
 
 	#gravedad
 	velocity.y += gravity*delta
 	velocity = move_and_slide(velocity, Vector2.UP,true)
 	
-	if type_pattern == "simple":
-		if is_on_wall() and is_on_floor():
-			if facing == 1:
-				facing = -1
-			else:
-				facing = 1
-			$Sprite.scale.x = facing * -1
-
-	else:
-		if chasing and state == "idle" and !$Sprite/RayCastFront.is_colliding():
-			change_state("walk")
-		#choque de pared pero hay espacio para saltar por encima (determinado por raycast)
-		if is_on_wall() and is_on_floor() and !$Sprite/RayCastFront.is_colliding():
-			velocity += Vector2.UP * jump_speed
-		if state == "walk" and $Sprite/RayCastFront.is_colliding():
-			#al chocar poner idle, el enemigo a veces no se mueve
-			#cuando detecta jugador, por eso se desactiva el raycas
-			#y se activa de nuevo al voltear sprite
-			#en update_facing
-			$Sprite/RayCastFront.enabled = false
-			change_state("idle")
+	if is_on_wall() and is_on_floor():
+		if facing == 1:
+			facing = -1
 		else:
-			$Sprite/RayCastFront.enabled = true
+			facing = 1
+		$Sprite.scale.x = facing * -1
 	
 	#-------------- deteccion de colisiones ----------------------
 	if state!="dead":
@@ -117,9 +94,6 @@ func _physics_process(delta):
 			#si colisiona contra jugador
 			if collision.collider.is_in_group("player"):
 				collision.collider.hurt(id,position)
-				#si este cuerpo lleva veneno
-				if self.is_in_group("poison"):
-					collision.collider.change_condition("poison")
 					
 	if state == "dead" and is_on_floor():
 		gravity = 0
@@ -132,13 +106,8 @@ func hurt(damage,weapon_position):
 		$TimerHurt.start()
 		change_state("idle")
 		velocity.x = 0
-		
-		if id in ["skeleton","infected_skeleton"]:
-			Audio.play_sfx("hit4")
-		elif id in ["zombie"]:
-			Audio.play_sfx("knife_stab")
-		elif id in ["slime","infected_slime"]:
-			Audio.play_sfx("hit2")
+
+		Audio.play_sfx("hit4")
 		
 		#damage calcule
 		#reducir damage gracias a defensa
@@ -163,12 +132,7 @@ func die():
 		set_collision_mask_bit(4,false)
 		
 		
-		if id in ["skeleton","infected_skeleton"]:
-			Audio.play_sfx("smash_wood_pieces")
-		elif id in ["zombie"]:
-			pass #tal vez un gruñido al morir...
-		elif id in ["slime","infected_slime"]:
-			Audio.play_sfx("hit3")
+		Audio.play_sfx("smash_wood_pieces")
 		
 		#mostrar el nombre del enemigo eliminado
 		Functions.show_hud_notif(tr(Vars.enemy[id]["name"]))
@@ -182,21 +146,54 @@ func die():
 #cambio de estados
 func change_state(new_state):
 	#no podrá regresar a estado de caminar si no está en pantalla
-	if (new_state == "walk" and $Sprite/RayCastFront.is_colliding()) or new_state == state or state == "dead":
+	if state == "dead":
 		return
+	
 	match new_state:
 		"idle":
 			velocity.x = 0
 			velocity.y = 0
 	$AnimationPlayer.play(new_state)
 	state = new_state
+	
+func throw_bone():
+	if state != "dead" and $VisibilityEnabler2D.is_on_screen():
+		bone_instance = bone.instance()
+		bone_instance.global_position = $Sprite/PosSpawnBone.global_position
+		bone_instance.direction = facing
+		if $Sprite/RayCastDetectPlayerFront.is_colliding():
+			bone_instance.linear_direction = true
+		Functions.get_main_level_scene().add_child(bone_instance)
+		update_facing()
+		
+		
+#un pequeño salto hacia atrás a manera de esquivar
+func jump(back=false):
+	if state == "dead":
+		return
+		
+	if back and ($Sprite/RayCastDetectBackWall.is_colliding() or !$Sprite/RayCastDetectBackNoFloor.is_colliding() ):
+		jump()
+		return
+		
+	if !$Sprite/RayCastDetectFrontNoFloor.is_colliding() and !back:
+		return
+		
+	if back:
+		velocity.x = -50*facing
+	else:
+		velocity.x = 50*facing
+
+	velocity.y = -300
+	$TimerJumpBack.start()
 
 #entra o sale de pantalla (o que este cerca)
 func _on_VisibilityEnabler2D_screen_entered():
 	update_facing()
 
 func _on_VisibilityEnabler2D_screen_exited():
-	pass
+	change_state("idle")
+	update_facing()
 
 #cambiar facing mediante timer activado en physics process
 func _on_TimerToChangeFacing_timeout():
@@ -204,20 +201,22 @@ func _on_TimerToChangeFacing_timeout():
 
 #player entró en area de deteccion del enemigo
 func _on_AreaDetectPlayer_body_entered(body):
-	if body.is_in_group("player") and type_pattern != "simple":
+	if body.is_in_group("player") and state != "dead":
 		chasing = true
 		change_state("walk")
 #o salió
 func _on_AreaDetectPlayer_body_exited(body):
-	if body.is_in_group("player") and type_pattern != "simple":
+	if body.is_in_group("player") and state != "dead":
 		chasing = false
-		change_state("idle")
+		#change_state("idle")
 
 
 func _on_TimerHurt_timeout():
 	$Sprite.modulate = Color(1,1,1,1)
-	update_facing()
-	change_state("walk")
+	if state != "dead":
+		update_facing()
+		jump(true)
+		change_state("walk")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:
@@ -226,4 +225,52 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 			queue_free()
 
 func on_player_death():
-	change_state("idle")
+	if state != "dead":
+		change_state("idle")
+
+
+func _on_AreaDetectNearPlayer_body_entered(body):
+	if body.is_in_group("player") and is_on_floor() and state != "walk" and state != "dead":
+		update_facing()
+		jump(true)
+
+
+func _on_TimerJumpBack_timeout():
+	if state != "dead":
+		update_facing()
+		#if state != "walk":# and is_on_floor():
+		velocity.x = 0
+
+
+func _on_AreaDetectPlayerFront_body_entered(body):
+	if state != "dead" and body.is_in_group("player") and is_on_floor() and $VisibilityEnabler2D.is_on_screen():
+		update_facing()
+		change_state("walk")
+
+
+func _on_AreaDetectPlayerFront_body_exited(body):
+	if state == "dead":
+		return
+
+	if body.is_in_group("player"):
+		
+		
+		if $VisibilityEnabler2D.is_on_screen():
+			velocity.x = 0
+			change_state("throw")
+#		else:
+#			change_state("idle")
+			
+		update_facing()
+
+
+func _on_AreaDetectObstacle_body_entered(body):
+	if body is TileMap and is_on_floor() and state != "dead":
+		update_facing()
+		jump()
+
+
+func _on_AreaDetectNoFloor_body_exited(body):
+	if body is TileMap and state != "dead":
+#		velocity.x = 0
+		change_state("throw")

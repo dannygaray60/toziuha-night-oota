@@ -1,0 +1,230 @@
+[gd_scene load_steps=19 format=2]
+
+[ext_resource path="res://shaders/wave_background.shader" type="Shader" id=1]
+[ext_resource path="res://assets/sprites/rustic_town_simple/town_builds.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/rustic_town_simple/town_builds_v4.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/rustic_town_simple/town_builds_v3.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/rustic_town_simple/town_builds_v2.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/exterior_ruins/background1.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/exterior_ruins/background5.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/exterior_ruins/background2.png" type="Texture" id=8]
+[ext_resource path="res://shaders/FireBackground.shader" type="Shader" id=9]
+[ext_resource path="res://shaders/fire2d.shader" type="Shader" id=10]
+
+[sub_resource type="ShaderMaterial" id=13]
+shader = ExtResource( 9 )
+shader_param/fireMovement = Vector2( 0.181, -1.107 )
+shader_param/distortionMovement = Vector2( -0.158, -3.154 )
+shader_param/normalStrength = 40.0
+shader_param/distortionStrength = 0.1
+
+[sub_resource type="ShaderMaterial" id=14]
+shader = ExtResource( 1 )
+shader_param/screen_height = 640.0
+shader_param/amplitude = 0.016
+shader_param/frequency = 10.0
+shader_param/speed = 2.0
+shader_param/amplitude_vertical = 0.0
+shader_param/frequency_vertical = 0.0
+shader_param/speed_vertical = 0.0
+shader_param/scroll_direction = Vector2( 0, 0 )
+shader_param/scrolling_speed = 0.08
+shader_param/enable_palette_cycling = false
+shader_param/palette_speed = 0.1
+
+[sub_resource type="AnimatedTexture" id=8]
+frames = 5
+fps = 3.7
+frame_0/texture = ExtResource( 2 )
+frame_1/texture = ExtResource( 5 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 4 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 3 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 4 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="OpenSimplexNoise" id=9]
+
+[sub_resource type="NoiseTexture" id=10]
+noise = SubResource( 9 )
+
+[sub_resource type="ShaderMaterial" id=12]
+shader = ExtResource( 10 )
+shader_param/root_color = Color( 1, 0.75, 0.3, 1 )
+shader_param/tip_color = Color( 1, 0.03, 0.001, 1 )
+shader_param/fire_alpha = 1.0
+shader_param/fire_speed = 1.0
+shader_param/fire_aperture = 0.22
+shader_param/noise_tex = SubResource( 10 )
+
+[sub_resource type="Shader" id=5]
+code = "/* 
+Original shader from Fubucci – https://www.febucci.com/2019/05/fire-shader/ 
+Converted to Godot Shader Language by Godot Shaders - godotshaders.com/shader/2D-fire/
+*/
+
+shader_type canvas_item;
+
+uniform sampler2D noise_tex;
+uniform sampler2D gradient_tex;
+
+uniform vec4 brighter_color : hint_color = vec4(1.0, 0.8, 0.0, 1.0);
+uniform vec4 middle_color : hint_color  = vec4(1.0, 0.56, 0.0, 1.0);
+uniform vec4 darker_color : hint_color  = vec4(0.64, 0.2, 0.05, 1.0);
+
+uniform float spread : hint_range(0.0, 1.0) = 0.2;
+
+void fragment()
+{
+	
+	float noise_value = texture(noise_tex, UV + vec2(0.0, TIME)).x;
+	// The .yx swizzle is when using the built in horizontal gradient texture. If you have a vertical gradient texture remove .yx
+	float gradient_value = texture(gradient_tex, UV.yx).x;
+	
+	gradient_value -= smoothstep(spread, spread + 0.5, length(UV + vec2(-0.5, -0.5)) / spread);
+	
+	float step1 = step(noise_value, gradient_value);
+	float step2 = step(noise_value, gradient_value - 0.2);
+	float step3 = step(noise_value, gradient_value - 0.4);
+	
+	vec3 bd_color = mix(brighter_color.rgb, darker_color.rgb, step1 - step2);
+	
+	vec4 color = vec4(bd_color, step1);
+	color.rgb = mix(color.rgb, middle_color.rgb, step2 - step3);
+	
+	COLOR = color;
+}"
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 5 )
+shader_param/brighter_color = Color( 1, 0.8, 0, 1 )
+shader_param/middle_color = Color( 1, 0.56, 0, 1 )
+shader_param/darker_color = Color( 0.64, 0.2, 0.05, 1 )
+shader_param/spread = 0.474
+shader_param/noise_tex = SubResource( 10 )
+
+[node name="ParallaxBackground" type="ParallaxBackground"]
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.1, 0.4 )
+motion_mirroring = Vector2( 426, 0 )
+
+[node name="background" type="Sprite" parent="ParallaxLayer2"]
+position = Vector2( 206.688, 161.216 )
+texture = ExtResource( 6 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.3, 0.5 )
+motion_mirroring = Vector2( 426, 0 )
+
+[node name="background" type="Sprite" parent="ParallaxLayer3"]
+position = Vector2( 209.913, 168.161 )
+texture = ExtResource( 8 )
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.8, 0.7 )
+motion_mirroring = Vector2( 426, 0 )
+
+[node name="background" type="Sprite" parent="ParallaxLayer5"]
+position = Vector2( 211.584, 195.57 )
+texture = ExtResource( 7 )
+
+[node name="ParallaxFire" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 1056, 0 )
+
+[node name="Fire" type="ColorRect" parent="ParallaxFire"]
+modulate = Color( 1, 1, 1, 0.156863 )
+material = SubResource( 13 )
+margin_right = 1056.0
+margin_bottom = 397.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ParallaxBuilds2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.8, 1 )
+motion_mirroring = Vector2( 1056, 0 )
+
+[node name="RuinsBuilds" type="TextureRect" parent="ParallaxBuilds2"]
+modulate = Color( 0.262745, 0.262745, 0.262745, 1 )
+material = SubResource( 14 )
+margin_left = -5.32855
+margin_top = 291.204
+margin_right = 1050.67
+margin_bottom = 467.204
+rect_scale = Vector2( 0.5, 0.5 )
+texture = SubResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RuinsBuilds2" type="TextureRect" parent="ParallaxBuilds2"]
+modulate = Color( 0.262745, 0.262745, 0.262745, 1 )
+material = SubResource( 14 )
+margin_left = 578.742
+margin_top = 292.618
+margin_right = 1634.74
+margin_bottom = 468.618
+rect_scale = Vector2( 0.5, 0.5 )
+texture = SubResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ParallaxBuilds" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 1056, 0 )
+
+[node name="RuinsBuilds" type="TextureRect" parent="ParallaxBuilds"]
+modulate = Color( 0.654902, 0.537255, 0, 1 )
+material = SubResource( 14 )
+margin_left = -37.9402
+margin_top = 208.159
+margin_right = 1018.06
+margin_bottom = 384.159
+texture = SubResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ParallaxFire3" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 694, 0 )
+
+[node name="Fire3" type="ColorRect" parent="ParallaxFire3"]
+modulate = Color( 1, 1, 1, 0.203922 )
+material = SubResource( 12 )
+margin_left = -6.47089
+margin_top = 221.088
+margin_right = 340.529
+margin_bottom = 440.088
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fire4" type="ColorRect" parent="ParallaxFire3"]
+modulate = Color( 1, 1, 1, 0.203922 )
+material = SubResource( 12 )
+margin_left = 687.512
+margin_top = 220.672
+margin_right = 1034.51
+margin_bottom = 439.672
+rect_scale = Vector2( -1, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ParallaxFire2" type="ParallaxLayer" parent="."]
+visible = false
+motion_mirroring = Vector2( 1056, 0 )
+
+[node name="Fire2" type="ColorRect" parent="ParallaxFire2"]
+modulate = Color( 1, 1, 1, 0.203922 )
+material = SubResource( 11 )
+margin_left = -262.936
+margin_top = 72.0193
+margin_right = 1393.06
+margin_bottom = 469.019
+__meta__ = {
+"_edit_use_anchors_": false
+}

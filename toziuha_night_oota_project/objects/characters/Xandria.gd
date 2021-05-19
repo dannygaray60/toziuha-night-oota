@@ -468,6 +468,9 @@ func hurt(enemy_id=null,hurt_pos=null):
 	
 	
 func death():
+	
+	Vars.player["hp_now"] = 0
+	
 	emit_signal("dead")
 	enable_collision_with_danger(false)
 	

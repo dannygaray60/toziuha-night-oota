@@ -9,30 +9,39 @@ var linear_direction = false
 
 var direction = 1
 
-var height_arc = -80
+var height_arc = -250
 
-var speed = 50
+var speed = 60
 
 func _ready():
-	
+		
+	if !linear_direction:
+		velocity.y = height_arc
+	else:
+		speed += 90
+		
 	speed = speed * direction
 	velocity.x = speed
 	
-	if !linear_direction:
-		velocity.y = height_arc
-	
 
-	Audio.play_sfx("fireball_enemy")
+	Audio.play_sfx("small_woosh")
 	
 	$Sprite.scale.x = direction
-	$AnimationPlayer.play("show")
 	
+	if direction == -1:
+		$AnimationPlayer.play("show")
+	else:
+		$AnimationPlayer.play_backwards("show")
+		
 func _physics_process(delta):
+	if inactive:
+		return
+	
 	if !linear_direction:
-		velocity.y += 200 *delta
+		velocity.y += 500 *delta
 	velocity = move_and_slide(velocity)
 
-func delete_fireball():
+func delete_bone():
 	call_deferred("queue_free")
 
 
@@ -46,7 +55,7 @@ func _on_FireBall_body_entered(body):
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "end":
-		delete_fireball()
+		delete_bone()
 
 
 #arma del jugador toca bola de fuego
@@ -62,4 +71,7 @@ func _on_AnimationPlayer_animation_started(anim_name):
 
 
 func _on_VisibilityNotifier2D_screen_exited():
-	delete_fireball()
+	delete_bone()
+
+func is_inactive(val=false):
+	inactive = val

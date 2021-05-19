@@ -4,7 +4,7 @@ extends Node
 #dejar vacío para no mostrar nada
 export var title_room = ""
 
-export(String, "silence","rondo_of_darkness","nameless_symphony", "cave_theme") var music = "silence"
+export(String, "silence","rondo_of_darkness","war_prelude","nameless_symphony", "cave_theme") var music = "silence"
 
 var player = null	
 

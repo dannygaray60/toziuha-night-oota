@@ -63,7 +63,7 @@ func hurt(damage,weapon_position):
 
 		velocity = Vector2(0,0)
 		
-		Audio.play_sfx("hit4")
+		Audio.play_sfx("knife_stab")
 		
 		damage = Functions.get_value(damage,"-",Vars.enemy[id]["def"])
 		hp_now -= damage
@@ -75,6 +75,7 @@ func hurt(damage,weapon_position):
 			die()
 			
 func die():
+	Audio.play_sfx("crazy_bat_death")
 	Functions.show_hud_notif(tr(Vars.enemy[id]["name"]))
 	$CollisionShape2D.set_deferred("disabled", true)
 	state = "dead"

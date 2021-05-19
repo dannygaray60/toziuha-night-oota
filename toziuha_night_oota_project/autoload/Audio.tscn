@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://assets/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Audio.gd" type="Script" id=2]
@@ -50,6 +50,8 @@
 [ext_resource path="res://assets/sfx/level_end_jingle.ogg" type="AudioStream" id=48]
 [ext_resource path="res://assets/sfx/boss_defeated_jingle.ogg" type="AudioStream" id=49]
 [ext_resource path="res://assets/sfx/roar1.wav" type="AudioStream" id=50]
+[ext_resource path="res://assets/bgm/war_prelude.ogg" type="AudioStream" id=51]
+[ext_resource path="res://assets/sfx/crazy_bat_death.wav" type="AudioStream" id=52]
 
 [node name="Audio" type="Node"]
 pause_mode = 2
@@ -203,6 +205,11 @@ stream = ExtResource( 33 )
 pitch_scale = 0.8
 bus = "Effects"
 
+[node name="crazy_bat_death" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 52 )
+pitch_scale = 0.84
+bus = "Effects"
+
 [node name="roar" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 50 )
 volume_db = 2.737
@@ -303,6 +310,10 @@ bus = "Effects"
 [node name="nameless_symphony" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 4 )
 volume_db = 2.5
+bus = "Music"
+
+[node name="war_prelude" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 51 )
 bus = "Music"
 
 [node name="cave_theme" type="AudioStreamPlayer" parent="music"]

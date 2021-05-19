@@ -95,7 +95,6 @@ anims/idle = SubResource( 4 )
 anims/walk = SubResource( 5 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0, -18.2359 )
 scale = Vector2( 5.71704, 4.29111 )
 process_parent = true
@@ -111,6 +110,7 @@ one_shot = true
 __meta__ = {
 "_editor_description_": "activado al ser herido, mientras esté activo no podrá ser herido"
 }
+
 [connection signal="body_entered" from="Sprite/AreaDetectPlayer" to="." method="_on_AreaDetectPlayer_body_entered"]
 [connection signal="body_exited" from="Sprite/AreaDetectPlayer" to="." method="_on_AreaDetectPlayer_body_exited"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

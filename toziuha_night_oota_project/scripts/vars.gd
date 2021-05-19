@@ -88,6 +88,15 @@ var enemy = {
 		#y aqui una lista de objetos que puede dejar al morir...
 		"item_drop": ["none","none","none","money_10","money_100","money_1","money_1","money_10","money_10"],
 	},
+	"floating_skull":{
+		"name": "FLOATINGSKULL",
+		"atk": 15,
+		"def":3,
+		"hp_max": 7,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none"],
+	},
 	"infected_slime":{
 		"name": "INFECTEDSLIME",
 		"atk": 15,

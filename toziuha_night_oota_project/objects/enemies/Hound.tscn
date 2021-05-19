@@ -6,10 +6,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 14.4323, 8.78378 )
 
-[sub_resource type="RayShape2D" id=25]
+[sub_resource type="RayShape2D" id=2]
 length = 10.0
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 resource_name = "dead"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -38,7 +38,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 resource_name = "fall"
 length = 0.2
 tracks/0/type = "value"
@@ -54,8 +54,7 @@ tracks/0/keys = {
 "values": [ 13, 14 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "idle"
+[sub_resource type="Animation" id=5]
 length = 6.0
 loop = true
 tracks/0/type = "value"
@@ -86,7 +85,7 @@ tracks/0/keys = {
 "values": [ 10, 12 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "pos_fall"
 length = 0.2
 tracks/0/type = "value"
@@ -102,8 +101,7 @@ tracks/0/keys = {
 "values": [ 15, 16 ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "run"
+[sub_resource type="Animation" id=8]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -119,61 +117,61 @@ tracks/0/keys = {
 "values": [ 6, 7, 8, 9, 10 ]
 }
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 117.246, 68.1332 )
 
-[sub_resource type="AnimationNodeAnimation" id=9]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "dead"
 
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=11]
 animation = "fall"
 
-[sub_resource type="AnimationNodeAnimation" id=11]
+[sub_resource type="AnimationNodeAnimation" id=12]
 animation = "idle"
 
-[sub_resource type="AnimationNodeAnimation" id=12]
+[sub_resource type="AnimationNodeAnimation" id=13]
 animation = "jump"
 
-[sub_resource type="AnimationNodeAnimation" id=21]
+[sub_resource type="AnimationNodeAnimation" id=14]
 animation = "pos_fall"
 
-[sub_resource type="AnimationNodeAnimation" id=13]
+[sub_resource type="AnimationNodeAnimation" id=15]
 animation = "run"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=14]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=15]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=16]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=17]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=23]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=24]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachine" id=19]
-states/dead/node = SubResource( 9 )
+[sub_resource type="AnimationNodeStateMachine" id=23]
+states/dead/node = SubResource( 10 )
 states/dead/position = Vector2( 323, 248.333 )
-states/fall/node = SubResource( 10 )
+states/fall/node = SubResource( 11 )
 states/fall/position = Vector2( 809.667, 196.333 )
-states/idle/node = SubResource( 11 )
+states/idle/node = SubResource( 12 )
 states/idle/position = Vector2( 567, 136.333 )
-states/jump/node = SubResource( 12 )
+states/jump/node = SubResource( 13 )
 states/jump/position = Vector2( 755, 80.3333 )
-states/pos_fall/node = SubResource( 21 )
+states/pos_fall/node = SubResource( 14 )
 states/pos_fall/position = Vector2( 640.333, 247.444 )
-states/run/node = SubResource( 13 )
+states/run/node = SubResource( 15 )
 states/run/position = Vector2( 345.667, 94.1111 )
-transitions = [ "idle", "jump", SubResource( 14 ), "idle", "run", SubResource( 15 ), "run", "idle", SubResource( 16 ), "jump", "fall", SubResource( 17 ), "idle", "dead", SubResource( 22 ), "fall", "pos_fall", SubResource( 23 ), "pos_fall", "idle", SubResource( 24 ) ]
+transitions = [ "idle", "jump", SubResource( 16 ), "idle", "run", SubResource( 17 ), "run", "idle", SubResource( 18 ), "jump", "fall", SubResource( 19 ), "idle", "dead", SubResource( 20 ), "fall", "pos_fall", SubResource( 21 ), "pos_fall", "idle", SubResource( 22 ) ]
 start_node = "idle"
 end_node = "dead"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=20]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=24]
 
 [node name="CursedHound" type="KinematicBody2D" groups=[
 "enemies",
@@ -199,15 +197,15 @@ collision_mask = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaDetectObstacle"]
 rotation = 1.5708
-shape = SubResource( 25 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/dead = SubResource( 4 )
-anims/fall = SubResource( 5 )
-anims/idle = SubResource( 2 )
+anims/dead = SubResource( 3 )
+anims/fall = SubResource( 4 )
+anims/idle = SubResource( 5 )
 anims/jump = SubResource( 6 )
-anims/pos_fall = SubResource( 8 )
-anims/run = SubResource( 7 )
+anims/pos_fall = SubResource( 7 )
+anims/run = SubResource( 8 )
 
 [node name="AreaDetectPlayer" type="Area2D" parent="."]
 position = Vector2( 0, 35 )
@@ -215,14 +213,14 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDetectPlayer"]
 position = Vector2( 0.650543, -0.943878 )
-shape = SubResource( 3 )
+shape = SubResource( 9 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 19 )
+tree_root = SubResource( 23 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 process_mode = 0
-parameters/playback = SubResource( 20 )
+parameters/playback = SubResource( 24 )
 
 [node name="TimerChangeFacing" type="Timer" parent="."]
 wait_time = 0.5

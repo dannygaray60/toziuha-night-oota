@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/war_prelude.ogg-04e51f8746fb991610a604e78395322f.oggstr"
+
+[deps]
+
+source_file="res://assets/bgm/war_prelude.ogg"
+dest_files=[ "res://.import/war_prelude.ogg-04e51f8746fb991610a604e78395322f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

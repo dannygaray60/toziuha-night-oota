@@ -31,6 +31,13 @@ var anim_state_machine
 var chasing = false
 
 func _ready():
+	
+	#colocar stats de vida
+	hp_max = Vars.enemy[id]["hp_max"]
+	hp_now = hp_max
+	#items que deja al morir
+	list_items = Vars.enemy[id]["item_drop"]
+	
 	player = Functions.get_main_level_scene().get_player()
 	update_facing()
 	anim_state_machine = $AnimationTree.get("parameters/playback")

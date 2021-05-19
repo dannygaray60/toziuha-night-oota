@@ -1,0 +1,221 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://assets/sprites/enemy_thrower_skeleton.png" type="Texture" id=1]
+[ext_resource path="res://objects/enemies/ThrowerSkeleton.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 6.19846, 20.1512 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 34, 29 )
+
+[sub_resource type="RayShape2D" id=3]
+
+[sub_resource type="RayShape2D" id=4]
+length = 10.0
+slips_on_slope = true
+
+[sub_resource type="Animation" id=5]
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 13 ]
+}
+
+[sub_resource type="Animation" id=6]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 3, 4 ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.9, 1.2, 1.5, 1.8, 2.1, 2.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 6, 7, 3, 4, 3, 4, 3, 4 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "throw_bone"
+}, {
+"args": [ true ],
+"method": "jump"
+} ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 28.1967, 28.8085 )
+
+[node name="Skeleton" type="KinematicBody2D" groups=[
+"enemies",
+]]
+collision_layer = 4
+collision_mask = 29
+script = ExtResource( 2 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+modulate = Color( 1, 1, 1, 0.682353 )
+position = Vector2( 0, -18.2359 )
+scale = Vector2( 5.71704, 4.29111 )
+process_parent = true
+physics_process_parent = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.44532, -20.2359 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -25 )
+texture = ExtResource( 1 )
+hframes = 15
+frame = 4
+
+[node name="AreaDetectPlayerFront" type="Area2D" parent="Sprite"]
+position = Vector2( -32, 25 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaDetectPlayerFront"]
+position = Vector2( -34, -10 )
+shape = SubResource( 2 )
+
+[node name="AreaDetectObstacle" type="Area2D" parent="Sprite"]
+position = Vector2( 32, 33 )
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaDetectObstacle"]
+position = Vector2( -49, -19 )
+rotation = 1.5708
+shape = SubResource( 3 )
+
+[node name="AreaDetectNoFloor" type="Area2D" parent="Sprite"]
+position = Vector2( 32, 33 )
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaDetectNoFloor"]
+position = Vector2( -43, -16 )
+shape = SubResource( 4 )
+
+[node name="PosSpawnBone" type="Position2D" parent="Sprite"]
+position = Vector2( -12.2068, 7.85723 )
+
+[node name="RayCastDetectBackWall" type="RayCast2D" parent="Sprite"]
+position = Vector2( 8, -15 )
+rotation = -1.60745
+scale = Vector2( 11.353, 1 )
+enabled = true
+cast_to = Vector2( 0, 20 )
+collision_mask = 8
+
+[node name="RayCastDetectBackNoFloor" type="RayCast2D" parent="Sprite"]
+position = Vector2( 40, 17 )
+rotation = -1.02625
+scale = Vector2( 11.353, 1 )
+enabled = true
+cast_to = Vector2( 0, 20 )
+collision_mask = 8
+
+[node name="RayCastDetectFrontNoFloor" type="RayCast2D" parent="Sprite"]
+position = Vector2( -48, 17.0001 )
+rotation = 0.918043
+scale = Vector2( 11.353, 1 )
+enabled = true
+cast_to = Vector2( 0, 20 )
+collision_mask = 8
+
+[node name="RayCastDetectPlayerFront" type="RayCast2D" parent="Sprite"]
+position = Vector2( -104, 9 )
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 0, 100 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/dead = SubResource( 5 )
+anims/idle = SubResource( 6 )
+anims/throw = SubResource( 7 )
+anims/walk = SubResource( 8 )
+
+[node name="TimerToChangeFacing" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="TimerHurt" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+__meta__ = {
+"_editor_description_": "activado al ser herido, mientras esté activo no podrá ser herido"
+}
+
+[node name="TimerJumpBack" type="Timer" parent="."]
+one_shot = true
+
+[node name="AreaDetectNearPlayer" type="Area2D" parent="."]
+collision_layer = 8
+__meta__ = {
+"_editor_description_": "cuando el jugador se acerca mucho al esqueleto"
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDetectNearPlayer"]
+modulate = Color( 0.262745, 0.733333, 0, 1 )
+position = Vector2( 0, -29 )
+shape = SubResource( 9 )
+
+[connection signal="body_entered" from="Sprite/AreaDetectPlayerFront" to="." method="_on_AreaDetectPlayerFront_body_entered"]
+[connection signal="body_exited" from="Sprite/AreaDetectPlayerFront" to="." method="_on_AreaDetectPlayerFront_body_exited"]
+[connection signal="body_entered" from="Sprite/AreaDetectObstacle" to="." method="_on_AreaDetectObstacle_body_entered"]
+[connection signal="body_exited" from="Sprite/AreaDetectNoFloor" to="." method="_on_AreaDetectNoFloor_body_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="TimerHurt" to="." method="_on_TimerHurt_timeout"]
+[connection signal="timeout" from="TimerJumpBack" to="." method="_on_TimerJumpBack_timeout"]
+[connection signal="body_entered" from="AreaDetectNearPlayer" to="." method="_on_AreaDetectNearPlayer_body_entered"]

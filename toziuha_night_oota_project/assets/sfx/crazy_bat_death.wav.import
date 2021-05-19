@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/crazy_bat_death.wav-d4e1f50e7fcdcd1ec97555fbfcc7fc63.sample"
+
+[deps]
+
+source_file="res://assets/sfx/crazy_bat_death.wav"
+dest_files=[ "res://.import/crazy_bat_death.wav-d4e1f50e7fcdcd1ec97555fbfcc7fc63.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

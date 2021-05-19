@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objects/AreaPlayerDeath.gd" type="Script" id=1]
+
+[node name="AreaPlayerDeath" type="Area2D"]
+collision_layer = 8
+script = ExtResource( 1 )
+
+[connection signal="body_entered" from="." to="." method="_on_AreaPlayerDeath_body_entered"]
