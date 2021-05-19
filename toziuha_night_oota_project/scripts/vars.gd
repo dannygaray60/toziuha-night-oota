@@ -97,6 +97,15 @@ var enemy = {
 		#y aqui una lista de objetos que puede dejar al morir...
 		"item_drop": ["none"],
 	},
+	"armored_skeleton":{
+		"name": "ARMOREDSKELETON",
+		"atk": 20,
+		"def":3,
+		"hp_max": 10000,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none"],
+	},
 	"infected_slime":{
 		"name": "INFECTEDSLIME",
 		"atk": 15,

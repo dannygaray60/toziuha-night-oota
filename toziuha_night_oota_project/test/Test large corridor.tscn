@@ -183,7 +183,6 @@ item = "slide"
 
 [node name="RelicKey4" parent="." index="48" instance=ExtResource( 10 )]
 position = Vector2( 1367.77, 648 )
-item = "bronce_key"
 
 [node name="RelicKey5" parent="." index="49" instance=ExtResource( 10 )]
 position = Vector2( 1236.79, 727.232 )
