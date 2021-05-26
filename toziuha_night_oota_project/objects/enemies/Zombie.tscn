@@ -1,15 +1,9 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/sprites/enemy_zombie.png" type="Texture" id=1]
-[ext_resource path="res://objects/enemies/basic_enemy.gd" type="Script" id=2]
+[ext_resource path="res://objects/enemies/Zombie.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.19846, 20.1512 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 113.555, 19.7641 )
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -24,7 +18,7 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -39,7 +33,7 @@ tracks/0/keys = {
 "values": [ 1 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 length = 1.5
 loop = true
 tracks/0/type = "value"
@@ -55,54 +49,18 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 6.19846, 20.1512 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 64, 24 )
+
 [node name="Zombie" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 collision_layer = 4
 collision_mask = 29
 script = ExtResource( 2 )
-id = "zombie"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.44532, -20.2359 )
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -2, -25 )
-texture = ExtResource( 1 )
-hframes = 16
-
-[node name="AreaDetectPlayer" type="Area2D" parent="Sprite"]
-visible = false
-show_behind_parent = true
-position = Vector2( -10, -59 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaDetectPlayer"]
-position = Vector2( -17.5547, 64.7641 )
-shape = SubResource( 2 )
-
-[node name="RayCastFront" type="RayCast2D" parent="Sprite"]
-visible = false
-position = Vector2( -8, -9 )
-rotation = 1.5708
-enabled = true
-cast_to = Vector2( 0, 5 )
-collision_mask = 12
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/dead = SubResource( 3 )
-anims/idle = SubResource( 4 )
-anims/walk = SubResource( 5 )
-
-[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-position = Vector2( 0, -18.2359 )
-scale = Vector2( 5.71704, 4.29111 )
-process_parent = true
-physics_process_parent = true
-
-[node name="TimerToChangeFacing" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
 
 [node name="TimerHurt" type="Timer" parent="."]
 wait_time = 0.3
@@ -111,10 +69,34 @@ __meta__ = {
 "_editor_description_": "activado al ser herido, mientras esté activo no podrá ser herido"
 }
 
-[connection signal="body_entered" from="Sprite/AreaDetectPlayer" to="." method="_on_AreaDetectPlayer_body_entered"]
-[connection signal="body_exited" from="Sprite/AreaDetectPlayer" to="." method="_on_AreaDetectPlayer_body_exited"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/dead = SubResource( 1 )
+anims/idle = SubResource( 2 )
+anims/walk = SubResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.44532, -20.2359 )
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -2, -25 )
+texture = ExtResource( 1 )
+hframes = 16
+frame = 1
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( -4.76837e-07, -25 )
+scale = Vector2( 1.325, 2.65 )
+process_parent = true
+physics_process_parent = true
+
+[node name="AreaDetectPlayer" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDetectPlayer"]
+position = Vector2( 0, -24 )
+shape = SubResource( 5 )
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
-[connection signal="timeout" from="TimerToChangeFacing" to="." method="_on_TimerToChangeFacing_timeout"]
-[connection signal="timeout" from="TimerHurt" to="." method="_on_TimerHurt_timeout"]
+[connection signal="body_entered" from="AreaDetectPlayer" to="." method="_on_AreaDetectPlayer_body_entered"]

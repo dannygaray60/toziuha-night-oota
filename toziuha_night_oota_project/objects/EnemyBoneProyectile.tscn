@@ -8,12 +8,11 @@
 radius = 2.78479
 height = 0.0
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 2.98097
 height = 14.2901
 
-[sub_resource type="Animation" id=2]
-resource_name = "end"
+[sub_resource type="Animation" id=3]
 length = 0.45
 step = 0.05
 tracks/0/type = "value"
@@ -91,7 +90,7 @@ tracks/5/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionShape2D:disabled")
@@ -163,11 +162,11 @@ collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2D"]
 rotation = 1.775
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/end = SubResource( 2 )
-anims/show = SubResource( 3 )
+anims/end = SubResource( 3 )
+anims/show = SubResource( 4 )
 
 [node name="impact_simple" type="Sprite" parent="."]
 position = Vector2( 0, 0.210463 )

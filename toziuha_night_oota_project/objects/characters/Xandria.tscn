@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=2]
+[gd_scene load_steps=109 format=2]
 
 [ext_resource path="res://objects/characters/Xandria.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/xandria.png" type="Texture" id=2]
@@ -710,17 +710,19 @@ priority = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=96]
 
-[sub_resource type="AnimationNodeStateMachine" id=97]
+[sub_resource type="AnimationNodeStateMachineTransition" id=97]
+
+[sub_resource type="AnimationNodeStateMachine" id=98]
 states/attack/node = SubResource( 27 )
-states/attack/position = Vector2( -165.424, -866.371 )
+states/attack/position = Vector2( -173.424, -927.371 )
 states/attack-crouch/node = SubResource( 26 )
-states/attack-crouch/position = Vector2( -441.369, -635.873 )
+states/attack-crouch/position = Vector2( -535.369, -760.536 )
 states/backdash/node = SubResource( 28 )
 states/backdash/position = Vector2( -523.8, -540.862 )
 states/changedir/node = SubResource( 29 )
 states/changedir/position = Vector2( 223, -635.873 )
 states/crouch/node = SubResource( 30 )
-states/crouch/position = Vector2( -160.424, -281.862 )
+states/crouch/position = Vector2( 406.576, -114.862 )
 states/dead/node = SubResource( 31 )
 states/dead/position = Vector2( 303.281, -949.904 )
 states/fall/node = SubResource( 32 )
@@ -728,9 +730,9 @@ states/fall/position = Vector2( -91.424, -504.862 )
 states/hurt/node = SubResource( 33 )
 states/hurt/position = Vector2( 59, -760.536 )
 states/idle/node = SubResource( 34 )
-states/idle/position = Vector2( 533, -831.873 )
+states/idle/position = Vector2( -188, -231.873 )
 states/jump/node = SubResource( 35 )
-states/jump/position = Vector2( -22, -212.862 )
+states/jump/position = Vector2( -128, -91.862 )
 states/jump2/node = SubResource( 36 )
 states/jump2/position = Vector2( -447, -56.862 )
 states/pos-backdash/node = SubResource( 37 )
@@ -740,21 +742,21 @@ states/pos-jump/position = Vector2( -543, -404.862 )
 states/pos-run/node = SubResource( 39 )
 states/pos-run/position = Vector2( 204, -510.862 )
 states/pos-slide/node = SubResource( 40 )
-states/pos-slide/position = Vector2( -350.424, -777.873 )
+states/pos-slide/position = Vector2( -362.424, -889.873 )
 states/pre-run/node = SubResource( 41 )
 states/pre-run/position = Vector2( 576, -510.862 )
 states/run/node = SubResource( 42 )
 states/run/position = Vector2( 526, -356.862 )
 states/slide/node = SubResource( 43 )
 states/slide/position = Vector2( -165.424, -660.873 )
-transitions = [ "idle", "pre-run", SubResource( 44 ), "pre-run", "run", SubResource( 45 ), "run", "pos-run", SubResource( 46 ), "changedir", "run", SubResource( 47 ), "pre-run", "changedir", SubResource( 48 ), "fall", "jump2", SubResource( 49 ), "fall", "jump", SubResource( 50 ), "jump", "jump2", SubResource( 51 ), "changedir", "idle", SubResource( 52 ), "pos-run", "idle", SubResource( 53 ), "pre-run", "pos-run", SubResource( 54 ), "pos-run", "pre-run", SubResource( 55 ), "run", "changedir", SubResource( 56 ), "pos-run", "changedir", SubResource( 57 ), "jump", "pos-jump", SubResource( 58 ), "pos-jump", "fall", SubResource( 59 ), "jump2", "pos-jump", SubResource( 60 ), "idle", "jump", SubResource( 61 ), "pos-run", "jump", SubResource( 62 ), "pre-run", "jump", SubResource( 63 ), "run", "jump", SubResource( 64 ), "fall", "run", SubResource( 65 ), "pos-jump", "run", SubResource( 66 ), "changedir", "jump", SubResource( 67 ), "pos-jump", "pos-run", SubResource( 68 ), "pre-run", "crouch", SubResource( 69 ), "crouch", "idle", SubResource( 70 ), "changedir", "crouch", SubResource( 71 ), "fall", "crouch", SubResource( 72 ), "pos-jump", "crouch", SubResource( 73 ), "pos-jump", "jump", SubResource( 74 ), "idle", "backdash", SubResource( 75 ), "backdash", "pos-backdash", SubResource( 76 ), "pos-backdash", "idle", SubResource( 77 ), "pos-backdash", "jump", SubResource( 78 ), "pos-backdash", "crouch", SubResource( 79 ), "crouch", "slide", SubResource( 80 ), "slide", "pos-slide", SubResource( 81 ), "pos-slide", "slide", SubResource( 82 ), "pos-slide", "idle", SubResource( 83 ), "idle", "attack", SubResource( 84 ), "attack", "idle", SubResource( 85 ), "crouch", "attack-crouch", SubResource( 86 ), "attack-crouch", "pos-slide", SubResource( 87 ), "pos-slide", "attack-crouch", SubResource( 88 ), "changedir", "pre-run", SubResource( 89 ), "idle", "hurt", SubResource( 90 ), "hurt", "pos-run", SubResource( 91 ), "idle", "dead", SubResource( 92 ), "pos-backdash", "fall", SubResource( 93 ), "backdash", "crouch", SubResource( 94 ), "backdash", "fall", SubResource( 95 ), "slide", "pos-backdash", SubResource( 96 ) ]
+transitions = [ "idle", "pre-run", SubResource( 44 ), "pre-run", "run", SubResource( 45 ), "run", "pos-run", SubResource( 46 ), "changedir", "run", SubResource( 47 ), "pre-run", "changedir", SubResource( 48 ), "fall", "jump2", SubResource( 49 ), "fall", "jump", SubResource( 50 ), "jump", "jump2", SubResource( 51 ), "changedir", "idle", SubResource( 52 ), "pos-run", "idle", SubResource( 53 ), "pre-run", "pos-run", SubResource( 54 ), "pos-run", "pre-run", SubResource( 55 ), "run", "changedir", SubResource( 56 ), "pos-run", "changedir", SubResource( 57 ), "jump", "pos-jump", SubResource( 58 ), "pos-jump", "fall", SubResource( 59 ), "jump2", "pos-jump", SubResource( 60 ), "idle", "jump", SubResource( 61 ), "pos-run", "jump", SubResource( 62 ), "pre-run", "jump", SubResource( 63 ), "run", "jump", SubResource( 64 ), "fall", "run", SubResource( 65 ), "pos-jump", "run", SubResource( 66 ), "changedir", "jump", SubResource( 67 ), "pos-jump", "pos-run", SubResource( 68 ), "pre-run", "crouch", SubResource( 69 ), "crouch", "idle", SubResource( 70 ), "changedir", "crouch", SubResource( 71 ), "fall", "crouch", SubResource( 72 ), "pos-jump", "crouch", SubResource( 73 ), "pos-jump", "jump", SubResource( 74 ), "idle", "backdash", SubResource( 75 ), "backdash", "pos-backdash", SubResource( 76 ), "pos-backdash", "idle", SubResource( 77 ), "pos-backdash", "jump", SubResource( 78 ), "pos-backdash", "crouch", SubResource( 79 ), "crouch", "slide", SubResource( 80 ), "slide", "pos-slide", SubResource( 81 ), "pos-slide", "slide", SubResource( 82 ), "pos-slide", "idle", SubResource( 83 ), "idle", "attack", SubResource( 84 ), "attack", "idle", SubResource( 85 ), "crouch", "attack-crouch", SubResource( 86 ), "attack-crouch", "pos-slide", SubResource( 87 ), "pos-slide", "attack-crouch", SubResource( 88 ), "changedir", "pre-run", SubResource( 89 ), "idle", "hurt", SubResource( 90 ), "hurt", "pos-run", SubResource( 91 ), "idle", "dead", SubResource( 92 ), "pos-backdash", "fall", SubResource( 93 ), "backdash", "crouch", SubResource( 94 ), "backdash", "fall", SubResource( 95 ), "slide", "pos-backdash", SubResource( 96 ), "idle", "crouch", SubResource( 97 ) ]
 start_node = "idle"
 end_node = "dead"
-graph_offset = Vector2( -643.38, -982.337 )
+graph_offset = Vector2( -659.006, -404.658 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=98]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=99]
 
-[sub_resource type="Animation" id=99]
+[sub_resource type="Animation" id=100]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionStand:shape:extents")
@@ -781,7 +783,7 @@ tracks/1/keys = {
 "values": [ Vector2( -0.023, -14.801 ) ]
 }
 
-[sub_resource type="Animation" id=100]
+[sub_resource type="Animation" id=101]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionStand:position")
@@ -870,6 +872,7 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 hframes = 16
 vframes = 7
+frame = 1
 script = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": "z index : 0"
@@ -979,17 +982,17 @@ anims/run = SubResource( 24 )
 anims/slide = SubResource( 25 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 97 )
+tree_root = SubResource( 98 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 process_mode = 0
-parameters/playback = SubResource( 98 )
+parameters/playback = SubResource( 99 )
 "parameters/conditions/state == \"fall\"" = false
 "parameters/conditions/state == \"run\"" = false
 
 [node name="AnimationPlayerCollision" type="AnimationPlayer" parent="."]
-anims/crouch = SubResource( 99 )
-anims/stand = SubResource( 100 )
+anims/crouch = SubResource( 100 )
+anims/stand = SubResource( 101 )
 
 [node name="TimerBackdash" type="Timer" parent="."]
 wait_time = 0.2

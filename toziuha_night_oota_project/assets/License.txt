@@ -1,3 +1,37 @@
 The most of assets (graphics and music) aren´t free to use. 
-
 All rights is from their respective owners.
+
+----------------------------------------------------------------
+
+
+All rights Reserved - Danny Garay.
+----------------------------------
+» ./sprites/xandria.png
+» ./sprites/weapon_xandria_lvl3.png
+» ./sprites/weapon_xandria_lvl2.png
+» ./sprites/weapon_xandria_lvl1.png
+» ./sprites/weapon_upgrade_xandria.png
+» ./sprites/upgrade_stats_items.png [sprite 1, sprite 5]
+» ./sprites/subweapons_xandria.png
+» ./sprites/subweapon_xandria_icons.png
+» ./sprites/slider_grabber_no_focus.png
+» ./sprites/slider_grabber.png
+» ./sprites/shiny.png
+» ./sprites/relics_keys.png [sprite 4, sprite 5, sprite 6]
+» ./sprites/potion.png
+» ./sprites/panel_corner.png
+» ./sprites/notification_in_game_panel.png
+» ./sprites/money_silver.png
+» ./sprites/money_gold.png
+» ./sprites/money_diamond1000.png
+» ./sprites/money_diamond500.png
+» ./sprites/main_panel*.png
+» ./sprites/main_menu_button_box.png
+» ./sprites/icons_buttons_gamepad_sheet_normal.png
+» ./sprites/hud.png
+» ./sprites/hud_status_panel.png
+» ./sprites/
+» ./sprites/
+» ./sprites/
+» ./sprites/
+» ./sprites/

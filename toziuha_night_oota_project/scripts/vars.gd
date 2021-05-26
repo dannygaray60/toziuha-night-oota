@@ -69,7 +69,6 @@ var enemy = {
 		#y aqui una lista de objetos que puede dejar al morir...
 		"item_drop": ["none","none","none","money_10","money_100","money_1","money_1","money_10","money_10"],
 	},
-	
 	"zombie":{
 		"name": "ZOMBIE",
 		"atk": 10,
@@ -88,6 +87,33 @@ var enemy = {
 		#y aqui una lista de objetos que puede dejar al morir...
 		"item_drop": ["none","none","none","money_10","money_100","money_1","money_1","money_10","money_10"],
 	},
+	"cursed_hound":{
+		"name": "CURSEDHOUND",
+		"atk": 7,
+		"def":0,
+		"hp_max": 2,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none"],
+	},	
+	"bat":{
+		"name": "BAT",
+		"atk": 7,
+		"def":0,
+		"hp_max": 2,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none"],
+	},
+	"blood_bat":{
+		"name": "BLOODBAT",
+		"atk": 10,
+		"def":3,
+		"hp_max": 7,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none","none","none"],
+	},
 	"floating_skull":{
 		"name": "FLOATINGSKULL",
 		"atk": 15,
@@ -97,6 +123,24 @@ var enemy = {
 		#y aqui una lista de objetos que puede dejar al morir...
 		"item_drop": ["none"],
 	},
+	"demon_skull_head":{
+		"name": "DEMONSKULLHEAD",
+		"atk": 10,
+		"def":3,
+		"hp_max": 7,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none","none","none"],
+	},
+	"thrower_skeleton":{
+		"name": "THROWERSKELETON",
+		"atk": 17,
+		"def":2,
+		"hp_max": 7,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none","none","none","money_10","money_100","money_1","money_1","money_10","money_10"],
+	},	
 	"armored_skeleton":{
 		"name": "ARMOREDSKELETON",
 		"atk": 20,
@@ -115,42 +159,9 @@ var enemy = {
 		#y aqui una lista de objetos que puede dejar al morir...
 		"item_drop": ["none","none","none","money_10","money_100","money_1","money_1","money_10","money_10"],
 	},
-	"demon_skull_head":{
-		"name": "DEMONSKULLHEAD",
-		"atk": 10,
-		"def":3,
-		"hp_max": 7,
-		"description": "Description...",
-		#y aqui una lista de objetos que puede dejar al morir...
-		"item_drop": ["none","none","none"],
-	},
-	"blood_bat":{
-		"name": "BLOODBAT",
-		"atk": 10,
-		"def":3,
-		"hp_max": 7,
-		"description": "Description...",
-		#y aqui una lista de objetos que puede dejar al morir...
-		"item_drop": ["none","none","none"],
-	},
-	"bat":{
-		"name": "BAT",
-		"atk": 7,
-		"def":0,
-		"hp_max": 2,
-		"description": "Description...",
-		#y aqui una lista de objetos que puede dejar al morir...
-		"item_drop": ["none"],
-	},
-	"cursed_hound":{
-		"name": "CURSEDHOUND",
-		"atk": 7,
-		"def":0,
-		"hp_max": 2,
-		"description": "Description...",
-		#y aqui una lista de objetos que puede dejar al morir...
-		"item_drop": ["none"],
-	},
+
+
+
 	"fireball":{
 		"name": "",
 		"atk": 20,

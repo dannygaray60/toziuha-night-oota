@@ -103,7 +103,6 @@ func _ready():
 
 #debug
 #func _process(_delta):
-#	ScreenDebugger.dict["em_now"] = str(Vars.player["em_now"])
 #	ScreenDebugger.dict["State"] = state
 #	ScreenDebugger.dict["Anim"] = str( anim_current )
 #	ScreenDebugger.dict["Jumps"] = str( num_jumps )
@@ -215,7 +214,12 @@ func _get_input():
 	
 	#agacharse
 	if Input.is_action_pressed("ui_down") and is_on_floor() and state != "slide" and state != "attack-crouch" and state != "attack":
-		_crouch()
+		#al terminar de deslizarse no se detendrá movimiento en X en seco (ver _crouch())
+		if velocity.x != 0 and anim_current == "slide":
+			_crouch(false)
+		else:
+			_crouch()
+		
 	elif Input.is_action_just_released("ui_down") and state == "crouch":
 		if !$Sprite/RayCastUp.is_colliding():
 			change_state("idle")
@@ -291,6 +295,11 @@ func _use_health_item():
 
 func _backdash():
 	if state != "slide" and state != "attack-crouch" and is_on_floor() and state != "backdash" and state != "crouch" and anim_current != "backdash" and anim_current != "pos-backdash" and Vars.player["hability_backdash"]:
+		
+		#desactivar pressed para evitar glitch de backdash al mantener left o right mientras se repite backdash
+		Input.action_release("ui_left")
+		Input.action_release("ui_right")
+		
 		$TimerBackdash.start()
 		$Sprite/XandriaWeapon.cancel()
 		Audio.play_voice("xandria-up")
@@ -305,8 +314,11 @@ func _slide():
 		Audio.play_sfx("slide")
 		change_state("slide")
 
-func _crouch():
-	velocity.x = 0
+func _crouch(stop_x_move=true):
+	#detener movimiento de X en seco
+	#dejar en false para que el propio lerp de _move haga su trabajo
+	if stop_x_move:
+		velocity.x = 0
 	change_state("crouch")
 	
 func _jump():
@@ -358,7 +370,7 @@ func _check_states():
 	
 	#correccion de volteo de sprites
 	#(al atacar y mantener direccion contraria presionada
-	if facing != $Sprite.scale.x and state != "attack" and state != "attack-crouch":
+	if facing != $Sprite.scale.x and state != "attack" and state != "attack-crouch" and anim_current != "slide":
 		$Sprite.scale.x = facing
 	
 	#estados que no permiten cambiar automaticamente a otro estado
@@ -422,7 +434,7 @@ func hurt(enemy_id=null,hurt_pos=null):
 	emit_signal("damaged")
 	
 	#screen shake
-	get_node("PlayerCamera").add_trauma(0.4)
+	get_node("PlayerCamera").add_trauma(0.45)
 	
 	#Input.start_joy_vibration(0,1,1,1)
 	
@@ -581,11 +593,11 @@ func set_body_collision(pose="stand"):
 func change_direction(new_dir):
 	
 	#bajo estas condiciones no se permite cambiar la direccion
-	if facing == new_dir:
+	if (
+		facing == new_dir 
+		or state in ["crouch","backdash","slide","attack","attack-crouch"]
+	):
 		return	
-	#en los siguientes estados no se puede cambiar direccion
-	if state in ["crouch","backdash","slide","attack","attack-crouch"]:
-		return
 	#si ya estaba animacion de cambiardireccion entonces se reproduce desde inicio
 	elif is_on_floor():
 		anim_state_machine.start("changedir")
@@ -628,7 +640,7 @@ func _on_TimerSlide_timeout():
 		if (Input.is_action_pressed("ui_down") or $Sprite/RayCastUp.is_colliding()) and is_on_floor():
 			state = "crouch"
 		elif is_on_floor():
-			velocity.x = 0
+#			velocity.x = 0
 			change_state("idle")
 
 #cuando se termina ataque

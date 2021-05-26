@@ -1,121 +1,131 @@
 extends KinematicBody2D
 
-export var id = "floating_skull"
+var Enemy = load("res://scripts/enemy.gd").new()
 
-#puntos de salud
-var hp_max = 0
-var hp_now = 0
-
-var player = null
-
-var anim_state_machine
-
-var state = "fly"
-
-var list_items = []
+#velocidad de movimiento
+var velocity = Vector2()
+#direcion en x o y
+var direction = Vector2()
 
 var facing = -1
+var state = "fly"
+var gravity = 600
+var speed = 30
+
+var id = "floating_skull"
+var hp_max = Vars.enemy[id]["hp_max"]
+var hp_now = hp_max
+var atk = Vars.enemy[id]["atk"]
+var def = Vars.enemy[id]["def"]
+var default_def = Vars.enemy[id]["def"]
 
 var chasing = false
 
-var tween_duration = 3
+var chase_duration = 1
 
-func update_facing():
-
-	if state != "dead":
-
-		facing = Functions.get_new_facing_with_player(self,player)
-
-		#volteo de sprite
-		$Sprite.scale.x = -1 * facing
+var anim_state_machine
 
 func _ready():
-	
-	#colocar stats de vida
-	hp_max = Vars.enemy[id]["hp_max"]
-	hp_now = hp_max
-	#items que deja al morir
-	list_items = Vars.enemy[id]["item_drop"]
-	
-	player = Functions.get_main_level_scene().get_player()
-	update_facing()
+	Enemy.connect("collision_with_player",self,"_on_collision_with_player")
 	anim_state_machine = $AnimationTree.get("parameters/playback")
+	change_state("pre_show",true)
+	
+func change_state(new_state, forced=false):
+	if (new_state != state or forced) and state != "dead":		
+		state = new_state
+		anim_state_machine.travel(state)
 
-func _on_TimerToShow_timeout():
-	if $VisibilityEnabler2D.is_on_screen():
-		anim_state_machine.travel("fly")
+func get_target_position(targetnode=null):
+	randomize()
+	var opt = randi() % 4
+	var decrease_y = [20,80,30,5]
+	decrease_y.shuffle()
+	var target_pos = targetnode.position
+	target_pos.y -= decrease_y[opt]
+	return target_pos
 
 func start_chase():
-	if $VisibilityEnabler2D.is_on_screen():
+	if state != "dead":
+		$Tween.stop_all()
+		randomize()
+		if $VisibilityEnabler2D.is_on_screen():
+			chase_duration = randi() % 3 + 1
+		else:
+			chase_duration = 5
+		
+		Enemy.update_facing(self,$Sprite)
 		chasing = true
-		var position_end = player.global_position
-		position_end.y -= 20
-		update_facing()
-		$Tween.interpolate_property(self, "position", global_position, position_end, tween_duration, Tween.EASE_OUT, Tween.EASE_OUT)
+		$Tween.interpolate_property(self, "position", position, get_target_position(Functions.get_main_level_scene().get_player()), chase_duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$Tween.start()
+
+
+func random_move():
+	
+	if state == "dead":
+		return
+	
+	$Tween.stop_all()
+	randomize()
+	var opt = randi() % 4
+	match opt:
+		0:
+			$Tween.interpolate_property(self, "position", position, Vector2(position.x-40,position.y-40), 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT)
+		1:
+			$Tween.interpolate_property(self, "position", position, Vector2(position.x+40,position.y-40), 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT)		
+		2:
+			$Tween.interpolate_property(self, "position", position, Vector2(position.x-40,position.y+40), 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT)		
+		3:
+			$Tween.interpolate_property(self, "position", position, Vector2(position.x+40,position.y+40), 0.5, Tween.TRANS_LINEAR, Tween.EASE_OUT)		
+	$Tween.start()
+	
 	
 func hurt(damage,weapon_position):
-	chasing = false
-	$Tween.stop_all()
-	if $TimerHurt.get_time_left() == 0:
+	
+	if $TimerHurt.get_time_left() == 0 and state != "dead" and hp_now > 0:
+		
+		$Tween.stop_all()
+		
 		$Sprite.modulate = Color(1,0,0,1)
 		$TimerHurt.start()
-		
 		Audio.play_sfx("hit4")
 		
-		#damage calcule
-		#reducir damage gracias a defensa
-		damage = Functions.get_value(damage,"-",Vars.enemy[id]["def"])
-		hp_now -= damage
-		
-		var indicator_position = Vector2(global_position.x,weapon_position.y)
-		Functions.show_damage_indicator(damage,indicator_position,"red")
-		
+		Enemy.apply_damage(self,damage,weapon_position)
+
 		if hp_now <= 0:
-			die()
-			
-func die():
-	Audio.play_sfx("crazy_bat_death")
-	state = "dead"
-	anim_state_machine.travel("dead")
-	chasing = false
-	$Tween.stop_all()
+			$Sprite.modulate = Color(1,1,1,1)
+			disable_collisions()
+			Enemy.drop_item_and_show_name(self)
+			Audio.play_sfx("crazy_bat_death")
+			change_state("dead")
+			$Sprite.modulate = Color(1,1,1,1)
+			return
 
-func free_enemy():
-	queue_free()
-
-func _on_Tween_tween_completed(_object, _key):
-	if state != "dead":
-		start_chase()
-
-
-func _on_TimerHurt_timeout():
+	yield($TimerHurt,"timeout")
+	random_move()
+	Enemy.update_facing(self,$Sprite)
 	$Sprite.modulate = Color(1,1,1,1)
-	if state != "dead":
-		start_chase()
 
+
+func disable_collisions():
+	#quitar layer enemy
+	set_collision_layer_bit(2,false)
+	#ya no chocará con jugador
+	set_collision_mask_bit(0,false)
+	#contra otros enemigos
+	set_collision_mask_bit(2,false)
+	#ni con el arma del jugador
+	set_collision_mask_bit(4,false)
+
+#---------- señales ----------------
 
 func _on_VisibilityEnabler2D_screen_entered():
-	if state != "dead":
-		if anim_state_machine.get_current_node() == "fly":
-			start_chase()
-		else:
-			anim_state_machine.travel("fly")
-
-			
+	change_state("fly")
 
 
-func _on_VisibilityEnabler2D_screen_exited():
-	$Tween.stop_all()
-
-
-func _on_AreaPlayerIsNear_body_entered(body):
-	if body.is_in_group("player"):
-		tween_duration = 1
-	elif body.is_in_group("enemies"):
-		tween_duration += 2
+func _on_Tween_tween_completed(_object, _key):
+	if state == "fly":
 		start_chase()
-
-func _on_AreaPlayerIsNear_body_exited(body):
+		
+func _on_collision_with_player(body):
 	if body.is_in_group("player"):
-		tween_duration = 3
+		random_move()

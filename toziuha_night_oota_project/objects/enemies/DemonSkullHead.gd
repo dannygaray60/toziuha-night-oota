@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var Enemy = load("res://scripts/enemy.gd").new()
+
 var fireball = preload("res://objects/EnemyFireBall.tscn")
 var fireball_instance = null
 
@@ -29,25 +31,11 @@ var facing = 1
 
 var gravity = 700
 
-#nodo del player
-var player = null
-
 func _ready():
 	
-	player = Functions.get_main_level_scene().get_player()
-	
-	update_facing()
+	Enemy.update_facing(self,$Sprite)
 		
 	$TimerStart.start()
-	
-func update_facing():
-
-	if state != "dead":
-
-		facing = Functions.get_new_facing_with_player(self,player)
-
-		#volteo de sprite
-		$Sprite.scale.x = -1 * facing
 
 func _physics_process(delta):
 	
@@ -55,18 +43,12 @@ func _physics_process(delta):
 	velocity.y += gravity*delta
 	velocity = move_and_slide(velocity, Vector2.UP,true)
 	
-	#-------------- deteccion de colisiones ----------------------
-	if state!="dead":
-		for i in get_slide_count():
-			var collision = get_slide_collision(i)
-			#si colisiona contra jugador
-			if collision.collider.is_in_group("player"):
-				collision.collider.hurt(id,position)
+	Enemy.check_body_collisions(self)
 
 
 func hurt(damage,weapon_position):
 	if $TimerHurt.get_time_left() == 0 and state != "dead":
-		update_facing()
+		Enemy.update_facing(self,$Sprite)
 		$Sprite.modulate = Color(1,0,0,1)
 		$TimerHurt.start()
 
@@ -74,18 +56,14 @@ func hurt(damage,weapon_position):
 		
 		Audio.play_sfx("hit4")
 		
-		damage = Functions.get_value(damage,"-",Vars.enemy[id]["def"])
-		hp_now -= damage
-		
-		var indicator_position = Vector2(global_position.x,weapon_position.y)
-		Functions.show_damage_indicator(damage,indicator_position,"red")
+		Enemy.apply_damage(self,damage,weapon_position)
 		
 		if hp_now <= 0:
 			die()
 
 func die():
 	if state != "dead":
-		Functions.show_hud_notif(tr(Vars.enemy[id]["name"]))
+		Enemy.drop_item_and_show_name(self)
 		state = "dead"
 		gravity = 0
 		$AnimationPlayer.stop()
@@ -106,14 +84,14 @@ func throw_fireball():
 		if !linear_direction_fireball:
 			fireball_instance.speed += 30
 		Functions.get_main_level_scene().add_child(fireball_instance)
-		update_facing()
+		Enemy.update_facing(self,$Sprite)
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	#finaliza animacion de lanzar bolas de fuego
 	if anim_name == "attack" and state != "dead":
 		fireballs = 0
-		update_facing()
+		Enemy.update_facing(self,$Sprite)
 		$AnimationPlayer.play("idle")
 	elif anim_name == "death":
 		queue_free()

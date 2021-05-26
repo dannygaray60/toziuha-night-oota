@@ -7,7 +7,7 @@
 [ext_resource path="res://tilemaps/CreepyDawn/TileMap.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/AreaPlayerDeath.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/enemies/Skeleton.tscn" type="PackedScene" id=7]
-[ext_resource path="res://objects/enemies/Hound.tscn" type="PackedScene" id=8]
+[ext_resource path="res://objects/enemies/CursedHound.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/items/Torch.tscn" type="PackedScene" id=9]
 [ext_resource path="res://objects/enemies/Zombie.tscn" type="PackedScene" id=10]
 [ext_resource path="res://objects/items/RelicKey.tscn" type="PackedScene" id=11]
@@ -51,7 +51,7 @@ position = Vector2( 941.941, 299.746 )
 position = Vector2( 256.815, 351.689 )
 
 [node name="CursedHound" parent="Node2D" index="2" instance=ExtResource( 8 )]
-position = Vector2( 641.005, 239.71 )
+position = Vector2( 596.005, 239.71 )
 
 [node name="CursedHound2" parent="Node2D" index="3" instance=ExtResource( 8 )]
 position = Vector2( 800, 296 )
@@ -96,7 +96,7 @@ position = Vector2( 407.246, 311.278 )
 position = Vector2( 738.101, 286.011 )
 
 [node name="Skeleton3" parent="Node2D" index="17" instance=ExtResource( 13 )]
-position = Vector2( 595.293, 231.226 )
+position = Vector2( 646.293, 240.226 )
 
 [node name="Skeleton4" parent="Node2D" index="18" instance=ExtResource( 13 )]
 position = Vector2( 1118.22, 287.497 )

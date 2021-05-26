@@ -1,13 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/sprites/enemy_bat.png" type="Texture" id=1]
 [ext_resource path="res://objects/enemies/Bat.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 7.15365
+radius = 7.49145
 
 [sub_resource type="Animation" id=2]
-resource_name = "death"
+resource_name = "dead"
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -38,6 +38,37 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
+[sub_resource type="Animation" id=4]
+resource_name = "sleep"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 5, 4 ]
+}
+
 [node name="Bat" type="KinematicBody2D" groups=[
 "enemies",
 ]]
@@ -45,9 +76,11 @@ collision_layer = 0
 collision_mask = 17
 script = ExtResource( 2 )
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
-position = Vector2( 0.280621, 0.211169 )
-scale = Vector2( 5.59449, 0.919608 )
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( 1.16786, -4 )
+scale = Vector2( 3.18321, 2 )
+process_parent = true
+physics_process_parent = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -58,14 +91,12 @@ texture = ExtResource( 1 )
 hframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/death = SubResource( 2 )
+anims/dead = SubResource( 2 )
 anims/fly = SubResource( 3 )
+anims/sleep = SubResource( 4 )
+anims/wake_up = SubResource( 5 )
 
-[node name="TimerJump" type="Timer" parent="."]
-
-[node name="TimerGravity" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
+[node name="TimerMoveY" type="Timer" parent="."]
 
 [node name="TimerHurt" type="Timer" parent="."]
 wait_time = 0.3
@@ -74,8 +105,6 @@ __meta__ = {
 "_editor_description_": "activado al ser herido, mientras esté activo no podrá ser herido"
 }
 
-[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
-[connection signal="timeout" from="TimerJump" to="." method="_on_TimerJump_timeout"]
-[connection signal="timeout" from="TimerGravity" to="." method="_on_TimerGravity_timeout"]
-[connection signal="timeout" from="TimerHurt" to="." method="_on_TimerHurt_timeout"]
+[connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
+[connection signal="timeout" from="TimerMoveY" to="." method="_on_TimerMoveY_timeout"]

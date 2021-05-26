@@ -8,23 +8,89 @@
 [ext_resource path="res://assets/sprites/exterior_ruins/background1.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/exterior_ruins/background5.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/exterior_ruins/background2.png" type="Texture" id=8]
-[ext_resource path="res://shaders/FireBackground.shader" type="Shader" id=9]
 [ext_resource path="res://shaders/fire2d.shader" type="Shader" id=10]
 [ext_resource path="res://tilemaps/RuinsTown/Background.gd" type="Script" id=11]
 
-[sub_resource type="ShaderMaterial" id=1]
-shader = ExtResource( 9 )
-shader_param/fireMovement = Vector2( 0.181, -1.107 )
-shader_param/distortionMovement = Vector2( -0.158, -3.154 )
-shader_param/normalStrength = 40.0
-shader_param/distortionStrength = 0.1
+[sub_resource type="Shader" id=1]
+code = "/*
+	Fire Shader by Yui Kinomoto @arlez80
+	MIT License
+*/
+shader_type canvas_item;
+render_mode unshaded;
 
-[sub_resource type="ShaderMaterial" id=2]
+uniform sampler2D noise_tex : hint_white;
+uniform vec4 root_color : hint_color = vec4( 1.0, 0.75, 0.3, 1.0 );
+uniform vec4 tip_color : hint_color = vec4( 1.0, 0.03, 0.001, 1.0 );
+
+uniform float fire_alpha : hint_range( 0.0, 1.0 ) = 1.0;
+uniform float fire_speed = 1.0;
+uniform float fire_aperture : hint_range( 0.0, 3.0 ) = 0.22;
+
+/*
+	noise_texを使わないパターン
+
+float random( vec2 pos )
+{ 
+	return fract(sin(dot(pos, vec2(12.9898,78.233))) * 43758.5453);
+}
+
+float value_noise( vec2 pos )
+{
+	vec2 p = floor( pos );
+	vec2 f = fract( pos );
+
+	float v00 = random( p + vec2( 0.0, 0.0 ) );
+	float v10 = random( p + vec2( 1.0, 0.0 ) );
+	float v01 = random( p + vec2( 0.0, 1.0 ) );
+	float v11 = random( p + vec2( 1.0, 1.0 ) );
+
+	vec2 u = f * f * ( 3.0 - 2.0 * f );
+
+	return mix( mix( v00, v10, u.x ), mix( v01, v11, u.x ), u.y );
+}
+*/
+
+void fragment( )
+{
+	vec2 shifted_uv = UV + vec2( 0.0, TIME * fire_speed );
+	/*float fire_noise = (
+		value_noise( shifted_uv * 0.984864 ) * 20.0
+	+	value_noise( shifted_uv * 2.543 ) * 10.0
+	+	value_noise( shifted_uv * 9.543543 ) * 8.0
+	+	value_noise( shifted_uv * 21.65436 ) * 5.0
+	+	value_noise( shifted_uv * 42.0 ) * 2.0
+	+	value_noise( shifted_uv * 87.135148 ) * 2.0
+	+	value_noise( shifted_uv * 340.66534654 )
+	) / 48.0;*/
+	float fire_noise = texture( noise_tex, shifted_uv ).r;
+	float noise = UV.y * ( ( ( UV.y + fire_aperture ) * fire_noise - fire_aperture ) * 75.0 );
+	vec4 fire_color = mix( tip_color, root_color, noise * 0.05 );
+
+	COLOR = vec4( fire_color.rgb, clamp( noise, 0.0, 1.0 ) * fire_alpha );
+}
+"
+
+[sub_resource type="OpenSimplexNoise" id=2]
+
+[sub_resource type="NoiseTexture" id=3]
+noise = SubResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 1 )
+shader_param/root_color = Color( 1, 0.937255, 0.541176, 1 )
+shader_param/tip_color = Color( 0.435294, 0.0666667, 0.0666667, 1 )
+shader_param/fire_alpha = 1.0
+shader_param/fire_speed = 1.0
+shader_param/fire_aperture = 0.22
+shader_param/noise_tex = SubResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=5]
 shader = ExtResource( 1 )
 shader_param/screen_height = 640.0
-shader_param/amplitude = -0.008
-shader_param/frequency = 22.449
-shader_param/speed = 1.806
+shader_param/amplitude = -0.005
+shader_param/frequency = 20.564
+shader_param/speed = 1.948
 shader_param/amplitude_vertical = 0.0
 shader_param/frequency_vertical = 0.0
 shader_param/speed_vertical = 0.0
@@ -33,7 +99,7 @@ shader_param/scrolling_speed = 0.08
 shader_param/enable_palette_cycling = false
 shader_param/palette_speed = 0.1
 
-[sub_resource type="AnimatedTexture" id=3]
+[sub_resource type="AnimatedTexture" id=6]
 frames = 5
 fps = 3.7
 frame_0/texture = ExtResource( 2 )
@@ -46,19 +112,14 @@ frame_3/delay_sec = 0.0
 frame_4/texture = ExtResource( 4 )
 frame_4/delay_sec = 0.0
 
-[sub_resource type="OpenSimplexNoise" id=4]
-
-[sub_resource type="NoiseTexture" id=5]
-noise = SubResource( 4 )
-
-[sub_resource type="ShaderMaterial" id=6]
+[sub_resource type="ShaderMaterial" id=7]
 shader = ExtResource( 10 )
 shader_param/root_color = Color( 1, 0.75, 0.3, 1 )
 shader_param/tip_color = Color( 1, 0.03, 0.001, 1 )
 shader_param/fire_alpha = 1.0
 shader_param/fire_speed = 1.0
 shader_param/fire_aperture = 0.22
-shader_param/noise_tex = SubResource( 5 )
+shader_param/noise_tex = SubResource( 3 )
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
 script = ExtResource( 11 )
@@ -87,14 +148,29 @@ motion_mirroring = Vector2( 426, 0 )
 position = Vector2( 211.584, 195.57 )
 texture = ExtResource( 7 )
 
-[node name="ParallaxFire" type="ParallaxLayer" parent="."]
-motion_mirroring = Vector2( 1056, 0 )
+[node name="ParallaxFire4" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2( 694, 0 )
 
-[node name="Fire" type="ColorRect" parent="ParallaxFire"]
-modulate = Color( 1, 1, 1, 0.156863 )
-material = SubResource( 1 )
-margin_right = 1056.0
-margin_bottom = 397.0
+[node name="Fire3" type="ColorRect" parent="ParallaxFire4"]
+modulate = Color( 1, 1, 1, 0.203922 )
+material = SubResource( 4 )
+margin_left = -6.0
+margin_top = 58.0
+margin_right = 341.0
+margin_bottom = 441.0
+rect_scale = Vector2( 1, 1.12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fire4" type="ColorRect" parent="ParallaxFire4"]
+modulate = Color( 1, 1, 1, 0.203922 )
+material = SubResource( 4 )
+margin_left = 687.537
+margin_top = 58.0
+margin_right = 1034.54
+margin_bottom = 441.0
+rect_scale = Vector2( -1, 1.12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -105,26 +181,26 @@ motion_mirroring = Vector2( 1056, 0 )
 
 [node name="RuinsBuilds" type="TextureRect" parent="ParallaxBuilds2"]
 modulate = Color( 0.262745, 0.262745, 0.262745, 1 )
-material = SubResource( 2 )
+material = SubResource( 5 )
 margin_left = -5.32855
 margin_top = 291.204
 margin_right = 1050.67
 margin_bottom = 467.204
 rect_scale = Vector2( 0.5, 0.5 )
-texture = SubResource( 3 )
+texture = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RuinsBuilds2" type="TextureRect" parent="ParallaxBuilds2"]
 modulate = Color( 0.262745, 0.262745, 0.262745, 1 )
-material = SubResource( 2 )
+material = SubResource( 5 )
 margin_left = 578.742
 margin_top = 292.618
 margin_right = 1634.74
 margin_bottom = 468.618
 rect_scale = Vector2( 0.5, 0.5 )
-texture = SubResource( 3 )
+texture = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -134,12 +210,12 @@ motion_mirroring = Vector2( 1056, 0 )
 
 [node name="RuinsBuilds" type="TextureRect" parent="ParallaxBuilds"]
 modulate = Color( 0.654902, 0.537255, 0, 1 )
-material = SubResource( 2 )
+material = SubResource( 5 )
 margin_left = -37.9402
 margin_top = 208.159
 margin_right = 1018.06
 margin_bottom = 384.159
-texture = SubResource( 3 )
+texture = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -149,7 +225,7 @@ motion_mirroring = Vector2( 694, 0 )
 
 [node name="Fire3" type="ColorRect" parent="ParallaxFire3"]
 modulate = Color( 1, 1, 1, 0.203922 )
-material = SubResource( 6 )
+material = SubResource( 7 )
 margin_left = -6.47089
 margin_top = 221.088
 margin_right = 340.529
@@ -160,7 +236,7 @@ __meta__ = {
 
 [node name="Fire4" type="ColorRect" parent="ParallaxFire3"]
 modulate = Color( 1, 1, 1, 0.203922 )
-material = SubResource( 6 )
+material = SubResource( 7 )
 margin_left = 687.512
 margin_top = 220.672
 margin_right = 1034.51

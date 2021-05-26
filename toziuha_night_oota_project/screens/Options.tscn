@@ -52,10 +52,10 @@ extents = Vector2( 90, 10 )
 [sub_resource type="DynamicFont" id=9]
 font_data = ExtResource( 8 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=10]
 font_data = ExtResource( 8 )
 
-[sub_resource type="ButtonGroup" id=10]
+[sub_resource type="ButtonGroup" id=11]
 
 [node name="Options" type="Control"]
 anchor_right = 1.0
@@ -107,7 +107,7 @@ __meta__ = {
 
 [node name="HBx" type="HBoxContainer" parent="Margin"]
 margin_left = 20.0
-margin_right = 1009.0
+margin_right = 663.0
 margin_bottom = 271.0
 size_flags_vertical = 0
 custom_constants/separation = 43
@@ -1103,13 +1103,13 @@ text = "(or touch here) to fix issues (if buttons doesn't work)."
 visible = false
 margin_left = 645.0
 margin_right = 989.0
-margin_bottom = 94.0
+margin_bottom = 77.0
 size_flags_vertical = 0
 custom_styles/panel = SubResource( 4 )
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelControlsTouchScreen"]
 margin_right = 344.0
-margin_bottom = 94.0
+margin_bottom = 77.0
 custom_constants/margin_right = 15
 custom_constants/margin_top = 5
 custom_constants/margin_left = 15
@@ -1119,7 +1119,7 @@ custom_constants/margin_bottom = 5
 margin_left = 15.0
 margin_top = 5.0
 margin_right = 329.0
-margin_bottom = 89.0
+margin_bottom = 72.0
 
 [node name="Show" type="HBoxContainer" parent="Margin/HBx/PanelControlsTouchScreen/Margin/VBx"]
 margin_right = 314.0
@@ -1171,10 +1171,11 @@ text = "BUTTONSPOSITION"
 align = 1
 
 [node name="Label" type="Label" parent="Margin/HBx/PanelControlsTouchScreen/Margin/VBx"]
+visible = false
 margin_top = 71.0
 margin_right = 314.0
 margin_bottom = 84.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 10 )
 text = "PHRASERESTARTTOAPPLYCHANGES"
 
 [node name="PanelLang" type="PanelContainer" parent="Margin/HBx"]
@@ -1235,7 +1236,7 @@ focus_neighbour_top = NodePath("../../PortuguesBR/CheckBox")
 focus_neighbour_right = NodePath("../../../../../../..")
 focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../PortuguesBR/CheckBox")
-group = SubResource( 10 )
+group = SubResource( 11 )
 
 [node name="Espanol" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
 margin_top = 38.0
@@ -1273,7 +1274,7 @@ focus_neighbour_left = NodePath("../../../../../../..")
 focus_neighbour_right = NodePath("../../../../../../..")
 focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../../../../../..")
-group = SubResource( 10 )
+group = SubResource( 11 )
 
 [node name="PortuguesBR" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
 margin_top = 76.0
@@ -1313,7 +1314,7 @@ focus_neighbour_bottom = NodePath("../../English/CheckBox")
 focus_next = NodePath("../../English/CheckBox")
 focus_previous = NodePath("../../Espanol/CheckBox")
 disabled = true
-group = SubResource( 10 )
+group = SubResource( 11 )
 
 [node name="HBxHelp2" type="HBoxContainer" parent="."]
 anchor_left = 1.0

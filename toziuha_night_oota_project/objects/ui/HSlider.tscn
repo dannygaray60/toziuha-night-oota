@@ -42,5 +42,6 @@ custom_fonts/font = SubResource( 3 )
 text = "000"
 align = 1
 valign = 1
+
 [connection signal="focus_entered" from="." to="." method="_on_HSlider_focus_entered"]
 [connection signal="value_changed" from="." to="." method="_on_HSlider_value_changed"]

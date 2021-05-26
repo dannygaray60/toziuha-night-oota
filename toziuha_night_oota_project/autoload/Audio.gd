@@ -1,6 +1,6 @@
 extends Node
 
-func play_sfx(name_sfx):
+func play_sfx(name_sfx):	
 	get_node("sfx/"+name_sfx).play()
 
 func stop_sfx(name_sfx):

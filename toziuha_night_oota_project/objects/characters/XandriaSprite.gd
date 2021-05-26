@@ -11,20 +11,24 @@ func _ready():
 func _process(_delta):
 	
 	vel_x = get_parent().velocity.x * get_parent().facing
+	
+	material.set_shader_param("alpha_trail",0)
+	material.set_shader_param("frame_coords",0)
+	material.set_shader_param("velocity",Vector2(0,0))
 
-	if get_parent().state in ["backdash","idle"] and vel_x != 0:
+	if get_parent().state != "dead" and get_parent().anim_current in ["backdash","pos-backdash"] and vel_x != 0:
 		material.set_shader_param("alpha_trail",0.7)
 		material.set_shader_param("velocity_max",100)
 		material.set_shader_param("trail_size",7)
 		material.set_shader_param("frame_coords",frame_coords)
 		material.set_shader_param("velocity",Vector2(vel_x,0))
-	elif get_parent().state in ["slide","crouch"] and vel_x != 0:
-		material.set_shader_param("alpha_trail",0.7)
+	elif get_parent().anim_current in ["slide"] and vel_x != 0:
+		material.set_shader_param("alpha_trail",0)
 		material.set_shader_param("velocity_max",90)
 		material.set_shader_param("trail_size",2)
 		material.set_shader_param("frame_coords",frame_coords)
 		material.set_shader_param("velocity",Vector2(vel_x,0))	
-	else:
-		material.set_shader_param("alpha_trail",0)
-		material.set_shader_param("frame_coords",0)
-		material.set_shader_param("velocity",Vector2(0,0))
+#	else:
+#		material.set_shader_param("alpha_trail",0)
+#		material.set_shader_param("frame_coords",0)
+#		material.set_shader_param("velocity",Vector2(0,0))

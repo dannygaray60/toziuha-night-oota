@@ -11,7 +11,7 @@ var direction = 1
 
 var height_arc = -80
 
-var speed = 50
+var speed = 70
 
 func _ready():
 	

@@ -5,7 +5,7 @@
 
 [sub_resource type="CircleShape2D" id=1]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "dead"
 length = 0.7
 tracks/0/type = "value"
@@ -43,12 +43,11 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
-"method": "free_enemy"
+"method": "queue_free"
 } ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "fly"
+[sub_resource type="Animation" id=3]
 length = 1.1
 loop = true
 step = 0.05
@@ -65,7 +64,7 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
 }
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="Animation" id=4]
 resource_name = "pre_show"
 length = 0.3
 tracks/0/type = "value"
@@ -93,9 +92,8 @@ tracks/1/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "show_skull"
-length = 3.0
+[sub_resource type="Animation" id=5]
+length = 4.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -103,7 +101,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7, 0.9, 1.1, 1.3, 1.8, 2.3, 2.8 ),
+"times": PoolRealArray( 0, 0.7, 1.4, 1.9, 2.1, 2.6, 3.1, 3.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 18, 17, 16, 17, 16, 14, 12, 0 ]
@@ -115,7 +113,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 2 ),
+"times": PoolRealArray( 0, 2.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -127,7 +125,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 3 ),
+"times": PoolRealArray( 4 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -135,79 +133,77 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=5]
+[sub_resource type="AnimationNodeAnimation" id=6]
 animation = "dead"
 
-[sub_resource type="AnimationNodeAnimation" id=6]
+[sub_resource type="AnimationNodeAnimation" id=7]
 animation = "fly"
 
-[sub_resource type="AnimationNodeAnimation" id=15]
+[sub_resource type="AnimationNodeAnimation" id=8]
 animation = "pre_show"
 
-[sub_resource type="AnimationNodeAnimation" id=7]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "show_skull"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=8]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=9]
-switch_mode = 2
-auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=10]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=11]
+switch_mode = 2
+auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+[sub_resource type="AnimationNodeStateMachineTransition" id=12]
 
-[sub_resource type="AnimationNodeStateMachine" id=12]
-states/dead/node = SubResource( 5 )
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachine" id=15]
+states/dead/node = SubResource( 6 )
 states/dead/position = Vector2( 665, 112 )
-states/fly/node = SubResource( 6 )
+states/fly/node = SubResource( 7 )
 states/fly/position = Vector2( 411, 190 )
-states/pre_show/node = SubResource( 15 )
+states/pre_show/node = SubResource( 8 )
 states/pre_show/position = Vector2( 211, 29 )
-states/show_skull/node = SubResource( 7 )
+states/show_skull/node = SubResource( 9 )
 states/show_skull/position = Vector2( 118, 132 )
-transitions = [ "fly", "dead", SubResource( 8 ), "show_skull", "fly", SubResource( 9 ), "fly", "show_skull", SubResource( 10 ), "dead", "show_skull", SubResource( 11 ), "pre_show", "show_skull", SubResource( 16 ) ]
+transitions = [ "fly", "dead", SubResource( 10 ), "show_skull", "fly", SubResource( 11 ), "fly", "show_skull", SubResource( 12 ), "dead", "show_skull", SubResource( 13 ), "pre_show", "show_skull", SubResource( 14 ) ]
 start_node = "pre_show"
 end_node = "dead"
 graph_offset = Vector2( 0, -20.636 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=13]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=16]
 
 [sub_resource type="CircleShape2D" id=17]
-radius = 64.0
+radius = 11.6711
 
 [node name="FloatingSkull" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 collision_layer = 4
+collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 19
-frame = 18
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/dead = SubResource( 3 )
-anims/fly = SubResource( 2 )
-anims/pre_show = SubResource( 14 )
-anims/show_skull = SubResource( 4 )
+anims/dead = SubResource( 2 )
+anims/fly = SubResource( 3 )
+anims/pre_show = SubResource( 4 )
+anims/show_skull = SubResource( 5 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 12 )
+tree_root = SubResource( 15 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 process_mode = 0
-parameters/playback = SubResource( 13 )
-
-[node name="TimerToShow" type="Timer" parent="."]
-one_shot = true
+parameters/playback = SubResource( 16 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
@@ -223,20 +219,17 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-position = Vector2( -9.53674e-07, -1.90735e-06 )
-scale = Vector2( 2.4, 2.4 )
+position = Vector2( 0.111272, -2.798 )
+scale = Vector2( 3.25646, 2.55342 )
+process_parent = true
+physics_process_parent = true
 
-[node name="AreaPlayerIsNear" type="Area2D" parent="."]
+[node name="Area2DDetectPlayer" type="Area2D" parent="."]
 collision_layer = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaPlayerIsNear"]
-modulate = Color( 1, 1, 1, 0.247059 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DDetectPlayer"]
 shape = SubResource( 17 )
 
-[connection signal="timeout" from="TimerToShow" to="." method="_on_TimerToShow_timeout"]
-[connection signal="timeout" from="TimerHurt" to="." method="_on_TimerHurt_timeout"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
-[connection signal="body_entered" from="AreaPlayerIsNear" to="." method="_on_AreaPlayerIsNear_body_entered"]
-[connection signal="body_exited" from="AreaPlayerIsNear" to="." method="_on_AreaPlayerIsNear_body_exited"]
+[connection signal="body_entered" from="Area2DDetectPlayer" to="." method="_on_collision_with_player"]

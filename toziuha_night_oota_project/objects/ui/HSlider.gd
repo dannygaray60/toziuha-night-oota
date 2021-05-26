@@ -21,7 +21,7 @@ func set_value(val):
 func _on_HSlider_value_changed(value):
 	update_value_label(value)
 	if play_sound:
-		Audio.play_sfx("slider_change_value")
+		Audio.play_sfx("checkbox_change_value")
 
 func update_value_label(val=value):
 	$Label.text = str(val).pad_zeros(3)

@@ -241,6 +241,7 @@ step = 0.1
 value = 1.0
 
 [node name="Hud" parent="." instance=ExtResource( 21 )]
+
 [connection signal="pressed" from="VBoxContainer/BtnSave" to="." method="selected_action" binds= [ "save" ]]
 [connection signal="pressed" from="VBoxContainer/BtnCancel" to="." method="selected_action" binds= [ "cancel" ]]
 [connection signal="pressed" from="VBoxContainer/BtnDefault" to="." method="selected_action" binds= [ "default" ]]

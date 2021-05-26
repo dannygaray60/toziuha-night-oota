@@ -15,16 +15,20 @@ func _ready():
 	$Btn.modulate.a = Conf.get_conf_value("touchscreenbutton","opacity",1)
 	$Dpad.modulate.a = Conf.get_conf_value("touchscreenbutton","opacity",1)
 	
+	#aplicar posicion y scale primero a btn de manera individual
+	#y luego a dpad como un solo ente
 	for b in $Btn.get_children():
 		b.position = Conf.get_conf_value("touchscreenbutton",b.name,Vector2(0,0))
 		b.scale = Vector2(b_size,b_size)
-		
 	$Dpad.position = Conf.get_conf_value("touchscreenbutton","dpad",Vector2(0,0))
 	$Dpad.scale = Vector2(b_size,b_size)
 	
 	#colocar shapes a los botones del dpad
 	for dp in $Dpad.get_children():
-		dp.get_node("Btn").shape.points = $DpadButtonShape.polygon
+		if dp.name in ["ui_left","ui_right"]:
+			dp.get_node("Btn").shape.points = $DpadButtonShape2.polygon
+		else:
+			dp.get_node("Btn").shape.points = $DpadButtonShape.polygon
 
 #mostrar u ocultar botones
 func show_buttons(val=false):

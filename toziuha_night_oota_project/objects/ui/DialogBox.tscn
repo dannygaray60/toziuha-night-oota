@@ -9,20 +9,20 @@
 [ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://assets/sprites/main_panel.png" type="Texture" id=8]
 
-[sub_resource type="StyleBoxTexture" id=3]
+[sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 8 )
 region_rect = Rect2( 0, 0, 32, 32 )
 margin_top = 4.00473
 margin_bottom = 4.11544
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 7 )
 
-[sub_resource type="RectangleShape2D" id=5]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 90, 30 )
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 350, 200 )
 
 [node name="DialogBox" type="CanvasLayer"]
@@ -42,7 +42,7 @@ __meta__ = {
 [node name="Black" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0.435294 )
+color = Color( 0, 0, 0, 0.658824 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -97,7 +97,7 @@ margin_left = 20.0
 margin_top = 10.0
 margin_right = 663.0
 margin_bottom = 116.0
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="Margin" type="MarginContainer" parent="Control/Margin/Panel"]
 margin_top = 4.00473
@@ -178,17 +178,17 @@ margin_left = 20.0
 margin_top = 7.0
 margin_right = 68.0
 margin_bottom = 33.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "SKIP"
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Control"]
 position = Vector2( 550.311, -8 )
-shape = SubResource( 5 )
+shape = SubResource( 3 )
 action = "ui_select"
 
 [node name="TouchScreenButton2" type="TouchScreenButton" parent="Control"]
 position = Vector2( -8, 56 )
-shape = SubResource( 6 )
+shape = SubResource( 4 )
 action = "ui_accept"
 
 [node name="Tween" type="Tween" parent="."]

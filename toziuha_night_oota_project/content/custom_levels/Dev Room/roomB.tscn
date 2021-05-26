@@ -51,7 +51,7 @@ position = Vector2( -64, 0.000228882 )
 position = Vector2( 217.17, 112 )
 
 [node name="Skeleton3" parent="Node2D" index="1" instance=ExtResource( 8 )]
-position = Vector2( 72, 250 )
+position = Vector2( 200, 240 )
 
 [node name="Skeleton5" parent="Node2D" index="2" instance=ExtResource( 8 )]
 position = Vector2( 314.83, 600 )
@@ -81,5 +81,4 @@ position = Vector2( 358.555, 107 )
 position = Vector2( 383.109, 736 )
 
 [editable path="DoorLeft"]
-
 [editable path="DoorDown"]

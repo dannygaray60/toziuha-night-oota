@@ -1,15 +1,9 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://assets/sprites/enemy_infected_skeleton.png" type="Texture" id=1]
-[ext_resource path="res://objects/enemies/basic_enemy.gd" type="Script" id=2]
+[ext_resource path="res://objects/enemies/Skeleton.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 6.19846, 20.1512 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 113.555, 19.7641 )
-
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -24,7 +18,7 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 13 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -39,7 +33,7 @@ tracks/0/keys = {
 "values": [ 3, 4 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=3]
 resource_name = "throw"
 length = 0.6
 tracks/0/type = "value"
@@ -55,7 +49,7 @@ tracks/0/keys = {
 "values": [ 3, 6, 7 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=4]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -71,6 +65,47 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
 }
 
+[sub_resource type="Animation" id=5]
+resource_name = "walk_reverse(slow)"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.7, 1, 1.2, 1.5, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 6.19846, 20.1512 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 5.19143, 1.31729 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 4.09628, 52.684 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 35.4638, 31.9516 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 48, 16 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 35.6228, 3.07961 )
+
+[sub_resource type="RayShape2D" id=12]
+length = 9.36143
+
+[sub_resource type="RectangleShape2D" id=13]
+extents = Vector2( 2.24873, 3.20919 )
+
 [node name="InfectedSkeleton" type="KinematicBody2D" groups=[
 "enemies",
 "poison",
@@ -78,66 +113,130 @@ tracks/0/keys = {
 collision_layer = 4
 collision_mask = 29
 script = ExtResource( 2 )
-type_pattern = "chaser"
 id = "infected_skeleton"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.44532, -20.2359 )
-shape = SubResource( 1 )
-
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, -25 )
-texture = ExtResource( 1 )
-hframes = 15
-frame = 3
-
-[node name="AreaDetectPlayer" type="Area2D" parent="Sprite"]
-show_behind_parent = true
-position = Vector2( -10, -59 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaDetectPlayer"]
-position = Vector2( -17.5547, 64.7641 )
-shape = SubResource( 2 )
-
-[node name="RayCastFront" type="RayCast2D" parent="Sprite"]
-modulate = Color( 1, 1, 1, 0.223529 )
-position = Vector2( -8, -1 )
-rotation = 1.5708
-scale = Vector2( 12.573, 1 )
-enabled = true
-cast_to = Vector2( 0, 5 )
-collision_mask = 12
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/dead = SubResource( 3 )
-anims/idle = SubResource( 4 )
-anims/throw = SubResource( 5 )
-anims/walk = SubResource( 6 )
-
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 0, -18.2359 )
-scale = Vector2( 5.71704, 4.29111 )
+position = Vector2( -4.96752, -20.386 )
+scale = Vector2( 1.68085, 2.10612 )
 process_parent = true
 physics_process_parent = true
 
-[node name="TimerToChangeFacing" type="Timer" parent="."]
-wait_time = 0.5
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/dead = SubResource( 1 )
+anims/idle = SubResource( 2 )
+anims/throw = SubResource( 3 )
+anims/walk = SubResource( 4 )
+anims/walk_reverse(slow) = SubResource( 5 )
+
+[node name="Timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="TimerHurt" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
 __meta__ = {
-"_editor_description_": "activado al ser herido, mientras esté activo no podrá ser herido"
+"_editor_description_": "activado al ser herido, mientras esté activo no podrá ser herido
+
+0.3"
 }
-[connection signal="body_entered" from="Sprite/AreaDetectPlayer" to="." method="_on_AreaDetectPlayer_body_entered"]
-[connection signal="body_exited" from="Sprite/AreaDetectPlayer" to="." method="_on_AreaDetectPlayer_body_exited"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.44532, -20.2359 )
+shape = SubResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1, -25 )
+texture = ExtResource( 1 )
+offset = Vector2( -2.898, 0 )
+hframes = 15
+
+[node name="AreaDetectNoFloor" type="Area2D" parent="Sprite"]
+position = Vector2( 1, 0 )
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaDetectNoFloor"]
+position = Vector2( 0, 27 )
+shape = SubResource( 7 )
+
+[node name="AreaDetectNearPlayer" type="Area2D" parent="Sprite"]
+collision_layer = 0
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Sprite/AreaDetectNearPlayer"]
+modulate = Color( 0.266667, 0.458824, 0.0784314, 1 )
+position = Vector2( -0.260662, -21.316 )
+shape = SubResource( 8 )
+
+[node name="AreaDetectPlayerFrontFloor" type="Area2D" parent="Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaDetectPlayerFrontFloor"]
+modulate = Color( 0.741176, 1, 0.0235294, 1 )
+position = Vector2( -40, -10 )
+rotation = 1.5708
+shape = SubResource( 9 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Sprite/AreaDetectPlayerFrontFloor"]
+modulate = Color( 0.741176, 1, 0.0235294, 1 )
+position = Vector2( 58, 9 )
+shape = SubResource( 10 )
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Sprite/AreaDetectPlayerFrontFloor"]
+modulate = Color( 0.741176, 1, 0.0235294, 1 )
+position = Vector2( -35, 22 )
+shape = SubResource( 11 )
+
+[node name="RaycastWallHeadFront" type="RayCast2D" parent="Sprite"]
+modulate = Color( 0.0823529, 0.490196, 0.156863, 1 )
+position = Vector2( -1, -10 )
+rotation = 1.5708
+scale = Vector2( 2.081, 1 )
+enabled = true
+cast_to = Vector2( 0, 10 )
+collision_mask = 8
+
+[node name="AreaWallHeadFront" type="Area2D" parent="Sprite"]
+collision_layer = 4
+collision_mask = 12
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaWallHeadFront"]
+position = Vector2( -10, -10 )
+rotation = 1.5708
+shape = SubResource( 12 )
+
+[node name="AreaWallHeadBack" type="Area2D" parent="Sprite"]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaWallHeadBack"]
+position = Vector2( 3.05613, 15.3985 )
+rotation = 4.71239
+shape = SubResource( 12 )
+
+[node name="AreaDetectWallFloorFront" type="Area2D" parent="Sprite"]
+collision_layer = 4
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaDetectWallFloorFront"]
+position = Vector2( -18, 18 )
+shape = SubResource( 13 )
+
+[node name="RayCastUpWall" type="RayCast2D" parent="Sprite"]
+position = Vector2( 0, -16 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 5 )
+collision_mask = 8
+
+[node name="TimerToChangeFacing" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered" flags=3]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
-[connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
-[connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
-[connection signal="timeout" from="TimerToChangeFacing" to="." method="_on_TimerToChangeFacing_timeout"]
-[connection signal="timeout" from="TimerHurt" to="." method="_on_TimerHurt_timeout"]
+[connection signal="body_exited" from="Sprite/AreaDetectNoFloor" to="." method="_on_AreaDetectNoFloor_body_exited"]
+[connection signal="body_entered" from="Sprite/AreaDetectNearPlayer" to="." method="_on_AreaDetectNearPlayer_body_entered"]
+[connection signal="body_entered" from="Sprite/AreaDetectPlayerFrontFloor" to="." method="_on_AreaDetectPlayerFrontFloor_body_entered"]
+[connection signal="body_exited" from="Sprite/AreaDetectPlayerFrontFloor" to="." method="_on_AreaDetectPlayerFrontFloor_body_exited"]
+[connection signal="body_entered" from="Sprite/AreaWallHeadFront" to="." method="_on_AreaWallHeadFront_body_entered"]
+[connection signal="body_entered" from="Sprite/AreaWallHeadBack" to="." method="_on_AreaWallHeadBack_body_entered"]
+[connection signal="body_entered" from="Sprite/AreaDetectWallFloorFront" to="." method="_on_AreaDetectWallFloorFront_body_entered"]

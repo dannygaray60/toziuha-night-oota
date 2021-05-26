@@ -81,8 +81,6 @@ func jump():
 
 func _physics_process(delta):
 	
-	ScreenDebugger.dict["statehound"] = str(state)
-	
 	if state == "run":
 		velocity.x = speed*facing
 
@@ -166,7 +164,7 @@ func _on_AreaDetectPlayer_body_entered(body):
 #			$AreaDetectPlayer.disconnect("body_entered",self,"_on_AreaDetectPlayer_body_entered")
 		Audio.play_sfx("roar2")
 #		jump()
-		update_facing()
+#		update_facing()
 		change_state("run")
 
 
