@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemy_armor.png-47b584b2ad98361fd4fc31f467bd2587.stex"
+path="res://.import/enemy_armor_skeleton.png-3005749fd6d88ad117ad14421a6393f4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/enemy_armor.png"
-dest_files=[ "res://.import/enemy_armor.png-47b584b2ad98361fd4fc31f467bd2587.stex" ]
+source_file="res://assets/sprites/enemy_armor_skeleton.png"
+dest_files=[ "res://.import/enemy_armor_skeleton.png-3005749fd6d88ad117ad14421a6393f4.stex" ]
 
 [params]
 

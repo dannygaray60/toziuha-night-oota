@@ -6,13 +6,13 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6.19846, 20.1512 )
 
-[sub_resource type="RectangleShape2D" id=9]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 72 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 31.6698, 143 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 length = 2.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -41,7 +41,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -56,7 +56,7 @@ tracks/0/keys = {
 "values": [ 3, 4 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 1.7
 loop = true
 tracks/0/type = "value"
@@ -86,7 +86,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 length = 0.8
 loop = true
 tracks/0/type = "value"
@@ -134,12 +134,12 @@ position = Vector2( 0, 25 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaDetectPlayerToWalk"]
 modulate = Color( 0, 0.658824, 0.027451, 1 )
 position = Vector2( -168, -24 )
-shape = SubResource( 9 )
+shape = SubResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Sprite/AreaDetectPlayerToWalk"]
 modulate = Color( 0, 0.658824, 0.027451, 1 )
 position = Vector2( 104, -24 )
-shape = SubResource( 9 )
+shape = SubResource( 2 )
 
 [node name="PosSpawnBone" type="Position2D" parent="Sprite"]
 position = Vector2( -12.2068, 7.85723 )
@@ -154,7 +154,7 @@ cast_to = Vector2( 0, 150 )
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/Area2DDetectPlayerUpDown"]
-shape = SubResource( 10 )
+shape = SubResource( 3 )
 
 [node name="RayCast2DDetectFloorFront" type="RayCast2D" parent="Sprite"]
 position = Vector2( -16, 25 )
@@ -163,10 +163,10 @@ cast_to = Vector2( 0, 10 )
 collision_mask = 8
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/dead = SubResource( 5 )
-anims/idle = SubResource( 6 )
-anims/throw = SubResource( 7 )
-anims/walk = SubResource( 8 )
+anims/dead = SubResource( 4 )
+anims/idle = SubResource( 5 )
+anims/throw = SubResource( 6 )
+anims/walk = SubResource( 7 )
 
 [node name="TimerToChangeFacing" type="Timer" parent="."]
 wait_time = 0.5
