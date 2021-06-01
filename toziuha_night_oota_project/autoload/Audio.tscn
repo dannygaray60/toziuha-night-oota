@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://assets/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Audio.gd" type="Script" id=2]
@@ -52,6 +52,9 @@
 [ext_resource path="res://assets/sfx/roar1.wav" type="AudioStream" id=50]
 [ext_resource path="res://assets/bgm/war_prelude.ogg" type="AudioStream" id=51]
 [ext_resource path="res://assets/sfx/crazy_bat_death.wav" type="AudioStream" id=52]
+[ext_resource path="res://assets/sfx/box_glass_items_drop_smash.wav" type="AudioStream" id=53]
+[ext_resource path="res://assets/sfx/smash_wood_pieces_inverse.wav" type="AudioStream" id=54]
+[ext_resource path="res://assets/sfx/spike_slash.wav" type="AudioStream" id=55]
 
 [node name="Audio" type="Node"]
 pause_mode = 2
@@ -215,6 +218,18 @@ volume_db = 3.0
 pitch_scale = 0.7
 bus = "Effects"
 
+[node name="spike_slash" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 55 )
+volume_db = 4.0
+pitch_scale = 0.8
+bus = "Effects"
+
+[node name="spike_slash2" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 55 )
+volume_db = 4.0
+pitch_scale = 1.25
+bus = "Effects"
+
 [node name="enemy_die1" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 17 )
 bus = "Effects"
@@ -222,6 +237,10 @@ bus = "Effects"
 [node name="zombie_roar" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 33 )
 pitch_scale = 0.8
+bus = "Effects"
+
+[node name="zombie_roar2" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 33 )
 bus = "Effects"
 
 [node name="crazy_bat_death" type="AudioStreamPlayer" parent="sfx"]
@@ -246,9 +265,20 @@ stream = ExtResource( 32 )
 volume_db = 5.0
 bus = "Effects"
 
+[node name="box_glass_items_drop_smash" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 53 )
+volume_db = 4.0
+pitch_scale = 0.75
+bus = "Effects"
+
 [node name="smash_wood_pieces" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 34 )
 pitch_scale = 1.5
+bus = "Effects"
+
+[node name="smash_wood_pieces_inverse" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 54 )
+pitch_scale = 0.61
 bus = "Effects"
 
 [node name="fireball_enemy" type="AudioStreamPlayer" parent="sfx"]

@@ -25,7 +25,7 @@ music = "war_prelude"
 [node name="ParallaxBackground" parent="." index="3" instance=ExtResource( 3 )]
 
 [node name="Xandria" parent="." index="4" instance=ExtResource( 2 )]
-position = Vector2( 16, 352 )
+position = Vector2( -8.69416, 100.569 )
 limit_left_camera = 0
 limit_top_camera = 0
 limit_bottom_camera = 365
@@ -51,7 +51,7 @@ position = Vector2( 941.941, 299.746 )
 position = Vector2( 256.815, 351.689 )
 
 [node name="CursedHound" parent="Node2D" index="2" instance=ExtResource( 8 )]
-position = Vector2( 596.005, 239.71 )
+position = Vector2( 546.617, 303.69 )
 
 [node name="CursedHound2" parent="Node2D" index="3" instance=ExtResource( 8 )]
 position = Vector2( 800, 296 )
@@ -96,13 +96,13 @@ position = Vector2( 407.246, 311.278 )
 position = Vector2( 738.101, 286.011 )
 
 [node name="Skeleton3" parent="Node2D" index="17" instance=ExtResource( 13 )]
-position = Vector2( 646.293, 240.226 )
+position = Vector2( 994.256, 165.021 )
 
 [node name="Skeleton4" parent="Node2D" index="18" instance=ExtResource( 13 )]
 position = Vector2( 1118.22, 287.497 )
 
 [node name="Skeleton5" parent="Node2D" index="19" instance=ExtResource( 13 )]
-position = Vector2( 748.501, 303.488 )
+position = Vector2( 837.176, 404.51 )
 
 [node name="Skeleton6" parent="Node2D" index="20" instance=ExtResource( 13 )]
 position = Vector2( 669.869, 318.808 )

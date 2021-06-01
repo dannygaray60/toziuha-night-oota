@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=2]
+[gd_scene load_steps=110 format=2]
 
 [ext_resource path="res://objects/characters/Xandria.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/xandria.png" type="Texture" id=2]
@@ -784,6 +784,33 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=101]
+resource_name = "slide"
+tracks/0/type = "value"
+tracks/0/path = NodePath("CollisionStand:shape:extents")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 19.061, 9.94327 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("CollisionStand:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -0.023, -9.91 ) ]
+}
+
+[sub_resource type="Animation" id=102]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("CollisionStand:position")
@@ -872,7 +899,6 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 hframes = 16
 vframes = 7
-frame = 1
 script = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": "z index : 0"
@@ -992,7 +1018,8 @@ parameters/playback = SubResource( 99 )
 
 [node name="AnimationPlayerCollision" type="AnimationPlayer" parent="."]
 anims/crouch = SubResource( 100 )
-anims/stand = SubResource( 101 )
+anims/slide = SubResource( 101 )
+anims/stand = SubResource( 102 )
 
 [node name="TimerBackdash" type="Timer" parent="."]
 wait_time = 0.2

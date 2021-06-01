@@ -541,8 +541,10 @@ func change_state(new_state):
 	#quitar healing en los siguientes estados
 	if Vars.player["condition"] == "healing" and state in ["attack","attack-crouch","backdash","hurt","slide"]:
 		_on_TimerHealingEnd_timeout()
-	
-	if state in ["crouch","slide","attack-crouch"]:
+
+	if state == "slide":
+		set_body_collision("slide")	
+	elif state in ["crouch","attack-crouch"]:
 		set_body_collision("crouch")
 	else:
 		if !$Sprite/RayCastUp.is_colliding():
@@ -585,8 +587,11 @@ func set_body_collision(pose="stand"):
 	elif pose == "crouch":
 		$Sprite/RayCastUp.enabled = true
 		$AnimationPlayerCollision.play("crouch")
-#		$CollisionStand.disabled = true
-#		$CollisionCrouch.disabled = false
+		#posicion del arma
+		$Sprite/XandriaWeapon.position = Vector2(13.094,16.004)
+	elif pose == "slide":
+		$Sprite/RayCastUp.enabled = true
+		$AnimationPlayerCollision.play("slide")
 		#posicion del arma
 		$Sprite/XandriaWeapon.position = Vector2(13.094,16.004)
 
@@ -639,6 +644,7 @@ func _on_TimerSlide_timeout():
 	if state != "hurt" or state != "dead":
 		if (Input.is_action_pressed("ui_down") or $Sprite/RayCastUp.is_colliding()) and is_on_floor():
 			state = "crouch"
+			set_body_collision("crouch")
 		elif is_on_floor():
 #			velocity.x = 0
 			change_state("idle")

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/smash_wood_pieces_inverse.wav-b73c9d468cf804c96c7092d9814dac95.sample"
+
+[deps]
+
+source_file="res://assets/sfx/smash_wood_pieces_inverse.wav"
+dest_files=[ "res://.import/smash_wood_pieces_inverse.wav-b73c9d468cf804c96c7092d9814dac95.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

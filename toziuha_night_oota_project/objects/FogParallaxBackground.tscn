@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/sprites/fog.png" type="Texture" id=1]
+[ext_resource path="res://objects/FogParallaxBackground.gd" type="Script" id=2]
+
+[node name="FogParallax" type="ParallaxBackground"]
+layer = 0
+script = ExtResource( 2 )
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.1, 0 )
+motion_mirroring = Vector2( 858, 0 )
+
+[node name="fog" type="Sprite" parent="ParallaxLayer"]
+position = Vector2( 215, 80 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 542, 429, 58 )
+
+[node name="fog2" type="Sprite" parent="ParallaxLayer"]
+position = Vector2( 644, 80 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 542, 429, 58 )
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.6, 0 )
+motion_mirroring = Vector2( 858, 0 )
+
+[node name="fog2" type="Sprite" parent="ParallaxLayer3"]
+position = Vector2( 215, -80 )
+scale = Vector2( 1, -1 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 542, 429, 58 )
+
+[node name="fog3" type="Sprite" parent="ParallaxLayer3"]
+position = Vector2( 644, -80 )
+scale = Vector2( 1, -1 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 542, 429, 58 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.4, 0 )
+motion_mirroring = Vector2( 858, 0 )
+
+[node name="fog2" type="Sprite" parent="ParallaxLayer2"]
+position = Vector2( 216, -40 )
+scale = Vector2( 1, -1 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 289, 429, 146 )
+
+[node name="fog3" type="Sprite" parent="ParallaxLayer2"]
+position = Vector2( 645, -40 )
+scale = Vector2( 1, -1 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 289, 429, 146 )
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.8, 0 )
+motion_mirroring = Vector2( 858, 0 )
+
+[node name="fog" type="Sprite" parent="ParallaxLayer4"]
+position = Vector2( 215, 48 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 289, 429, 146 )
+
+[node name="fog2" type="Sprite" parent="ParallaxLayer4"]
+position = Vector2( 644, 48 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 289, 429, 146 )

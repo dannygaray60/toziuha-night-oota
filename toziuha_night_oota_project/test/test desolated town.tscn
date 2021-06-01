@@ -1,0 +1,160 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://tilemaps/DesolatedTown/TileMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/characters/Xandria.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/desolated_town/tree_256px.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/desolated_town/fence1_32px.png" type="Texture" id=4]
+[ext_resource path="res://tilemaps/DesolatedTown/ParallaxBackground.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/items/RelicKey.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/FogParallaxBackground.tscn" type="PackedScene" id=7]
+[ext_resource path="res://objects/LevelBase.tscn" type="PackedScene" id=8]
+[ext_resource path="res://objects/enemies/ArmoredSkeleton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://objects/items/WeaponUpgrade.tscn" type="PackedScene" id=10]
+[ext_resource path="res://objects/traps/TrapCircleSaw.tscn" type="PackedScene" id=11]
+[ext_resource path="res://objects/enemies/ThrowerSkeleton.tscn" type="PackedScene" id=12]
+[ext_resource path="res://objects/enemies/BloodSkeleton.tscn" type="PackedScene" id=13]
+[ext_resource path="res://objects/enemies/Bat.tscn" type="PackedScene" id=14]
+[ext_resource path="res://objects/items/UpgradeStatsItem.tscn" type="PackedScene" id=15]
+[ext_resource path="res://objects/traps/TrapSmallSpikes.tscn" type="PackedScene" id=16]
+[ext_resource path="res://objects/enemies/Slime.tscn" type="PackedScene" id=17]
+[ext_resource path="res://objects/enemies/Skeleton.tscn" type="PackedScene" id=18]
+[ext_resource path="res://objects/traps/TrapLargeSpikes.tscn" type="PackedScene" id=19]
+[ext_resource path="res://objects/enemies/DemonSkullHead.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/sprites/desolated_town/tree_128px.png" type="Texture" id=21]
+[ext_resource path="res://objects/items/Torch.tscn" type="PackedScene" id=22]
+[ext_resource path="res://objects/traps/TrapAxeCurve.tscn" type="PackedScene" id=23]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, -96, 0, 0, 0, 0, 0, -8 )
+}
+
+[node name="test desolated town" type="Node2D"]
+
+[node name="LevelBase" parent="." instance=ExtResource( 8 )]
+music = "war_prelude"
+
+[node name="TileMap" parent="LevelBase" instance=ExtResource( 1 )]
+tile_data = PoolIntArray( -524276, 1610612745, 0, -524275, 1073741833, 0, -458740, 1610612745, 0, -458739, 1073741833, 0, -393204, 1610612745, 0, -393203, 1073741833, 0, -327668, 1610612745, 0, -327667, 1073741833, 0, -327662, 536870920, 0, -327660, 7, 0, -262132, 1610612745, 0, -262131, 1073741833, 0, -262127, 2, 0, -262125, 1610612745, 0, -262121, 536870916, 0, -262120, 536870916, 0, -262119, 536870918, 0, -262118, 536870916, 0, -262117, 536870916, 0, -262116, 536870916, 0, -262115, 536870916, 0, -262114, 536870916, 0, -262113, 536870916, 0, -196596, 1610612739, 0, -196595, 1073741827, 0, -196592, 2, 0, -196589, 1610612745, 0, -196588, 536870924, 0, -196587, 536870924, 0, -196586, 536870924, 0, -196585, 536870924, 0, -196584, 536870924, 0, -196583, 536870924, 0, -196582, 536870924, 0, -196581, 536870924, 0, -196580, 536870924, 0, -196579, 536870924, 0, -196578, 536870924, 0, -196577, 536870924, 0, -131057, 2, 0, -131053, 1610612745, 0, -131052, 536870924, 0, -131051, 536870924, 0, -131050, 536870924, 0, -131049, 536870924, 0, -131048, 536870924, 0, -131047, 536870924, 0, -131046, 536870924, 0, -131045, 536870924, 0, -131044, 536870924, 0, -131043, 536870924, 0, -131042, 536870924, 0, -131041, 536870924, 0, -65534, 536870927, 0, -65522, 2, 0, -65517, 1610612745, 0, -65516, 536870924, 0, -65515, 536870924, 0, -65514, 536870924, 0, -65513, 536870924, 0, -65512, 536870924, 0, -65511, 536870924, 0, -65510, 536870924, 0, -65509, 536870924, 0, -65508, 536870924, 0, -65507, 536870924, 0, -65506, 536870924, 0, -65505, 536870924, 0, 9, 536870919, 0, 13, 2, 0, 19, 1610612745, 0, 20, 536870924, 0, 21, 536870924, 0, 22, 536870924, 0, 23, 536870924, 0, 24, 536870924, 0, 25, 536870924, 0, 26, 536870924, 0, 27, 536870924, 0, 28, 536870924, 0, 29, 536870924, 0, 30, 536870924, 0, 31, 536870924, 0, 131071, 536870915, 0, 65536, 536870917, 0, 65537, 536870916, 0, 65538, 536870918, 0, 65539, 4, 0, 65540, 3, 0, 65542, 536870914, 0, 65544, 536870915, 0, 65555, 1610612745, 0, 65556, 536870924, 0, 65557, 536870924, 0, 65558, 536870924, 0, 65559, 536870924, 0, 65560, 536870924, 0, 65561, 536870924, 0, 65562, 536870924, 0, 65563, 536870924, 0, 65564, 536870924, 0, 65565, 536870924, 0, 65566, 536870924, 0, 65567, 536870924, 0, 65568, 536870924, 0, 196607, 536870921, 0, 131072, 536870924, 0, 131073, 536870923, 0, 131074, 536870924, 0, 131075, 536870924, 0, 131076, 9, 0, 131080, 536870921, 0, 131081, 536870924, 0, 131082, 536870924, 0, 131083, 536870924, 0, 131091, 1610612745, 0, 131092, 536870924, 0, 131093, 536870924, 0, 131094, 536870924, 0, 131095, 536870924, 0, 131096, 536870924, 0, 131097, 536870924, 0, 131098, 536870924, 0, 131099, 536870924, 0, 131100, 536870924, 0, 131101, 536870924, 0, 131102, 536870924, 0, 131103, 536870924, 0, 131104, 536870924, 0, 262143, 536870921, 0, 196608, 536870923, 0, 196609, 536870924, 0, 196610, 536870923, 0, 196611, 536870924, 0, 196612, 9, 0, 196616, 536870921, 0, 196617, 536870923, 0, 196618, 536870924, 0, 196619, 536870924, 0, 196627, 1610612745, 0, 196628, 536870924, 0, 196629, 536870924, 0, 196630, 536870924, 0, 196631, 536870924, 0, 196632, 536870924, 0, 196633, 536870924, 0, 196634, 536870924, 0, 196635, 536870924, 0, 196636, 536870924, 0, 196637, 536870924, 0, 196638, 536870924, 0, 196639, 536870924, 0, 196640, 536870924, 0, 327679, 536870921, 0, 262144, 536870924, 0, 262145, 536870924, 0, 262146, 536870924, 0, 262147, 536870924, 0, 262148, 9, 0, 262152, 536870921, 0, 262153, 536870924, 0, 262154, 536870924, 0, 262155, 536870924, 0, 262163, 1610612745, 0, 262164, 536870924, 0, 262165, 536870924, 0, 262166, 536870924, 0, 262167, 536870924, 0, 262168, 536870924, 0, 262169, 536870924, 0, 262170, 536870924, 0, 262171, 536870924, 0, 262172, 536870924, 0, 262173, 536870924, 0, 262174, 536870924, 0, 262175, 536870924, 0, 262176, 536870924, 0, 327699, 1610612745, 0, 327700, 536870924, 0, 327701, 536870924, 0, 327702, 536870924, 0, 327703, 536870924, 0, 327704, 536870924, 0, 327705, 536870924, 0, 327706, 536870924, 0, 327707, 536870924, 0, 327708, 536870924, 0, 327709, 536870924, 0, 327710, 536870924, 0, 327711, 536870924, 0, 393235, 1610612745, 0, 393236, 536870924, 0, 393237, 536870924, 0, 393238, 536870924, 0, 393239, 536870924, 0, 393240, 536870924, 0, 393241, 536870924, 0, 393242, 536870924, 0, 393243, 536870924, 0, 393244, 536870924, 0, 393245, 536870924, 0, 393246, 536870924, 0, 393247, 536870924, 0, 458771, 1610612745, 0, 458772, 536870924, 0, 458773, 536870924, 0, 458774, 536870924, 0, 458775, 536870924, 0, 458776, 536870924, 0, 458777, 536870924, 0, 458778, 536870924, 0, 458779, 536870924, 0, 458780, 536870924, 0, 458781, 536870924, 0, 458782, 536870924, 0, 458783, 536870924, 0, 458784, 536870924, 0 )
+
+[node name="tree_256px" type="Sprite" parent="LevelBase"]
+position = Vector2( 0, -48 )
+texture = ExtResource( 3 )
+
+[node name="tree_128px" type="Sprite" parent="LevelBase"]
+position = Vector2( 560, 0 )
+texture = ExtResource( 21 )
+
+[node name="fence1_32px" type="Sprite" parent="LevelBase"]
+position = Vector2( 288, 40 )
+texture = ExtResource( 4 )
+
+[node name="Xandria" parent="LevelBase" instance=ExtResource( 2 )]
+position = Vector2( -40, 64 )
+limit_bottom_camera = 128
+
+[node name="ParallaxBackground" parent="LevelBase" instance=ExtResource( 5 )]
+
+[node name="RelicKey" parent="LevelBase" instance=ExtResource( 6 )]
+position = Vector2( -40, 0 )
+
+[node name="ParallaxBackground2" parent="LevelBase" instance=ExtResource( 7 )]
+
+[node name="ArmoredSkeleton" parent="LevelBase" instance=ExtResource( 9 )]
+position = Vector2( 208, 80 )
+
+[node name="Skeleton" parent="LevelBase" instance=ExtResource( 12 )]
+position = Vector2( 568, 72 )
+
+[node name="WeaponUpgrade" parent="LevelBase" instance=ExtResource( 10 )]
+position = Vector2( -40, -24 )
+
+[node name="RelicKey2" parent="LevelBase" instance=ExtResource( 6 )]
+position = Vector2( -40, -48 )
+item = "backdash"
+
+[node name="RelicKey3" parent="LevelBase" instance=ExtResource( 6 )]
+position = Vector2( -40, -80 )
+item = "slide"
+
+[node name="CircleSaw" parent="LevelBase" instance=ExtResource( 11 )]
+position = Vector2( 352, 112 )
+curve = SubResource( 1 )
+playback_speed = 0.6
+
+[node name="BloodSkeleton" parent="LevelBase" instance=ExtResource( 13 )]
+position = Vector2( 416, 80 )
+
+[node name="Bat" parent="LevelBase" instance=ExtResource( 14 )]
+position = Vector2( 704, 40 )
+
+[node name="Bat2" parent="LevelBase" instance=ExtResource( 14 )]
+position = Vector2( 952, -80 )
+
+[node name="Bat3" parent="LevelBase" instance=ExtResource( 14 )]
+position = Vector2( 488, 56 )
+
+[node name="UpgradeStatsItem" parent="LevelBase" instance=ExtResource( 15 )]
+position = Vector2( -40, -104 )
+stat = "def"
+
+[node name="TrapSmallSpikes" parent="LevelBase" instance=ExtResource( 16 )]
+position = Vector2( 88, 80 )
+
+[node name="Slime" parent="LevelBase" instance=ExtResource( 17 )]
+position = Vector2( 864, 16 )
+
+[node name="Skeleton2" parent="LevelBase" instance=ExtResource( 18 )]
+position = Vector2( 272, 80 )
+
+[node name="TrapLargeSpikes" parent="LevelBase" instance=ExtResource( 19 )]
+position = Vector2( 880, -136 )
+scale = Vector2( 1, -1 )
+
+[node name="TrapLargeSpikes3" parent="LevelBase" instance=ExtResource( 19 )]
+position = Vector2( 896, -176 )
+rotation = 1.5708
+
+[node name="TrapLargeSpikes2" parent="LevelBase" instance=ExtResource( 19 )]
+position = Vector2( 240, 72 )
+
+[node name="DemonSkullHead" parent="LevelBase" instance=ExtResource( 20 )]
+position = Vector2( 904, -48 )
+linear_direction_fireball = false
+max_fireballs = 3
+
+[node name="BloodSkeleton2" parent="LevelBase" instance=ExtResource( 13 )]
+position = Vector2( 1512, -248 )
+
+[node name="BloodSkeleton3" parent="LevelBase" instance=ExtResource( 13 )]
+position = Vector2( 1856, -248 )
+
+[node name="Skeleton3" parent="LevelBase" instance=ExtResource( 12 )]
+position = Vector2( 1944, -240 )
+
+[node name="Skeleton4" parent="LevelBase" instance=ExtResource( 12 )]
+position = Vector2( 1560, -240 )
+
+[node name="Skeleton5" parent="LevelBase" instance=ExtResource( 12 )]
+position = Vector2( 1288, -304 )
+
+[node name="Torch" parent="LevelBase" instance=ExtResource( 22 )]
+position = Vector2( 728, -8 )
+subweapon_shuriken = true
+
+[node name="Torch2" parent="LevelBase" instance=ExtResource( 22 )]
+position = Vector2( 600, -24 )
+em_5_probability = 10
+
+[node name="Torch3" parent="LevelBase" instance=ExtResource( 22 )]
+position = Vector2( 560, -24 )
+em_5_probability = 10
+
+[node name="TrapAxeCurve" parent="LevelBase" instance=ExtResource( 23 )]
+position = Vector2( 1440, -216 )
+scale = Vector2( 1, -1 )
+
+[node name="TrapAxeCurve2" parent="LevelBase" instance=ExtResource( 23 )]
+position = Vector2( 1208, -296 )
+scale = Vector2( 1, -1 )
+circle_animation = true

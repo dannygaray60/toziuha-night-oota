@@ -114,6 +114,15 @@ var enemy = {
 		#y aqui una lista de objetos que puede dejar al morir...
 		"item_drop": ["none","none","none"],
 	},
+	"blood_skeleton":{
+		"name": "BLOODSKELETON",
+		"atk": 10,
+		"def":0,
+		"hp_max": 1,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none"],
+	},
 	"floating_skull":{
 		"name": "FLOATINGSKULL",
 		"atk": 15,
@@ -143,9 +152,9 @@ var enemy = {
 	},	
 	"armored_skeleton":{
 		"name": "ARMOREDSKELETON",
-		"atk": 20,
-		"def":3,
-		"hp_max": 10000,
+		"atk": 30,
+		"def":0,
+		"hp_max": 20,
 		"description": "Description...",
 		#y aqui una lista de objetos que puede dejar al morir...
 		"item_drop": ["none"],
@@ -170,6 +179,40 @@ var enemy = {
 		"description": "",
 		"item_drop": [],
 	},
+	"curved_axe":{
+		"name": "",
+		"atk": 20,
+		"def":0,
+		"hp_max": 0,
+		"description": "",
+		"item_drop": [],
+	},
+	"large_spikes":{
+		"name": "",
+		"atk": 10,
+		"def":0,
+		"hp_max": 0,
+		"description": "",
+		"item_drop": [],
+	},
+	"small_spikes":{
+		"name": "",
+		"atk": 5,
+		"def":0,
+		"hp_max": 0,
+		"description": "",
+		"item_drop": [],
+	},
+	"circle_saw":{
+		"name": "",
+		"atk": 15,
+		"def":0,
+		"hp_max": 0,
+		"description": "",
+		"item_drop": [],
+	},
+	
+	
 	"boss_big_bat":{
 		"name": "BIGBAT",
 		"atk": 30,

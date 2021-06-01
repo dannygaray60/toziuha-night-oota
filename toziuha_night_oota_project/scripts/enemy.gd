@@ -13,11 +13,11 @@ func check_player_node():
 
 #funcion para comprobar la posicion de personaje y colocar el facing 
 #de frente al jugador y de paso voltear el sprite
-func update_facing(enemynode=null,sprite=null):
+func update_facing(enemynode=null,sprite=null,force=false):
 
 	check_player_node()
 	
-	if enemynode.state != "dead":
+	if enemynode.state != "dead" or force:
 
 		enemynode.facing = Functions.get_new_facing_with_player(enemynode,player)
 
