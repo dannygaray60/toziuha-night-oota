@@ -27,4 +27,5 @@ position = Vector2( 48, 0 )
 __meta__ = {
 "_gizmo_extents_": 30.0
 }
+
 [connection signal="body_entered" from="." to="." method="_on_RoomChanger_body_entered"]

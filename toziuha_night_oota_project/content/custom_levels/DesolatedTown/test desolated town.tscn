@@ -1,0 +1,272 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://tilemaps/DesolatedTown/TileMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/characters/Xandria.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/desolated_town/tree_256px.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/desolated_town/fence1_32px.png" type="Texture" id=4]
+[ext_resource path="res://tilemaps/DesolatedTown/ParallaxBackground.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/items/RelicKey.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/FogParallaxBackground.tscn" type="PackedScene" id=7]
+[ext_resource path="res://objects/LevelBase.tscn" type="PackedScene" id=8]
+[ext_resource path="res://objects/enemies/ArmoredSkeleton.tscn" type="PackedScene" id=9]
+[ext_resource path="res://objects/items/WeaponUpgrade.tscn" type="PackedScene" id=10]
+[ext_resource path="res://objects/traps/TrapCircleSaw.tscn" type="PackedScene" id=11]
+[ext_resource path="res://objects/enemies/ThrowerSkeleton.tscn" type="PackedScene" id=12]
+[ext_resource path="res://objects/enemies/BloodSkeleton.tscn" type="PackedScene" id=13]
+[ext_resource path="res://objects/enemies/Bat.tscn" type="PackedScene" id=14]
+[ext_resource path="res://objects/items/UpgradeStatsItem.tscn" type="PackedScene" id=15]
+[ext_resource path="res://objects/traps/TrapSmallSpikes.tscn" type="PackedScene" id=16]
+[ext_resource path="res://objects/enemies/Slime.tscn" type="PackedScene" id=17]
+[ext_resource path="res://objects/enemies/Skeleton.tscn" type="PackedScene" id=18]
+[ext_resource path="res://objects/traps/TrapLargeSpikes.tscn" type="PackedScene" id=19]
+[ext_resource path="res://objects/enemies/DemonSkullHead.tscn" type="PackedScene" id=20]
+[ext_resource path="res://assets/sprites/desolated_town/tree_128px.png" type="Texture" id=21]
+[ext_resource path="res://objects/items/Torch.tscn" type="PackedScene" id=22]
+[ext_resource path="res://objects/traps/TrapAxeCurve.tscn" type="PackedScene" id=23]
+[ext_resource path="res://assets/sprites/desolated_town/rockpile_64px.png" type="Texture" id=24]
+[ext_resource path="res://assets/sprites/desolated_town/rockpile_128px.png" type="Texture" id=25]
+[ext_resource path="res://assets/sprites/desolated_town/rockpile_32px.png" type="Texture" id=26]
+[ext_resource path="res://objects/AreaPlayerDeath.tscn" type="PackedScene" id=27]
+[ext_resource path="res://tilemaps/CreepyDawn/TileMap.tscn" type="PackedScene" id=28]
+[ext_resource path="res://objects/OrbBoss.tscn" type="PackedScene" id=29]
+[ext_resource path="res://objects/SaveStatue.tscn" type="PackedScene" id=30]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, -96, 0, 0, 0, 0, 0, -8 )
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 2368, 64 )
+
+[node name="test desolated town" type="Node2D"]
+
+[node name="LevelBase" parent="." instance=ExtResource( 8 )]
+music = "war_prelude"
+
+[node name="TileMap" parent="LevelBase" instance=ExtResource( 1 )]
+tile_data = PoolIntArray( -524276, 1610612745, 0, -524275, 1073741833, 0, -458740, 1610612745, 0, -458739, 1073741833, 0, -393204, 1610612745, 0, -393203, 1073741833, 0, -327668, 1610612745, 0, -327667, 1073741833, 0, -327662, 536870920, 0, -327660, 7, 0, -262132, 1610612745, 0, -262131, 1073741833, 0, -262127, 2, 0, -262125, 1610612745, 0, -262121, 536870916, 0, -262120, 536870916, 0, -262119, 536870918, 0, -262118, 536870916, 0, -262117, 536870916, 0, -262116, 536870916, 0, -262115, 536870916, 0, -262114, 536870916, 0, -262113, 536870916, 0, -196596, 1610612739, 0, -196595, 1073741827, 0, -196592, 2, 0, -196589, 1610612745, 0, -196588, 536870924, 0, -196587, 536870924, 0, -196586, 536870924, 0, -196585, 536870924, 0, -196584, 536870924, 0, -196583, 536870924, 0, -196582, 536870924, 0, -196581, 536870924, 0, -196580, 536870924, 0, -196579, 536870924, 0, -196578, 536870924, 0, -196577, 536870924, 0, -131057, 2, 0, -131053, 1610612745, 0, -131052, 536870924, 0, -131051, 536870924, 0, -131050, 536870924, 0, -131049, 536870924, 0, -131048, 536870924, 0, -131047, 536870924, 0, -131046, 536870924, 0, -131045, 536870924, 0, -131044, 536870924, 0, -131043, 536870924, 0, -131042, 536870924, 0, -131041, 536870924, 0, -65534, 536870927, 0, -65522, 2, 0, -65517, 1610612745, 0, -65516, 536870924, 0, -65515, 536870924, 0, -65514, 536870924, 0, -65513, 536870924, 0, -65512, 536870924, 0, -65511, 536870924, 0, -65510, 536870924, 0, -65509, 536870924, 0, -65508, 536870924, 0, -65507, 536870924, 0, -65506, 536870924, 0, -65505, 536870924, 0, 9, 536870919, 0, 13, 2, 0, 19, 1610612745, 0, 20, 536870924, 0, 21, 536870924, 0, 22, 536870924, 0, 23, 536870924, 0, 24, 536870924, 0, 25, 536870924, 0, 26, 536870924, 0, 27, 536870924, 0, 28, 536870924, 0, 29, 536870924, 0, 30, 536870924, 0, 31, 536870924, 0, 131057, 536870920, 0, 131059, 536870916, 0, 131060, 536870916, 0, 131061, 536870916, 0, 131062, 4, 0, 131063, 536870918, 0, 131064, 4, 0, 131065, 4, 0, 131066, 4, 0, 131067, 6, 0, 131068, 4, 0, 131069, 3, 0, 131071, 536870915, 0, 65536, 536870917, 0, 65537, 536870916, 0, 65538, 536870918, 0, 65539, 4, 0, 65540, 3, 0, 65542, 536870914, 0, 65544, 536870915, 0, 65555, 1610612745, 0, 65556, 536870924, 0, 65557, 536870924, 0, 65558, 536870924, 0, 65559, 536870924, 0, 65560, 536870924, 0, 65561, 536870924, 0, 65562, 536870924, 0, 65563, 536870924, 0, 65564, 536870924, 0, 65565, 536870924, 0, 65566, 536870924, 0, 65567, 536870924, 0, 65568, 536870924, 0, 196594, 536870921, 0, 196595, 536870924, 0, 196596, 536870924, 0, 196597, 536870923, 0, 196598, 536870924, 0, 196599, 536870924, 0, 196600, 536870924, 0, 196601, 536870924, 0, 196602, 536870924, 0, 196603, 536870924, 0, 196604, 536870924, 0, 196605, 9, 0, 196607, 536870921, 0, 131072, 536870924, 0, 131073, 536870923, 0, 131074, 536870924, 0, 131075, 536870924, 0, 131076, 9, 0, 131080, 536870921, 0, 131081, 536870924, 0, 131082, 536870924, 0, 131083, 536870924, 0, 131091, 1610612745, 0, 131092, 536870924, 0, 131093, 536870924, 0, 131094, 536870924, 0, 131095, 536870924, 0, 131096, 536870924, 0, 131097, 536870924, 0, 131098, 536870924, 0, 131099, 536870924, 0, 131100, 536870924, 0, 131101, 536870924, 0, 131102, 536870924, 0, 131103, 536870924, 0, 131104, 536870924, 0, 262130, 536870921, 0, 262131, 536870923, 0, 262132, 536870924, 0, 262133, 536870924, 0, 262134, 536870924, 0, 262135, 536870924, 0, 262136, 536870924, 0, 262137, 536870924, 0, 262138, 536870924, 0, 262139, 536870924, 0, 262140, 536870924, 0, 262141, 9, 0, 262143, 536870921, 0, 196608, 536870923, 0, 196609, 536870924, 0, 196610, 536870923, 0, 196611, 536870924, 0, 196612, 9, 0, 196616, 536870921, 0, 196617, 536870923, 0, 196618, 536870924, 0, 196619, 536870924, 0, 196627, 1610612745, 0, 196628, 536870924, 0, 196629, 536870924, 0, 196630, 536870924, 0, 196631, 536870924, 0, 196632, 536870924, 0, 196633, 536870924, 0, 196634, 536870924, 0, 196635, 536870924, 0, 196636, 536870924, 0, 196637, 536870924, 0, 196638, 536870924, 0, 196639, 536870924, 0, 196640, 536870924, 0, 327666, 536870921, 0, 327667, 536870924, 0, 327668, 536870924, 0, 327669, 536870924, 0, 327670, 536870924, 0, 327671, 536870924, 0, 327672, 536870924, 0, 327673, 536870924, 0, 327674, 536870924, 0, 327675, 536870924, 0, 327676, 536870924, 0, 327677, 9, 0, 327679, 536870921, 0, 262144, 536870924, 0, 262145, 536870924, 0, 262146, 536870924, 0, 262147, 536870924, 0, 262148, 9, 0, 262152, 536870921, 0, 262153, 536870924, 0, 262154, 536870924, 0, 262155, 536870924, 0, 262163, 1610612745, 0, 262164, 536870924, 0, 262165, 536870924, 0, 262166, 536870924, 0, 262167, 536870924, 0, 262168, 536870924, 0, 262169, 536870924, 0, 262170, 536870924, 0, 262171, 536870924, 0, 262172, 536870924, 0, 262173, 536870924, 0, 262174, 536870924, 0, 262175, 536870924, 0, 262176, 536870924, 0, 393202, 536870921, 0, 393203, 536870924, 0, 393204, 536870924, 0, 393205, 536870924, 0, 393206, 536870924, 0, 393207, 536870924, 0, 393208, 536870924, 0, 393209, 536870924, 0, 393210, 536870924, 0, 393211, 536870924, 0, 393212, 536870924, 0, 393213, 9, 0, 327699, 1610612745, 0, 327700, 536870924, 0, 327701, 536870924, 0, 327702, 536870924, 0, 327703, 536870924, 0, 327704, 536870924, 0, 327705, 536870924, 0, 327706, 536870924, 0, 327707, 536870924, 0, 327708, 536870924, 0, 327709, 536870924, 0, 327710, 536870924, 0, 327711, 536870924, 0, 458738, 536870921, 0, 458739, 536870924, 0, 458740, 536870924, 0, 458741, 536870924, 0, 458742, 536870924, 0, 458743, 536870924, 0, 458744, 536870924, 0, 458745, 536870924, 0, 458746, 536870924, 0, 458747, 536870924, 0, 458748, 536870924, 0, 458749, 9, 0, 393235, 1610612745, 0, 393236, 536870924, 0, 393237, 536870924, 0, 393238, 536870924, 0, 393239, 536870924, 0, 393240, 536870924, 0, 393241, 536870924, 0, 393242, 536870924, 0, 393243, 536870924, 0, 393244, 536870924, 0, 393245, 536870924, 0, 393246, 536870924, 0, 393247, 536870924, 0, 524274, 536870921, 0, 524275, 536870924, 0, 524276, 536870924, 0, 524277, 536870924, 0, 524278, 536870924, 0, 524279, 536870924, 0, 524280, 536870924, 0, 524281, 536870924, 0, 524282, 536870924, 0, 524283, 536870924, 0, 524284, 536870924, 0, 524285, 9, 0, 458771, 1610612745, 0, 458772, 536870924, 0, 458773, 536870924, 0, 458774, 536870924, 0, 458775, 536870924, 0, 458776, 536870924, 0, 458777, 536870924, 0, 458778, 536870924, 0, 458779, 536870924, 0, 458780, 536870924, 0, 458781, 536870924, 0, 458782, 536870924, 0, 458783, 536870924, 0, 458784, 536870924, 0, 589810, 536870921, 0, 589811, 536870924, 0, 589812, 536870924, 0, 589813, 536870924, 0, 589814, 536870924, 0, 589815, 536870924, 0, 589816, 536870924, 0, 589817, 536870924, 0, 589818, 536870924, 0, 589819, 536870924, 0, 589820, 536870924, 0, 589821, 9, 0, 655346, 536870921, 0, 655347, 536870924, 0, 655348, 536870924, 0, 655349, 536870924, 0, 655350, 536870924, 0, 655351, 536870924, 0, 655352, 536870924, 0, 655353, 536870924, 0, 655354, 536870924, 0, 655355, 536870924, 0, 655356, 536870924, 0, 655357, 536870924, 0, 720882, 536870921, 0, 720883, 536870924, 0, 720884, 536870924, 0, 720885, 536870924, 0, 720886, 536870924, 0, 720887, 536870924, 0, 720888, 536870924, 0, 720889, 536870924, 0, 720890, 536870924, 0, 720891, 536870924, 0, 720892, 536870924, 0, 720893, 536870924, 0 )
+
+[node name="tree_256px" type="Sprite" parent="LevelBase"]
+position = Vector2( 0, -48 )
+texture = ExtResource( 3 )
+
+[node name="tree_256px2" type="Sprite" parent="LevelBase"]
+position = Vector2( -544, -28.4908 )
+z_index = -1
+texture = ExtResource( 3 )
+
+[node name="tree_128px" type="Sprite" parent="LevelBase"]
+position = Vector2( 560, 8 )
+texture = ExtResource( 21 )
+
+[node name="fence1_32px" type="Sprite" parent="LevelBase"]
+position = Vector2( 288, 40 )
+texture = ExtResource( 4 )
+
+[node name="Xandria" parent="LevelBase" instance=ExtResource( 2 )]
+position = Vector2( -864, 77 )
+limit_bottom_camera = 128
+
+[node name="ParallaxBackground" parent="LevelBase" instance=ExtResource( 5 )]
+
+[node name="RelicKey" parent="LevelBase" instance=ExtResource( 6 )]
+position = Vector2( -664, 39.7625 )
+
+[node name="ParallaxBackground2" parent="LevelBase" instance=ExtResource( 7 )]
+
+[node name="ArmoredSkeleton" parent="LevelBase" instance=ExtResource( 9 )]
+position = Vector2( 208, 80 )
+
+[node name="ArmoredSkeleton2" parent="LevelBase" instance=ExtResource( 9 )]
+position = Vector2( 2248, -257.143 )
+
+[node name="Skeleton" parent="LevelBase" instance=ExtResource( 12 )]
+position = Vector2( 704, 16 )
+
+[node name="WeaponUpgrade" parent="LevelBase" instance=ExtResource( 10 )]
+position = Vector2( 760, 8 )
+
+[node name="RelicKey2" parent="LevelBase" instance=ExtResource( 6 )]
+position = Vector2( -488, 42.0555 )
+item = "backdash"
+
+[node name="RelicKey3" parent="LevelBase" instance=ExtResource( 6 )]
+position = Vector2( -376, 35 )
+item = "slide"
+
+[node name="CircleSaw" parent="LevelBase" instance=ExtResource( 11 )]
+position = Vector2( 352, 112 )
+curve = SubResource( 1 )
+playback_speed = 0.6
+
+[node name="BloodSkeleton" parent="LevelBase" instance=ExtResource( 13 )]
+position = Vector2( 416, 80 )
+
+[node name="Bat" parent="LevelBase" instance=ExtResource( 14 )]
+position = Vector2( 680, 48 )
+
+[node name="Bat2" parent="LevelBase" instance=ExtResource( 14 )]
+position = Vector2( 952, -80 )
+
+[node name="Bat3" parent="LevelBase" instance=ExtResource( 14 )]
+position = Vector2( 488, 56 )
+
+[node name="UpgradeStatsItem" parent="LevelBase" instance=ExtResource( 15 )]
+position = Vector2( -240, 47.1352 )
+stat = "def"
+
+[node name="TrapSmallSpikes" parent="LevelBase" instance=ExtResource( 16 )]
+position = Vector2( 88, 80 )
+
+[node name="Slime" parent="LevelBase" instance=ExtResource( 17 )]
+position = Vector2( 864, 16 )
+
+[node name="Skeleton2" parent="LevelBase" instance=ExtResource( 18 )]
+position = Vector2( 272, 80 )
+
+[node name="TrapLargeSpikes" parent="LevelBase" instance=ExtResource( 19 )]
+position = Vector2( 880, -120 )
+scale = Vector2( 1, -1 )
+z_index = 0
+
+[node name="TrapLargeSpikes3" parent="LevelBase" instance=ExtResource( 19 )]
+position = Vector2( 896, -176 )
+rotation = 1.5708
+
+[node name="TrapLargeSpikes2" parent="LevelBase" instance=ExtResource( 19 )]
+position = Vector2( 240, 72 )
+z_index = 0
+
+[node name="DemonSkullHead" parent="LevelBase" instance=ExtResource( 20 )]
+position = Vector2( 904, -48 )
+linear_direction_fireball = false
+max_fireballs = 3
+
+[node name="BloodSkeleton2" parent="LevelBase" instance=ExtResource( 13 )]
+position = Vector2( 1512, -248 )
+
+[node name="BloodSkeleton3" parent="LevelBase" instance=ExtResource( 13 )]
+position = Vector2( 1856, -248 )
+
+[node name="Skeleton3" parent="LevelBase" instance=ExtResource( 12 )]
+position = Vector2( 1944, -240 )
+
+[node name="Skeleton4" parent="LevelBase" instance=ExtResource( 12 )]
+position = Vector2( 1560, -240 )
+
+[node name="Skeleton5" parent="LevelBase" instance=ExtResource( 12 )]
+position = Vector2( 1288, -304 )
+
+[node name="Torch" parent="LevelBase" instance=ExtResource( 22 )]
+position = Vector2( -776, 41 )
+subweapon_shuriken = true
+
+[node name="Torch5" parent="LevelBase" instance=ExtResource( 22 )]
+position = Vector2( 293, 19 )
+em_1_probability = 1
+
+[node name="Torch6" parent="LevelBase" instance=ExtResource( 22 )]
+position = Vector2( 153, 5.2692 )
+em_1_probability = 1
+
+[node name="Torch2" parent="LevelBase" instance=ExtResource( 22 )]
+position = Vector2( 600, -24 )
+em_5_probability = 10
+
+[node name="Torch4" parent="LevelBase" instance=ExtResource( 22 )]
+position = Vector2( 728, 0 )
+subweapon_axe = true
+
+[node name="Torch3" parent="LevelBase" instance=ExtResource( 22 )]
+position = Vector2( 560, -24 )
+em_5_probability = 10
+
+[node name="TrapAxeCurve" parent="LevelBase" instance=ExtResource( 23 )]
+position = Vector2( 1440, -216 )
+scale = Vector2( 1, -1 )
+
+[node name="TrapAxeCurve2" parent="LevelBase" instance=ExtResource( 23 )]
+position = Vector2( 1208, -296 )
+scale = Vector2( 1, -1 )
+circle_animation = true
+
+[node name="rockpile_64px" type="Sprite" parent="LevelBase"]
+position = Vector2( 240, 86 )
+z_index = 1
+texture = ExtResource( 24 )
+
+[node name="rockpile_128px" type="Sprite" parent="LevelBase"]
+position = Vector2( 176, 120 )
+z_index = 1
+texture = ExtResource( 25 )
+
+[node name="rockpile_128px2" type="Sprite" parent="LevelBase"]
+position = Vector2( 224, 144 )
+z_index = 1
+texture = ExtResource( 25 )
+
+[node name="rockpile_128px4" type="Sprite" parent="LevelBase"]
+position = Vector2( 8, 128 )
+scale = Vector2( -1, 1 )
+z_index = 1
+texture = ExtResource( 25 )
+
+[node name="rockpile_128px5" type="Sprite" parent="LevelBase"]
+position = Vector2( 848, -144 )
+scale = Vector2( 1, -1 )
+z_index = 1
+texture = ExtResource( 25 )
+
+[node name="rockpile_128px6" type="Sprite" parent="LevelBase"]
+position = Vector2( 848, -272 )
+z_index = 1
+texture = ExtResource( 25 )
+
+[node name="rockpile_32px" type="Sprite" parent="LevelBase"]
+position = Vector2( 280, 120 )
+z_index = 1
+texture = ExtResource( 26 )
+
+[node name="rockpile_128px3" type="Sprite" parent="LevelBase"]
+position = Vector2( 264, 152 )
+z_index = 1
+texture = ExtResource( 25 )
+
+[node name="rockpile_128px7" type="Sprite" parent="LevelBase"]
+position = Vector2( -512, 184 )
+z_index = 1
+texture = ExtResource( 25 )
+
+[node name="rockpile_128px8" type="Sprite" parent="LevelBase"]
+position = Vector2( -815.843, 232 )
+z_index = 1
+texture = ExtResource( 25 )
+
+[node name="rockpile_128px9" type="Sprite" parent="LevelBase"]
+position = Vector2( -815.843, 232 )
+z_index = 1
+texture = ExtResource( 25 )
+
+[node name="rockpile_128px10" type="Sprite" parent="LevelBase"]
+position = Vector2( -200, 190 )
+z_index = 1
+texture = ExtResource( 25 )
+
+[node name="AreaPlayerDeath" parent="LevelBase" instance=ExtResource( 27 )]
+position = Vector2( 24, 208 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelBase/AreaPlayerDeath"]
+position = Vector2( 136, 90 )
+shape = SubResource( 2 )
+
+[node name="TileMap2" parent="LevelBase" instance=ExtResource( 28 )]
+tile_data = PoolIntArray( -1965938, 2, 0, -1965937, 2, 4, -1900402, 2, 65536, -1900401, 2, 65540, -1834866, 2, 65536, -1834865, 2, 65540, -1769346, 2, 0, -1769345, 2, 1, -1769344, 2, 4, -1769330, 2, 65536, -1769329, 2, 131076, -1703810, 2, 65536, -1703809, 2, 65538, -1703808, 2, 131076, -1703794, 2, 131072, -1703793, 2, 65540, -1638274, 2, 65536, -1638273, 2, 65538, -1638272, 2, 131076, -1638258, 2, 65536, -1638257, 2, 65540, -1572738, 2, 131072, -1572737, 2, 65538, -1572736, 2, 0, -1572722, 2, 65536, -1572721, 2, 131076, -1507202, 2, 131072, -1507201, 2, 131073, -1507200, 2, 0, -1507199, 2, 0, -1507198, 2, 3, -1507197, 2, 3, -1507196, 2, 3, -1507195, 2, 2, -1507194, 2, 2, -1507193, 2, 3, -1507192, 2, 3, -1507191, 2, 3, -1507190, 2, 4, -1507186, 2, 65536, -1507185, 2, 131076, -1441666, 2, 196608, -1441665, 2, 196609, -1441664, 2, 196609, -1441663, 2, 196611, -1441662, 2, 196611, -1441661, 2, 196609, -1441660, 2, 196609, -1441659, 2, 196609, -1441658, 2, 196611, -1441657, 2, 196610, -1441656, 2, 196610, -1441655, 2, 196609, -1441654, 2, 196612, -1441650, 2, 131072, -1441649, 2, 131076, -1376115, 3, 0, -1376114, 2, 65536, -1376113, 2, 131076, -1310578, 2, 131072, -1310577, 2, 131076, -1245048, 8, 0, -1245042, 2, 65536, -1245041, 2, 131076, -1179506, 2, 131072, -1179505, 2, 131076, -1113978, 5, 0, -1113971, 4, 0, -1113970, 2, 0, -1113969, 2, 65540, -1048452, 5, 0, -1048444, 2, 0, -1048443, 2, 1, -1048442, 2, 3, -1048441, 2, 3, -1048440, 2, 3, -1048439, 2, 1, -1048438, 2, 3, -1048437, 2, 3, -1048436, 2, 2, -1048435, 2, 0, -1048434, 2, 0, -1048433, 2, 131076, -982908, 2, 0, -982907, 2, 131073, -982906, 2, 131074, -982905, 2, 131075, -982904, 2, 131074, -982903, 2, 131075, -982902, 2, 65538, -982901, 2, 131074, -982900, 2, 131073, -982899, 2, 65539, -982898, 2, 131074, -982897, 2, 65540, -917376, 2, 0, -917375, 2, 1, -917374, 2, 3, -917373, 2, 0, -917372, 2, 0, -917371, 2, 131075, -917370, 2, 65538, -917369, 2, 65537, -917368, 2, 65538, -917367, 2, 131075, -917366, 2, 65539, -917365, 2, 131075, -917364, 2, 65537, -917363, 2, 131074, -917362, 2, 131074, -917361, 2, 65540, -851840, 2, 131072, -851839, 2, 131074, -851838, 2, 131075, -851837, 2, 131075, -851836, 2, 65537, -851835, 7, 0, -851834, 2, 131074, -851833, 2, 131073, -851832, 2, 65538, -851831, 6, 0, -851830, 7, 0, -851829, 2, 65539, -851828, 2, 131075, -851827, 2, 65538, -851826, 2, 131073, -851825, 2, 65540, -786304, 2, 131072, -786303, 2, 131073, -786302, 2, 131074, -786301, 2, 131075, -786300, 2, 65537, -786299, 2, 131074, -786298, 2, 65538, -786297, 2, 131075, -786296, 2, 65538, -786295, 2, 65539, -786293, 2, 131075, -786292, 2, 131075, -786291, 2, 65538, -786290, 2, 65537, -786289, 2, 65540, -720768, 2, 131072, -720767, 2, 65539, -720766, 2, 131073, -720765, 2, 65539, -720764, 2, 131075, -720763, 2, 65537, -720762, 2, 65537, -720761, 2, 131074, -720760, 2, 131075, -720759, 2, 65539, -720758, 6, 0, -720757, 2, 131074, -720756, 2, 131073, -720755, 2, 65539, -720754, 2, 65538, -720753, 2, 65540, -655232, 2, 65536, -655231, 2, 65537, -655230, 2, 65539, -655229, 2, 65537, -655228, 2, 131075, -655227, 2, 65539, -655226, 2, 65538, -655225, 2, 65538, -655224, 2, 65539, -655223, 6, 0, -655222, 2, 65539, -655221, 2, 131074, -655220, 2, 131074, -655219, 2, 65537, -655218, 2, 131074, -655217, 2, 65540, -589696, 2, 131072, -589695, 2, 131073, -589694, 2, 65539, -589693, 2, 131074, -589692, 2, 65539, -589691, 2, 131075, -589690, 2, 65537, -589689, 2, 65538, -589688, 2, 65537, -589687, 2, 65537, -589686, 2, 131075, -589685, 2, 131073, -589684, 2, 131073, -589683, 2, 131074, -589682, 2, 131073, -589681, 2, 65540, -524160, 2, 196608, -524159, 2, 196609, -524158, 2, 196610, -524157, 2, 196609, -524156, 2, 196611, -524155, 2, 196611, -524154, 2, 196609, -524153, 2, 196609, -524152, 2, 196610, -524151, 2, 196611, -524150, 2, 196610, -524149, 2, 196610, -524148, 2, 196610, -524147, 2, 196611, -524146, 2, 196611, -524145, 2, 196612, 196657, 2, 0, 196658, 2, 2, 196659, 2, 3, 196660, 2, 4, 262193, 2, 196608, 262194, 2, 196609, 262195, 2, 196610, 262196, 2, 196612 )
+
+[node name="OrbBoss" parent="LevelBase" instance=ExtResource( 29 )]
+position = Vector2( 2112, -400 )
+silent_spawn = true
+end_of_level = true
+
+[node name="SaveStatue" parent="LevelBase" instance=ExtResource( 30 )]
+position = Vector2( -168, 79.1352 )

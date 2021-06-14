@@ -243,6 +243,8 @@ func set_vars():
 	player_door_spawn = ""
 
 	player = {
+		#cuantas veces murió jugador en una misión
+		"deaths": 0,
 		#cual subarma se tiene o "none"
 		"subweapon": "none",
 		#condicion: good, poison, cursed, healing
@@ -267,8 +269,7 @@ func set_vars():
 		#y la cantidad actual
 		"potion_now": 0,
 		#cantidad de hp que puede dar la pocion
-		#calculado en script del jugador
-		"potion_healing_hp": 0,
+		"potion_healing_hp": 0, #calculado en script del jugador
 		#habilidad para dar un doble salto
 		"hability_double_jump" : false,
 		#habilidad para esquivar

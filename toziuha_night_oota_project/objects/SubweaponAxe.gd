@@ -21,7 +21,7 @@ func _ready():
 	else:
 		$Sprite.scale.x = -1
 		$AnimationPlayer.play("show_reverse")
-	velocity.y -= 400
+	velocity.y -= 300
 
 func play_sound():
 	Audio.play_sfx("whip_woosh")

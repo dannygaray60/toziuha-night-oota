@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Toziuha Night - Order of the Alchemists"
-run/main_scene="res://test/level.tscn"
+run/main_scene="res://screens/MainMenu.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="ToziuhaNight_OrderOfTheAlchemists"
 config/icon="res://icon.png"

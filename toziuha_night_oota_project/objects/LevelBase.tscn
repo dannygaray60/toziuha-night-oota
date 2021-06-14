@@ -30,4 +30,5 @@ wait_time = 0.3
 one_shot = true
 
 [connection signal="ready" from="." to="." method="_on_LevelBase_ready"]
+[connection signal="tree_exiting" from="." to="." method="_on_LevelBase_tree_exiting"]
 [connection signal="tween_all_completed" from="FadeBlack/Tween" to="." method="_on_Tween_tween_all_completed"]

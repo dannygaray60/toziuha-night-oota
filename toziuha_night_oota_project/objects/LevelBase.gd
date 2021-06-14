@@ -64,7 +64,7 @@ func _on_player_damage():
 	$Hud.update_stats()
 
 #al morir
-func _on_player_death():
+func _on_player_death():	
 	$FadeBlack/Tween.interpolate_property($FadeBlack/ColorRect,"color",Color(0,0,0,0),Color(0,0,0,1),3,
 	Tween.TRANS_LINEAR,Tween.TRANS_LINEAR)
 	$FadeBlack/Tween.start()
@@ -72,16 +72,32 @@ func _on_player_death():
 #cuando terminó el fade al morir
 func _on_Tween_tween_all_completed():
 	
-	#si no hay partida guardada (desde estatua) se reinicia el nivel
+	#primero obtener el contador de muertes antes de la muerte actual
+	var prev_deaths_count = Vars.player["deaths"]	
+
+	#si no hay partida guardada (desde estatua) se reinicia el nivel (y variable player)
 	if !Savedata.has_savefile("savegame"):
 		Vars.set_vars()
+		#despues de reiniciar valores
+		#se aumenta contador de muertes con el valor obtenido previamente 
+		Vars.player["deaths"] = prev_deaths_count + 1
 		SceneChanger.change_scene("%s/%s.tscn"%[Vars.level_dir_path,Vars.level_main_scene])
 	else:
 		if Savedata.load_savedata("savegame") == OK:
+			
 			Vars.loaded_from_statue_save = true
+			
+			#aumentar contador y guardar valor
+			Vars.player["deaths"] += 1
+			Savedata.save_savedata("savegame")
+			
 			SceneChanger.change_scene("%s/%s.tscn"%[Vars.level_dir_path,Vars.player["current_room"]])
 	
 
 #mostrar botones tactiles de acuerdo a configuracion
 func _on_LevelBase_ready():
 	ControlsOnscreen.show_buttons_in_game()
+
+#cuando sale de tree, se oculta controles
+func _on_LevelBase_tree_exiting():
+	ControlsOnscreen.show_buttons(false)

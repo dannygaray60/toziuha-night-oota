@@ -1,18 +1,26 @@
 extends RigidBody2D
 
-var end_of_level = false
+#orbe aparecerá sin hacer flash o ruido
+export var silent_spawn = false
+
+export var end_of_level = false
+export var custom_next_scene = ""
 
 func _ready():
 	$Area2DTile.monitoring = false
-	Audio.play_sfx("boss_orb_generating")
+	if !silent_spawn:
+		Audio.play_sfx("boss_orb_generating")
 	$AnimationPlayer.play("show")
 
 func flash():
-	Functions.get_main_level_scene().get_node("Hud").show_flash()
+	if !silent_spawn:
+		Functions.get_main_level_scene().get_node("Hud").show_flash()
 func play_heartbeat():
-	Audio.play_sfx("boss_orb_heartbeat")
+	if !silent_spawn:
+		Audio.play_sfx("boss_orb_heartbeat")
 func play_orb_generated():
-	Audio.play_sfx("boss_orb_generated")
+	if !silent_spawn:
+		Audio.play_sfx("boss_orb_generated")
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	match anim_name:
@@ -29,7 +37,7 @@ func _on_Area2D_body_entered(body):
 		$AnimationPlayer.play("idle")
 
 	elif body.is_in_group("player"):
-		
+		Audio.stop_music()
 		$AnimationPlayer.stop()
 		
 		if end_of_level:
@@ -45,7 +53,13 @@ func _on_Area2D_body_entered(body):
 			visible = false
 			$Timer.start()
 			yield($Timer,"timeout")
-			print("ir a siguiente escena")
+			if custom_next_scene != "":
+				var go_to = "%s/%s.tscn" % [Vars.level_dir_path,custom_next_scene]
+				#print("ir a siguiente escena: %s (OrbBoss.gd)"%[go_to])
+				SceneChanger.change_scene(go_to)
+			else:
+				#print("ir a siguiente escena: resultados (OrbBoss.gd)")
+				SceneChanger.change_scene("res://screens/MissionResults.tscn")
 		
 		else:
 			Audio.play_sfx("boss_defeated_jingle")

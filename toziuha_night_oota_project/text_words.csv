@@ -97,6 +97,9 @@ SKIP;Skip;Omitir
 HOLD;Hold;Mantén
 PRESS;Press;Presiona
 RELEASE;Release;Suelta
+MISSIONRESULTS;Mission Results;Resultados de Misión
+MONEY;Money;Dinero
+DEATHS;Deaths;Muertes
 PHRASE_DOUBLEJUMP;Now you can make a double jump.;Ahora puedes hacer un segundo salto.
 PHRASE_SLIDE;Press «Down» + «Jump» to slide.;Presiona «Abajo» + «Salto» para deslizarte.
 PHRASE_BACKDASH;Go Backward with «Backdash» button.;Retrocede rápidamente con el botón de «Retropropulsión».

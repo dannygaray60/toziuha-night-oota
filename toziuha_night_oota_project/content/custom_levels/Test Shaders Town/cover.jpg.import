@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/bat_blood.png-184125a125a649365f308c4318b23b1e.stex"
+path="res://.import/cover.jpg-dd1b6bf625c47159e589a5edec8f76ce.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://test/bat_blood.png"
-dest_files=[ "res://.import/bat_blood.png-184125a125a649365f308c4318b23b1e.stex" ]
+source_file="res://content/custom_levels/Test Shaders Town/cover.jpg"
+dest_files=[ "res://.import/cover.jpg-dd1b6bf625c47159e589a5edec8f76ce.stex" ]
 
 [params]
 

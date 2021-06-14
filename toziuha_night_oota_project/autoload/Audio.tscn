@@ -79,6 +79,11 @@ bus = "Effects"
 stream = ExtResource( 45 )
 bus = "Effects"
 
+[node name="boss_orb_generated2" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 45 )
+pitch_scale = 0.49
+bus = "Effects"
+
 [node name="boss_orb_heartbeat" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 46 )
 volume_db = 8.0

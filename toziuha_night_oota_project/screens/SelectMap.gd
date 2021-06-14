@@ -130,6 +130,9 @@ func load_level(mode="newgame"):
 			#eliminar quicksave
 			if has_quicksave:
 				Savedata.delete_savedata("quicksave")
+			#y la partida anterior
+			if has_savegame:
+				Savedata.delete_savedata("savegame")
 		"quickload":
 			Vars.set_vars()
 			err = Savedata.load_savedata("quicksave")

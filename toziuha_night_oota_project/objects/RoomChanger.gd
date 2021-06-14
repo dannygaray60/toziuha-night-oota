@@ -23,7 +23,7 @@ func _ready():
 func _on_RoomChanger_body_entered(body):
 	
 	if destiny_filename != "" and body.is_in_group("player") and $TimerDontDetect.get_time_left() == 0:
-		
+		body.can_move = false
 		var go_to = "%s/%s.tscn" % [Vars.level_dir_path,destiny_filename]
 		
 		if f.file_exists(go_to):

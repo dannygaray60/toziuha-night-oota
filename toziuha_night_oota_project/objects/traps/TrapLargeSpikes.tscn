@@ -41,8 +41,8 @@ z_index = -5
 script = ExtResource( 2 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-position = Vector2( -1.19209e-07, -8 )
-scale = Vector2( 0.8, 0.8 )
+position = Vector2( -1.19209e-06, 12 )
+scale = Vector2( 4.4, 5.2 )
 
 [node name="AreaSpikes" type="Area2D" parent="."]
 position = Vector2( 0, 17 )

@@ -1,5 +1,8 @@
 extends Node
 
+var boss_orb = preload("res://objects/OrbBoss.tscn")
+var boss_orb_instance = null
+
 signal collision_with_player
 
 #referencia del nodo de jugador
@@ -71,3 +74,34 @@ func check_body_collisions(enemynode=null):
 				#si este cuerpo lleva veneno
 				if enemynode.is_in_group("poison") and collision.collider.has_method("change_condition"):
 					collision.collider.change_condition("poison")
+
+
+# ----------- funciones para jefes ---------------
+
+#comprobar si el boss ya fue derrotado
+#de ser así se elimina inmediatamente
+#y las puertas se mantendrán abiertas siempre
+func check_boss_doors():
+	if name in Vars.player["defeated_bosses"]:
+		for d in get_tree().get_nodes_in_group("special_door"):
+			d.keep_open_door = true
+		queue_free()
+		return
+	#deshabilitar guardado rápido
+	Functions.get_main_level_scene().get_node("Hud").can_quicksave = false
+
+#solo se abrirán puertas si no es jefe final
+#en consecuencia su orbe no aparecerá de nuevo si se regresa a la habitacion
+#al ser jefe final el juego cambiará automaticamente a la siguiente escena
+func open_doors_on_boss_death(bossnode):
+	if !bossnode.final_boss:
+		for d in Functions.get_main_level_scene().get_tree().get_nodes_in_group("special_door"):
+			d.open_door(true)
+
+#añadir orbe a la escena
+func add_boss_orb(pos,bossnode,next_scene=""):
+	boss_orb_instance = boss_orb.instance()
+	boss_orb_instance.global_position = pos
+	boss_orb_instance.end_of_level = bossnode.final_boss
+	boss_orb_instance.custom_next_scene = next_scene
+	Functions.get_main_level_scene().call_deferred("add_child",boss_orb_instance)

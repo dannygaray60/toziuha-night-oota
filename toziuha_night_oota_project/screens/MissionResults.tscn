@@ -1,0 +1,199 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://assets/img/purple_demon_forest.png" type="Texture" id=1]
+[ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=3]
+[ext_resource path="res://assets/img/render_xandria.png" type="Texture" id=4]
+[ext_resource path="res://objects/ui/SubButton.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/ui/Panel_Red_light.tres" type="StyleBox" id=6]
+[ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://screens/MissionResults.gd" type="Script" id=9]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 90, 47 )
+margin_left = 18.9633
+margin_right = 18.9107
+margin_top = 14.0969
+margin_bottom = 14.0
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -7
+extra_spacing_bottom = -7
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
+
+[node name="MissionResults" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CharRender" type="TextureRect" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = -104.0
+margin_top = -424.0
+margin_right = 1088.0
+margin_bottom = 224.0
+grow_vertical = 0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -66.5
+margin_top = 12.0
+margin_right = 322.5
+margin_bottom = 74.0969
+grow_horizontal = 0
+size_flags_horizontal = 4
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+text = "MISSIONRESULTS"
+align = 1
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="PanelActions" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -195.0
+margin_top = -62.0
+margin_right = -19.0
+margin_bottom = -22.0
+color = Color( 0, 0, 0, 0.537255 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBx" type="HBoxContainer" parent="PanelActions"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnStory" parent="PanelActions/HBx" instance=ExtResource( 5 )]
+visible = false
+margin_right = 193.0
+margin_bottom = 40.0
+size_flags_horizontal = 1
+text = "STORY MODE"
+
+[node name="BtnMissions" parent="PanelActions/HBx" instance=ExtResource( 5 )]
+visible = false
+margin_right = 193.0
+margin_bottom = 40.0
+size_flags_horizontal = 1
+text = "MISSIONS"
+
+[node name="BtnContinue" parent="PanelActions/HBx" instance=ExtResource( 5 )]
+margin_left = 14.0
+margin_right = 161.0
+margin_bottom = 40.0
+size_flags_horizontal = 1
+text = "CONTINUE"
+
+[node name="PanelDetails" parent="." instance=ExtResource( 7 )]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -395.0
+margin_top = -42.0601
+margin_right = -19.0
+margin_bottom = 42.0601
+custom_styles/panel = ExtResource( 6 )
+
+[node name="Margin" type="MarginContainer" parent="PanelDetails"]
+margin_top = 4.00473
+margin_right = 376.0
+margin_bottom = 80.0047
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="VBx" type="VBoxContainer" parent="PanelDetails/Margin"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 366.0
+margin_bottom = 66.0
+alignment = 1
+
+[node name="HBxRecolectedMoney" type="HBoxContainer" parent="PanelDetails/Margin/VBx"]
+margin_right = 356.0
+margin_bottom = 26.0
+custom_constants/separation = 11
+alignment = 1
+
+[node name="Lbl1" type="Label" parent="PanelDetails/Margin/VBx/HBxRecolectedMoney"]
+margin_left = 104.0
+margin_right = 168.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 3 )
+text = "MONEY"
+
+[node name="Lbl2" type="Label" parent="PanelDetails/Margin/VBx/HBxRecolectedMoney"]
+margin_left = 179.0
+margin_right = 251.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 3 )
+text = "000000"
+
+[node name="HBxDeaths" type="HBoxContainer" parent="PanelDetails/Margin/VBx"]
+margin_top = 30.0
+margin_right = 356.0
+margin_bottom = 56.0
+custom_constants/separation = 11
+alignment = 1
+
+[node name="Lbl1" type="Label" parent="PanelDetails/Margin/VBx/HBxDeaths"]
+margin_left = 124.0
+margin_right = 196.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 3 )
+text = "DEATHS"
+
+[node name="Lbl2" type="Label" parent="PanelDetails/Margin/VBx/HBxDeaths"]
+margin_left = 207.0
+margin_right = 231.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 3 )
+text = "00"
+
+[connection signal="pressed" from="PanelActions/HBx/BtnContinue" to="." method="_on_BtnContinue_pressed"]
