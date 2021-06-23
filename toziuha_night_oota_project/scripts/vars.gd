@@ -31,20 +31,20 @@ var subweapons = {
 	"none":{
 		"name": "None",
 		"atk_add": 0,
-		"em_use": 0,
+		"mp_use": 0,
 		"description": ".",
 	},
 	"shuriken":{
 		"name": "Shuriken",
 		"atk_add": 10,
-		"em_use": 1,
+		"mp_use": 1,
 		"description": "Shuriken ninja.",
 	},
 	
 	"axe":{
 		"name": "Axe",
 		"atk_add": 20,
-		"em_use": 3,
+		"mp_use": 3,
 		"description": "Hacha grande.",
 	},
 }
@@ -259,9 +259,12 @@ func set_vars():
 		#health points
 		"hp_now" : 50,
 		"hp_max" : 50,
-		#elemental materials, munition to throw subweapon
-		"em_now" : 0,
-		"em_max" : 10,
+		#mana points, munition to throw subweapon
+		"mp_now" : 0,
+		"mp_max" : 10,
+		#stamina points (for run, backdash, dodge)
+		"sp_now" : 100,
+		"sp_max" : 100,
 		#hacia qué lado mira el jugador: -1 : izquierda, 1 : derecha
 		"facing" : 1,
 		#cantidad maxima de pociones para llevar
@@ -273,7 +276,7 @@ func set_vars():
 		#habilidad para dar un doble salto
 		"hability_double_jump" : false,
 		#habilidad para esquivar
-		"hability_backdash" : false,
+		"hability_dodge" : false,
 		#deslizarse en el suelo
 		"hability_slide" : false,
 		#llaves para desbloquear puertas especiales

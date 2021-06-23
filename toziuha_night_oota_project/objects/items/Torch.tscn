@@ -52,10 +52,9 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0.787985, -13.4908 )
-scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
-vframes = 3
 hframes = 4
+vframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/destroyed = SubResource( 2 )

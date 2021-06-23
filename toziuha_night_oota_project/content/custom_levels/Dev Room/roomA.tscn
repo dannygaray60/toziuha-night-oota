@@ -60,7 +60,7 @@ position = Vector2( 316.206, 236 )
 
 [node name="RelicKey3" parent="." index="12" instance=ExtResource( 6 )]
 position = Vector2( 537, 374.63 )
-item = "backdash"
+item = "dodge"
 
 [node name="Torch" parent="." index="13" instance=ExtResource( 9 )]
 position = Vector2( 437.222, 275 )
@@ -80,8 +80,6 @@ money_1000_probability = 1
 
 [node name="Torch4" parent="." index="16" instance=ExtResource( 9 )]
 position = Vector2( 523, 70.416 )
-em_1_probability = 6
-em_5_probability = 2
 
 [node name="Torch5" parent="." index="17" instance=ExtResource( 9 )]
 position = Vector2( 460, 70.416 )
@@ -92,7 +90,7 @@ position = Vector2( 140, 320 )
 
 [node name="statsemplus10" parent="." index="19" instance=ExtResource( 11 )]
 position = Vector2( 603.925, 382.497 )
-stat = "em"
+stat = "mp"
 quantity = 10
 
 [editable path="DoorRight"]

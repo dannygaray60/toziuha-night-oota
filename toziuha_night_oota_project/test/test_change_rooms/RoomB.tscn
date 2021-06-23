@@ -20,7 +20,7 @@ tile_data = PoolIntArray( -851949, 0, 0, -851948, 0, 4, -851947, 0, 2, -851946, 
 
 [node name="DoorR1" parent="." index="4" instance=ExtResource( 5 )]
 position = Vector2( 736, 118.867 )
-destiny_path = "res://test/test_change_rooms/Main.tscn"
+destiny_filename = "res://test/test_change_rooms/Main.tscn"
 destiny_door = "DoorL1"
 
 [node name="PositionSpawn" parent="DoorR1" index="2"]

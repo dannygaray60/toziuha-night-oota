@@ -1,11 +1,11 @@
 extends RigidBody2D
 
-export(String, "double_jump","backdash","slide", "bronze_key", "silver_key", "golden_key") var item = "double_jump"
+export(String, "double_jump","dodge","slide", "bronze_key", "silver_key", "golden_key") var item = "double_jump"
 
 func _ready():
 	
 	#eliminar objeto si el jugador ya lo tiene
-	if item in ["double_jump","slide","backdash"]:
+	if item in ["double_jump","slide","dodge"]:
 		if Vars.player["hability_"+item]:
 			queue_free()
 	elif Vars.player[item]:
@@ -16,7 +16,7 @@ func _ready():
 			$Sprite.frame = 0
 		"slide":
 			$Sprite.frame = 1
-		"backdash":
+		"dodge":
 			$Sprite.frame = 2
 		"bronze_key":
 			$Sprite.frame = 3
@@ -28,7 +28,7 @@ func _ready():
 func _on_AreaPick_body_entered(body):
 	if body.is_in_group("player"):
 		
-		if item in ["double_jump","slide","backdash"]:
+		if item in ["double_jump","slide","dodge"]:
 			Audio.play_sfx("weapon_upgrade")
 			Vars.player["hability_"+item] = true
 		else:
@@ -42,8 +42,8 @@ func _on_AreaPick_body_entered(body):
 					body.show_quick_notif(tr("SKILLDOUBLEJUMP"))
 				"slide":
 					body.show_quick_notif(tr("SKILLSLIDE"))
-				"backdash":
-					body.show_quick_notif(tr("SKILLBACKDASH"))
+				"dodge":
+					body.show_quick_notif(tr("SKILLDODGE"))
 				"bronze_key":
 					body.show_quick_notif(tr("BRONZEKY"))
 				"silver_key":

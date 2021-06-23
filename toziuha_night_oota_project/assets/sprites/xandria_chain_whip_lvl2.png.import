@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ep_bar.png-bf8631274078d6260e1c22e61df17ec8.stex"
+path="res://.import/xandria_chain_whip_lvl2.png-14ea0d0dcf80479e1d583c0edb29ee1f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ep_bar.png"
-dest_files=[ "res://.import/ep_bar.png-bf8631274078d6260e1c22e61df17ec8.stex" ]
+source_file="res://assets/sprites/xandria_chain_whip_lvl2.png"
+dest_files=[ "res://.import/xandria_chain_whip_lvl2.png-14ea0d0dcf80479e1d583c0edb29ee1f.stex" ]
 
 [params]
 

@@ -76,8 +76,14 @@ export var limit_top_camera = -10000000
 export var limit_right_camera = 10000000
 export var limit_bottom_camera = 10000000
 
-func _ready():
+#ultimo input presionado
+var last_action = "ui_up"
 
+func _ready():
+	
+	#quitar cualquier colision del latigo hasta que se active con botón
+	weapon_cancel()
+	
 	#establecer hacia qué lado mira el jugador
 	if Vars.player_facing != 0:
 		facing = Vars.player_facing
@@ -88,6 +94,7 @@ func _ready():
 	$PlayerCamera.limit_right = limit_right_camera
 	$PlayerCamera.limit_bottom = limit_bottom_camera
 	
+	#colision del cuerpo normal (no agachado)
 	set_body_collision()
 	
 	anim_state_machine = $AnimationTree.get("parameters/playback")
@@ -99,12 +106,14 @@ func _ready():
 	Timers.get_node("TimerHeal").connect("timeout",self,"_on_TimerHeal_timeout")
 	# warning-ignore:return_value_discarded
 	Timers.get_node("TimerHealingEnd").connect("timeout",self,"_on_TimerHealingEnd_timeout")
+	# warning-ignore:return_value_discarded
+	Timers.get_node("TimerRecoverStamina").connect("timeout",self,"_on_TimerRecoverStamina_timeout")
 
 
 #debug
-#func _process(_delta):
-#	ScreenDebugger.dict["State"] = state
-#	ScreenDebugger.dict["Anim"] = str( anim_current )
+func _process(_delta):
+	ScreenDebugger.dict["State"] = state
+	ScreenDebugger.dict["Anim"] = str( anim_current )
 #	ScreenDebugger.dict["Jumps"] = str( num_jumps )
 #	ScreenDebugger.dict["Vel_X"] = str( round(velocity.x) )
 #	ScreenDebugger.dict["Vel_Y"] = str( round(velocity.y) )
@@ -130,7 +139,7 @@ func _physics_process(delta):
 	anim_current = anim_state_machine.get_current_node()
 	
 	#se cambiará la direccion solo si no está la animacion changedir en reproduccion
-	if direction.x != 0 and state != "backdash" and state != "attack" and state != "attack-crouch":
+	if direction.x != 0 and state != "backdash" and state != "dodge" and state != "attack" and state != "attack-crouch":
 		change_direction(direction.x)
 		facing = direction.x
 	
@@ -143,11 +152,15 @@ func _physics_process(delta):
 
 	#movimiento automatico en backdash
 	if state == "backdash" and is_on_floor():
-		velocity.x = (-170 * facing)
+		velocity.x = -170 * facing
+	
+	#movimiento automatico para doge (lo contrario a backdash)
+	if state == "dodge" and is_on_floor():
+		velocity.x = 150 * facing
 			
 	#y movimiento para slide
 	if state == "slide" and is_on_floor():
-		velocity.x = (170 * facing)
+		velocity.x = 170 * facing
 
 	#movimiento general en Y
 	velocity.y = move_and_slide_with_snap(velocity,snap_vector,FLOOR_NORMAL,stop_on_slope,4,SLOPE_THRESHOLD).y
@@ -189,7 +202,7 @@ func _physics_process(delta):
 
 func _get_input():
 	
-	if !can_move:
+	if !can_move or state == "dodge":
 		return
 	
 	#mientras haya un dialogo activo no podrá moverse
@@ -197,20 +210,36 @@ func _get_input():
 		direction.x = 0
 		velocity.x = 0
 		return
+		
+	#detectar un doble input hacia izquierda o derecha
+#	if Input.is_action_just_pressed(last_action) and $TimerInput.get_time_left() != 0:
+#		#ejecutar dodge
+#		_dodge()
+#	if Input.is_action_just_pressed("ui_left"):
+#		last_action = "ui_left"
+#		$TimerInput.start()
+#	elif Input.is_action_just_pressed("ui_right"):
+#		last_action = "ui_right"
+#		$TimerInput.start()
+		
 	
 	#movimiento con teclas siempre y cuando no estemos heridos
 	
 	# --------- detectar entrada de tecla izq o der para movimiento horizontal ----------
 #	direction.x = int( Input.is_action_pressed('ui_right') ) - int( Input.is_action_pressed('ui_left') )
 	#metodo alternativo
-	if Input.is_action_pressed("ui_left") and state != "backdash" and state != "slide":
+	if Input.is_action_pressed("ui_left") and state != "backdash" and state != "dodge" and state != "slide":
 		direction.x = -1
-	elif Input.is_action_pressed("ui_right") and state != "backdash" and state != "slide":
+	elif Input.is_action_pressed("ui_right") and state != "backdash" and state != "dodge" and state != "slide":
 		direction.x = 1
 	else:
 		direction.x = 0
 
 	_move()
+
+	#desactivar ataque circular al soltar botón ataque
+	if anim_current == "attack-circle" and Input.is_action_just_released("ui_cancel"):
+		change_state("idle")
 	
 	#agacharse
 	if Input.is_action_pressed("ui_down") and is_on_floor() and state != "slide" and state != "attack-crouch" and state != "attack":
@@ -219,16 +248,13 @@ func _get_input():
 			_crouch(false)
 		else:
 			_crouch()
-		
-	elif Input.is_action_just_released("ui_down") and state == "crouch":
-		if !$Sprite/RayCastUp.is_colliding():
-			change_state("idle")
+	#levantarse (si la cabeza no toca techo)
+	elif Input.is_action_just_released("ui_down") and state == "crouch" and !$Sprite/RayCastUp.is_colliding():
+		change_state("idle")
 		
 	#acción de ataque	
 	if Input.is_action_just_pressed("ui_cancel"):
-		#si se presiona arriba y la cantidad de em es menor al em requerido por el subarma
-		if Input.is_action_pressed("ui_up") and Vars.player["subweapon"] != "none" and Vars.player["em_now"] < Vars.subweapons[Vars.player["subweapon"]]["em_use"]:
-			return
+		$TimerBtnAttackPress.start()
 		_attack()
 		
 	#accion para usar un item curativo
@@ -242,9 +268,13 @@ func _get_input():
 	else:
 		#si no pulsamos btn salto, hay snap para pegar al jugador al suelo inclinado
 		snap_vector = SNAP_DIRECTION * SNAP_LENGTH
-	
+
+		
+	#esquivar hacia adelante
+	if state == "run" and is_on_floor() and Input.is_action_just_pressed("ui_focus_prev") and (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")) and Vars.player["hability_dodge"]:
+		_dodge()
 	# esquive hacia atrás (backdash)
-	if Input.is_action_just_pressed("ui_focus_prev") and Vars.player["hability_backdash"]:
+	elif Input.is_action_just_pressed("ui_focus_prev") and is_on_floor():
 		_backdash()
 		
 	#slide
@@ -294,21 +324,31 @@ func _use_health_item():
 		emit_signal("stats_changed")
 
 func _backdash():
-	if state != "slide" and state != "attack-crouch" and is_on_floor() and state != "backdash" and state != "crouch" and anim_current != "backdash" and anim_current != "pos-backdash" and Vars.player["hability_backdash"]:
-		
-		#desactivar pressed para evitar glitch de backdash al mantener left o right mientras se repite backdash
-		Input.action_release("ui_left")
-		Input.action_release("ui_right")
+	if Vars.player["sp_now"] >= 30 and state != "slide" and state != "attack-crouch" and is_on_floor() and state != "backdash" and state != "crouch" and anim_current != "backdash" and anim_current != "pos-backdash":
+
+		decrease_stamina(15)
 		
 		$TimerBackdash.start()
-		$Sprite/XandriaWeapon.cancel()
+		weapon_cancel()
 		Audio.play_voice("xandria-up")
 		Audio.play_sfx("backdash")
 		change_state("backdash")
 
+func _dodge():
+	if Vars.player["sp_now"] >= 30 and state != "slide" and state != "attack-crouch" and is_on_floor() and state != "dodge" and state != "crouch" and anim_current != "dodge":# and Vars.player["hability_dodge"]:
+		
+		decrease_stamina(30)
+		
+		$TimerBackdash.start()
+		weapon_cancel()
+		Audio.play_voice("xandria-up")
+		Audio.play_sfx("backdash")
+		change_state("dodge")
+		nohurt(0.5,false)
+
 func _slide():
 	if is_on_floor() and state == "crouch" and anim_current != "attack" and anim_current in ["crouch","pos-slide"] and Vars.player["hability_slide"]:
-		if anim_current == "backdash":
+		if anim_current in ["backdash","dodge"]:
 			return
 		$TimerSlide.start()
 		Audio.play_sfx("slide")
@@ -360,9 +400,75 @@ func _attack():
 			change_state("attack")
 
 		$TimerAttack.start()
-		
+		weapon_attack()
+
+#reproducir sonido de arma y además activar o desactivar las colisiones necesarias
+func weapon_attack():
+	
+	#puede tirar subarma
+	can_throw = false
+	
+	#randomizar cual voz usar para el ataque
+	randomize()
+	var voices = ["xandria-attack1","xandria-attack2","xandria-attackfast",null,null,null]
+	var selected_voice = randi() % 6
+	if voices[selected_voice] != null:
+		Audio.play_voice(voices[selected_voice])
+	
+	#si solo se mantiene presionado arriba y no las otras direcciones quiere decir que se lanzará subarma por lo que se oculta el latigo
+	#ya que se reutiliza la animación para lanzar subarmas
+	#siempre y cuando se tenga subarma, y maná suficiente para tirarlo
+	if Input.is_action_pressed("ui_up") and !Input.is_action_pressed("ui_left") and !Input.is_action_pressed("ui_right") and Vars.player["subweapon"] != "none" and Vars.player["mp_now"] >= Vars.subweapons[Vars.player["subweapon"]]["mp_use"]:
+		#descontar uso de subarma al maná
+		Vars.player["mp_now"] = Functions.get_value(Vars.player["mp_now"],"-",Vars.subweapons[Vars.player["subweapon"]]["mp_use"])
+		can_throw = true #usado para throw_subweapon que se llama desde animationplayer
+		emit_signal("stats_changed")
+		#ocultar colision y latigo
+		weapon_enable_collision()
+	else:
+		weapon_enable_collision(2)
+	
+		weapon_sound_woosh()
+		Audio.play_sfx("chains")
+
+#sonido woosh del latigo
+func weapon_sound_woosh():
+	Audio.play_sfx("whip_woosh")
+	
+#activar la colision del arma especificada (las demás se desactivan)
+func weapon_enable_collision(lvl=0):
+	#desactivar todas las colisiones (y ocultarlas para propositos de testeo
+	get_node("Sprite/Weapon/AreaLvl2/CollisionPolygon2D").polygon = []
+	get_node("Sprite/Weapon/AreaLvl2").monitoring = false
+	get_node("Sprite/Weapon/AreaLvl2").visible = false
+	#si no se especifica se oculta el sprite del arma y se deja desactivada todas las colisiones con el bloque de codigo anterior
+	if lvl == 0:
+		$Sprite/Weapon/StandChainWhip.visible = false
+	else:
+		$Sprite/Weapon/StandChainWhip.visible = true
+		get_node("Sprite/Weapon/AreaLvl"+str(lvl)).monitoring = true
+		get_node("Sprite/Weapon/AreaLvl"+str(lvl)).visible = true
+
+#quitar frames y desactivar colisiones del arma
+func weapon_cancel():
+	weapon_enable_collision()
+	$Sprite/Weapon/StandChainWhip.frame = 0
+
+
+func decrease_stamina(val=30):
+	Vars.player["sp_now"] = Functions.get_value(Vars.player["sp_now"],"-",val)
+	emit_signal("stats_changed")
+	#iniciar timers
+	Timers.get_node("TimerRecoverStamina").start()
+	emit_signal("stats_changed")
+
+	
 #cambiar entre estados automaticamente
 func _check_states():
+	
+	#corregir animacion de latigo de cadenas si no se está atacando
+	if !anim_current.begins_with("attack") and $Sprite/Weapon/StandChainWhip.frame != 0:
+		$Sprite/Weapon/StandChainWhip.frame = 0
 	
 	#al estar heridos en el aire no se podrá cambiar a otro estado automaticamente
 	if (state == "hurt" and !is_on_floor()) or state == "dead":
@@ -374,11 +480,15 @@ func _check_states():
 		$Sprite.scale.x = facing
 	
 	#estados que no permiten cambiar automaticamente a otro estado
-	if state in ["attack","attack-crouch","crouch","backdash","slide"]:
+	if state in ["attack","attack-crouch","crouch","backdash","dodge","dash","slide"]:
 		if !is_on_floor() and state == "crouch":
 			change_state("fall")
 		if !is_on_floor() and state == "slide":
 			change_state("fall")
+		#cancelar animacion ataque hacia abajo estando en el suelo
+		if is_on_floor() and anim_current == "attack-down":
+			change_state("idle")
+			anim_state_machine.start("idle")
 		#arreglar animacion de slide al hacerlo muy de seguido
 		if state == "slide" and anim_current == "pos-slide":
 			anim_state_machine.start("slide")
@@ -418,7 +528,7 @@ func hurt(enemy_id=null,hurt_pos=null):
 		
 	Audio.play_sfx("hit-player")
 		
-	$Sprite/XandriaWeapon.cancel()	
+	weapon_cancel()	
 	
 	var damage = 0
 	#calculo de daño y mostrarlo
@@ -489,7 +599,7 @@ func death():
 	Audio.play_voice("xandria-death")
 	
 	#tomado de hurt()
-	$Sprite/XandriaWeapon.cancel()	
+	weapon_cancel()	
 	
 	anim_state_machine.start("dead")
 	state = "dead"
@@ -505,9 +615,10 @@ func death():
 	$Tween.start()
 
 #activar invencibilidad por x tiempo en segundos
-func nohurt(time=1.5):
+func nohurt(time=1.5,change_alpha=true):
 	$TimerNoHurt.start(time)
-	$Sprite.self_modulate.a = .5
+	if change_alpha:
+		$Sprite.self_modulate.a = .5
 	enable_collision_with_danger(false)
 	
 #funcion para activar o desactivar colissions que hacen daño al jugador
@@ -532,18 +643,21 @@ func change_state(new_state):
 	#evitar que se cambie a idle mientras estamos en slide
 	if new_state == "idle" and state == "dead":
 		return
-	
+	#
 	if state == new_state and new_state != "attack"  or (state == "hurt" and !is_on_floor()) or (new_state == "idle" and $Sprite/RayCastUp.is_colliding()):
 		return
-
-	state = new_state
 	
 	#quitar healing en los siguientes estados
-	if Vars.player["condition"] == "healing" and state in ["attack","attack-crouch","backdash","hurt","slide"]:
+	if Vars.player["condition"] == "healing" and state in ["attack","attack-crouch","backdash","dodge","hurt","slide"]:
 		_on_TimerHealingEnd_timeout()
+		
+	weapon_cancel()
+		
+	state = new_state
 
-	if state == "slide":
-		set_body_collision("slide")	
+	#setear colisiones
+	if state in ["slide"]:
+		set_body_collision("slide")
 	elif state in ["crouch","attack-crouch"]:
 		set_body_collision("crouch")
 	else:
@@ -552,8 +666,13 @@ func change_state(new_state):
 	
 	if state == "jump" and num_jumps > 0:
 		pass
-	elif state in ["backdash","attack","hurt","dead"]:
-		anim_state_machine.start(new_state)
+	elif state in ["backdash","dodge","attack","hurt","dead"]:
+		if state == "attack" and Input.is_action_pressed("ui_up") and (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):
+			anim_state_machine.start("attack-diag")
+		elif state == "attack" and !is_on_floor() and Input.is_action_pressed("ui_down"):
+			anim_state_machine.start("attack-down")
+		else:
+			anim_state_machine.start(new_state)
 	else:
 		#arreglar error al atacar agachado (y que termine el ataque) 
 		#y que no esté presionado abajo
@@ -561,16 +680,6 @@ func change_state(new_state):
 			change_state("idle")
 			return
 		anim_state_machine.travel(new_state)
-		
-	#animacion de ataque
-	can_throw = false
-	if state in ["attack","attack-crouch"]:
-		if Input.is_action_pressed("ui_up") and state == "attack" and Vars.player["subweapon"] != "none":
-			Vars.player["em_now"] = Functions.get_value(Vars.player["em_now"],"-",Vars.subweapons[Vars.player["subweapon"]]["em_use"])
-			can_throw = true
-			emit_signal("stats_changed")
-		else:
-			$Sprite/XandriaWeapon.attack()
 
 #cambiar cual colision de cuerpo usar	
 #se ha cambiado la forma de hacer diferentes colisiones
@@ -583,24 +692,24 @@ func set_body_collision(pose="stand"):
 #		$CollisionStand.disabled = false
 #		$CollisionCrouch.disabled = true
 		#posicion del arma
-		$Sprite/XandriaWeapon.position = Vector2(21.034,8)
+		#$Sprite/XandriaWeapon.position = Vector2(21.034,8)
 	elif pose == "crouch":
 		$Sprite/RayCastUp.enabled = true
 		$AnimationPlayerCollision.play("crouch")
 		#posicion del arma
-		$Sprite/XandriaWeapon.position = Vector2(13.094,16.004)
+		#$Sprite/XandriaWeapon.position = Vector2(13.094,16.004)
 	elif pose == "slide":
 		$Sprite/RayCastUp.enabled = true
 		$AnimationPlayerCollision.play("slide")
 		#posicion del arma
-		$Sprite/XandriaWeapon.position = Vector2(13.094,16.004)
+		#$Sprite/XandriaWeapon.position = Vector2(13.094,16.004)
 
 func change_direction(new_dir):
 	
 	#bajo estas condiciones no se permite cambiar la direccion
 	if (
 		facing == new_dir 
-		or state in ["crouch","backdash","slide","attack","attack-crouch"]
+		or state in ["crouch","backdash","dodge","slide","attack","attack-crouch"]
 	):
 		return	
 	#si ya estaba animacion de cambiardireccion entonces se reproduce desde inicio
@@ -653,7 +762,12 @@ func _on_TimerSlide_timeout():
 func _on_TimerAttack_timeout():
 	if state != "hurt" or state != "dead":
 		if state in ["attack","attack-crouch"]:
-			if (Input.is_action_pressed("ui_down") or $Sprite/RayCastUp.is_colliding()):# and is_on_floor():
+			#activar ataque circular (usando timer para medir tiempo desde que se mantuvo presionado
+			if state == "attack" and Input.is_action_pressed("ui_cancel") and $TimerBtnAttackPress.get_time_left() <= 0.3 and $Sprite/Weapon/StandChainWhip.visible:
+				#print(str($TimerBtnAttackPress.get_time_left()))
+				anim_state_machine.start("attack-circle")
+			#animacion de reposo luego de atacar agachado y mantenerse agachado
+			elif (Input.is_action_pressed("ui_down") or $Sprite/RayCastUp.is_colliding()):# and is_on_floor():
 				if Input.is_action_pressed("ui_down") and state == "attack-crouch":
 					anim_state_machine.start("pos-slide")
 				elif Input.is_action_pressed("ui_down") and state == "attack":
@@ -667,9 +781,10 @@ func _on_TimerAttack_timeout():
 				else:
 					change_state("idle")
 
-
+#spawnear subarma desde animacion
+#nota: codigo relacionado en el final de change_state()
 func throw_subweapon():
-	if can_throw:
+	if can_throw :
 		var lvl_base = Functions.get_main_level_scene()
 		var subweapon_instance = null
 		match Vars.player["subweapon"]:
@@ -680,7 +795,7 @@ func throw_subweapon():
 				subweapon_instance = Functions.axe_weapon.instance()
 				subweapon_instance.direction = facing
 		#posicion de spawneo
-		subweapon_instance.position = $Sprite/XandriaWeapon.global_position
+		subweapon_instance.position = $Sprite/SubWeaponPosition.global_position
 		if lvl_base != null:
 			lvl_base.call_deferred("add_child",subweapon_instance)
 
@@ -710,7 +825,7 @@ func _on_TimerHeal_timeout():
 	#eliminar excedente
 	if Vars.player["hp_now"] > Vars.player["hp_max"]:
 		Vars.player["hp_now"] = Vars.player["hp_max"]
-	#si se ha llegado el topo de hp max
+	#si se ha llegado el tope de hp max
 	if (Vars.player["hp_now"] == Vars.player["hp_max"]) or state in ["hurt","dead"]:
 		_on_TimerHealingEnd_timeout()
 	#enviar señal para actualizar hud
@@ -719,6 +834,23 @@ func _on_TimerHeal_timeout():
 func _on_TimerHealingEnd_timeout():
 	Vars.player["condition"] = "good"
 	Timers.get_node("TimerHeal").stop()
+	emit_signal("stats_changed")
+
+#recuperar stamina de a poco
+func _on_TimerRecoverStamina_timeout():
+	var sp_recover = 2
+	if Vars.player["sp_now"] < Vars.player["sp_max"]:
+		#al estar agachados recuperamos mas sp
+		if state == "crouch":
+			sp_recover = 10
+		Vars.player["sp_now"] += sp_recover
+	#eliminar excedente
+	if Vars.player["sp_now"] > Vars.player["sp_max"]:
+		Vars.player["sp_now"] = Vars.player["sp_max"]
+	#si se ha llegado el tope de sp max
+	if Vars.player["sp_now"] == Vars.player["sp_max"]:
+		Timers.get_node("TimerRecoverStamina").stop()
+	#enviar señal para actualizar hud
 	emit_signal("stats_changed")
 
 #pasado un tiempo luego de estar poison o cursed se regresará a good
@@ -732,3 +864,27 @@ func _on_Xandria_tree_exiting():
 	#antes de salir del escenario, guardar
 	#hacia qué lado estaba viendo
 	Vars.player_facing = facing
+
+
+#cuando un area u objeto entra al area del arma que ataca
+func _on_WeaponArea_body_entered(body_area):
+	#destruir antorchas o parecidos
+	if body_area.is_in_group("torch"):
+		body_area.destroy()
+	#aplicar daño a enemigos
+	if body_area.is_in_group("enemies"):
+		#dependiendo del porcentaje de stamina se dará ese porcentaje en bonus para el ataque
+		var total_atk = Vars.player["atk"]
+		#añadir atk dependiendo del nivel del arma
+		match Vars.player["weapon_lvl"]:
+			2:
+				total_atk += 3
+			3:
+				total_atk += 50
+		#daño a la mitad estando envenenado
+		if Vars.player["condition"] == "poison":
+			total_atk = total_atk / 2
+		#camera shake
+		get_node("PlayerCamera").add_trauma(0.35,true)
+		#send hurt data to enemy
+		body_area.hurt(total_atk,global_position)

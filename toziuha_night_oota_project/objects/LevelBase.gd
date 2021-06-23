@@ -100,4 +100,5 @@ func _on_LevelBase_ready():
 
 #cuando sale de tree, se oculta controles
 func _on_LevelBase_tree_exiting():
-	ControlsOnscreen.show_buttons(false)
+#	ControlsOnscreen.show_buttons(false)
+	pass

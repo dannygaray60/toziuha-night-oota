@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-export(String, "atk","def","hp","em","potion") var stat = "atk"
+export(String, "atk","def","hp","mp","potion") var stat = "atk"
 export(int, 1, 50) var quantity
 
 func _ready():
@@ -15,7 +15,7 @@ func _ready():
 			$Sprite.frame = 2
 		"hp":
 			$Sprite.frame = 0
-		"em":
+		"mp":
 			$Sprite.frame = 3
 		"potion":
 			$Sprite.frame = 4
@@ -48,7 +48,7 @@ func _on_AreaPick_body_entered(body):
 					body.show_quick_notif(tr("DEF")+" +%d"%[quantity])
 				"hp":
 					body.show_quick_notif(tr("HP")+" +%d"%[quantity])
-				"em":
+				"mp":
 					body.show_quick_notif(tr("EMLIMIT")+" +%d"%[quantity])
 				"potion":
 					body.show_quick_notif(tr("POTIONLIMIT")+" +%d"%[quantity])
@@ -63,7 +63,7 @@ func _on_AreaPick_body_entered(body):
 #				DialogBox.lines = [['say','none',tr("PHRASEDEFINCREASED")%[quantity]],]	
 #			"hp":
 #				DialogBox.lines = [['say','none',tr("PHRASEHPINCREASED")%[quantity]],]	
-#			"em":
+#			"mp":
 #				DialogBox.lines = [['say','none',tr("PHRASEEMINCREASED")%[quantity]],]	
 #			"potion":
 #				DialogBox.lines = [['say','none',tr("PHRASEPOTIONINCREASED")%[quantity]],]	

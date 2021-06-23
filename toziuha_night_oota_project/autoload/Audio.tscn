@@ -140,13 +140,13 @@ volume_db = 5.0
 pitch_scale = 0.7
 bus = "Effects"
 
-[node name="em_drop" type="AudioStreamPlayer" parent="sfx"]
+[node name="mp_drop" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 35 )
 volume_db = 10.0
 pitch_scale = 1.5
 bus = "Effects"
 
-[node name="em_drop2" type="AudioStreamPlayer" parent="sfx"]
+[node name="mp_drop2" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 35 )
 volume_db = 7.0
 bus = "Effects"
@@ -361,6 +361,11 @@ volume_db = 4.0
 bus = "Music"
 
 [node name="voice" type="Node" parent="."]
+__meta__ = {
+"_editor_description_": "xandria pitch a 1.43
+
+voz mas infantil"
+}
 
 [node name="xandria-attack1" type="AudioStreamPlayer" parent="voice"]
 stream = ExtResource( 7 )

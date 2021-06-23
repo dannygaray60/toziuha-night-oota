@@ -37,6 +37,9 @@ func serialize_persistent_variables(type="quicksave"):
 
 func save_savedata(type="quicksave"):
 	
+	#reestablecer stamina al maximo en cualquier accion de guardar partida
+	Vars.player["sp_now"] = Vars.player["sp_max"]
+	
 	if !dir.dir_exists("user://saves"):
 		dir.make_dir("user://saves")
 	

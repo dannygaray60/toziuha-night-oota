@@ -10,8 +10,8 @@ export var subweapon_axe = false
 export var weapon_lvl2 = false
 export var weapon_lvl3 = false
 export(int,0,10) var potion_probability = 0
-export(int,0,10) var em_1_probability = 0
-export(int,0,10) var em_5_probability = 0
+export(int,0,10) var mp_1_probability = 0
+export(int,0,10) var mp_5_probability = 0
 export(int,0,10) var money_1_probability = 0
 export(int,0,10) var money_10_probability = 0
 export(int,0,10) var money_50_probability = 0
@@ -46,16 +46,16 @@ func _ready():
 			list_items.push_back("potion")
 			i += 1
 			
-	if em_1_probability > 0:
+	if mp_1_probability > 0:
 		i = 0
-		while i < em_1_probability:
-			list_items.push_back("em_1")
+		while i < mp_1_probability:
+			list_items.push_back("mp_1")
 			i += 1
 	
-	if em_5_probability > 0:
+	if mp_5_probability > 0:
 		i = 0
-		while i < em_5_probability:
-			list_items.push_back("em_5")
+		while i < mp_5_probability:
+			list_items.push_back("mp_5")
 			i += 1
 
 	if money_1_probability > 0:

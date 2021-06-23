@@ -56,17 +56,25 @@ func update_stats():
 		
 	$Main/Texture/HPBar.max_value = Vars.player["hp_max"]
 	$Main/Texture/HPBar.value = Vars.player["hp_now"]
-	$Main/Texture/EMBar.max_value = Vars.player["em_max"]
-	$Main/Texture/EMBar.value = Vars.player["em_now"]
+	$Main/Texture/MPBar.max_value = Vars.player["mp_max"]
+	$Main/Texture/MPBar.value = Vars.player["mp_now"]
+	$Main/Texture/SPBar.max_value = Vars.player["sp_max"]
+	$Main/Texture/SPBar.value = Vars.player["sp_now"]
 	$Main/Texture/LblPotionNum.text = str(Vars.player["potion_now"]).pad_zeros(2)
 	$Main/Texture/TextureStatusPanel/LblStatus.text = Vars.player["condition"].capitalize()
 
+	#si la barra de stamina es mayor o igual a 30 se cambia modulacion alpha a 1
+	#indicando que se puede hacer más acciones que requieran stamina
+	if $Main/Texture/SPBar.value >= 30:
+		$Main/Texture/SPBar.modulate.a = 1
+	else:
+		$Main/Texture/SPBar.modulate.a = 0.3
 
 func update_pause_stats():
 	$ControlPause/MarginContainer2/HBoxContainer/LblAtk.text = "ATK: %s" % [str(Vars.player["atk"]).pad_zeros(2)]
 	$ControlPause/MarginContainer2/HBoxContainer/LblDef.text = "DEF: %s" % [str(Vars.player["def"]).pad_zeros(2)]
 	$ControlPause/MarginContainer2/HBoxContainer/LblHP.text = "HP: %s/%s" % [str(Vars.player["hp_now"]).pad_zeros(2),str(Vars.player["hp_max"]).pad_zeros(2)]
-	$ControlPause/MarginContainer2/HBoxContainer/LblEM.text = "EM: %s/%s" % [str(Vars.player["em_now"]).pad_zeros(2),str(Vars.player["em_max"]).pad_zeros(2)]
+	$ControlPause/MarginContainer2/HBoxContainer/LblEM.text = "EM: %s/%s" % [str(Vars.player["mp_now"]).pad_zeros(2),str(Vars.player["mp_max"]).pad_zeros(2)]
 	$ControlPause/MarginContainer2/HBoxContainer/LblCordova.text = "$%s" % [str(Vars.player["money"]).pad_zeros(5)]
 
 	#llaves, cambiar la visibilidad de llaves dependiendo si ya se consiguieron

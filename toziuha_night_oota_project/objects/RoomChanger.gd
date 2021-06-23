@@ -24,7 +24,12 @@ func _on_RoomChanger_body_entered(body):
 	
 	if destiny_filename != "" and body.is_in_group("player") and $TimerDontDetect.get_time_left() == 0:
 		body.can_move = false
+		
 		var go_to = "%s/%s.tscn" % [Vars.level_dir_path,destiny_filename]
+		
+		#si el campo en vez de ser el nombre del archivo es una ruta completa al archivo
+		if destiny_filename.is_abs_path():
+			go_to = destiny_filename
 		
 		if f.file_exists(go_to):
 			#deshabilitar input (no funciona)

@@ -13,7 +13,7 @@ var impact_vfx_instance = null
 var weapon_upgrade = preload("res://objects/items/WeaponUpgrade.tscn")
 var money = preload("res://objects/items/MoneyDrop.tscn")
 var potion = preload("res://objects/items/Potion.tscn")
-var em = preload("res://objects/items/ElementalMaterial.tscn")
+var mp = preload("res://objects/items/ElementalMaterial.tscn")
 
 
 #y subarmas
@@ -116,9 +116,9 @@ func spawn_drop_item(itemname,item_position):
 			item_drop_instance.lvl = int(itemname.lstrip("weapon_lvl"))
 		elif itemname == "potion":
 			item_drop_instance = potion.instance()
-		elif itemname.begins_with("em_"):
-			item_drop_instance = em.instance()
-			item_drop_instance.num = int(itemname.lstrip("em_"))
+		elif itemname.begins_with("mp_"):
+			item_drop_instance = mp.instance()
+			item_drop_instance.num = int(itemname.lstrip("mp_"))
 		elif itemname == "axe":
 			item_drop_instance = subweapon_changer.instance()
 			item_drop_instance.subweapon = "axe"

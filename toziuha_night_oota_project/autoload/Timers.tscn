@@ -25,3 +25,9 @@ one_shot = true
 __meta__ = {
 "_editor_description_": "cantidad de tiempo total para recibir healing"
 }
+
+[node name="TimerRecoverStamina" type="Timer" parent="."]
+wait_time = 0.5
+__meta__ = {
+"_editor_description_": "tiempo para recibir x cantidad de sp"
+}

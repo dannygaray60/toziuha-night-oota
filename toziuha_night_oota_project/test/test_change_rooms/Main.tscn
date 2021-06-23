@@ -20,14 +20,14 @@ tile_data = PoolIntArray( -1048455, 0, 0, -1048454, 0, 3, -1048453, 0, 4, -10484
 
 [node name="DoorL1" parent="." index="4" instance=ExtResource( 5 )]
 position = Vector2( 328, 114.634 )
-destiny_path = "res://test/test_change_rooms/RoomB.tscn"
+destiny_filename = "res://test/test_change_rooms/RoomB.tscn"
 destiny_door = "DoorR1"
 
 [node name="PositionSpawn" parent="DoorL1" index="2"]
 position = Vector2( 32.1566, 33.3452 )
 
 [node name="Xandria" parent="." index="5" instance=ExtResource( 2 )]
-position = Vector2( 408, -8 )
+position = Vector2( 384, 152 )
 limit_left_camera = 344
 limit_bottom_camera = 320
 
