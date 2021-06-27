@@ -405,13 +405,13 @@ margin_bottom = 41.0
 custom_fonts/font = ExtResource( 10 )
 text = "HP: 000/100"
 
-[node name="LblEM" type="Label" parent="ControlPause/MarginContainer2/HBoxContainer"]
+[node name="LblMP" type="Label" parent="ControlPause/MarginContainer2/HBoxContainer"]
 margin_left = 407.0
 margin_top = 15.0
 margin_right = 505.0
 margin_bottom = 41.0
 custom_fonts/font = ExtResource( 10 )
-text = "EM: 00/00"
+text = "MP: 00/00"
 
 [node name="LblCordova" type="Label" parent="ControlPause/MarginContainer2/HBoxContainer"]
 margin_left = 523.0

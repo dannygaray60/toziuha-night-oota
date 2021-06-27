@@ -5,8 +5,9 @@ HP;Health;Salud
 SKILLDOUBLEJUMP;Skill:\nDouble Jump;Habilidad:\nSalto Doble
 SKILLSLIDE;Skill:\nSlide;Habilidad:\nDeslizarse
 SKILLBACKDASH;Skill:\nBackdash;Habilidad:\nRetropropulsión
+SKILLDODGE;Skilll:\nTo dodge;Habilidad:\nEsquivar hacia adelante
 POTIONLIMIT;Potion Limit;Límite de poción
-EMLIMIT;EM Limit;Límite de EM
+MPLIMIT;MP Limit;Límite de MP
 SAVEPOINT;Save Point (from statues);Punto de guardado (desde estatuas)
 QUICKLOAD;Quick Load;Cargado rápido
 NEWGAME;New Game;Nueva Partida
@@ -87,8 +88,8 @@ BAT;Bat;Murciélago
 CURSEDHOUND;Cursed Hound;Sabueso Maldito
 DEMONSKULLHEAD;Demon Skull;Calavera Demoníaca
 BLOODBAT;Blood Bat;Múrciélago Sangriento
-IRONPLUS1;Iron (em) +1;Hierro (em) +1
-IRONPLUS5;Iron (em) +5;Hierro (em) +5
+MPPLUS1;Mana Points +1;Puntos de maná +1
+MPPLUS5;Mana Points +5;Puntos de maná +5
 WEAPONLVL;Weapon Lvl%d;Arma Nivel %d
 BRONZEKY;Bronze Key;Llave de Bronce
 SILVERKY;Silver Key;Llave Plateada
@@ -106,8 +107,7 @@ PHRASE_BACKDASH;Go Backward with «Backdash» button.;Retrocede rápidamente con
 LOCKEDDOOR;Locked Door;Puerta Bloqueada.
 PHRASEATKINCREASED;Your attack power has increased to +%d.;Tu poder de ataque a aumentado a +%d.
 PHRASEDEFINCREASED;Your defense has increased to +%d.;Tu defensa a aumentado a +%d.
-PHRASEHPINCREASED;Your max health points (hp) has increased to +%d.;La máxima capacidad de puntos de salud (hp) a aumentado a +%d.
-PHRASEEMINCREASED;Your max elemental material (em) has increased to +%d.;Tu máxima capacidad de material elemental (em) a aumentado a +%d.
+PHRASEHPINCMPINCREASED;Your mana points limit has increased to +%d.;Tu máxima capacidad de maná a aumentado a +%d.
 PHRASEPOTIONINCREASED;Your max of potions that you can have has increased to %d;El máximo de pociones que puedes llevar a aumentado a %d.
 PHRASEWANTLOADORNEWGAME;Do you want continue from a save file or start new game?;¿Desea continuar desde un punto de guardado o comenzar de nuevo?
 PHRASEABOUTQUICKSAVE;Note: The quick save just create a temporal file. If you lose all health points (HP) the last save point (from statues) will be loaded, otherwise the whole level will be restarted.;Nota: El guardado rápido crea un archivo temporal que se elimina al ser cargado. Al perder toda la salud (HP) solo puede regresar a los puntos de guardado realizados con las estatuas, en caso contrario el nivel entero será reiniciado.

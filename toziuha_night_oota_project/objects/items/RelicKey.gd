@@ -32,7 +32,7 @@ func _on_AreaPick_body_entered(body):
 			Audio.play_sfx("weapon_upgrade")
 			Vars.player["hability_"+item] = true
 		else:
-			Audio.play_sfx("em_drop")
+			Audio.play_sfx("mp_drop")
 			Vars.player[item] = true
 
 		#mostrar habilidad como notificacion rapida

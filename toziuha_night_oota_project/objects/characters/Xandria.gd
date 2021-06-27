@@ -35,6 +35,8 @@ export var low_jump_multiplier = 300
 export var jump_velocity = 280
 #valor de la gravedad
 export var gravity = 700
+#gravedad cuando se está atacando, esta debe ser un poco menor
+var gravity_attack = 500
 #velocidad para desplazamiento
 export var speed = 100
 
@@ -69,6 +71,10 @@ var can_throw = false
 
 #al ser false, el jugador no podrá moverse
 var can_move = true
+
+#si el jugador se está balanceando desde el latigo
+#la gravedad se desactiva
+var whip_swing = false
 
 #limites de camara
 export var limit_left_camera = -10000000
@@ -139,7 +145,7 @@ func _physics_process(delta):
 	anim_current = anim_state_machine.get_current_node()
 	
 	#se cambiará la direccion solo si no está la animacion changedir en reproduccion
-	if direction.x != 0 and state != "backdash" and state != "dodge" and state != "attack" and state != "attack-crouch":
+	if direction.x != 0 and state != "backdash" and state != "dodge" and state != "attack" and state != "attack-crouch" and anim_current != "slide" and anim_current != "throw":
 		change_direction(direction.x)
 		facing = direction.x
 	
@@ -147,8 +153,12 @@ func _physics_process(delta):
 		_get_input()
 	
 	#gravedad
-	velocity.y += gravity*delta
-	
+	if !whip_swing and anim_current in ["attack-down","attack-diag-down"]:
+		velocity.y += gravity_attack*delta
+	elif !whip_swing:
+		velocity.y += gravity*delta
+	else:
+		velocity.y = 0
 
 	#movimiento automatico en backdash
 	if state == "backdash" and is_on_floor():
@@ -257,6 +267,10 @@ func _get_input():
 		$TimerBtnAttackPress.start()
 		_attack()
 		
+	#accion para lanzar subarma
+	if Input.is_action_just_pressed("ui_focus_next") and state != "attack-crouch" and state != "crouch":
+		_throw_subweapon()
+		
 	#accion para usar un item curativo
 	if Input.is_action_pressed("ui_down") and Input.is_action_just_pressed("ui_focus_prev"):
 		_use_health_item()
@@ -299,7 +313,7 @@ func _get_input():
 
 func _move():
 	#si no hay pulsacion no se moverá o en los siguientes estados
-	if direction.x == 0 or state in ["crouch","slide"] or (is_on_floor() and state in ["attack","attack-crouch"]):
+	if direction.x == 0 or state in ["crouch","slide"] or (is_on_floor() and state in ["attack","attack-crouch"] or (anim_current=="throw" and is_on_floor())):
 		#evitar deslizamiento sobre rampas
 		if $Sprite/RayCastRampFront.is_colliding() or $Sprite/RayCastRampBack.is_colliding():
 			#para evitar que backdash se trave en rampas
@@ -394,18 +408,26 @@ func _jump():
 func _attack():
 	if state != "attack" and state != "attack-crouch" and state != "slide" and $TimerAttack.get_time_left() == 0:
 		
-		if ($Sprite/RayCastUp.is_colliding() or Input.is_action_pressed("ui_down")) and state == "crouch" and anim_current in ["crouch","pos-slide"]:
+		if is_on_floor() and (Input.is_action_pressed("ui_down") or state == "crouch"):
 			change_state("attack-crouch")
 		elif state != "crouch":
 			change_state("attack")
 
-		$TimerAttack.start()
+		$TimerAttack.start(0.56) #duracion de la animacion
 		weapon_attack()
+
+func _throw_subweapon():
+	#si solo se mantiene presionado arriba y no las otras direcciones quiere decir que se lanzará subarma por lo que se oculta el latigo
+	#ya que se reutiliza la animación para lanzar subarmas
+	#siempre y cuando se tenga subarma, y maná suficiente para tirarlo
+	if anim_current != "throw" and Vars.player["subweapon"] != "none" and Vars.player["mp_now"] >= Vars.subweapons[Vars.player["subweapon"]]["mp_use"]:
+		can_throw = true #usado para throw_subweapon que se llama desde animationplayer
+		change_state("throw")
 
 #reproducir sonido de arma y además activar o desactivar las colisiones necesarias
 func weapon_attack():
 	
-	#puede tirar subarma
+	#cancelar tirar subarma
 	can_throw = false
 	
 	#randomizar cual voz usar para el ataque
@@ -414,22 +436,11 @@ func weapon_attack():
 	var selected_voice = randi() % 6
 	if voices[selected_voice] != null:
 		Audio.play_voice(voices[selected_voice])
-	
-	#si solo se mantiene presionado arriba y no las otras direcciones quiere decir que se lanzará subarma por lo que se oculta el latigo
-	#ya que se reutiliza la animación para lanzar subarmas
-	#siempre y cuando se tenga subarma, y maná suficiente para tirarlo
-	if Input.is_action_pressed("ui_up") and !Input.is_action_pressed("ui_left") and !Input.is_action_pressed("ui_right") and Vars.player["subweapon"] != "none" and Vars.player["mp_now"] >= Vars.subweapons[Vars.player["subweapon"]]["mp_use"]:
-		#descontar uso de subarma al maná
-		Vars.player["mp_now"] = Functions.get_value(Vars.player["mp_now"],"-",Vars.subweapons[Vars.player["subweapon"]]["mp_use"])
-		can_throw = true #usado para throw_subweapon que se llama desde animationplayer
-		emit_signal("stats_changed")
-		#ocultar colision y latigo
-		weapon_enable_collision()
-	else:
-		weapon_enable_collision(2)
-	
-		weapon_sound_woosh()
-		Audio.play_sfx("chains")
+
+	weapon_enable_collision(2)
+
+	weapon_sound_woosh()
+	Audio.play_sfx("chains")
 
 #sonido woosh del latigo
 func weapon_sound_woosh():
@@ -443,16 +454,22 @@ func weapon_enable_collision(lvl=0):
 	get_node("Sprite/Weapon/AreaLvl2").visible = false
 	#si no se especifica se oculta el sprite del arma y se deja desactivada todas las colisiones con el bloque de codigo anterior
 	if lvl == 0:
-		$Sprite/Weapon/StandChainWhip.visible = false
+		$Sprite/Weapon/ChainWhip.visible = false
 	else:
-		$Sprite/Weapon/StandChainWhip.visible = true
+		$Sprite/Weapon/ChainWhip.visible = true
 		get_node("Sprite/Weapon/AreaLvl"+str(lvl)).monitoring = true
 		get_node("Sprite/Weapon/AreaLvl"+str(lvl)).visible = true
+		
+#activar o desactivar area de latigo segun el nivel
+#para usarse en attack-circle
+#gasta estamina
+func whip_enabled_collision(enable_col=true):
+	get_node("Sprite/Weapon/AreaLvl2").monitoring = enable_col
 
 #quitar frames y desactivar colisiones del arma
 func weapon_cancel():
 	weapon_enable_collision()
-	$Sprite/Weapon/StandChainWhip.frame = 0
+	$Sprite/Weapon/ChainWhip.frame = 0
 
 
 func decrease_stamina(val=30):
@@ -467,8 +484,8 @@ func decrease_stamina(val=30):
 func _check_states():
 	
 	#corregir animacion de latigo de cadenas si no se está atacando
-	if !anim_current.begins_with("attack") and $Sprite/Weapon/StandChainWhip.frame != 0:
-		$Sprite/Weapon/StandChainWhip.frame = 0
+	if !anim_current.begins_with("attack") and $Sprite/Weapon/ChainWhip.frame != 0:
+		$Sprite/Weapon/ChainWhip.frame = 0
 	
 	#al estar heridos en el aire no se podrá cambiar a otro estado automaticamente
 	if (state == "hurt" and !is_on_floor()) or state == "dead":
@@ -486,7 +503,7 @@ func _check_states():
 		if !is_on_floor() and state == "slide":
 			change_state("fall")
 		#cancelar animacion ataque hacia abajo estando en el suelo
-		if is_on_floor() and anim_current == "attack-down":
+		if is_on_floor() and anim_current in ["attack-down","attack-diag-down"]:
 			change_state("idle")
 			anim_state_machine.start("idle")
 		#arreglar animacion de slide al hacerlo muy de seguido
@@ -666,11 +683,18 @@ func change_state(new_state):
 	
 	if state == "jump" and num_jumps > 0:
 		pass
-	elif state in ["backdash","dodge","attack","hurt","dead"]:
-		if state == "attack" and Input.is_action_pressed("ui_up") and (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):
+	elif state in ["throw","backdash","dodge","attack","attack-crouch","hurt","dead"]:
+		if state == "attack" and Input.is_action_pressed("ui_up") and (!Input.is_action_pressed("ui_left") and !Input.is_action_pressed("ui_right")):
+			anim_state_machine.start("attack-up")
+		elif state == "attack" and Input.is_action_pressed("ui_up") and (Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right")):
 			anim_state_machine.start("attack-diag")
-		elif state == "attack" and !is_on_floor() and Input.is_action_pressed("ui_down"):
+		elif state == "attack" and !is_on_floor() and Input.is_action_pressed("ui_down") and !Input.is_action_pressed("ui_left") and !Input.is_action_pressed("ui_right"):
 			anim_state_machine.start("attack-down")
+		elif state == "attack" and !is_on_floor() and Input.is_action_pressed("ui_down") and ( Input.is_action_pressed("ui_left") or Input.is_action_pressed("ui_right") ):
+			anim_state_machine.start("attack-diag-down")
+		elif state == "throw" and is_on_floor():
+			state = "attack"
+			anim_state_machine.start("throw")
 		else:
 			anim_state_machine.start(new_state)
 	else:
@@ -689,27 +713,19 @@ func set_body_collision(pose="stand"):
 	if pose == "stand":
 		$Sprite/RayCastUp.enabled = false
 		$AnimationPlayerCollision.play("stand")
-#		$CollisionStand.disabled = false
-#		$CollisionCrouch.disabled = true
-		#posicion del arma
-		#$Sprite/XandriaWeapon.position = Vector2(21.034,8)
 	elif pose == "crouch":
 		$Sprite/RayCastUp.enabled = true
 		$AnimationPlayerCollision.play("crouch")
-		#posicion del arma
-		#$Sprite/XandriaWeapon.position = Vector2(13.094,16.004)
 	elif pose == "slide":
 		$Sprite/RayCastUp.enabled = true
 		$AnimationPlayerCollision.play("slide")
-		#posicion del arma
-		#$Sprite/XandriaWeapon.position = Vector2(13.094,16.004)
 
 func change_direction(new_dir):
-	
 	#bajo estas condiciones no se permite cambiar la direccion
 	if (
 		facing == new_dir 
 		or state in ["crouch","backdash","dodge","slide","attack","attack-crouch"]
+		or anim_current == "throw"
 	):
 		return	
 	#si ya estaba animacion de cambiardireccion entonces se reproduce desde inicio
@@ -763,7 +779,7 @@ func _on_TimerAttack_timeout():
 	if state != "hurt" or state != "dead":
 		if state in ["attack","attack-crouch"]:
 			#activar ataque circular (usando timer para medir tiempo desde que se mantuvo presionado
-			if state == "attack" and Input.is_action_pressed("ui_cancel") and $TimerBtnAttackPress.get_time_left() <= 0.3 and $Sprite/Weapon/StandChainWhip.visible:
+			if state == "attack" and Input.is_action_pressed("ui_cancel") and $TimerBtnAttackPress.get_time_left() <= 0.4 and $Sprite/Weapon/ChainWhip.visible:
 				#print(str($TimerBtnAttackPress.get_time_left()))
 				anim_state_machine.start("attack-circle")
 			#animacion de reposo luego de atacar agachado y mantenerse agachado
@@ -785,6 +801,10 @@ func _on_TimerAttack_timeout():
 #nota: codigo relacionado en el final de change_state()
 func throw_subweapon():
 	if can_throw :
+		$TimerAttack.start(0.56)
+		#descontar uso de subarma al maná
+		Vars.player["mp_now"] = Functions.get_value(Vars.player["mp_now"],"-",Vars.subweapons[Vars.player["subweapon"]]["mp_use"])
+		emit_signal("stats_changed")
 		var lvl_base = Functions.get_main_level_scene()
 		var subweapon_instance = null
 		match Vars.player["subweapon"]:
@@ -873,7 +893,6 @@ func _on_WeaponArea_body_entered(body_area):
 		body_area.destroy()
 	#aplicar daño a enemigos
 	if body_area.is_in_group("enemies"):
-		#dependiendo del porcentaje de stamina se dará ese porcentaje en bonus para el ataque
 		var total_atk = Vars.player["atk"]
 		#añadir atk dependiendo del nivel del arma
 		match Vars.player["weapon_lvl"]:
@@ -884,7 +903,10 @@ func _on_WeaponArea_body_entered(body_area):
 		#daño a la mitad estando envenenado
 		if Vars.player["condition"] == "poison":
 			total_atk = total_atk / 2
+		#si se ataca en circulo el ataque será solo un minimo
+		if anim_current == "attack-circle" and total_atk > 5:
+			total_atk = 5#total_atk / 3
 		#camera shake
 		get_node("PlayerCamera").add_trauma(0.35,true)
 		#send hurt data to enemy
-		body_area.hurt(total_atk,global_position)
+		body_area.hurt(total_atk,$Sprite/Weapon/PosImpact.global_position)

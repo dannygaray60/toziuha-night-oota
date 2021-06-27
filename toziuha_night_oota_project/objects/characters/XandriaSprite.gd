@@ -22,7 +22,7 @@ func _process(_delta):
 		material.set_shader_param("trail_size",9)#7
 		material.set_shader_param("frame_coords",frame_coords)
 		material.set_shader_param("velocity",Vector2(vel_x,0))
-	elif get_parent().anim_current in ["slide"] and vel_x != 0:
+	elif get_parent().anim_current in ["slide","dodge"] and vel_x != 0:
 		material.set_shader_param("alpha_trail",0)
 		material.set_shader_param("velocity_max",90)
 		material.set_shader_param("trail_size",2)

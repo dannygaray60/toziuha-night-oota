@@ -13,7 +13,7 @@ var impact_vfx_instance = null
 var weapon_upgrade = preload("res://objects/items/WeaponUpgrade.tscn")
 var money = preload("res://objects/items/MoneyDrop.tscn")
 var potion = preload("res://objects/items/Potion.tscn")
-var mp = preload("res://objects/items/ElementalMaterial.tscn")
+var mp = preload("res://objects/items/Mana.tscn")
 
 
 #y subarmas

@@ -126,44 +126,44 @@ margin_bottom = 128.0
 text = "Gameboy Classic"
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 60, 32 )
+position = Vector2( 63.3371, 41.3439 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-hframes = 16
-vframes = 7
+hframes = 15
+vframes = 12
 frame = 1
 __meta__ = {
 "_editor_description_": "z index : 0"
 }
 
 [node name="Sprite2" type="Sprite" parent="."]
-position = Vector2( 132, 32 )
+position = Vector2( 135.337, 41.3439 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-hframes = 16
-vframes = 7
+hframes = 15
+vframes = 12
 frame = 17
 __meta__ = {
 "_editor_description_": "z index : 0"
 }
 
 [node name="Sprite3" type="Sprite" parent="."]
-position = Vector2( 60, 136 )
+position = Vector2( 63.3371, 145.344 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-hframes = 16
-vframes = 7
+hframes = 15
+vframes = 12
 frame = 58
 __meta__ = {
 "_editor_description_": "z index : 0"
 }
 
 [node name="Sprite4" type="Sprite" parent="."]
-position = Vector2( 132, 110 )
+position = Vector2( 135.337, 119.344 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 6 )
-hframes = 16
-vframes = 7
+hframes = 15
+vframes = 12
 frame = 74
 __meta__ = {
 "_editor_description_": "z index : 0"

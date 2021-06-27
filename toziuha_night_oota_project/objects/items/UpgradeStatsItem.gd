@@ -49,7 +49,7 @@ func _on_AreaPick_body_entered(body):
 				"hp":
 					body.show_quick_notif(tr("HP")+" +%d"%[quantity])
 				"mp":
-					body.show_quick_notif(tr("EMLIMIT")+" +%d"%[quantity])
+					body.show_quick_notif(tr("MPLIMIT")+" +%d"%[quantity])
 				"potion":
 					body.show_quick_notif(tr("POTIONLIMIT")+" +%d"%[quantity])
 				

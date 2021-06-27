@@ -35,6 +35,8 @@ func inverse_facing(enemynode=null,sprite=null):
 		
 #------- aplicar daño a enemigo --------
 func apply_damage(enemynode=null, damage=0, weapon_position=Vector2(0,0), def=0):
+		#damage a entero por si acaso
+		damage = int(damage)
 		if def == 0:
 			def = Vars.enemy[enemynode.id]["def"]
 		#damage calcule

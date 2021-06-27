@@ -59,7 +59,7 @@ extents = Vector2( 64, 24 )
 "enemies",
 ]]
 collision_layer = 4
-collision_mask = 29
+collision_mask = 25
 script = ExtResource( 2 )
 
 [node name="TimerHurt" type="Timer" parent="."]

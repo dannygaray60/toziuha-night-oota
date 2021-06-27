@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/sprites/iron_em.png" type="Texture" id=1]
-[ext_resource path="res://objects/items/ElementalMaterial.gd" type="Script" id=2]
+[ext_resource path="res://objects/items/Mana.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
@@ -9,7 +9,7 @@ extents = Vector2( 8, 8 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16, 10.5843 )
 
-[node name="ElementalMaterial" type="RigidBody2D"]
+[node name="Mana" type="RigidBody2D"]
 collision_layer = 64
 collision_mask = 8
 mode = 2

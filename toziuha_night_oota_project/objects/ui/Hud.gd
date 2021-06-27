@@ -74,7 +74,7 @@ func update_pause_stats():
 	$ControlPause/MarginContainer2/HBoxContainer/LblAtk.text = "ATK: %s" % [str(Vars.player["atk"]).pad_zeros(2)]
 	$ControlPause/MarginContainer2/HBoxContainer/LblDef.text = "DEF: %s" % [str(Vars.player["def"]).pad_zeros(2)]
 	$ControlPause/MarginContainer2/HBoxContainer/LblHP.text = "HP: %s/%s" % [str(Vars.player["hp_now"]).pad_zeros(2),str(Vars.player["hp_max"]).pad_zeros(2)]
-	$ControlPause/MarginContainer2/HBoxContainer/LblEM.text = "EM: %s/%s" % [str(Vars.player["mp_now"]).pad_zeros(2),str(Vars.player["mp_max"]).pad_zeros(2)]
+	$ControlPause/MarginContainer2/HBoxContainer/LblMP.text = "MP: %s/%s" % [str(Vars.player["mp_now"]).pad_zeros(2),str(Vars.player["mp_max"]).pad_zeros(2)]
 	$ControlPause/MarginContainer2/HBoxContainer/LblCordova.text = "$%s" % [str(Vars.player["money"]).pad_zeros(5)]
 
 	#llaves, cambiar la visibilidad de llaves dependiendo si ya se consiguieron

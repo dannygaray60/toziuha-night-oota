@@ -17,11 +17,11 @@ func _on_AreaPick_body_entered(body):
 			pass
 		else:
 			if num == 1:
-				Functions.show_hud_notif(tr("IRONPLUS1"))
+				Functions.show_hud_notif(tr("MPPLUS1"))
 				Vars.player["mp_now"] += 1
 				Audio.play_sfx("mp_drop")
 			else:
-				Functions.show_hud_notif(tr("IRONPLUS5"))
+				Functions.show_hud_notif(tr("MPPLUS5"))
 				Vars.player["mp_now"] += 5
 				Audio.play_sfx("mp_drop2")
 				#quitar excedente
