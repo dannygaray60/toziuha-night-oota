@@ -1,4 +1,6 @@
 # Toziuha Night - Order of the Alchemists
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/X8X82YWDI)
+
 Free Metroidvania inspired on Castlevania Order of Ecclesia
 
 #Note:
