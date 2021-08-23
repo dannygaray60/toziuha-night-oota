@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=2]
+[gd_scene load_steps=80 format=2]
 
 [ext_resource path="res://assets/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Audio.gd" type="Script" id=2]
@@ -55,6 +55,30 @@
 [ext_resource path="res://assets/sfx/box_glass_items_drop_smash.wav" type="AudioStream" id=53]
 [ext_resource path="res://assets/sfx/smash_wood_pieces_inverse.wav" type="AudioStream" id=54]
 [ext_resource path="res://assets/sfx/spike_slash.wav" type="AudioStream" id=55]
+[ext_resource path="res://assets/sfx/charging_elemental_circuit.ogg" type="AudioStream" id=56]
+[ext_resource path="res://assets/sfx/circuit_spell_shoot.ogg" type="AudioStream" id=58]
+[ext_resource path="res://assets/sfx/clean_explosion2.ogg" type="AudioStream" id=59]
+[ext_resource path="res://assets/sfx/water_fall.ogg" type="AudioStream" id=60]
+[ext_resource path="res://assets/sfx/clean_explosion1.ogg" type="AudioStream" id=61]
+[ext_resource path="res://assets/sfx/water_pouring.wav" type="AudioStream" id=62]
+[ext_resource path="res://assets/sfx/electric_zap1.wav" type="AudioStream" id=63]
+[ext_resource path="res://assets/sfx/electric_shock1.wav" type="AudioStream" id=64]
+[ext_resource path="res://assets/voice/female1_damage_5.wav" type="AudioStream" id=65]
+[ext_resource path="res://assets/voice/female1_damage_4.wav" type="AudioStream" id=66]
+[ext_resource path="res://assets/voice/female1_damage_1.wav" type="AudioStream" id=67]
+[ext_resource path="res://assets/voice/female1_damage_2.wav" type="AudioStream" id=68]
+[ext_resource path="res://assets/voice/female1_damage_3.wav" type="AudioStream" id=69]
+[ext_resource path="res://assets/voice/female1_miscellaneous_12.wav" type="AudioStream" id=70]
+[ext_resource path="res://assets/bgm/prepare_for_war.ogg" type="AudioStream" id=71]
+[ext_resource path="res://assets/bgm/the_beginning_of_darkness.ogg" type="AudioStream" id=72]
+[ext_resource path="res://assets/bgm/caverns_theme.ogg" type="AudioStream" id=73]
+[ext_resource path="res://assets/bgm/cathedral_theme.ogg" type="AudioStream" id=74]
+[ext_resource path="res://assets/sfx/ambient_forest_wind.ogg" type="AudioStream" id=75]
+[ext_resource path="res://assets/bgm/fatal_answer.ogg" type="AudioStream" id=76]
+[ext_resource path="res://assets/bgm/xandria's_theme.ogg" type="AudioStream" id=77]
+[ext_resource path="res://assets/sfx/fall_explosion.wav" type="AudioStream" id=78]
+[ext_resource path="res://assets/bgm/deep_resonance.ogg" type="AudioStream" id=79]
+[ext_resource path="res://assets/sfx/precharge_elemental_circuit.ogg" type="AudioStream" id=80]
 
 [node name="Audio" type="Node"]
 pause_mode = 2
@@ -62,16 +86,52 @@ script = ExtResource( 2 )
 
 [node name="sfx" type="Node" parent="."]
 
+[node name="elemental_circuit_absorbed" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 19 )
+volume_db = -2.0
+pitch_scale = 0.7
+bus = "Effects"
+
+[node name="precharge_elemental_circuit" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 80 )
+volume_db = 11.0
+bus = "Effects"
+
+[node name="precharge_elemental_circuit_eva" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 80 )
+volume_db = 12.0
+pitch_scale = 0.8
+bus = "Effects"
+
+[node name="elemental_circuit_shoot" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 58 )
+volume_db = 2.0
+bus = "Effects"
+
+[node name="eva_proyectile_shoot" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 58 )
+volume_db = 3.5
+pitch_scale = 1.5
+bus = "Effects"
+
+[node name="charging_elemental_circuit2" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 56 )
+volume_db = 1.0
+bus = "Effects"
+
 [node name="level_end" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 48 )
+volume_db = 4.0
 bus = "Effects"
 
 [node name="boss_defeated_jingle" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 49 )
+volume_db = 8.0
 bus = "Effects"
 
 [node name="boss_orb_generating" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 47 )
+volume_db = 2.0
 pitch_scale = 0.75
 bus = "Effects"
 
@@ -81,12 +141,13 @@ bus = "Effects"
 
 [node name="boss_orb_generated2" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 45 )
+volume_db = 2.0
 pitch_scale = 0.49
 bus = "Effects"
 
 [node name="boss_orb_heartbeat" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 46 )
-volume_db = 8.0
+volume_db = 15.0
 bus = "Effects"
 
 [node name="glass_break" type="AudioStreamPlayer" parent="sfx"]
@@ -96,17 +157,18 @@ bus = "Effects"
 
 [node name="cinematic_hit_reverse" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 42 )
+volume_db = 5.0
 bus = "Effects"
 
 [node name="door_opening" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 39 )
-volume_db = 6.0
+volume_db = 9.0
 pitch_scale = 0.53
 bus = "Effects"
 
 [node name="door_closed" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 43 )
-volume_db = 6.0
+volume_db = 10.0
 pitch_scale = 0.53
 bus = "Effects"
 
@@ -117,20 +179,23 @@ bus = "Effects"
 
 [node name="potion_use" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 19 )
+volume_db = 3.0
 bus = "Effects"
 
 [node name="item_pick1" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 18 )
+volume_db = 3.0
 pitch_scale = 1.3
 bus = "Effects"
 
 [node name="item_pick2" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 18 )
+volume_db = 4.0
 bus = "Effects"
 
 [node name="torch_destroyed" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 20 )
-volume_db = 3.714
+volume_db = 5.0
 pitch_scale = 1.6
 bus = "Effects"
 
@@ -142,13 +207,13 @@ bus = "Effects"
 
 [node name="mp_drop" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 35 )
-volume_db = 10.0
+volume_db = 6.0
 pitch_scale = 1.5
 bus = "Effects"
 
 [node name="mp_drop2" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 35 )
-volume_db = 7.0
+volume_db = 5.0
 bus = "Effects"
 
 [node name="coin" type="AudioStreamPlayer" parent="sfx"]
@@ -195,6 +260,12 @@ bus = "Effects"
 stream = ExtResource( 6 )
 bus = "Effects"
 
+[node name="chains2" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 6 )
+volume_db = -10.0
+pitch_scale = 1.33
+bus = "Effects"
+
 [node name="hit-player" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 14 )
 volume_db = 2.0
@@ -223,6 +294,22 @@ volume_db = 3.0
 pitch_scale = 0.7
 bus = "Effects"
 
+[node name="clean_explosion1" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 61 )
+volume_db = 3.095
+pitch_scale = 0.65
+bus = "Effects"
+
+[node name="clean_explosion2" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 59 )
+volume_db = 3.095
+bus = "Effects"
+
+[node name="clean_explosion3" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 78 )
+pitch_scale = 0.65
+bus = "Effects"
+
 [node name="spike_slash" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 55 )
 volume_db = 4.0
@@ -237,6 +324,8 @@ bus = "Effects"
 
 [node name="enemy_die1" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 17 )
+volume_db = 6.0
+pitch_scale = 0.72
 bus = "Effects"
 
 [node name="zombie_roar" type="AudioStreamPlayer" parent="sfx"]
@@ -246,6 +335,12 @@ bus = "Effects"
 
 [node name="zombie_roar2" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 33 )
+bus = "Effects"
+
+[node name="zombie_roar3" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 33 )
+volume_db = 8.0
+pitch_scale = 0.69
 bus = "Effects"
 
 [node name="crazy_bat_death" type="AudioStreamPlayer" parent="sfx"]
@@ -298,6 +393,22 @@ volume_db = 3.714
 pitch_scale = 2.84
 bus = "Effects"
 
+[node name="water_pouring" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 62 )
+bus = "Effects"
+
+[node name="water_fall" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 60 )
+bus = "Effects"
+
+[node name="electric_shock" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 64 )
+bus = "Effects"
+
+[node name="electric_zap" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 63 )
+bus = "Effects"
+
 [node name="btn_main_menu" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 23 )
 volume_db = 8.0
@@ -337,27 +448,84 @@ bus = "Effects"
 
 [node name="music" type="Node" parent="."]
 
+[node name="ambient_forest_wind" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 75 )
+volume_db = 9.0
+bus = "Effects"
+
+[node name="xandria\'s_theme" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 77 )
+volume_db = 3.0
+bus = "Music"
+__meta__ = {
+"_editor_description_": "4"
+}
+
 [node name="nameless_symphony" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 4 )
-volume_db = 2.5
+volume_db = 5.0
 bus = "Music"
 
-[node name="war_prelude" type="AudioStreamPlayer" parent="music"]
-stream = ExtResource( 51 )
+[node name="the_beginning_of_darkness" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 72 )
+volume_db = 8.0
+bus = "Music"
+__meta__ = {
+"_editor_description_": "1"
+}
+
+[node name="cathedral_theme" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 74 )
+volume_db = 4.0
+bus = "Music"
+__meta__ = {
+"_editor_description_": "4"
+}
+
+[node name="fatal_answer" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 76 )
+volume_db = 4.0
+bus = "Music"
+__meta__ = {
+"_editor_description_": "4"
+}
+
+[node name="caverns_theme" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 73 )
+volume_db = 6.0
 bus = "Music"
 
-[node name="cave_theme" type="AudioStreamPlayer" parent="music"]
-stream = ExtResource( 21 )
+[node name="prepare_for_war" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 71 )
+volume_db = 9.0
 bus = "Music"
+
+[node name="deep_resonance" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 79 )
+volume_db = 9.0
+bus = "Music"
+__meta__ = {
+"_editor_description_": "4"
+}
 
 [node name="rondo_of_darkness" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 22 )
 volume_db = -2.0
 bus = "Music"
 
+[node name="war_prelude" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 51 )
+volume_db = 3.0
+bus = "Music"
+
+[node name="cave_theme" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 21 )
+volume_db = 6.0
+bus = "Music"
+
 [node name="boss_theme" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 28 )
-volume_db = 4.0
+volume_db = 12.0
 bus = "Music"
 
 [node name="voice" type="Node" parent="."]
@@ -400,3 +568,40 @@ bus = "Voice"
 [node name="xandria-death" type="AudioStreamPlayer" parent="voice"]
 stream = ExtResource( 15 )
 bus = "Voice"
+
+[node name="eva-damage1" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 67 )
+pitch_scale = 0.75
+bus = "Voice"
+
+[node name="eva-damage2" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 68 )
+pitch_scale = 0.75
+bus = "Voice"
+
+[node name="eva-damage3" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 69 )
+pitch_scale = 0.75
+bus = "Voice"
+
+[node name="eva-damage4" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 66 )
+pitch_scale = 0.75
+bus = "Voice"
+
+[node name="eva-damage5" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 65 )
+pitch_scale = 0.75
+bus = "Voice"
+
+[node name="eva-damage6" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 65 )
+pitch_scale = 0.75
+bus = "Voice"
+
+[node name="eva-laugh" type="AudioStreamPlayer" parent="voice"]
+stream = ExtResource( 70 )
+pitch_scale = 0.75
+bus = "Voice"
+
+[node name="Tween" type="Tween" parent="."]

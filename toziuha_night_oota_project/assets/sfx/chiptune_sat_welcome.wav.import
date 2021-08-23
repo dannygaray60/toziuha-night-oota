@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/chiptune_sat_welcome.wav-784e2ca5b5bfa07e0dc1434dfc1deec6.sample"
+
+[deps]
+
+source_file="res://assets/sfx/chiptune_sat_welcome.wav"
+dest_files=[ "res://.import/chiptune_sat_welcome.wav-784e2ca5b5bfa07e0dc1434dfc1deec6.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=2]
@@ -8,6 +8,11 @@
 [ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://assets/sprites/main_panel.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/xandria_chain_whip_lvl2.png" type="Texture" id=9]
+[ext_resource path="res://assets/sprites/xandria.png" type="Texture" id=10]
+[ext_resource path="res://fonts_tres/DamageIndicatorPlayer.tres" type="DynamicFont" id=11]
+[ext_resource path="res://assets/sprites/subweapons_xandria.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/chain_swing_point.png" type="Texture" id=13]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 8 )
@@ -24,6 +29,119 @@ extents = Vector2( 90, 30 )
 
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 350, 200 )
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+uniform vec2 frame_coords = vec2(0.0,0.0);
+uniform vec2 nb_frames = vec2(0.0,0.0);
+uniform vec2 velocity = vec2(0.0,0.0);
+uniform float velocity_max = 300.0;
+uniform float trail_size = 6.0;
+uniform float alpha_start = 0.8;
+uniform float alpha_tail = 0.2;
+uniform float alpha_factor = 1.2;
+uniform float noise_margin = 0.68;
+uniform sampler2D noise;
+
+
+vec2 get_mid_uv(vec2 coords, vec2 px_size) {
+	// récupérer les UV des milieux de ces px en partant du dernier
+	float px_mid_x = 1.0 - px_size.x / 2.0;
+	float px_mid_y = 1.0 - px_size.y / 2.0;
+	if (coords.x < 1.0)
+		px_mid_x = px_size.x * ( floor(coords.x / px_size.x) + 1.0 / 2.0 );
+	if (coords.y < 1.0)
+		px_mid_y = px_size.y * ( floor(coords.y / px_size.y) + 1.0 / 2.0 ); 
+	return vec2(px_mid_x, px_mid_y);
+}
+
+void fragment() {
+	COLOR = texture(TEXTURE,UV);
+
+	float UV_X = (UV.x * nb_frames.x - frame_coords.x);
+	float UV_Y = (UV.y * nb_frames.y - frame_coords.y);
+	vec2 uv = vec2(UV_X, UV_Y);
+	
+	// Limite velocity à trail_size pixels max 
+	vec2 v_dir = normalize(velocity);
+	float v_length = length(velocity) * trail_size / velocity_max;
+	
+	float alpha_step = (alpha_start - alpha_tail) / trail_size;
+	float alpha = alpha_tail;
+	while (v_length > 0.0) {
+		vec2 velo = v_length * v_dir * TEXTURE_PIXEL_SIZE;
+		vec2 px_mid_uv = get_mid_uv(UV, TEXTURE_PIXEL_SIZE) + velo;
+		float noiseValue = texture(noise, px_mid_uv).r;
+		vec4 new_color = texture(TEXTURE, px_mid_uv);
+		if (noiseValue > noise_margin && new_color.a > 0.0) {
+			if (COLOR.a == 0.0) {
+				COLOR = new_color;
+				COLOR.a = new_color.a * alpha;
+			}
+			break;
+		}
+		v_length -= 0.5;
+		alpha *= alpha_factor;
+		alpha = min(alpha,alpha_start);
+	}
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+shader_param/frame_coords = Vector2( 0, 0 )
+shader_param/nb_frames = Vector2( 0, 0 )
+shader_param/velocity = Vector2( 0, 0 )
+shader_param/velocity_max = 100.0
+shader_param/trail_size = 7.0
+shader_param/alpha_start = 0.8
+shader_param/alpha_tail = 0.5
+shader_param/alpha_factor = 1.2
+shader_param/noise_margin = 0.68
+
+[sub_resource type="Animation" id=7]
+resource_name = "fadein"
+tracks/0/type = "value"
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "screen_shake"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Control:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 20, 0 ), Vector2( -20, 0 ), Vector2( 20, 0 ), Vector2( -20, 0 ), Vector2( 0, 0 ) ]
+}
 
 [node name="DialogBox" type="CanvasLayer"]
 pause_mode = 2
@@ -42,7 +160,19 @@ __meta__ = {
 [node name="Black" type="ColorRect" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -80.0
+margin_right = 141.0
 color = Color( 0, 0, 0, 0.658824 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+expand = true
+stretch_mode = 7
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -103,7 +233,7 @@ custom_styles/panel = SubResource( 1 )
 margin_top = 4.00473
 margin_right = 643.0
 margin_bottom = 101.885
-custom_constants/margin_right = 25
+custom_constants/margin_right = 27
 custom_constants/margin_top = 5
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 5
@@ -111,12 +241,12 @@ custom_constants/margin_bottom = 5
 [node name="VBx" type="VBoxContainer" parent="Control/Margin/Panel/Margin"]
 margin_left = 10.0
 margin_top = 5.0
-margin_right = 618.0
+margin_right = 616.0
 margin_bottom = 92.0
 alignment = 1
 
 [node name="LblTitle" type="Label" parent="Control/Margin/Panel/Margin/VBx"]
-margin_right = 608.0
+margin_right = 606.0
 margin_bottom = 26.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -126,7 +256,7 @@ clip_text = true
 
 [node name="LblMsg" type="Label" parent="Control/Margin/Panel/Margin/VBx"]
 margin_top = 30.0
-margin_right = 608.0
+margin_right = 606.0
 margin_bottom = 87.0
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 2 )
@@ -146,7 +276,7 @@ animated = true
 action = "ui_accept"
 
 [node name="HBxHelp" type="HBoxContainer" parent="Control"]
-modulate = Color( 1, 1, 1, 0.756863 )
+modulate = Color( 1, 1, 1, 0.282353 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -92.0
@@ -187,11 +317,1005 @@ shape = SubResource( 3 )
 action = "ui_select"
 
 [node name="TouchScreenButton2" type="TouchScreenButton" parent="Control"]
+modulate = Color( 1, 1, 1, 0 )
 position = Vector2( -8, 56 )
 shape = SubResource( 4 )
 action = "ui_accept"
 
+[node name="CtrlTutos" type="Control" parent="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = -128.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="Control/CtrlTutos"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_bottom = 2.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.713726 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tutos" type="Node" parent="Control/CtrlTutos"]
+
+[node name="FirstMoves" type="Node2D" parent="Control/CtrlTutos/Tutos"]
+visible = false
+
+[node name="run" type="Sprite" parent="Control/CtrlTutos/Tutos/FirstMoves"]
+material = SubResource( 6 )
+position = Vector2( 111, 128 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 18
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="ButtonKeyGamepadIcon" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
+margin_left = 212.0
+margin_top = 71.0
+margin_right = 228.0
+margin_bottom = 87.0
+rect_scale = Vector2( 2, 2 )
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/FirstMoves/ButtonKeyGamepadIcon"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "ATTACK"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon6" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
+margin_left = 282.0
+margin_top = 218.0
+margin_right = 298.0
+margin_bottom = 234.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_accept"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/FirstMoves/ButtonKeyGamepadIcon6"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "ACCEPT"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon7" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
+margin_left = 101.0
+margin_top = 218.0
+margin_right = 117.0
+margin_bottom = 234.0
+rect_scale = Vector2( 2, 2 )
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/FirstMoves/ButtonKeyGamepadIcon7"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "CANCEL"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon8" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
+margin_left = 461.0
+margin_top = 218.0
+margin_right = 477.0
+margin_bottom = 234.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_select"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/FirstMoves/ButtonKeyGamepadIcon8"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "PAUSEMAP"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon4" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
+margin_left = 59.0
+margin_top = 40.0
+margin_right = 75.0
+margin_bottom = 56.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_left"
+
+[node name="ButtonKeyGamepadIcon5" parent="Control/CtrlTutos/Tutos/FirstMoves/ButtonKeyGamepadIcon4" instance=ExtResource( 6 )]
+margin_left = 32.0
+margin_right = 48.0
+action = "ui_right"
+
+[node name="ButtonKeyGamepadIcon6" parent="Control/CtrlTutos/Tutos/FirstMoves/ButtonKeyGamepadIcon4" instance=ExtResource( 6 )]
+margin_left = 16.0
+margin_top = -16.0
+margin_right = 32.0
+margin_bottom = 0.0
+action = "ui_up"
+
+[node name="ButtonKeyGamepadIcon7" parent="Control/CtrlTutos/Tutos/FirstMoves/ButtonKeyGamepadIcon4" instance=ExtResource( 6 )]
+margin_left = 16.0
+margin_top = 17.0
+margin_right = 32.0
+margin_bottom = 33.0
+action = "ui_down"
+
+[node name="atk" type="Sprite" parent="Control/CtrlTutos/Tutos/FirstMoves"]
+material = SubResource( 6 )
+position = Vector2( 216, 128 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 86
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="ChainWhip" type="Sprite" parent="Control/CtrlTutos/Tutos/FirstMoves/atk"]
+position = Vector2( 23, 0 )
+texture = ExtResource( 9 )
+hframes = 14
+vframes = 9
+frame = 15
+
+[node name="jump" type="Sprite" parent="Control/CtrlTutos/Tutos/FirstMoves"]
+material = SubResource( 6 )
+position = Vector2( 381, 128 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 42
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="backdash2" type="Sprite" parent="Control/CtrlTutos/Tutos/FirstMoves"]
+modulate = Color( 1, 1, 1, 0.364706 )
+material = SubResource( 6 )
+position = Vector2( 578, 128 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 123
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="backdash" type="Sprite" parent="Control/CtrlTutos/Tutos/FirstMoves"]
+modulate = Color( 1, 1, 1, 0.94902 )
+material = SubResource( 6 )
+position = Vector2( 546, 128 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 125
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="backdash3" type="Sprite" parent="Control/CtrlTutos/Tutos/FirstMoves"]
+material = SubResource( 6 )
+position = Vector2( 498, 128 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 126
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="ButtonKeyGamepadIcon2" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
+margin_left = 363.0
+margin_top = 42.0
+margin_right = 379.0
+margin_bottom = 58.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_accept"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/FirstMoves/ButtonKeyGamepadIcon2"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "JUMP"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon3" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
+margin_left = 466.0
+margin_top = 90.0
+margin_right = 482.0
+margin_bottom = 106.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_focus_prev"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/FirstMoves/ButtonKeyGamepadIcon3"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "BACKDASH"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="Hook" type="Node2D" parent="Control/CtrlTutos/Tutos"]
+visible = false
+
+[node name="ButtonKeyGamepadIcon" parent="Control/CtrlTutos/Tutos/Hook" instance=ExtResource( 6 )]
+margin_left = 64.0
+margin_top = 68.0
+margin_right = 80.0
+margin_bottom = 84.0
+rect_scale = Vector2( 2, 2 )
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/Hook/ButtonKeyGamepadIcon"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "PRESS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="atk" type="Sprite" parent="Control/CtrlTutos/Tutos/Hook"]
+material = SubResource( 6 )
+position = Vector2( 72, 127 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 86
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="ChainWhip" type="Sprite" parent="Control/CtrlTutos/Tutos/Hook/atk"]
+position = Vector2( 23, 0 )
+texture = ExtResource( 9 )
+hframes = 14
+vframes = 9
+frame = 15
+
+[node name="jump" type="Sprite" parent="Control/CtrlTutos/Tutos/Hook"]
+material = SubResource( 6 )
+position = Vector2( 552, 73 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 56
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="chain_swing_point2" type="Sprite" parent="Control/CtrlTutos/Tutos/Hook"]
+position = Vector2( 398, 66 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 13 )
+region_enabled = true
+region_rect = Rect2( 8, 5, 17, 23 )
+
+[node name="hooked" type="Sprite" parent="Control/CtrlTutos/Tutos/Hook"]
+material = SubResource( 6 )
+position = Vector2( 328, 153 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 159
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="ChainWhip" type="Sprite" parent="Control/CtrlTutos/Tutos/Hook/hooked"]
+position = Vector2( 11.5, -5 )
+texture = ExtResource( 9 )
+hframes = 14
+vframes = 9
+frame = 35
+
+[node name="ButtonKeyGamepadIcon3" parent="Control/CtrlTutos/Tutos/Hook" instance=ExtResource( 6 )]
+margin_left = 258.972
+margin_top = 56.0
+margin_right = 274.972
+margin_bottom = 72.0
+rect_scale = Vector2( 2, 2 )
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/Hook/ButtonKeyGamepadIcon3"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "HOLD"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon4" parent="Control/CtrlTutos/Tutos/Hook" instance=ExtResource( 6 )]
+margin_left = 495.0
+margin_top = 168.0
+margin_right = 511.0
+margin_bottom = 184.0
+rect_scale = Vector2( 2, 2 )
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/Hook/ButtonKeyGamepadIcon4"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "RELEASE"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="chain_swing_point" type="Sprite" parent="Control/CtrlTutos/Tutos/Hook"]
+position = Vector2( 224, 128 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 13 )
+region_enabled = true
+region_rect = Rect2( 8, 5, 17, 23 )
+
+[node name="chain_swing_point3" type="Sprite" parent="Control/CtrlTutos/Tutos/Hook"]
+position = Vector2( 486, 112 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 13 )
+region_enabled = true
+region_rect = Rect2( 8, 5, 17, 23 )
+
+[node name="RecoverHealth" type="Node2D" parent="Control/CtrlTutos/Tutos"]
+visible = false
+
+[node name="run" type="Sprite" parent="Control/CtrlTutos/Tutos/RecoverHealth"]
+material = SubResource( 6 )
+position = Vector2( 176, 115 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 62
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/RecoverHealth"]
+margin_left = 362.0
+margin_top = 133.0
+margin_right = 403.0
+margin_bottom = 146.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 11 )
+text = "+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon" parent="Control/CtrlTutos/Tutos/RecoverHealth" instance=ExtResource( 6 )]
+margin_left = 254.972
+margin_top = 133.0
+margin_right = 270.972
+margin_bottom = 149.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_down"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/RecoverHealth/ButtonKeyGamepadIcon"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "HOLD"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon2" parent="Control/CtrlTutos/Tutos/RecoverHealth" instance=ExtResource( 6 )]
+margin_left = 432.0
+margin_top = 133.0
+margin_right = 448.0
+margin_bottom = 149.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_focus_next"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/RecoverHealth/ButtonKeyGamepadIcon2"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "PRESS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ElementalCircuits" type="Node2D" parent="Control/CtrlTutos/Tutos"]
+visible = false
+
+[node name="sprite" type="Sprite" parent="Control/CtrlTutos/Tutos/ElementalCircuits"]
+material = SubResource( 6 )
+position = Vector2( 168, 148 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 131
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="ButtonKeyGamepadIcon" parent="Control/CtrlTutos/Tutos/ElementalCircuits" instance=ExtResource( 6 )]
+margin_left = 126.028
+margin_top = 83.0
+margin_right = 142.028
+margin_bottom = 99.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_up"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/ElementalCircuits/ButtonKeyGamepadIcon"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "HOLD"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="sprite2" type="Sprite" parent="Control/CtrlTutos/Tutos/ElementalCircuits"]
+material = SubResource( 6 )
+position = Vector2( 376.028, 147 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 134
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="ButtonKeyGamepadIcon3" parent="Control/CtrlTutos/Tutos/ElementalCircuits" instance=ExtResource( 6 )]
+margin_left = 293.028
+margin_top = 85.0
+margin_right = 309.028
+margin_bottom = 101.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_up"
+
+[node name="Lbl2" type="Label" parent="Control/CtrlTutos/Tutos/ElementalCircuits/ButtonKeyGamepadIcon3"]
+margin_left = 50.0
+margin_top = 0.5
+margin_right = 91.0
+margin_bottom = 13.5
+custom_fonts/font = ExtResource( 11 )
+text = "+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/ElementalCircuits/ButtonKeyGamepadIcon3"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "HOLD"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon2" parent="Control/CtrlTutos/Tutos/ElementalCircuits" instance=ExtResource( 6 )]
+margin_left = 461.028
+margin_top = 84.0
+margin_right = 477.028
+margin_bottom = 100.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_focus_next"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/ElementalCircuits/ButtonKeyGamepadIcon2"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "HOLD"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="EMGet" type="Node2D" parent="Control/CtrlTutos/Tutos"]
+visible = false
+
+[node name="sprite2" type="Sprite" parent="Control/CtrlTutos/Tutos/EMGet"]
+material = SubResource( 6 )
+position = Vector2( 376.028, 147 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 134
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="ButtonKeyGamepadIcon3" parent="Control/CtrlTutos/Tutos/EMGet" instance=ExtResource( 6 )]
+margin_left = 293.028
+margin_top = 85.0
+margin_right = 309.028
+margin_bottom = 101.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_up"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/EMGet/ButtonKeyGamepadIcon3"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "HOLD"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="Dodge" type="Node2D" parent="Control/CtrlTutos/Tutos"]
+visible = false
+
+[node name="dodge" type="Sprite" parent="Control/CtrlTutos/Tutos/Dodge"]
+modulate = Color( 1, 1, 1, 0.482353 )
+material = SubResource( 6 )
+position = Vector2( 254.028, 88 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 110
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="dodge2" type="Sprite" parent="Control/CtrlTutos/Tutos/Dodge"]
+modulate = Color( 1, 1, 1, 0.8 )
+material = SubResource( 6 )
+position = Vector2( 294.028, 88 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 111
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="dodge4" type="Sprite" parent="Control/CtrlTutos/Tutos/Dodge"]
+modulate = Color( 1, 1, 1, 0.8 )
+material = SubResource( 6 )
+position = Vector2( 318.028, 88 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 112
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="dodge3" type="Sprite" parent="Control/CtrlTutos/Tutos/Dodge"]
+material = SubResource( 6 )
+position = Vector2( 362.028, 88 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 117
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/Dodge"]
+margin_left = 272.0
+margin_top = 179.0
+margin_right = 313.0
+margin_bottom = 192.0
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 11 )
+text = "+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon" parent="Control/CtrlTutos/Tutos/Dodge" instance=ExtResource( 6 )]
+margin_left = 190.028
+margin_top = 176.0
+margin_right = 206.028
+margin_bottom = 192.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_left"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/Dodge/ButtonKeyGamepadIcon"]
+margin_left = 4.98581
+margin_top = 1.5
+margin_right = 45.9858
+margin_bottom = 14.5
+custom_fonts/font = ExtResource( 11 )
+text = "/"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon3" parent="Control/CtrlTutos/Tutos/Dodge" instance=ExtResource( 6 )]
+margin_left = 256.0
+margin_top = 176.0
+margin_right = 272.0
+margin_bottom = 192.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_right"
+
+[node name="ButtonKeyGamepadIcon2" parent="Control/CtrlTutos/Tutos/Dodge" instance=ExtResource( 6 )]
+margin_left = 333.0
+margin_top = 179.0
+margin_right = 349.0
+margin_bottom = 195.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_focus_prev"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/Dodge/ButtonKeyGamepadIcon2"]
+margin_left = 16.5
+margin_right = 57.5
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "PRESS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="Subweapon" type="Node2D" parent="Control/CtrlTutos/Tutos"]
+visible = false
+
+[node name="run" type="Sprite" parent="Control/CtrlTutos/Tutos/Subweapon"]
+material = SubResource( 6 )
+position = Vector2( 320, 112 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 86
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="ButtonKeyGamepadIcon2" parent="Control/CtrlTutos/Tutos/Subweapon" instance=ExtResource( 6 )]
+margin_left = 296.0
+margin_top = 199.0
+margin_right = 312.0
+margin_bottom = 215.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_focus_next"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/Subweapon/ButtonKeyGamepadIcon2"]
+margin_left = 24.0
+margin_right = 65.0
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "PRESS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="subweapons_xandria" type="Sprite" parent="Control/CtrlTutos/Tutos/Subweapon"]
+position = Vector2( 418, 120 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 12 )
+region_enabled = true
+region_rect = Rect2( 63, 15, 29, 22 )
+
+[node name="WhipLvl2" type="Node2D" parent="Control/CtrlTutos/Tutos"]
+visible = false
+
+[node name="atkdiagup" type="Sprite" parent="Control/CtrlTutos/Tutos/WhipLvl2"]
+material = SubResource( 6 )
+position = Vector2( 248.028, 122 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 92
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="ChainWhip" type="Sprite" parent="Control/CtrlTutos/Tutos/WhipLvl2/atkdiagup"]
+position = Vector2( 23, 0 )
+texture = ExtResource( 9 )
+hframes = 14
+vframes = 9
+frame = 35
+
+[node name="atkdiagup2" type="Sprite" parent="Control/CtrlTutos/Tutos/WhipLvl2"]
+material = SubResource( 6 )
+position = Vector2( 110, 128 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 168
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="ChainWhip" type="Sprite" parent="Control/CtrlTutos/Tutos/WhipLvl2/atkdiagup2"]
+position = Vector2( 25, -10 )
+texture = ExtResource( 9 )
+hframes = 14
+vframes = 9
+frame = 106
+
+[node name="atkdown" type="Sprite" parent="Control/CtrlTutos/Tutos/WhipLvl2"]
+material = SubResource( 6 )
+position = Vector2( 391.972, 113 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 101
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="ChainWhip" type="Sprite" parent="Control/CtrlTutos/Tutos/WhipLvl2/atkdown"]
+position = Vector2( 31, 21 )
+texture = ExtResource( 9 )
+hframes = 14
+vframes = 9
+frame = 68
+
+[node name="atkdiagdown" type="Sprite" parent="Control/CtrlTutos/Tutos/WhipLvl2"]
+material = SubResource( 6 )
+position = Vector2( 569, 135 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 10 )
+hframes = 15
+vframes = 12
+frame = 164
+__meta__ = {
+"_editor_description_": "z index : 0"
+}
+
+[node name="ChainWhip" type="Sprite" parent="Control/CtrlTutos/Tutos/WhipLvl2/atkdiagdown"]
+position = Vector2( 24, 9.5 )
+texture = ExtResource( 9 )
+hframes = 14
+vframes = 9
+frame = 93
+
+[node name="ButtonKeyGamepadIcon" parent="Control/CtrlTutos/Tutos/WhipLvl2" instance=ExtResource( 6 )]
+margin_left = 298.0
+margin_top = 213.0
+margin_right = 314.0
+margin_bottom = 229.0
+rect_scale = Vector2( 2, 2 )
+
+[node name="ButtonKeyGamepadIcon5" parent="Control/CtrlTutos/Tutos/WhipLvl2/ButtonKeyGamepadIcon" instance=ExtResource( 6 )]
+margin_left = -31.9858
+margin_top = 1.0
+margin_right = -15.9858
+margin_bottom = 17.0
+action = "ui_right"
+
+[node name="ButtonKeyGamepadIcon6" parent="Control/CtrlTutos/Tutos/WhipLvl2/ButtonKeyGamepadIcon" instance=ExtResource( 6 )]
+margin_left = -48.0
+margin_top = -8.5
+margin_right = -32.0
+margin_bottom = 7.5
+action = "ui_up"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/WhipLvl2/ButtonKeyGamepadIcon"]
+margin_left = -26.5142
+margin_top = 0.5
+margin_right = 14.4858
+margin_bottom = 13.5
+custom_fonts/font = ExtResource( 11 )
+text = "+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon4" parent="Control/CtrlTutos/Tutos/WhipLvl2" instance=ExtResource( 6 )]
+margin_left = 116.028
+margin_top = 203.0
+margin_right = 132.028
+margin_bottom = 219.0
+rect_scale = Vector2( 2, 2 )
+
+[node name="ButtonKeyGamepadIcon6" parent="Control/CtrlTutos/Tutos/WhipLvl2/ButtonKeyGamepadIcon4" instance=ExtResource( 6 )]
+margin_left = -30.9858
+margin_right = -14.9858
+action = "ui_up"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/WhipLvl2/ButtonKeyGamepadIcon4"]
+margin_left = -27.4858
+margin_top = 1.0
+margin_right = 13.5142
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 11 )
+text = "+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon2" parent="Control/CtrlTutos/Tutos/WhipLvl2" instance=ExtResource( 6 )]
+margin_left = 406.0
+margin_top = 62.0
+margin_right = 422.0
+margin_bottom = 78.0
+rect_scale = Vector2( 2, 2 )
+
+[node name="ButtonKeyGamepadIcon7" parent="Control/CtrlTutos/Tutos/WhipLvl2/ButtonKeyGamepadIcon2" instance=ExtResource( 6 )]
+margin_left = -30.9858
+margin_right = -14.9858
+action = "ui_down"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/WhipLvl2/ButtonKeyGamepadIcon2"]
+margin_left = -25.9858
+margin_top = 1.0
+margin_right = 15.0142
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 11 )
+text = "+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="ButtonKeyGamepadIcon3" parent="Control/CtrlTutos/Tutos/WhipLvl2" instance=ExtResource( 6 )]
+margin_left = 588.0
+margin_top = 66.0
+margin_right = 604.0
+margin_bottom = 82.0
+rect_scale = Vector2( 2, 2 )
+
+[node name="ButtonKeyGamepadIcon5" parent="Control/CtrlTutos/Tutos/WhipLvl2/ButtonKeyGamepadIcon3" instance=ExtResource( 6 )]
+margin_left = -31.4858
+margin_right = -15.4858
+action = "ui_right"
+
+[node name="ButtonKeyGamepadIcon7" parent="Control/CtrlTutos/Tutos/WhipLvl2/ButtonKeyGamepadIcon3" instance=ExtResource( 6 )]
+margin_left = -44.9858
+margin_top = 15.0
+margin_right = -28.9858
+margin_bottom = 31.0
+action = "ui_down"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/WhipLvl2/ButtonKeyGamepadIcon3"]
+margin_left = -26.9858
+margin_right = 14.0142
+margin_bottom = 13.0
+custom_fonts/font = ExtResource( 11 )
+text = "+"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/WhipLvl2"]
+margin_left = 351.028
+margin_top = 28.0
+margin_right = 392.028
+margin_bottom = 41.0
+grow_horizontal = 2
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 11 )
+text = "INAIR"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="Lbl2" type="Label" parent="Control/CtrlTutos/Tutos/WhipLvl2"]
+margin_left = 482.0
+margin_top = 28.0
+margin_right = 523.0
+margin_bottom = 41.0
+grow_horizontal = 2
+rect_scale = Vector2( 2, 2 )
+custom_fonts/font = ExtResource( 11 )
+text = "INAIR"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
 [node name="Tween" type="Tween" parent="."]
+
+[node name="ControlFadeBlack" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ControlFadeBlack"]
+anims/fadein = SubResource( 7 )
+
+[node name="ColorRect" type="ColorRect" parent="ControlFadeBlack"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/screen_shake = SubResource( 8 )
 
 [connection signal="script_ended" from="." to="." method="_on_DialogBox_script_ended"]
 

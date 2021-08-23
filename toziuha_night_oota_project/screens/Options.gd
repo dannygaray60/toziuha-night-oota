@@ -156,8 +156,10 @@ func _input(event):
 	
 	if !$ControlRemap.visible:
 		
-		if $Margin/HBx/PanelGamepad.visible and Input.is_action_just_pressed("ui_focus_prev"):
-			print("ir a pantalla de arreglo de gamepad (añadir mapping string)")
+		if $Margin/HBx/PanelGamepad.visible and Input.is_action_just_pressed("ui_focus_prev") and Input.is_action_pressed("ui_down"):
+			Audio.play_sfx("btn_accept")
+			SceneChanger.change_scene("res://screens/ApplyMappingString.tscn")
+			#print("ir a pantalla de arreglo de gamepad (añadir mapping string)")
 		
 		return
 	
@@ -167,10 +169,11 @@ func _input(event):
 			hide_screen_remap()
 			return
 		
-		if (remap_type == "gamepad" and event is InputEventJoypadButton) or (remap_type == "keyboard" and event is InputEventKey):
+		if (remap_type == "gamepad" and (event is InputEventJoypadButton or event is InputEventJoypadMotion)) or (remap_type == "keyboard" and event is InputEventKey):
 			$ControlRemap/TimerRemap.start()
 			apply_remap(event)
 		else:
+			print(str(event))
 			Audio.play_sfx("btn_incorrect")
 	
 	
@@ -193,6 +196,35 @@ func remap_to(type,action,name_btn):
 		
 
 func apply_remap(event):
+	
+	if event is InputEventJoypadButton or event is InputEventKey:
+		pass
+	else:
+		return
+	
+	#comprobar si el boton elegido ya ha sido remapeado
+	var valid_input = true
+	#los codigos del config de la seccion keyboard o gamepad
+	var saved_codes = []
+	#codigo del boton presionado del keyboard o gamepad
+	var code = 0
+	
+	if remap_type == "keyboard":
+		code = event.get_scancode_with_modifiers()	
+	elif remap_type == "gamepad":
+		code = event.button_index
+	
+	#obtener lista de los codigos del boton (en keyboard o gamepad)
+	for k in Conf.conf.get_section_keys(remap_type):
+		saved_codes.append(Conf.conf.get_value(remap_type,k,0))
+	
+	if code in saved_codes:
+		valid_input = false
+	
+	if !valid_input:
+		Audio.play_sfx("btn_incorrect")
+		$Notif/NotificationInGame.show_notif("The button/key is in use, please choose another one.",3)
+		return
 	
 	#recorrer los eventos de la accion
 	for ev in InputMap.get_action_list(remap_action):

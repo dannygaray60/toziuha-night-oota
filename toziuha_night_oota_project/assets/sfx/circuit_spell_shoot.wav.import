@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/circuit_spell_shoot.wav-351b5a6016f005d077ee076732e73119.sample"
+
+[deps]
+
+source_file="res://assets/sfx/circuit_spell_shoot.wav"
+dest_files=[ "res://.import/circuit_spell_shoot.wav-351b5a6016f005d077ee076732e73119.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/img/portraits/xandria_normal.png" type="Texture" id=1]
 
-[sub_resource type="Shader" id=1]
+[sub_resource type="Shader" id=6]
 code = "shader_type canvas_item;
 
 uniform sampler2D dissolve_texture : hint_albedo;
@@ -15,21 +15,21 @@ void fragment(){
     COLOR = main_texture;
 }"
 
-[sub_resource type="OpenSimplexNoise" id=4]
+[sub_resource type="OpenSimplexNoise" id=7]
 
-[sub_resource type="NoiseTexture" id=3]
+[sub_resource type="NoiseTexture" id=8]
 flags = 3
-noise = SubResource( 4 )
+noise = SubResource( 7 )
 
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
+[sub_resource type="ShaderMaterial" id=9]
+shader = SubResource( 6 )
 shader_param/dissolve_value = 0.356
-shader_param/dissolve_texture = SubResource( 3 )
+shader_param/dissolve_texture = SubResource( 8 )
 
 [node name="Node2D" type="Node2D"]
 
 [node name="xandria_normal" type="Sprite" parent="."]
-material = SubResource( 2 )
+material = SubResource( 9 )
 position = Vector2( 292.408, 163.592 )
 scale = Vector2( 0.51108, 0.51108 )
 texture = ExtResource( 1 )

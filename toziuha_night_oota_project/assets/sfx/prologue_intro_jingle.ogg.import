@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/prologue_intro_jingle.ogg-fbe18bfc0e49948d33e25674429463ce.oggstr"
+
+[deps]
+
+source_file="res://assets/sfx/prologue_intro_jingle.ogg"
+dest_files=[ "res://.import/prologue_intro_jingle.ogg-fbe18bfc0e49948d33e25674429463ce.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

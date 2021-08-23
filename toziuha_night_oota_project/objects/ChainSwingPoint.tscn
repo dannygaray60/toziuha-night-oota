@@ -1,0 +1,119 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://objects/Pendulum.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/ChainSwingPoint.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/chain_link.png" type="Texture" id=3]
+[ext_resource path="res://objects/PlayerCamera.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sprites/chain_swing_point.png" type="Texture" id=5]
+[ext_resource path="res://assets/img/light_textures/light1.png" type="Texture" id=6]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 11.8609
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 5 )
+region = Rect2( 96, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 5 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 5 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 5 )
+region = Rect2( 64, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 5 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="SpriteFrames" id=7]
+animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 4.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "moving",
+"speed": 5.0
+} ]
+
+[node name="ChainSwingPoint" type="Area2D" groups=[
+"chain_swing",
+]]
+gravity = 0.0
+collision_layer = 0
+collision_mask = 16
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.297295, -3.97301 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+light_mask = 0
+position = Vector2( -0.39072, -3.14478 )
+frames = SubResource( 7 )
+playing = true
+
+[node name="Pendulum" parent="." instance=ExtResource( 1 )]
+end_position = Vector2( 0, 18 )
+gravity = 19.0
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 0, 52.0253 )
+
+[node name="ColorRect" type="ColorRect" parent="Position2D"]
+visible = false
+margin_left = -2.99231
+margin_top = -2.99231
+margin_right = 6.00769
+margin_bottom = 5.00769
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Line2D" type="Line2D" parent="."]
+light_mask = 0
+position = Vector2( -0.59, 0 )
+points = PoolVector2Array( 0.60161, -0.0658369, 0.60161, 52.3184 )
+width = 5.0
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 3 )
+texture_mode = 1
+
+[node name="PlayerCamera" parent="." instance=ExtResource( 4 )]
+visible = false
+position = Vector2( 0, 0 )
+current = false
+smoothing_speed = 20.0
+target = NodePath("..")
+
+[node name="Light2D" type="Light2D" parent="." groups=[
+"light2d",
+]]
+position = Vector2( 0.0828199, 3.48688 )
+scale = Vector2( 0.125335, 0.11811 )
+texture = ExtResource( 6 )
+texture_scale = 1.76
+color = Color( 0.988235, 0.0392157, 0.0392157, 1 )
+energy = 3.0
+range_layer_min = -100
+range_item_cull_mask = 3
+
+[connection signal="area_entered" from="." to="." method="_on_ChainSwingPoint_area_entered"]

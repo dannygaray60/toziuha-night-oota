@@ -32,14 +32,19 @@ func _ready():
 
 	$PanelBtns/Scroll/Margin/VBx.visible = true
 	$PanelBtns/Scroll/Margin/VBxEmptyList.visible = false
-	$PanelBtns/Scroll/Margin/VBx.get_children()[0].grab_focus()
-
+	
+	
+	#si la lista de niveles no está vacia
+	if !$PanelBtns/Scroll/Margin/VBx.get_children().empty():
+		$PanelBtns/Scroll/Margin/VBx.get_children()[0].grab_focus()
+	else:
+		$PanelBtns/Scroll/Margin/VBxEmptyList.visible = true
+		$PanelBtns/Scroll/Margin/VBxEmptyList/BtnDownloadLvls.focus()
 
 
 func scan_levels():
 	scan_path = "res://content/"+list_mode
 	var level_dirs = get_dirs(scan_path)
-	
 	#filtrar las carpetas que sean de niveles
 	#solo para los niveles externos
 	if list_mode == "custom_levels":
@@ -49,7 +54,8 @@ func scan_levels():
 			#si en la carpeta falta un data.ini
 			#no será considerado un nivel y será eliminado de la lista
 			if !files.has("data.ini"):
-				level_dirs.erase(d)
+#				level_dirs.erase(d)
+				pass
 			#el nivel es valido entonces agregamos datos
 			else:
 				level_ini = ConfigFile.new() #reiniciar para no tener datos restantes
@@ -122,24 +128,32 @@ func load_level(mode="newgame"):
 	#si existe una escena del mapa
 	if file.file_exists(Vars.level_dir_path+"/map.tscn"):
 		Vars.map_object = load(Vars.level_dir_path+"/map.tscn")
+		
+	if mode != "cancel":
+		$ControlContinue/Panel/Margin/VBx/Label.text = tr("LOADING")+"..."
+		#ocultar botones
+		$ControlContinue/Panel/Margin/VBx/VBx.visible = false
 	
 	match mode:
 		"newgame":
+			Audio.stop_music()
 			Vars.set_vars()
 			err = OK
 			#eliminar quicksave
 			if has_quicksave:
 				Savedata.delete_savedata("quicksave")
 			#y la partida anterior
-			if has_savegame:
-				Savedata.delete_savedata("savegame")
+#			if has_savegame:
+#				Savedata.delete_savedata("savegame")
 		"quickload":
+			Audio.stop_music()
 			Vars.set_vars()
 			err = Savedata.load_savedata("quicksave")
 			#una vez cargado se elimina el archivo de cargado rapido
 			if err == OK:
 				Savedata.delete_savedata("quicksave")
 		"savestatue":
+			Audio.stop_music()
 			Vars.set_vars()
 			err = Savedata.load_savedata("savegame")
 			Vars.loaded_from_statue_save = true

@@ -1,0 +1,265 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/img/light_textures/light1.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/elemental_circuit_icons.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/elemental_circuit_base.png" type="Texture" id=3]
+[ext_resource path="res://objects/ElementalCircuitSpawner.gd" type="Script" id=4]
+[ext_resource path="res://assets/sprites/elemental_circuit_bar_base.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/elemental_circuit_bar_fill.png" type="Texture" id=6]
+[ext_resource path="res://test/lighttexture.png" type="Texture" id=7]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="Animation" id=2]
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("AllCircuit/MagicCircle:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AllCircuit/Circuit/TriangleDown:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -360.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AllCircuit/Circuit/TriangleUp:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 720.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("AllCircuit/TriangleBG:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 720.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("AllCircuit/CircleLine:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.24, 0.25, 0.49, 0.509563, 0.749563, 0.77, 0.98 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 2, 2 ), Vector2( 1e-05, 1e-05 ), Vector2( 2, 2 ), Vector2( 1e-05, 1e-05 ), Vector2( 2, 2 ), Vector2( 1e-05, 1e-05 ), Vector2( 2, 2 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("AllCircuit/CircleLine:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.31, 0.43, 0.509563, 0.569563, 0.689563, 0.77, 0.83, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("AllCircuit/Circuit/Ovals/OvalLine:scale")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.08, 0.17, 0.26, 0.36, 0.45, 0.54, 0.63, 0.7, 0.77, 0.85, 0.92, 0.99 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("AllCircuit/Circuit/Ovals/OvalLine2:scale")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.08, 0.17, 0.26, 0.36, 0.45, 0.54, 0.63, 0.7, 0.77, 0.85, 0.92, 0.99 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("AllCircuit/Circuit/Ovals:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("AllCircuit/Circuit/Icon:modulate")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.05, 0.11, 0.17, 0.22, 0.29, 0.36, 0.43, 0.5, 0.562718, 0.632718, 0.702718, 0.772718, 0.87, 0.99 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.145098, 0.145098, 0.145098, 1 ), Color( 1, 1, 1, 1 ), Color( 0.188235, 0.188235, 0.188235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.188235, 0.188235, 0.188235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.188235, 0.188235, 0.188235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.188235, 0.188235, 0.188235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.188235, 0.188235, 0.188235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.188235, 0.188235, 0.188235, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="ElementalCircuitSpawner" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="CircuitProgressBar" type="TextureProgress" parent="."]
+margin_left = -48.0
+margin_top = -24.0
+margin_right = -16.0
+margin_bottom = -20.0
+rect_pivot_offset = Vector2( 16, 2 )
+max_value = 10.0
+step = 0.1
+value = 5.0
+texture_under = ExtResource( 5 )
+texture_progress = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AllCircuit" type="Node2D" parent="."]
+
+[node name="TriangleBG" type="Node2D" parent="AllCircuit"]
+
+[node name="Sprite" type="Sprite" parent="AllCircuit/TriangleBG"]
+modulate = Color( 1, 1, 1, 0.819608 )
+position = Vector2( 1.97393, 3.08814 )
+texture = ExtResource( 3 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+frame = 3
+
+[node name="MagicCircle" type="Node2D" parent="AllCircuit"]
+
+[node name="Sprite" type="Sprite" parent="AllCircuit/MagicCircle"]
+position = Vector2( 0.459562, -0.333148 )
+texture = ExtResource( 3 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+frame = 1
+
+[node name="Circuit" type="Node2D" parent="AllCircuit"]
+
+[node name="TriangleDown" type="Node2D" parent="AllCircuit/Circuit"]
+
+[node name="Sprite" type="Sprite" parent="AllCircuit/Circuit/TriangleDown"]
+modulate = Color( 1, 1, 1, 0.490196 )
+position = Vector2( 1.7882, 3.818 )
+texture = ExtResource( 3 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+frame = 3
+
+[node name="TriangleUp" type="Node2D" parent="AllCircuit/Circuit"]
+
+[node name="Sprite" type="Sprite" parent="AllCircuit/Circuit/TriangleUp"]
+modulate = Color( 1, 1, 1, 0.537255 )
+position = Vector2( 1.63375, -4.34349 )
+texture = ExtResource( 3 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+frame = 2
+
+[node name="Ovals" type="Node2D" parent="AllCircuit/Circuit"]
+
+[node name="OvalLine" type="Sprite" parent="AllCircuit/Circuit/Ovals"]
+position = Vector2( 0.589188, 1.03633 )
+rotation = 0.68766
+texture = ExtResource( 3 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+frame = 6
+
+[node name="OvalLine2" type="Sprite" parent="AllCircuit/Circuit/Ovals"]
+position = Vector2( 0.589188, 1.03633 )
+rotation = -0.68766
+texture = ExtResource( 3 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+frame = 6
+
+[node name="Icon" type="Sprite" parent="AllCircuit/Circuit"]
+texture = ExtResource( 2 )
+hframes = 25
+frame = 24
+
+[node name="CircleLine" type="Sprite" parent="AllCircuit"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 1.33371, 0 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 3 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+
+[node name="Light2D" type="Light2D" parent="AllCircuit" groups=[
+"light2d",
+]]
+position = Vector2( 5.96046e-08, 1.19209e-07 )
+scale = Vector2( 0.334207, 0.334207 )
+enabled = false
+texture = ExtResource( 1 )
+texture_scale = 1.76
+color = Color( 0, 0.27451, 1, 1 )
+energy = 2.0
+range_layer_min = -100
+
+[node name="lighttexture" type="Sprite" parent="AllCircuit"]
+modulate = Color( 0, 0.262745, 0.882353, 0.596078 )
+material = SubResource( 1 )
+scale = Vector2( 0.59375, 0.59375 )
+z_index = 1
+texture = ExtResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.1
+anims/spin = SubResource( 2 )
+__meta__ = {
+"_editor_description_": ".1 a .5 de velocidad"
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Position2D" type="Position2D" parent="."]
+visible = false
+position = Vector2( 0, -0.00032 )
+__meta__ = {
+"_gizmo_extents_": 90.0
+}
+
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]

@@ -71,7 +71,9 @@ tracks/1/keys = {
 [sub_resource type="CircleShape2D" id=4]
 radius = 8.086
 
-[node name="SubweaponShuriken" type="RigidBody2D"]
+[node name="SubweaponShuriken" type="RigidBody2D" groups=[
+"subweapon",
+]]
 collision_layer = 16
 collision_mask = 44
 gravity_scale = 0.0

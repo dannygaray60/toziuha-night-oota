@@ -9,14 +9,14 @@
 [ext_resource path="res://objects/enemies/Skeleton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://objects/enemies/InfectedSkeleton.tscn" type="PackedScene" id=8]
 [ext_resource path="res://test/test_largecorridor_area2d.gd" type="Script" id=9]
-[ext_resource path="res://objects/items/RelicKey.tscn" type="PackedScene" id=10]
+[ext_resource path="res://test/test large corridor torchs.gd" type="Script" id=10]
 [ext_resource path="res://objects/DoorSpecial.tscn" type="PackedScene" id=11]
 [ext_resource path="res://objects/enemies/Slime.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 48 )
 
-[node name="LevelBase" instance=ExtResource( 2 )]
+[node name="test large corridor" instance=ExtResource( 2 )]
 music = "cave_theme"
 
 [node name="Tilemap" parent="." index="2" instance=ExtResource( 1 )]
@@ -25,148 +25,67 @@ tile_data = PoolIntArray( 524389, 0, 0, 524390, 0, 1, 524391, 0, 1, 524392, 0, 5
 [node name="Background" parent="." index="3" instance=ExtResource( 3 )]
 
 [node name="Xandria" parent="." index="4" instance=ExtResource( 4 )]
-position = Vector2( 603.854, 356.083 )
+position = Vector2( 728, 296 )
 limit_left_camera = 0
 
-[node name="Torch" parent="." index="5" instance=ExtResource( 6 )]
-position = Vector2( 1417, -384 )
-weapon_lvl2 = true
-
-[node name="Torch3" parent="." index="6" instance=ExtResource( 6 )]
-position = Vector2( 1592, 160 )
-weapon_lvl3 = true
-
-[node name="Torch2" parent="." index="7" instance=ExtResource( 6 )]
-position = Vector2( 928, 312 )
-potion_probability = 1
-
-[node name="Torch20" parent="." index="8" instance=ExtResource( 6 )]
-position = Vector2( 407, 292.259 )
-potion_probability = 1
-
-[node name="Torch21" parent="." index="9" instance=ExtResource( 6 )]
-position = Vector2( 102.419, 358.586 )
-potion_probability = 1
-
-[node name="Torch4" parent="." index="10" instance=ExtResource( 6 )]
-position = Vector2( 2289, -596.259 )
-subweapon_shuriken = true
-
-[node name="Torch15" parent="." index="11" instance=ExtResource( 6 )]
-position = Vector2( 712, 322.5 )
-subweapon_shuriken = true
-
-[node name="Torch16" parent="." index="12" instance=ExtResource( 6 )]
-position = Vector2( 568, 266 )
-subweapon_axe = true
-
-[node name="Torch17" parent="." index="13" instance=ExtResource( 6 )]
-position = Vector2( 992, 312.759 )
-weapon_lvl2 = true
-
-[node name="Torch19" parent="." index="14" instance=ExtResource( 6 )]
-position = Vector2( 1088.63, 264 )
-em_5_probability = 1
-
-[node name="Skeleton" parent="." index="15" instance=ExtResource( 7 )]
+[node name="Skeleton" parent="." index="5" instance=ExtResource( 7 )]
 position = Vector2( 2360.48, -519.259 )
 
-[node name="Skeleton2" parent="." index="16" instance=ExtResource( 7 )]
+[node name="Skeleton2" parent="." index="6" instance=ExtResource( 7 )]
 position = Vector2( 1388.79, 220.5 )
 
-[node name="Skeleton3" parent="." index="17" instance=ExtResource( 7 )]
+[node name="Skeleton3" parent="." index="7" instance=ExtResource( 7 )]
 position = Vector2( 523, 353.586 )
 
-[node name="InfectedSkeleton" parent="." index="18" instance=ExtResource( 8 )]
+[node name="InfectedSkeleton" parent="." index="8" instance=ExtResource( 8 )]
 position = Vector2( 424, 360 )
 
-[node name="InfectedSkeleton3" parent="." index="19" instance=ExtResource( 8 )]
+[node name="InfectedSkeleton3" parent="." index="9" instance=ExtResource( 8 )]
 position = Vector2( 160, 353.586 )
 
-[node name="InfectedSkeleton4" parent="." index="20" instance=ExtResource( 8 )]
+[node name="InfectedSkeleton4" parent="." index="10" instance=ExtResource( 8 )]
 position = Vector2( 1665, -312 )
 
-[node name="InfectedSkeleton5" parent="." index="21" instance=ExtResource( 8 )]
+[node name="InfectedSkeleton5" parent="." index="11" instance=ExtResource( 8 )]
 position = Vector2( 1417, -296 )
 
-[node name="InfectedSkeleton6" parent="." index="22" instance=ExtResource( 8 )]
+[node name="InfectedSkeleton6" parent="." index="12" instance=ExtResource( 8 )]
 position = Vector2( 1617.55, -304 )
 
-[node name="InfectedSkeleton2" parent="." index="23" instance=ExtResource( 8 )]
+[node name="InfectedSkeleton2" parent="." index="13" instance=ExtResource( 8 )]
 position = Vector2( 1777, -568 )
 
-[node name="Torch5" parent="." index="24" instance=ExtResource( 6 )]
-position = Vector2( 2401.11, -648 )
-money_1_probability = 1
-
-[node name="Torch11" parent="." index="25" instance=ExtResource( 6 )]
-position = Vector2( 216, 312 )
-em_5_probability = 1
-
-[node name="Torch18" parent="." index="26" instance=ExtResource( 6 )]
-position = Vector2( 320, 306.853 )
-em_1_probability = 1
-
-[node name="Torch12" parent="." index="27" instance=ExtResource( 6 )]
-position = Vector2( 2480.48, -532.259 )
-
-[node name="Torch13" parent="." index="28" instance=ExtResource( 6 )]
-position = Vector2( 2584.48, -533.745 )
-
-[node name="Torch14" parent="." index="29" instance=ExtResource( 6 )]
-position = Vector2( 2664.48, -532.495 )
-
-[node name="Torch6" parent="." index="30" instance=ExtResource( 6 )]
-position = Vector2( 1243.96, 196.5 )
-money_10_probability = 1
-
-[node name="Torch7" parent="." index="31" instance=ExtResource( 6 )]
-position = Vector2( 1336, 243.741 )
-money_50_probability = 1
-
-[node name="Torch8" parent="." index="32" instance=ExtResource( 6 )]
-position = Vector2( 1439.55, 230.01 )
-money_100_probability = 1
-
-[node name="Torch9" parent="." index="33" instance=ExtResource( 6 )]
-position = Vector2( 1376, 168 )
-money_500_probability = 1
-
-[node name="Torch10" parent="." index="34" instance=ExtResource( 6 )]
-position = Vector2( 1512, 179.741 )
-money_1000_probability = 1
-
-[node name="Zombie" parent="." index="35" instance=ExtResource( 5 )]
+[node name="Zombie" parent="." index="14" instance=ExtResource( 5 )]
 position = Vector2( 1380.79, 346.5 )
 
-[node name="Zombie2" parent="." index="36" instance=ExtResource( 5 )]
+[node name="Zombie2" parent="." index="15" instance=ExtResource( 5 )]
 position = Vector2( 1168, 353.586 )
 
-[node name="Zombie3" parent="." index="37" instance=ExtResource( 5 )]
+[node name="Zombie3" parent="." index="16" instance=ExtResource( 5 )]
 position = Vector2( 1296, 368 )
 
-[node name="Zombie4" parent="." index="38" instance=ExtResource( 5 )]
+[node name="Zombie4" parent="." index="17" instance=ExtResource( 5 )]
 position = Vector2( 1544, 346.5 )
 
-[node name="Zombie8" parent="." index="39" instance=ExtResource( 5 )]
+[node name="Zombie8" parent="." index="18" instance=ExtResource( 5 )]
 position = Vector2( 1212.79, 736 )
 
-[node name="Zombie9" parent="." index="40" instance=ExtResource( 5 )]
+[node name="Zombie9" parent="." index="19" instance=ExtResource( 5 )]
 position = Vector2( 1000, 743.086 )
 
-[node name="Zombie10" parent="." index="41" instance=ExtResource( 5 )]
+[node name="Zombie10" parent="." index="20" instance=ExtResource( 5 )]
 position = Vector2( 1376, 736 )
 
-[node name="Zombie5" parent="." index="42" instance=ExtResource( 5 )]
+[node name="Zombie5" parent="." index="21" instance=ExtResource( 5 )]
 position = Vector2( 1489.56, -584 )
 
-[node name="Zombie6" parent="." index="43" instance=ExtResource( 5 )]
+[node name="Zombie6" parent="." index="22" instance=ExtResource( 5 )]
 position = Vector2( 1024, 360 )
 
-[node name="Zombie7" parent="." index="44" instance=ExtResource( 5 )]
+[node name="Zombie7" parent="." index="23" instance=ExtResource( 5 )]
 position = Vector2( 2081, -581.227 )
 
-[node name="Area2D" type="Area2D" parent="." index="45"]
+[node name="Area2D" type="Area2D" parent="." index="24"]
 position = Vector2( 664, 712 )
 script = ExtResource( 9 )
 
@@ -174,44 +93,679 @@ script = ExtResource( 9 )
 position = Vector2( -48, -3 )
 shape = SubResource( 1 )
 
-[node name="RelicKey" parent="." index="46" instance=ExtResource( 10 )]
-position = Vector2( 648.075, 744 )
-
-[node name="RelicKey2" parent="." index="47" instance=ExtResource( 10 )]
-position = Vector2( 1040, 727.616 )
-item = "slide"
-
-[node name="RelicKey4" parent="." index="48" instance=ExtResource( 10 )]
-position = Vector2( 1367.77, 648 )
-
-[node name="RelicKey5" parent="." index="49" instance=ExtResource( 10 )]
-position = Vector2( 1236.79, 727.232 )
-item = "silver_key"
-
-[node name="RelicKey6" parent="." index="50" instance=ExtResource( 10 )]
-position = Vector2( 1128, 733.912 )
-item = "golden_key"
-
-[node name="RelicKey3" parent="." index="51" instance=ExtResource( 10 )]
-position = Vector2( 960, 727.488 )
-item = "backdash"
-
-[node name="Door" parent="." index="52" instance=ExtResource( 11 )]
+[node name="Door" parent="." index="25" instance=ExtResource( 11 )]
 position = Vector2( 1440.18, 752 )
 
-[node name="Door2" parent="." index="53" instance=ExtResource( 11 )]
+[node name="Door2" parent="." index="26" instance=ExtResource( 11 )]
 position = Vector2( 1536, 752 )
 type_door = "silver"
 
-[node name="Door3" parent="." index="54" instance=ExtResource( 11 )]
+[node name="Door3" parent="." index="27" instance=ExtResource( 11 )]
 position = Vector2( 1632, 752 )
 type_door = "golden"
 
-[node name="Door4" parent="." index="55" instance=ExtResource( 11 )]
+[node name="Door4" parent="." index="28" instance=ExtResource( 11 )]
 position = Vector2( 1728, 752 )
 type_door = "boss"
 
-[node name="Slime" parent="." index="56" instance=ExtResource( 12 )]
+[node name="Slime" parent="." index="29" instance=ExtResource( 12 )]
 position = Vector2( 724.788, 744 )
+
+[node name="test large corridor torchs" type="Node2D" parent="." index="31"]
+script = ExtResource( 10 )
+
+[node name="Torch5" parent="test large corridor torchs" index="0" instance=ExtResource( 6 )]
+position = Vector2( 2401.11, -648 )
+money_1_probability = 1
+
+[node name="Torch11" parent="test large corridor torchs" index="1" instance=ExtResource( 6 )]
+position = Vector2( 216, 312 )
+
+[node name="Torch18" parent="test large corridor torchs" index="2" instance=ExtResource( 6 )]
+position = Vector2( 320, 306.853 )
+
+[node name="Torch12" parent="test large corridor torchs" index="3" instance=ExtResource( 6 )]
+position = Vector2( 2480.48, -532.259 )
+
+[node name="Torch13" parent="test large corridor torchs" index="4" instance=ExtResource( 6 )]
+position = Vector2( 2584.48, -533.745 )
+
+[node name="Torch14" parent="test large corridor torchs" index="5" instance=ExtResource( 6 )]
+position = Vector2( 2664.48, -532.495 )
+
+[node name="Torch6" parent="test large corridor torchs" index="6" instance=ExtResource( 6 )]
+position = Vector2( 1243.96, 196.5 )
+money_10_probability = 1
+
+[node name="Torch7" parent="test large corridor torchs" index="7" instance=ExtResource( 6 )]
+position = Vector2( 1336, 243.741 )
+money_50_probability = 1
+
+[node name="Torch8" parent="test large corridor torchs" index="8" instance=ExtResource( 6 )]
+position = Vector2( 1439.55, 230.01 )
+money_100_probability = 1
+
+[node name="Torch9" parent="test large corridor torchs" index="9" instance=ExtResource( 6 )]
+position = Vector2( 1376, 168 )
+money_500_probability = 1
+
+[node name="Torch10" parent="test large corridor torchs" index="10" instance=ExtResource( 6 )]
+position = Vector2( 1512, 179.741 )
+money_1000_probability = 1
+
+[node name="Torch" parent="test large corridor torchs" index="11" instance=ExtResource( 6 )]
+position = Vector2( 1417, -384 )
+weapon_lvl2 = true
+
+[node name="Torch3" parent="test large corridor torchs" index="12" instance=ExtResource( 6 )]
+position = Vector2( 1592, 160 )
+weapon_lvl3 = true
+
+[node name="Torch2" parent="test large corridor torchs" index="13" instance=ExtResource( 6 )]
+position = Vector2( 928, 312 )
+potion_probability = 1
+
+[node name="Torch20" parent="test large corridor torchs" index="14" instance=ExtResource( 6 )]
+position = Vector2( 407, 292.259 )
+potion_probability = 1
+
+[node name="Torch21" parent="test large corridor torchs" index="15" instance=ExtResource( 6 )]
+position = Vector2( 102.419, 358.586 )
+potion_probability = 1
+
+[node name="Torch4" parent="test large corridor torchs" index="16" instance=ExtResource( 6 )]
+position = Vector2( 2289, -596.259 )
+subweapon_shuriken = true
+
+[node name="Torch15" parent="test large corridor torchs" index="17" instance=ExtResource( 6 )]
+position = Vector2( 712, 322.5 )
+subweapon_shuriken = true
+
+[node name="Torch16" parent="test large corridor torchs" index="18" instance=ExtResource( 6 )]
+position = Vector2( 568, 266 )
+subweapon_axe = true
+
+[node name="Torch17" parent="test large corridor torchs" index="19" instance=ExtResource( 6 )]
+position = Vector2( 992, 312.759 )
+weapon_lvl2 = true
+
+[node name="Torch19" parent="test large corridor torchs" index="20" instance=ExtResource( 6 )]
+position = Vector2( 1088.63, 264 )
+
+[node name="Torch22" parent="test large corridor torchs" index="21" instance=ExtResource( 6 )]
+position = Vector2( 1418.58, -523.741 )
+weapon_lvl2 = true
+
+[node name="Torch23" parent="test large corridor torchs" index="22" instance=ExtResource( 6 )]
+position = Vector2( 1593.58, 20.259 )
+weapon_lvl3 = true
+
+[node name="Torch24" parent="test large corridor torchs" index="23" instance=ExtResource( 6 )]
+position = Vector2( 929.581, 172.259 )
+potion_probability = 1
+
+[node name="Torch25" parent="test large corridor torchs" index="24" instance=ExtResource( 6 )]
+position = Vector2( 408.581, 152.518 )
+potion_probability = 1
+
+[node name="Torch26" parent="test large corridor torchs" index="25" instance=ExtResource( 6 )]
+position = Vector2( 104, 218.845 )
+potion_probability = 1
+
+[node name="Torch27" parent="test large corridor torchs" index="26" instance=ExtResource( 6 )]
+position = Vector2( 2290.58, -736 )
+subweapon_shuriken = true
+
+[node name="Torch28" parent="test large corridor torchs" index="27" instance=ExtResource( 6 )]
+position = Vector2( 713.581, 182.759 )
+subweapon_shuriken = true
+
+[node name="Torch29" parent="test large corridor torchs" index="28" instance=ExtResource( 6 )]
+position = Vector2( 569.581, 126.259 )
+subweapon_axe = true
+
+[node name="Torch30" parent="test large corridor torchs" index="29" instance=ExtResource( 6 )]
+position = Vector2( 993.581, 173.018 )
+weapon_lvl2 = true
+
+[node name="Torch31" parent="test large corridor torchs" index="30" instance=ExtResource( 6 )]
+position = Vector2( 1090.21, 124.259 )
+
+[node name="Torch32" parent="test large corridor torchs" index="31" instance=ExtResource( 6 )]
+position = Vector2( 1162.58, -483.741 )
+weapon_lvl2 = true
+
+[node name="Torch33" parent="test large corridor torchs" index="32" instance=ExtResource( 6 )]
+position = Vector2( 1337.58, 60.259 )
+weapon_lvl3 = true
+
+[node name="Torch34" parent="test large corridor torchs" index="33" instance=ExtResource( 6 )]
+position = Vector2( 673.581, 212.259 )
+potion_probability = 1
+
+[node name="Torch35" parent="test large corridor torchs" index="34" instance=ExtResource( 6 )]
+position = Vector2( 152.581, 192.518 )
+potion_probability = 1
+
+[node name="Torch36" parent="test large corridor torchs" index="35" instance=ExtResource( 6 )]
+position = Vector2( -152, 258.845 )
+potion_probability = 1
+
+[node name="Torch37" parent="test large corridor torchs" index="36" instance=ExtResource( 6 )]
+position = Vector2( 2034.58, -696 )
+subweapon_shuriken = true
+
+[node name="Torch38" parent="test large corridor torchs" index="37" instance=ExtResource( 6 )]
+position = Vector2( 457.581, 222.759 )
+subweapon_shuriken = true
+
+[node name="Torch39" parent="test large corridor torchs" index="38" instance=ExtResource( 6 )]
+position = Vector2( 313.581, 166.259 )
+subweapon_axe = true
+
+[node name="Torch40" parent="test large corridor torchs" index="39" instance=ExtResource( 6 )]
+position = Vector2( 737.581, 213.018 )
+weapon_lvl2 = true
+
+[node name="Torch41" parent="test large corridor torchs" index="40" instance=ExtResource( 6 )]
+position = Vector2( 834.211, 164.259 )
+
+[node name="Torch42" parent="test large corridor torchs" index="41" instance=ExtResource( 6 )]
+position = Vector2( 1458.58, -627.741 )
+weapon_lvl2 = true
+
+[node name="Torch43" parent="test large corridor torchs" index="42" instance=ExtResource( 6 )]
+position = Vector2( 1633.58, -83.741 )
+weapon_lvl3 = true
+
+[node name="Torch44" parent="test large corridor torchs" index="43" instance=ExtResource( 6 )]
+position = Vector2( 969.581, 68.259 )
+potion_probability = 1
+
+[node name="Torch45" parent="test large corridor torchs" index="44" instance=ExtResource( 6 )]
+position = Vector2( 448.581, 48.5179 )
+potion_probability = 1
+
+[node name="Torch46" parent="test large corridor torchs" index="45" instance=ExtResource( 6 )]
+position = Vector2( 144, 114.845 )
+potion_probability = 1
+
+[node name="Torch47" parent="test large corridor torchs" index="46" instance=ExtResource( 6 )]
+position = Vector2( 2330.58, -840 )
+subweapon_shuriken = true
+
+[node name="Torch48" parent="test large corridor torchs" index="47" instance=ExtResource( 6 )]
+position = Vector2( 753.581, 78.759 )
+subweapon_shuriken = true
+
+[node name="Torch49" parent="test large corridor torchs" index="48" instance=ExtResource( 6 )]
+position = Vector2( 609.581, 22.259 )
+subweapon_axe = true
+
+[node name="Torch50" parent="test large corridor torchs" index="49" instance=ExtResource( 6 )]
+position = Vector2( 1033.58, 69.0179 )
+weapon_lvl2 = true
+
+[node name="Torch51" parent="test large corridor torchs" index="50" instance=ExtResource( 6 )]
+position = Vector2( 1130.21, 20.259 )
+
+[node name="Torch52" parent="test large corridor torchs" index="51" instance=ExtResource( 6 )]
+position = Vector2( 1626.58, -427.741 )
+weapon_lvl2 = true
+
+[node name="Torch53" parent="test large corridor torchs" index="52" instance=ExtResource( 6 )]
+position = Vector2( 1801.58, 116.259 )
+weapon_lvl3 = true
+
+[node name="Torch54" parent="test large corridor torchs" index="53" instance=ExtResource( 6 )]
+position = Vector2( 1137.58, 268.259 )
+potion_probability = 1
+
+[node name="Torch55" parent="test large corridor torchs" index="54" instance=ExtResource( 6 )]
+position = Vector2( 616.581, 248.518 )
+potion_probability = 1
+
+[node name="Torch56" parent="test large corridor torchs" index="55" instance=ExtResource( 6 )]
+position = Vector2( 312, 314.845 )
+potion_probability = 1
+
+[node name="Torch57" parent="test large corridor torchs" index="56" instance=ExtResource( 6 )]
+position = Vector2( 2498.58, -640 )
+subweapon_shuriken = true
+
+[node name="Torch58" parent="test large corridor torchs" index="57" instance=ExtResource( 6 )]
+position = Vector2( 921.581, 278.759 )
+subweapon_shuriken = true
+
+[node name="Torch59" parent="test large corridor torchs" index="58" instance=ExtResource( 6 )]
+position = Vector2( 777.581, 222.259 )
+subweapon_axe = true
+
+[node name="Torch60" parent="test large corridor torchs" index="59" instance=ExtResource( 6 )]
+position = Vector2( 1201.58, 269.018 )
+weapon_lvl2 = true
+
+[node name="Torch61" parent="test large corridor torchs" index="60" instance=ExtResource( 6 )]
+position = Vector2( 1298.21, 220.259 )
+
+[node name="Torch62" parent="test large corridor torchs" index="61" instance=ExtResource( 6 )]
+position = Vector2( 1306.58, -107.741 )
+weapon_lvl2 = true
+
+[node name="Torch63" parent="test large corridor torchs" index="62" instance=ExtResource( 6 )]
+position = Vector2( 1481.58, 436.259 )
+weapon_lvl3 = true
+
+[node name="Torch64" parent="test large corridor torchs" index="63" instance=ExtResource( 6 )]
+position = Vector2( 817.581, 588.259 )
+potion_probability = 1
+
+[node name="Torch65" parent="test large corridor torchs" index="64" instance=ExtResource( 6 )]
+position = Vector2( 296.581, 568.518 )
+potion_probability = 1
+
+[node name="Torch66" parent="test large corridor torchs" index="65" instance=ExtResource( 6 )]
+position = Vector2( -8, 634.845 )
+potion_probability = 1
+
+[node name="Torch67" parent="test large corridor torchs" index="66" instance=ExtResource( 6 )]
+position = Vector2( 2178.58, -320 )
+subweapon_shuriken = true
+
+[node name="Torch68" parent="test large corridor torchs" index="67" instance=ExtResource( 6 )]
+position = Vector2( 601.581, 598.759 )
+subweapon_shuriken = true
+
+[node name="Torch69" parent="test large corridor torchs" index="68" instance=ExtResource( 6 )]
+position = Vector2( 457.581, 542.259 )
+subweapon_axe = true
+
+[node name="Torch70" parent="test large corridor torchs" index="69" instance=ExtResource( 6 )]
+position = Vector2( 881.581, 589.018 )
+weapon_lvl2 = true
+
+[node name="Torch71" parent="test large corridor torchs" index="70" instance=ExtResource( 6 )]
+position = Vector2( 978.211, 540.259 )
+
+[node name="Torch72" parent="test large corridor torchs" index="71" instance=ExtResource( 6 )]
+position = Vector2( 1378.58, -323.741 )
+weapon_lvl2 = true
+
+[node name="Torch73" parent="test large corridor torchs" index="72" instance=ExtResource( 6 )]
+position = Vector2( 1553.58, 220.259 )
+weapon_lvl3 = true
+
+[node name="Torch74" parent="test large corridor torchs" index="73" instance=ExtResource( 6 )]
+position = Vector2( 889.581, 372.259 )
+potion_probability = 1
+
+[node name="Torch75" parent="test large corridor torchs" index="74" instance=ExtResource( 6 )]
+position = Vector2( 368.581, 352.518 )
+potion_probability = 1
+
+[node name="Torch76" parent="test large corridor torchs" index="75" instance=ExtResource( 6 )]
+position = Vector2( 64, 418.845 )
+potion_probability = 1
+
+[node name="Torch77" parent="test large corridor torchs" index="76" instance=ExtResource( 6 )]
+position = Vector2( 2250.58, -536 )
+subweapon_shuriken = true
+
+[node name="Torch78" parent="test large corridor torchs" index="77" instance=ExtResource( 6 )]
+position = Vector2( 673.581, 382.759 )
+subweapon_shuriken = true
+
+[node name="Torch79" parent="test large corridor torchs" index="78" instance=ExtResource( 6 )]
+position = Vector2( 529.581, 326.259 )
+subweapon_axe = true
+
+[node name="Torch80" parent="test large corridor torchs" index="79" instance=ExtResource( 6 )]
+position = Vector2( 953.581, 373.018 )
+weapon_lvl2 = true
+
+[node name="Torch81" parent="test large corridor torchs" index="80" instance=ExtResource( 6 )]
+position = Vector2( 1050.21, 324.259 )
+
+[node name="Torch82" parent="test large corridor torchs" index="81" instance=ExtResource( 6 )]
+position = Vector2( 1538.58, -195.741 )
+weapon_lvl2 = true
+
+[node name="Torch83" parent="test large corridor torchs" index="82" instance=ExtResource( 6 )]
+position = Vector2( 1713.58, 348.259 )
+weapon_lvl3 = true
+
+[node name="Torch84" parent="test large corridor torchs" index="83" instance=ExtResource( 6 )]
+position = Vector2( 1049.58, 500.259 )
+potion_probability = 1
+
+[node name="Torch85" parent="test large corridor torchs" index="84" instance=ExtResource( 6 )]
+position = Vector2( 528.581, 480.518 )
+potion_probability = 1
+
+[node name="Torch86" parent="test large corridor torchs" index="85" instance=ExtResource( 6 )]
+position = Vector2( 224, 546.845 )
+potion_probability = 1
+
+[node name="Torch87" parent="test large corridor torchs" index="86" instance=ExtResource( 6 )]
+position = Vector2( 2410.58, -408 )
+subweapon_shuriken = true
+
+[node name="Torch88" parent="test large corridor torchs" index="87" instance=ExtResource( 6 )]
+position = Vector2( 833.581, 510.759 )
+subweapon_shuriken = true
+
+[node name="Torch89" parent="test large corridor torchs" index="88" instance=ExtResource( 6 )]
+position = Vector2( 689.581, 454.259 )
+subweapon_axe = true
+
+[node name="Torch90" parent="test large corridor torchs" index="89" instance=ExtResource( 6 )]
+position = Vector2( 1113.58, 501.018 )
+weapon_lvl2 = true
+
+[node name="Torch91" parent="test large corridor torchs" index="90" instance=ExtResource( 6 )]
+position = Vector2( 1210.21, 452.259 )
+
+[node name="Torch92" parent="test large corridor torchs" index="91" instance=ExtResource( 6 )]
+position = Vector2( 1434.58, -3.74097 )
+weapon_lvl2 = true
+
+[node name="Torch93" parent="test large corridor torchs" index="92" instance=ExtResource( 6 )]
+position = Vector2( 1609.58, 540.259 )
+weapon_lvl3 = true
+
+[node name="Torch94" parent="test large corridor torchs" index="93" instance=ExtResource( 6 )]
+position = Vector2( 945.581, 692.259 )
+potion_probability = 1
+
+[node name="Torch95" parent="test large corridor torchs" index="94" instance=ExtResource( 6 )]
+position = Vector2( 424.581, 672.518 )
+potion_probability = 1
+
+[node name="Torch96" parent="test large corridor torchs" index="95" instance=ExtResource( 6 )]
+position = Vector2( 120, 738.845 )
+potion_probability = 1
+
+[node name="Torch97" parent="test large corridor torchs" index="96" instance=ExtResource( 6 )]
+position = Vector2( 2306.58, -216 )
+subweapon_shuriken = true
+
+[node name="Torch98" parent="test large corridor torchs" index="97" instance=ExtResource( 6 )]
+position = Vector2( 729.581, 702.759 )
+subweapon_shuriken = true
+
+[node name="Torch99" parent="test large corridor torchs" index="98" instance=ExtResource( 6 )]
+position = Vector2( 585.581, 646.259 )
+subweapon_axe = true
+
+[node name="Torch100" parent="test large corridor torchs" index="99" instance=ExtResource( 6 )]
+position = Vector2( 1009.58, 693.018 )
+weapon_lvl2 = true
+
+[node name="Torch101" parent="test large corridor torchs" index="100" instance=ExtResource( 6 )]
+position = Vector2( 1106.21, 644.259 )
+
+[node name="Torch102" parent="test large corridor torchs" index="101" instance=ExtResource( 6 )]
+position = Vector2( 400.581, -151.482 )
+potion_probability = 1
+
+[node name="Torch103" parent="test large corridor torchs" index="102" instance=ExtResource( 6 )]
+position = Vector2( 96, -85.155 )
+potion_probability = 1
+
+[node name="Torch104" parent="test large corridor torchs" index="103" instance=ExtResource( 6 )]
+position = Vector2( 2282.58, -1040 )
+subweapon_shuriken = true
+
+[node name="Torch105" parent="test large corridor torchs" index="104" instance=ExtResource( 6 )]
+position = Vector2( 705.581, -121.241 )
+subweapon_shuriken = true
+
+[node name="Torch106" parent="test large corridor torchs" index="105" instance=ExtResource( 6 )]
+position = Vector2( 561.581, -177.741 )
+subweapon_axe = true
+
+[node name="Torch107" parent="test large corridor torchs" index="106" instance=ExtResource( 6 )]
+position = Vector2( 985.581, -130.982 )
+weapon_lvl2 = true
+
+[node name="Torch108" parent="test large corridor torchs" index="107" instance=ExtResource( 6 )]
+position = Vector2( 1082.21, -179.741 )
+
+[node name="Torch109" parent="test large corridor torchs" index="108" instance=ExtResource( 6 )]
+position = Vector2( 1306.58, -635.741 )
+weapon_lvl2 = true
+
+[node name="Torch110" parent="test large corridor torchs" index="109" instance=ExtResource( 6 )]
+position = Vector2( 1481.58, -91.741 )
+weapon_lvl3 = true
+
+[node name="Torch111" parent="test large corridor torchs" index="110" instance=ExtResource( 6 )]
+position = Vector2( 817.581, 60.259 )
+potion_probability = 1
+
+[node name="Torch112" parent="test large corridor torchs" index="111" instance=ExtResource( 6 )]
+position = Vector2( 296.581, 40.5179 )
+potion_probability = 1
+
+[node name="Torch113" parent="test large corridor torchs" index="112" instance=ExtResource( 6 )]
+position = Vector2( -8, 106.845 )
+potion_probability = 1
+
+[node name="Torch114" parent="test large corridor torchs" index="113" instance=ExtResource( 6 )]
+position = Vector2( 2178.58, -848 )
+subweapon_shuriken = true
+
+[node name="Torch115" parent="test large corridor torchs" index="114" instance=ExtResource( 6 )]
+position = Vector2( 601.581, 70.759 )
+subweapon_shuriken = true
+
+[node name="Torch116" parent="test large corridor torchs" index="115" instance=ExtResource( 6 )]
+position = Vector2( 457.581, 14.259 )
+subweapon_axe = true
+
+[node name="Torch117" parent="test large corridor torchs" index="116" instance=ExtResource( 6 )]
+position = Vector2( 881.581, 61.0179 )
+weapon_lvl2 = true
+
+[node name="Torch118" parent="test large corridor torchs" index="117" instance=ExtResource( 6 )]
+position = Vector2( 978.211, 12.259 )
+
+[node name="Torch119" parent="test large corridor torchs" index="118" instance=ExtResource( 6 )]
+position = Vector2( 672.581, 216.518 )
+potion_probability = 1
+
+[node name="Torch120" parent="test large corridor torchs" index="119" instance=ExtResource( 6 )]
+position = Vector2( 368, 282.845 )
+potion_probability = 1
+
+[node name="Torch121" parent="test large corridor torchs" index="120" instance=ExtResource( 6 )]
+position = Vector2( 2554.58, -672 )
+subweapon_shuriken = true
+
+[node name="Torch122" parent="test large corridor torchs" index="121" instance=ExtResource( 6 )]
+position = Vector2( 977.581, 246.759 )
+subweapon_shuriken = true
+
+[node name="Torch123" parent="test large corridor torchs" index="122" instance=ExtResource( 6 )]
+position = Vector2( 833.581, 190.259 )
+subweapon_axe = true
+
+[node name="Torch124" parent="test large corridor torchs" index="123" instance=ExtResource( 6 )]
+position = Vector2( 1257.58, 237.018 )
+weapon_lvl2 = true
+
+[node name="Torch125" parent="test large corridor torchs" index="124" instance=ExtResource( 6 )]
+position = Vector2( 1354.21, 188.259 )
+
+[node name="Torch126" parent="test large corridor torchs" index="125" instance=ExtResource( 6 )]
+position = Vector2( 1578.58, -267.741 )
+weapon_lvl2 = true
+
+[node name="Torch127" parent="test large corridor torchs" index="126" instance=ExtResource( 6 )]
+position = Vector2( 1753.58, 276.259 )
+weapon_lvl3 = true
+
+[node name="Torch128" parent="test large corridor torchs" index="127" instance=ExtResource( 6 )]
+position = Vector2( 1089.58, 428.259 )
+potion_probability = 1
+
+[node name="Torch129" parent="test large corridor torchs" index="128" instance=ExtResource( 6 )]
+position = Vector2( 568.581, 408.518 )
+potion_probability = 1
+
+[node name="Torch130" parent="test large corridor torchs" index="129" instance=ExtResource( 6 )]
+position = Vector2( 264, 474.845 )
+potion_probability = 1
+
+[node name="Torch131" parent="test large corridor torchs" index="130" instance=ExtResource( 6 )]
+position = Vector2( 2450.58, -480 )
+subweapon_shuriken = true
+
+[node name="Torch132" parent="test large corridor torchs" index="131" instance=ExtResource( 6 )]
+position = Vector2( 873.581, 438.759 )
+subweapon_shuriken = true
+
+[node name="Torch133" parent="test large corridor torchs" index="132" instance=ExtResource( 6 )]
+position = Vector2( 729.581, 382.259 )
+subweapon_axe = true
+
+[node name="Torch134" parent="test large corridor torchs" index="133" instance=ExtResource( 6 )]
+position = Vector2( 1153.58, 429.018 )
+weapon_lvl2 = true
+
+[node name="Torch135" parent="test large corridor torchs" index="134" instance=ExtResource( 6 )]
+position = Vector2( 1250.21, 380.259 )
+
+[node name="Torch136" parent="test large corridor torchs" index="135" instance=ExtResource( 6 )]
+position = Vector2( 384.581, 200.518 )
+potion_probability = 1
+
+[node name="Torch137" parent="test large corridor torchs" index="136" instance=ExtResource( 6 )]
+position = Vector2( 80, 266.845 )
+potion_probability = 1
+
+[node name="Torch138" parent="test large corridor torchs" index="137" instance=ExtResource( 6 )]
+position = Vector2( 2266.58, -688 )
+subweapon_shuriken = true
+
+[node name="Torch139" parent="test large corridor torchs" index="138" instance=ExtResource( 6 )]
+position = Vector2( 689.581, 230.759 )
+subweapon_shuriken = true
+
+[node name="Torch140" parent="test large corridor torchs" index="139" instance=ExtResource( 6 )]
+position = Vector2( 545.581, 174.259 )
+subweapon_axe = true
+
+[node name="Torch141" parent="test large corridor torchs" index="140" instance=ExtResource( 6 )]
+position = Vector2( 969.581, 221.018 )
+weapon_lvl2 = true
+
+[node name="Torch142" parent="test large corridor torchs" index="141" instance=ExtResource( 6 )]
+position = Vector2( 1066.21, 172.259 )
+
+[node name="Torch143" parent="test large corridor torchs" index="142" instance=ExtResource( 6 )]
+position = Vector2( 1290.58, -283.741 )
+weapon_lvl2 = true
+
+[node name="Torch144" parent="test large corridor torchs" index="143" instance=ExtResource( 6 )]
+position = Vector2( 1465.58, 260.259 )
+weapon_lvl3 = true
+
+[node name="Torch145" parent="test large corridor torchs" index="144" instance=ExtResource( 6 )]
+position = Vector2( 801.581, 412.259 )
+potion_probability = 1
+
+[node name="Torch146" parent="test large corridor torchs" index="145" instance=ExtResource( 6 )]
+position = Vector2( 280.581, 392.518 )
+potion_probability = 1
+
+[node name="Torch147" parent="test large corridor torchs" index="146" instance=ExtResource( 6 )]
+position = Vector2( -24, 458.845 )
+potion_probability = 1
+
+[node name="Torch148" parent="test large corridor torchs" index="147" instance=ExtResource( 6 )]
+position = Vector2( 2162.58, -496 )
+subweapon_shuriken = true
+
+[node name="Torch149" parent="test large corridor torchs" index="148" instance=ExtResource( 6 )]
+position = Vector2( 585.581, 422.759 )
+subweapon_shuriken = true
+
+[node name="Torch150" parent="test large corridor torchs" index="149" instance=ExtResource( 6 )]
+position = Vector2( 441.581, 366.259 )
+subweapon_axe = true
+
+[node name="Torch151" parent="test large corridor torchs" index="150" instance=ExtResource( 6 )]
+position = Vector2( 865.581, 413.018 )
+weapon_lvl2 = true
+
+[node name="Torch152" parent="test large corridor torchs" index="151" instance=ExtResource( 6 )]
+position = Vector2( 962.211, 364.259 )
+
+[node name="Torch153" parent="test large corridor torchs" index="152" instance=ExtResource( 6 )]
+position = Vector2( 1040.58, 456.518 )
+potion_probability = 1
+
+[node name="Torch154" parent="test large corridor torchs" index="153" instance=ExtResource( 6 )]
+position = Vector2( 736, 522.845 )
+potion_probability = 1
+
+[node name="Torch155" parent="test large corridor torchs" index="154" instance=ExtResource( 6 )]
+position = Vector2( 2922.58, -432 )
+subweapon_shuriken = true
+
+[node name="Torch156" parent="test large corridor torchs" index="155" instance=ExtResource( 6 )]
+position = Vector2( 1345.58, 486.759 )
+subweapon_shuriken = true
+
+[node name="Torch157" parent="test large corridor torchs" index="156" instance=ExtResource( 6 )]
+position = Vector2( 1201.58, 430.259 )
+subweapon_axe = true
+
+[node name="Torch158" parent="test large corridor torchs" index="157" instance=ExtResource( 6 )]
+position = Vector2( 1625.58, 477.018 )
+weapon_lvl2 = true
+
+[node name="Torch159" parent="test large corridor torchs" index="158" instance=ExtResource( 6 )]
+position = Vector2( 1722.21, 428.259 )
+
+[node name="Torch160" parent="test large corridor torchs" index="159" instance=ExtResource( 6 )]
+position = Vector2( 1946.58, -27.741 )
+weapon_lvl2 = true
+
+[node name="Torch161" parent="test large corridor torchs" index="160" instance=ExtResource( 6 )]
+position = Vector2( 2121.58, 516.259 )
+weapon_lvl3 = true
+
+[node name="Torch162" parent="test large corridor torchs" index="161" instance=ExtResource( 6 )]
+position = Vector2( 1457.58, 668.259 )
+potion_probability = 1
+
+[node name="Torch163" parent="test large corridor torchs" index="162" instance=ExtResource( 6 )]
+position = Vector2( 936.581, 648.518 )
+potion_probability = 1
+
+[node name="Torch164" parent="test large corridor torchs" index="163" instance=ExtResource( 6 )]
+position = Vector2( 632, 714.845 )
+potion_probability = 1
+
+[node name="Torch165" parent="test large corridor torchs" index="164" instance=ExtResource( 6 )]
+position = Vector2( 2818.58, -240 )
+subweapon_shuriken = true
+
+[node name="Torch166" parent="test large corridor torchs" index="165" instance=ExtResource( 6 )]
+position = Vector2( 1241.58, 678.759 )
+subweapon_shuriken = true
+
+[node name="Torch167" parent="test large corridor torchs" index="166" instance=ExtResource( 6 )]
+position = Vector2( 1097.58, 622.259 )
+subweapon_axe = true
+
+[node name="Torch168" parent="test large corridor torchs" index="167" instance=ExtResource( 6 )]
+position = Vector2( 1521.58, 669.018 )
+weapon_lvl2 = true
+
+[node name="Torch169" parent="test large corridor torchs" index="168" instance=ExtResource( 6 )]
+position = Vector2( 1618.21, 620.259 )
 
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_Area2D_body_entered"]

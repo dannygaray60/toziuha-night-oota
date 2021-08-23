@@ -6,6 +6,8 @@ var velocity = Vector2.ZERO
 
 export var direction = 1
 
+var damage = int(Vars.player["atk"]*2)
+
 func _ready():
 	linear_velocity.x = 250 * direction
 	set_anim()
@@ -32,7 +34,7 @@ func _on_impact(body):
 	gravity_scale = 1
 	$CollisionShape2D.shape = null
 	if body.is_in_group("enemies"):
-		body.hurt(Vars.player["atk"]+5,position)
+		body.hurt(damage,position)
 
 
 func play_sound():

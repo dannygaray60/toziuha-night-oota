@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/precharge_elemental_circuit.ogg-e4058b20ca4818008846c7d56d577a33.oggstr"
+
+[deps]
+
+source_file="res://assets/sfx/precharge_elemental_circuit.ogg"
+dest_files=[ "res://.import/precharge_elemental_circuit.ogg-e4058b20ca4818008846c7d56d577a33.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://test/chain swing/ChainSwingPoint.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/ChainSwingPoint.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/characters/Xandria.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tilemaps/ForgottenDungeonGreen/TileMap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://tilemaps/ForgottenDungeonGreen/Background.tscn" type="PackedScene" id=4]
@@ -11,16 +11,16 @@
 tile_data = PoolIntArray( 589822, 1, 0, 524317, 1, 0, 655359, 1, 0, 589852, 1, 0, 589853, 1, 0, 655360, 1, 0, 655361, 1, 2, 655387, 1, 0, 655388, 1, 0, 720898, 1, 0, 720923, 1, 0, 786435, 1, 0, 786457, 1, 0, 786458, 1, 1, 786459, 1, 0, 851972, 1, 0, 851973, 1, 2, 851989, 1, 0, 851990, 1, 1, 851991, 1, 1, 851992, 1, 1, 851993, 1, 0, 917510, 1, 0, 917523, 1, 0, 917524, 1, 2, 983047, 1, 0, 983048, 1, 1, 983049, 1, 1, 983050, 1, 1, 983051, 1, 1, 983052, 1, 1, 983053, 1, 1, 983054, 1, 1, 983055, 1, 1, 983056, 1, 1, 983057, 1, 1, 983058, 1, 2 )
 
 [node name="ChainSwingPoint" parent="." instance=ExtResource( 1 )]
-position = Vector2( 203.677, 133.6 )
+position = Vector2( 160.941, 133.6 )
 
 [node name="ChainSwingPoint2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 325.969, 67.6734 )
+position = Vector2( 247.449, 98.5291 )
 
 [node name="ChainSwingPoint3" parent="." instance=ExtResource( 1 )]
-position = Vector2( 170.953, 15.9561 )
+position = Vector2( 165.953, 28.3758 )
 
 [node name="ChainSwingPoint4" parent="." instance=ExtResource( 1 )]
-position = Vector2( 266.702, -59.1028 )
+position = Vector2( 268.515, -16.3894 )
 
 [node name="Xandria" parent="." instance=ExtResource( 2 )]
 position = Vector2( 81.9263, 197.6 )

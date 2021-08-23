@@ -3,11 +3,10 @@
 [ext_resource path="res://assets/sprites/trap_small_spikes.png" type="Texture" id=1]
 [ext_resource path="res://objects/traps/TrapSmallSpikes.gd" type="Script" id=2]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 8 )
 
-[sub_resource type="Animation" id=1]
-resource_name = "show"
+[sub_resource type="Animation" id=2]
 length = 2.6
 step = 0.05
 tracks/0/type = "value"
@@ -61,16 +60,17 @@ collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, -8 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 disabled = true
 
 [node name="Sprite" type="Sprite" parent="Area2D"]
 position = Vector2( 0, -8 )
 texture = ExtResource( 1 )
 hframes = 14
+frame = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/show = SubResource( 1 )
+anims/show = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

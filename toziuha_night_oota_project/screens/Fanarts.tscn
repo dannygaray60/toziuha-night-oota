@@ -1,0 +1,468 @@
+[gd_scene load_steps=40 format=2]
+
+[ext_resource path="res://objects/ui/Panel_Purple.tres" type="StyleBox" id=1]
+[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://screens/Fanarts.gd" type="Script" id=3]
+[ext_resource path="res://objects/ui/SubButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=7]
+[ext_resource path="res://assets/img/purple_demon_forest.png" type="Texture" id=8]
+[ext_resource path="res://screens/ui_elements/ScrollContainer.tscn" type="PackedScene" id=9]
+[ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/img/intro_bgs/2.png" type="Texture" id=11]
+[ext_resource path="res://scripts/control_help_icons_screen_set_visible.gd" type="Script" id=12]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen1.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen11.png" type="Texture" id=14]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen2.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen12.png" type="Texture" id=16]
+[ext_resource path="res://assets/img/gallery/sindy_ramos.jpg" type="Texture" id=17]
+[ext_resource path="res://assets/img/gallery/danny_sketch1.jpg" type="Texture" id=18]
+[ext_resource path="res://assets/img/gallery/antagonists_sketchs.jpg" type="Texture" id=19]
+[ext_resource path="res://assets/img/gallery/first_ver_xandria.jpg" type="Texture" id=20]
+[ext_resource path="res://assets/img/gallery/atreu_sketch.png" type="Texture" id=21]
+[ext_resource path="res://assets/img/gallery/xandria_full_body.png" type="Texture" id=22]
+[ext_resource path="res://assets/img/gallery/portrait_xandria_alpha.png" type="Texture" id=23]
+[ext_resource path="res://assets/img/gallery/portrait_rachel_alpha.png" type="Texture" id=24]
+[ext_resource path="res://assets/img/gallery/neudigitalart.jpg" type="Texture" id=25]
+[ext_resource path="res://assets/img/gallery/smol_xandria.png" type="Texture" id=26]
+[ext_resource path="res://assets/img/gallery/marcos_lopez.png" type="Texture" id=27]
+[ext_resource path="res://assets/img/gallery/paolo_menoni.jpg" type="Texture" id=28]
+[ext_resource path="res://assets/img/gallery/eduardo_sf.jpg" type="Texture" id=29]
+[ext_resource path="res://assets/img/gallery/atomsk_luna.jpg" type="Texture" id=30]
+[ext_resource path="res://assets/img/gallery/elias_ojeda.jpg" type="Texture" id=31]
+[ext_resource path="res://assets/img/gallery/atomsk_luna2.png" type="Texture" id=32]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+content_margin_left = 51.0
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+extra_spacing_bottom = 3
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxTexture" id=5]
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 90, 47 )
+margin_left = 18.9633
+margin_right = 18.9107
+margin_top = 14.0969
+margin_bottom = 14.0
+
+[sub_resource type="DynamicFont" id=6]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -7
+extra_spacing_bottom = -7
+font_data = ExtResource( 6 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 130, 90 )
+
+[node name="Fanarts" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -152, 80 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" parent="." instance=ExtResource( 5 )]
+visible = false
+margin_left = 18.0
+margin_top = 86.0
+margin_right = 218.0
+margin_bottom = 143.12
+size_flags_vertical = 0
+custom_styles/panel = ExtResource( 1 )
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+margin_top = 4.00473
+margin_right = 200.0
+margin_bottom = 53.0047
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="BtnMenu" parent="Panel/Margin" instance=ExtResource( 4 )]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 190.0
+margin_bottom = 39.0
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 1 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/disabled = SubResource( 1 )
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+toggle_mode = true
+text = "MAINMENU"
+sfx_accept_sound = "btn_cancel"
+
+[node name="ScrollContainer" parent="." instance=ExtResource( 9 )]
+margin_bottom = 28.0
+mouse_filter = 2
+scroll_vertical_enabled = false
+semitransparent_unfocused_items = false
+
+[node name="CenterContainer" parent="ScrollContainer" index="0"]
+margin_right = 10362.0
+margin_bottom = 400.0
+
+[node name="MarginContainer" parent="ScrollContainer/CenterContainer" index="0"]
+margin_top = 0.0
+margin_right = 10362.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 0, 400 )
+custom_constants/margin_left = 1700
+
+[node name="HBoxContainer" parent="ScrollContainer/CenterContainer/MarginContainer" index="0"]
+margin_left = 1700.0
+margin_right = 8662.0
+margin_bottom = 400.0
+
+[node name="Sindy Ramos (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="0"]
+margin_right = 200.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 200, 400 )
+focus_mode = 2
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 6
+
+[node name="neu_digitalart (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="1"]
+margin_left = 312.0
+margin_right = 662.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 350, 400 )
+focus_mode = 2
+texture = ExtResource( 25 )
+expand = true
+stretch_mode = 6
+
+[node name="Paolo Menoni (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="2"]
+margin_left = 774.0
+margin_right = 1014.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 240, 400 )
+focus_mode = 2
+texture = ExtResource( 28 )
+expand = true
+stretch_mode = 6
+
+[node name="Elías Ojeda (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="3"]
+margin_left = 1126.0
+margin_right = 1406.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 280, 400 )
+focus_mode = 2
+texture = ExtResource( 31 )
+expand = true
+stretch_mode = 6
+
+[node name="Atomsk Luna (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="4"]
+margin_left = 1518.0
+margin_right = 1798.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 280, 400 )
+focus_mode = 2
+texture = ExtResource( 30 )
+expand = true
+stretch_mode = 6
+
+[node name="Atomsk Luna (fanart)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="5"]
+margin_left = 1910.0
+margin_right = 2190.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 280, 400 )
+focus_mode = 2
+texture = ExtResource( 32 )
+expand = true
+stretch_mode = 6
+
+[node name="Eduardo SF (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="6"]
+margin_left = 2302.0
+margin_right = 2532.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 230, 400 )
+focus_mode = 2
+texture = ExtResource( 29 )
+expand = true
+stretch_mode = 6
+
+[node name="Marcos Lopez (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="7"]
+margin_left = 2644.0
+margin_right = 2924.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 280, 400 )
+focus_mode = 2
+texture = ExtResource( 27 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (official sketch)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="8"]
+margin_left = 3036.0
+margin_right = 3376.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 340, 0 )
+focus_mode = 2
+texture = ExtResource( 18 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (official sketch)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="9"]
+margin_left = 3488.0
+margin_right = 4038.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 550, 400 )
+focus_mode = 2
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (official sketch)3" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="10"]
+margin_left = 4150.0
+margin_right = 4550.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 400, 0 )
+focus_mode = 2
+texture = ExtResource( 20 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (official sketch)4" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="11"]
+margin_left = 4662.0
+margin_right = 5122.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 460, 400 )
+focus_mode = 2
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (portrait prototype)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="12"]
+margin_left = 5234.0
+margin_right = 5424.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 190, 0 )
+focus_mode = 2
+texture = ExtResource( 23 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (portrait prototype)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="13"]
+margin_left = 5536.0
+margin_right = 5756.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 220, 0 )
+focus_mode = 2
+texture = ExtResource( 24 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (official)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="14"]
+margin_left = 5868.0
+margin_right = 6328.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 460, 400 )
+focus_mode = 2
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (official)3" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="15"]
+margin_left = 6440.0
+margin_right = 6620.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 180, 400 )
+focus_mode = 2
+texture = ExtResource( 26 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (official) (prototype)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="16"]
+margin_left = 6732.0
+margin_right = 6962.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 230, 400 )
+focus_mode = 2
+texture = ExtResource( 22 )
+expand = true
+stretch_mode = 6
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+margin_bottom = 40.0
+color = Color( 0, 0, 0, 0.552941 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -32.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.552941 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBxHelp" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -32.0
+grow_horizontal = 0
+mouse_filter = 2
+custom_constants/separation = 18
+alignment = 1
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBxHelp"]
+margin_left = 271.0
+margin_right = 337.0
+margin_bottom = 32.0
+
+[node name="Btn1" parent="HBxHelp/HBoxContainer" instance=ExtResource( 10 )]
+margin_top = 8.0
+margin_bottom = 24.0
+size_flags_vertical = 4
+action = "ui_left"
+
+[node name="Btn2" parent="HBxHelp/HBoxContainer" instance=ExtResource( 10 )]
+margin_left = 20.0
+margin_top = 8.0
+margin_right = 36.0
+margin_bottom = 24.0
+size_flags_vertical = 4
+action = "ui_right"
+
+[node name="Label" type="Label" parent="HBxHelp/HBoxContainer"]
+margin_left = 40.0
+margin_top = 9.0
+margin_right = 66.0
+margin_bottom = 22.0
+rect_pivot_offset = Vector2( 142, -89 )
+custom_fonts/font = SubResource( 3 )
+text = "MOVE"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBxHelp"]
+margin_left = 355.0
+margin_right = 411.0
+margin_bottom = 32.0
+
+[node name="Btn1" parent="HBxHelp/HBoxContainer2" instance=ExtResource( 10 )]
+margin_top = 8.0
+margin_bottom = 24.0
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="HBxHelp/HBoxContainer2"]
+margin_left = 20.0
+margin_top = 9.0
+margin_right = 56.0
+margin_bottom = 22.0
+custom_fonts/font = SubResource( 3 )
+text = "RETURN"
+
+[node name="HBxHelp2" type="HBoxContainer" parent="."]
+modulate = Color( 1, 1, 1, 0.282353 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -29.0
+margin_right = 82.0
+margin_bottom = -3.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonKeyGamepadIcon" parent="HBxHelp2" instance=ExtResource( 10 )]
+visible = false
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+action = "ui_select"
+
+[node name="Label" type="Label" parent="HBxHelp2"]
+margin_right = 72.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 4 )
+text = "RETURN"
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -327.5
+margin_top = 4.0
+margin_right = 327.5
+margin_bottom = 34.0969
+grow_horizontal = 2
+size_flags_horizontal = 4
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
+text = "Name Artist"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2( -120, 280 )
+shape = SubResource( 7 )
+action = "ui_cancel"
+visibility_mode = 1
+
+[node name="BtnL" type="TouchScreenButton" parent="."]
+position = Vector2( 208, 328 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 13 )
+pressed = ExtResource( 14 )
+passby_press = true
+action = "ui_left"
+visibility_mode = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BtnDown" type="TouchScreenButton" parent="."]
+position = Vector2( 411, 328 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 15 )
+pressed = ExtResource( 16 )
+passby_press = true
+action = "ui_right"
+visibility_mode = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[connection signal="pressed" from="Panel/Margin/BtnMenu" to="." method="_on_BtnMenu_pressed"]
+[connection signal="scrolled" from="ScrollContainer" to="." method="_on_ScrollContainer_scrolled"]
+
+[editable path="ScrollContainer"]

@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://test/BossHud.png" type="Texture" id=1]
+
+[sub_resource type="Gradient" id=1]
+offsets = PoolRealArray( 0, 0.493421, 1 )
+colors = PoolColorArray( 1, 0, 0, 1, 0.480469, 0.00187683, 0.00187683, 1, 0.9375, 0.0256348, 0.0256348, 1 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="WhipLevel3Blood" type="CPUParticles2D" parent="."]
+position = Vector2( 0.0783119, 9.43625 )
+rotation = 1.5708
+z_index = 1
+emitting = false
+amount = 40
+randomness = 0.69
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 7.0
+spread = 180.0
+gravity = Vector2( 0, 70 )
+radial_accel = 25.0
+radial_accel_random = 0.15
+scale_amount = 4.0
+scale_amount_random = 1.0
+color_ramp = SubResource( 1 )
+
+[node name="BossHud" type="Sprite" parent="."]
+position = Vector2( 331.257, 314.956 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )

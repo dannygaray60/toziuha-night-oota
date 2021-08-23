@@ -22,6 +22,10 @@ func _ready():
 
 func _on_RoomChanger_body_entered(body):
 	
+	#por si acaso el cuerpo del jugador entra estando muerto así evitar que se pueda seguir jugando con 0 de vida
+	if Vars.player["hp_now"] <= 0:
+		return
+	
 	if destiny_filename != "" and body.is_in_group("player") and $TimerDontDetect.get_time_left() == 0:
 		body.can_move = false
 		

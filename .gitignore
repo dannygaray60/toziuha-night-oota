@@ -4,3 +4,5 @@ export_presets.cfg
 *.*.translation
 dev-files/
 .import/
+android/
+toziuha_night_oota_project/content/custom_levels/Prologue/

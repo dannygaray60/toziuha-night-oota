@@ -77,8 +77,8 @@ collision_mask = 17
 script = ExtResource( 2 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-position = Vector2( 1.16786, -4 )
-scale = Vector2( 3.18321, 2 )
+position = Vector2( -9.53674e-07, -4 )
+scale = Vector2( 1.6, 2 )
 process_parent = true
 physics_process_parent = true
 

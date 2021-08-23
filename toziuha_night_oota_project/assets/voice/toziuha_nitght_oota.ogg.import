@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/toziuha_nitght_oota.ogg-24c6fdb65662c1267e4be4a1d1af3517.oggstr"
+
+[deps]
+
+source_file="res://assets/voice/toziuha_nitght_oota.ogg"
+dest_files=[ "res://.import/toziuha_nitght_oota.ogg-24c6fdb65662c1267e4be4a1d1af3517.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

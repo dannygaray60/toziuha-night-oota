@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://screens/ui_elements/ScrollContainer.gd" type="Script" id=5]
+
+[node name="ScrollContainer" type="ScrollContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = false
+mouse_filter = 1
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+scroll_duration = 0.3
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 3000.0
+margin_bottom = 372.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer"]
+margin_top = 186.0
+margin_right = 3000.0
+margin_bottom = 186.0
+mouse_filter = 2
+custom_constants/margin_right = 1700
+custom_constants/margin_left = 1300
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/MarginContainer"]
+margin_left = 1300.0
+margin_right = 1300.0
+grow_vertical = 0
+mouse_filter = 2
+custom_constants/separation = 112
+
+[node name="TimerStartAutomove" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+__meta__ = {
+"_editor_description_": "timeout inicia timerautomove"
+}
+
+[node name="TimerAutomove" type="Timer" parent="."]
+wait_time = 0.1
+__meta__ = {
+"_editor_description_": "cada timeout repite la ultima accion"
+}
+
+[connection signal="gui_input" from="." to="." method="_on_ScrollContainer_gui_input"]
+[connection signal="timeout" from="TimerStartAutomove" to="." method="_on_TimerStartAutomove_timeout"]
+[connection signal="timeout" from="TimerAutomove" to="." method="_on_TimerAutomove_timeout"]

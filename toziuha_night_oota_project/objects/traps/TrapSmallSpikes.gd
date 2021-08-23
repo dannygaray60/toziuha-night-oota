@@ -1,8 +1,16 @@
 extends Node2D
 
+export var static_spike = false
 export (float,0.2,3) var time_start = 1
 
 func _ready():
+	
+	if static_spike:
+		$Area2D/Sprite.frame = 7
+		$Area2D/CollisionShape2D.disabled = false
+	else:
+		$Area2D/Sprite.frame = 0
+	
 	$Timer.wait_time = time_start
 	
 
@@ -17,7 +25,8 @@ func play_sound():
 
 
 func _on_Timer_timeout():
-	$AnimationPlayer.play("show")
+	if !static_spike:
+		$AnimationPlayer.play("show")
 
 
 func _on_VisibilityEnabler2D_screen_entered():

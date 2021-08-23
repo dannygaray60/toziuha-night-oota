@@ -49,13 +49,14 @@ func selected_action(opt):
 			SceneChanger.change_scene("res://screens/Options.tscn")
 		"default":
 			$VBoxContainer/Transparency/SliderTransparency.value = 0.6
-			$VBoxContainer/Size/SliderSize.value = 1
+			$VBoxContainer/Size/SliderSize.value = 0.9
 			#posiciones por defecto
 			$Btn/ui_select.position =Vector2( 649.494, 32.4725 )
-			$Btn/ui_accept.position = Vector2(631.453, 279.882)
-			$Btn/ui_cancel.position = Vector2(552.07, 330.395)
-			$Btn/ui_focus_prev.position = Vector2(629.391, 180.403)
-			$Dpad.position = Vector2(96.3932, 280.913)
+			$Btn/ui_accept.position = Vector2(636, 281)
+			$Btn/ui_cancel.position = Vector2(558.256, 325.756)
+			$Btn/ui_focus_prev.position = Vector2(557, 232)
+			$Btn/ui_focus_next.position = Vector2(631.968, 184.526)
+			$Dpad.position = Vector2(96, 258)
 
 
 func _on_SliderOpacity_value_changed(value):

@@ -1,0 +1,303 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://assets/sprites/boss_puppet_master.png" type="Texture" id=1]
+[ext_resource path="res://objects/bosses/PuppetMaster.gd" type="Script" id=2]
+[ext_resource path="res://assets/sprites/vfx_tornado_static.png" type="Texture" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 16.0894
+height = 50.9637
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 18.2006
+height = 49.2682
+
+[sub_resource type="Animation" id=3]
+length = 3.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "end_battle"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("vfx_tornado_static:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.7, 2.8, 2.9, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 ]
+}
+
+[sub_resource type="Animation" id=4]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=5]
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 6, 5, 4 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "spawning"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.9, 2.1, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 4, 4.2, 4.5, 5.2, 5.5, 5.8, 6.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 6, 7, 6, 7, 6, 7, 6, 7, 6, 5, 7, 6, 7, 6, 7, 6, 7, 6, 5, 7, 5, 4, 2, 1 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 2.4, 4.5, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_spawn"
+}, {
+"args": [  ],
+"method": "start_spawn"
+}, {
+"args": [  ],
+"method": "start_spawn"
+}, {
+"args": [ "fly" ],
+"method": "change_state"
+} ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "wakeup"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 10, 9, 8, 7, 5, 4 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "dead"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "fly"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "pos-spawn"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "spawn"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "spawning"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "wakeup"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachine" id=26]
+states/dead/node = SubResource( 9 )
+states/dead/position = Vector2( 98, 214 )
+states/fly/node = SubResource( 10 )
+states/fly/position = Vector2( 304, 75 )
+states/pos-spawn/node = SubResource( 11 )
+states/pos-spawn/position = Vector2( 647, 63 )
+states/spawn/node = SubResource( 12 )
+states/spawn/position = Vector2( 490, 225 )
+states/spawning/node = SubResource( 13 )
+states/spawning/position = Vector2( 627, 159 )
+states/wakeup/node = SubResource( 14 )
+states/wakeup/position = Vector2( 145, 63 )
+transitions = [ "fly", "spawn", SubResource( 15 ), "pos-spawn", "fly", SubResource( 16 ), "fly", "dead", SubResource( 17 ), "spawn", "dead", SubResource( 18 ), "spawn", "spawning", SubResource( 19 ), "spawning", "pos-spawn", SubResource( 20 ), "spawn", "fly", SubResource( 21 ), "spawning", "fly", SubResource( 22 ), "pos-spawn", "dead", SubResource( 23 ), "wakeup", "fly", SubResource( 24 ), "fly", "wakeup", SubResource( 25 ) ]
+start_node = "wakeup"
+end_node = "dead"
+graph_offset = Vector2( 0, 71.3089 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=27]
+
+[sub_resource type="CapsuleShape2D" id=28]
+radius = 16.4862
+height = 34.3275
+
+[node name="PuppetMaster" type="KinematicBody2D" groups=[
+"enemies",
+]]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource( 2 )
+
+[node name="PositionCenter" type="Position2D" parent="."]
+__meta__ = {
+"_editor_description_": "ubicarlo en centro de room"
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color( 0.101961, 0.827451, 0.180392, 1 )
+position = Vector2( 0, -1 )
+shape = SubResource( 1 )
+
+[node name="Area2DDetectSubweapon" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DDetectSubweapon"]
+position = Vector2( 0, 1 )
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 5
+vframes = 4
+frame = 11
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/dead = SubResource( 3 )
+anims/fly = SubResource( 4 )
+anims/pos-spawn = SubResource( 5 )
+anims/spawn = SubResource( 6 )
+anims/spawning = SubResource( 7 )
+anims/wakeup = SubResource( 8 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 26 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 27 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="TimerHurt" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+__meta__ = {
+"_editor_description_": "activado al ser herido, mientras esté activo no podrá ser herido"
+}
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2( 0, -8 )
+shape = SubResource( 28 )
+
+[node name="vfx_tornado_static" type="Sprite" parent="."]
+position = Vector2( 0, -36 )
+texture = ExtResource( 4 )
+hframes = 5
+vframes = 3
+frame = 13
+
+[node name="TimerAutoInvoke" type="Timer" parent="."]
+wait_time = 40.0
+autostart = true
+
+[connection signal="body_entered" from="Area2DDetectSubweapon" to="." method="_on_Area2DDetectSubweapon_body_entered"]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
+[connection signal="body_entered" from="HitBox" to="." method="_on_collision_with_player"]
+[connection signal="timeout" from="TimerAutoInvoke" to="." method="_on_TimerAutoInvoke_timeout"]

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/fatal_answer.ogg-a3789d0f74eb99db1deb0681a93cb0bb.oggstr"
+
+[deps]
+
+source_file="res://assets/bgm/fatal_answer.ogg"
+dest_files=[ "res://.import/fatal_answer.ogg-a3789d0f74eb99db1deb0681a93cb0bb.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -134,7 +134,7 @@ func _on_Area2DDetectNoFloor_body_exited(body):
 			speed = 30
 		if state == "attack":
 			change_state("walk")
-		else:
+		elif !$Sprite/Area2DDetectNoFloor/RayCast2D.is_colliding():
 			Enemy.inverse_facing(self,$Sprite)
 
 

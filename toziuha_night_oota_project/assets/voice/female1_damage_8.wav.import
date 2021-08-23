@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/female1_damage_8.wav-034b95df57d9c7f17fb9b6edbb3b2516.sample"
+
+[deps]
+
+source_file="res://assets/voice/female1_damage_8.wav"
+dest_files=[ "res://.import/female1_damage_8.wav-034b95df57d9c7f17fb9b6edbb3b2516.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

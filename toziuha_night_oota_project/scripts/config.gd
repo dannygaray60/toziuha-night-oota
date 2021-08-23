@@ -14,7 +14,10 @@ func check_configfile(configfile="user://settings.cfg"):
 	# Store a variable if and only if it hasn't been defined yet
 	
 	#-------- seccion de video #disabled
-	check_conf_setting("video", "filter", "scanlines")
+	if OS.get_name() == "Android":
+		check_conf_setting("video", "filter", "disabled")
+	else:
+		check_conf_setting("video", "filter", "scanlines")
 	check_conf_setting("video", "fullscreen", false)
 	check_conf_setting("video", "borderless", false)
 	#iconos de botones: gamepad, keyboard, hide
@@ -25,7 +28,7 @@ func check_configfile(configfile="user://settings.cfg"):
 	
 	#-------- seccion de audio
 	check_conf_setting("audio", "sfx", 1.0)
-	check_conf_setting("audio", "bgm", 1.0)
+	check_conf_setting("audio", "bgm", 0.6)
 	check_conf_setting("audio", "voice", 1.0)
 	
 	#---- obtener la lista de acciones y sus eventos del inputmap
@@ -40,13 +43,15 @@ func check_configfile(configfile="user://settings.cfg"):
 				check_conf_setting("gamepad", action, ev.button_index)
 
 	#pausa - enter
-	check_conf_setting("gamepad_icon", "ui_select", 25)
+	check_conf_setting("gamepad_icon", "ui_select", 31)
 	#salto - aceptar
-	check_conf_setting("gamepad_icon", "ui_accept", 0)
+	check_conf_setting("gamepad_icon", "ui_accept", 4)
 	#ataque - cancelar
-	check_conf_setting("gamepad_icon", "ui_cancel", 1)
+	check_conf_setting("gamepad_icon", "ui_cancel", 6)
 	#backdash
-	check_conf_setting("gamepad_icon", "ui_focus_prev", 12)
+	check_conf_setting("gamepad_icon", "ui_focus_prev", 5)
+	#usar subarma
+	check_conf_setting("gamepad_icon", "ui_focus_next", 7)
 	#arriba
 	check_conf_setting("gamepad_icon", "ui_up", 22)
 	#abajo
@@ -58,9 +63,9 @@ func check_configfile(configfile="user://settings.cfg"):
 		
 	#configuracion de botones virtuales
 	#opacidad de botones
-	check_conf_setting("touchscreenbutton", "opacity", 0.71)
+	check_conf_setting("touchscreenbutton", "opacity", 0.6)
 	#tamaño de cada botón
-	check_conf_setting("touchscreenbutton", "size", 1)
+	check_conf_setting("touchscreenbutton", "size", 0.9)
 	#mostrar controles
 	if not conf.has_section_key("touchscreenbutton", "show_buttons"):
 		if OS.get_name() == "Android":
@@ -70,13 +75,15 @@ func check_configfile(configfile="user://settings.cfg"):
 	#pausa - enter
 	check_conf_setting("touchscreenbutton", "ui_select", Vector2( 649.494, 32.4725 ))
 	#salto - aceptar
-	check_conf_setting("touchscreenbutton", "ui_accept", Vector2(631.453, 279.882))
+	check_conf_setting("touchscreenbutton", "ui_accept", Vector2(636, 281))
 	#ataque - cancelar
-	check_conf_setting("touchscreenbutton", "ui_cancel", Vector2(552.07, 330.395))
+	check_conf_setting("touchscreenbutton", "ui_cancel", Vector2(558.256, 325.756))
 	#backdash
-	check_conf_setting("touchscreenbutton", "ui_focus_prev", Vector2(629.391, 180.403))
+	check_conf_setting("touchscreenbutton", "ui_focus_prev", Vector2(557, 232))
+	#subweapon
+	check_conf_setting("touchscreenbutton", "ui_focus_next", Vector2(631.968, 184.526))	
 	#arriba abajo izquierda derecha (el centro de estos botones en grupo)
-	check_conf_setting("touchscreenbutton", "dpad", Vector2(96.3932, 280.913))
+	check_conf_setting("touchscreenbutton", "dpad", Vector2(96, 258))
 
 	#--------- idioma
 	var langlocale = TranslationServer.get_locale()
@@ -86,6 +93,15 @@ func check_configfile(configfile="user://settings.cfg"):
 		else:
 			langlocale="en"
 	check_conf_setting("other", "lang", langlocale)
+
+	#mapping string para controles genericos
+	if not conf.has_section_key("other", "gamepad_mapping_string"):
+		check_conf_setting("other", "gamepad_mapping_string", "")
+		#030000004c0500006802000000000000,Generic PS3 Controller Custom,platform:Windows,a:b14,b:b13,x:b15,y:b12,back:b1,start:b2,leftstick:-a0,rightstick:+a2,leftshoulder:b10,rightshoulder:b11,dpup:b4,dpdown:b6,dpleft:b7,dpright:b5,-leftx:+a1,+leftx:+a0,-lefty:-a1,-rightx:-a2,righty:a3,lefttrigger:b8,righttrigger:b9,
+	
+	#aplicar mapeo en caso de haber uno
+	if get_conf_value("other","gamepad_mapping_string","") != "":
+		Input.add_joy_mapping(get_conf_value("other","gamepad_mapping_string",""), true)
 
 	#guardar cambios predeterminados en el config nuevo
 	err = conf.save(configfile)

@@ -1,14 +1,17 @@
 extends Node
 
+export var enable_quicksave = true
+
 #titulo de la habitacion que se mostrará una vez como titulo
 #dejar vacío para no mostrar nada
 export var title_room = ""
 
-export(String, "silence","rondo_of_darkness","war_prelude","nameless_symphony", "cave_theme") var music = "silence"
+export(String, "silence","the_beginning_of_darkness", "caverns_theme", "cave_theme", "ambient_forest_wind") var music = "silence"
 
 var player = null	
 
 func _ready():
+	$Hud.can_quicksave = enable_quicksave
 	
 	get_player()
 

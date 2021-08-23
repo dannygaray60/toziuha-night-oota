@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://assets/sprites/hud.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/hp_bar_good.png" type="Texture" id=2]
@@ -19,6 +19,24 @@
 [ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=17]
 [ext_resource path="res://scripts/control_help_icons_screen_set_visible.gd" type="Script" id=18]
 [ext_resource path="res://assets/sprites/st_bar.png" type="Texture" id=19]
+[ext_resource path="res://assets/sprites/quick_menu_equip.png" type="Texture" id=20]
+[ext_resource path="res://assets/sprites/elemental_circuit_icons.png" type="Texture" id=21]
+[ext_resource path="res://objects/ui/Hud_ControlQuickEquip.gd" type="Script" id=22]
+[ext_resource path="res://objects/ui/Panel_Purple_light.tres" type="StyleBox" id=23]
+[ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=24]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen5.png" type="Texture" id=25]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen15.png" type="Texture" id=26]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen11.png" type="Texture" id=27]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen1.png" type="Texture" id=28]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen13.png" type="Texture" id=29]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen3.png" type="Texture" id=30]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen4.png" type="Texture" id=31]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen2.png" type="Texture" id=32]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen12.png" type="Texture" id=33]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen14.png" type="Texture" id=34]
+[ext_resource path="res://assets/sprites/boss_bar_base.png" type="Texture" id=35]
+[ext_resource path="res://assets/sprites/boss_bar.png" type="Texture" id=36]
+[ext_resource path="res://assets/sprites/elements_and_equip_items.png" type="Texture" id=37]
 
 [sub_resource type="StyleBoxTexture" id=1]
 content_margin_left = 9.0
@@ -72,8 +90,10 @@ font_data = ExtResource( 17 )
 [sub_resource type="DynamicFont" id=8]
 font_data = ExtResource( 17 )
 
-[sub_resource type="Animation" id=9]
-resource_name = "flash"
+[sub_resource type="DynamicFont" id=9]
+font_data = ExtResource( 17 )
+
+[sub_resource type="Animation" id=10]
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:modulate")
 tracks/0/interp = 1
@@ -96,7 +116,6 @@ script = ExtResource( 7 )
 
 [node name="Main" type="Control" parent="."]
 pause_mode = 1
-modulate = Color( 1, 1, 1, 0.196078 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -237,6 +256,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TextureBoss" type="TextureRect" parent="Main"]
+visible = false
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -28.0
+margin_top = -167.0
+margin_right = -5.0
+margin_bottom = -4.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 23, 163 )
+texture = ExtResource( 35 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HPBar" type="TextureProgress" parent="Main/TextureBoss"]
+margin_left = 18.0
+margin_top = 1.5
+margin_right = 21.0
+margin_bottom = 137.5
+value = 50.0
+texture_progress = ExtResource( 36 )
+fill_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ControlTitleRoom" type="Control" parent="Main"]
 pause_mode = 2
 modulate = Color( 1, 1, 1, 0 )
@@ -261,9 +309,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -47.5
-margin_top = -21.75
+margin_top = -38.0
 margin_right = 48.5
-margin_bottom = -1.75
+margin_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -319,6 +367,9 @@ anchor_bottom = 1.0
 texture = ExtResource( 14 )
 expand = true
 stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ControlMap" type="Node2D" parent="ControlPause"]
 
@@ -345,28 +396,38 @@ __meta__ = {
 }
 
 [node name="BtnContinue" parent="ControlPause/MarginContainer/HBoxContainer" instance=ExtResource( 3 )]
-margin_left = 79.0
-margin_right = 226.0
+margin_left = 51.0
+margin_right = 198.0
 margin_bottom = 49.0
+focus_neighbour_left = NodePath("../BtnSaveAndExit")
 mouse_filter = 1
 size_flags_horizontal = 1
 text = "CONTINUE"
 
-[node name="BtnSaveAndExit" parent="ControlPause/MarginContainer/HBoxContainer" instance=ExtResource( 3 )]
-margin_left = 254.0
-margin_right = 437.0
+[node name="BtnEquip" parent="ControlPause/MarginContainer/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 226.0
+margin_right = 337.0
 margin_bottom = 49.0
 mouse_filter = 1
 size_flags_horizontal = 1
-text = "SAVEANDEXIT"
+text = "EQUIP"
 
 [node name="BtnHelp" parent="ControlPause/MarginContainer/HBoxContainer" instance=ExtResource( 3 )]
-margin_left = 465.0
-margin_right = 564.0
+margin_left = 365.0
+margin_right = 464.0
 margin_bottom = 49.0
 mouse_filter = 1
 size_flags_horizontal = 1
 text = "HELP"
+
+[node name="BtnSaveAndExit" parent="ControlPause/MarginContainer/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 492.0
+margin_right = 591.0
+margin_bottom = 49.0
+focus_neighbour_right = NodePath("../BtnContinue")
+mouse_filter = 1
+size_flags_horizontal = 1
+text = "EXIT"
 
 [node name="MarginContainer2" type="MarginContainer" parent="ControlPause"]
 anchor_right = 1.0
@@ -425,27 +486,30 @@ text = "$00000"
 position = Vector2( 652, 63.1352 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 12 )
-hframes = 7
+hframes = 15
 frame = 3
 
 [node name="silver_key" type="Sprite" parent="ControlPause"]
 position = Vector2( 652, 109 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 12 )
-hframes = 7
+hframes = 15
 frame = 4
 
 [node name="golden_key" type="Sprite" parent="ControlPause"]
 position = Vector2( 652, 155.698 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 12 )
-hframes = 7
+hframes = 15
 frame = 5
 
 [node name="ControlHelp" type="Control" parent="ControlPause"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ColorRect" type="TextureRect" parent="ControlPause/ControlHelp"]
 modulate = Color( 0.152941, 0.152941, 0.152941, 1 )
@@ -474,296 +538,432 @@ margin_bottom = 374.0
 alignment = 1
 
 [node name="VBx" type="VBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx"]
-margin_left = 108.0
-margin_right = 554.0
+margin_left = 50.0
+margin_right = 650.0
 margin_bottom = 364.0
+rect_min_size = Vector2( 600, 0 )
 alignment = 1
 
 [node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
-margin_top = 47.0
+visible = false
+margin_top = 32.0
 margin_right = 446.0
-margin_bottom = 73.0
+margin_bottom = 58.0
 custom_fonts/font = ExtResource( 10 )
 text = "ACTIONS_LIST"
 
 [node name="HSeparator" type="HSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
-margin_top = 77.0
+visible = false
+margin_top = 47.0
 margin_right = 446.0
-margin_bottom = 81.0
+margin_bottom = 51.0
 
 [node name="HBx" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
-margin_top = 85.0
-margin_right = 446.0
-margin_bottom = 111.0
+margin_top = 21.0
+margin_right = 600.0
+margin_bottom = 47.0
 
 [node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx"]
-margin_right = 250.0
+margin_right = 290.0
 margin_bottom = 26.0
-rect_min_size = Vector2( 250, 0 )
+rect_min_size = Vector2( 290, 0 )
 custom_fonts/font = ExtResource( 10 )
-text = "ATTACK"
+text = "MOVE"
+align = 2
 
 [node name="VSeparator" type="VSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx"]
-margin_left = 254.0
-margin_right = 274.0
+margin_left = 294.0
+margin_right = 314.0
 margin_bottom = 26.0
 custom_constants/separation = 20
 
 [node name="Label3" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx"]
-margin_left = 278.0
-margin_right = 338.0
+margin_left = 318.0
+margin_right = 378.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 10 )
 text = "PRESS"
 
 [node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx" instance=ExtResource( 13 )]
-margin_left = 342.0
+margin_left = 382.0
 margin_top = 5.0
-margin_right = 358.0
-margin_bottom = 21.0
-size_flags_vertical = 4
-
-[node name="HBx3" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
-margin_top = 115.0
-margin_right = 446.0
-margin_bottom = 141.0
-
-[node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx3"]
-margin_right = 250.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 250, 0 )
-custom_fonts/font = ExtResource( 10 )
-text = "THROW_SUBWEAPON"
-
-[node name="VSeparator" type="VSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx3"]
-margin_left = 254.0
-margin_right = 274.0
-margin_bottom = 26.0
-custom_constants/separation = 20
-
-[node name="Label3" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx3"]
-margin_left = 278.0
-margin_right = 326.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 10 )
-text = "HOLD"
-
-[node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx3" instance=ExtResource( 13 )]
-margin_left = 330.0
-margin_top = 5.0
-margin_right = 346.0
+margin_right = 398.0
 margin_bottom = 21.0
 size_flags_vertical = 4
 action = "ui_up"
 
-[node name="Label2" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx3"]
-margin_left = 350.0
-margin_right = 362.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 10 )
-text = "+"
+[node name="ButtonKeyGamepadIcon2" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx" instance=ExtResource( 13 )]
+margin_left = 402.0
+margin_top = 5.0
+margin_right = 418.0
+margin_bottom = 21.0
+size_flags_vertical = 4
+action = "ui_down"
 
-[node name="Label4" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx3"]
-margin_left = 366.0
-margin_right = 426.0
+[node name="ButtonKeyGamepadIcon3" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx" instance=ExtResource( 13 )]
+margin_left = 422.0
+margin_top = 5.0
+margin_right = 438.0
+margin_bottom = 21.0
+size_flags_vertical = 4
+action = "ui_left"
+
+[node name="ButtonKeyGamepadIcon4" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx" instance=ExtResource( 13 )]
+margin_left = 442.0
+margin_top = 5.0
+margin_right = 458.0
+margin_bottom = 21.0
+size_flags_vertical = 4
+action = "ui_right"
+
+[node name="HBx7" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
+margin_top = 51.0
+margin_right = 600.0
+margin_bottom = 77.0
+
+[node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx7"]
+margin_right = 290.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 290, 0 )
+custom_fonts/font = ExtResource( 10 )
+text = "ATTACK"
+align = 2
+
+[node name="VSeparator" type="VSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx7"]
+margin_left = 294.0
+margin_right = 314.0
+margin_bottom = 26.0
+custom_constants/separation = 20
+
+[node name="Label3" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx7"]
+margin_left = 318.0
+margin_right = 378.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 10 )
 text = "PRESS"
 
-[node name="ButtonKeyGamepadIcon2" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx3" instance=ExtResource( 13 )]
-margin_left = 430.0
+[node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx7" instance=ExtResource( 13 )]
+margin_left = 382.0
 margin_top = 5.0
-margin_right = 446.0
+margin_right = 398.0
 margin_bottom = 21.0
 size_flags_vertical = 4
 
 [node name="HBx5" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
-margin_top = 145.0
-margin_right = 446.0
-margin_bottom = 171.0
+margin_top = 81.0
+margin_right = 600.0
+margin_bottom = 107.0
 
 [node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx5"]
-margin_right = 250.0
+margin_right = 290.0
 margin_bottom = 26.0
-rect_min_size = Vector2( 250, 0 )
+rect_min_size = Vector2( 290, 0 )
 custom_fonts/font = ExtResource( 10 )
 text = "JUMP"
+align = 2
 
 [node name="VSeparator" type="VSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx5"]
-margin_left = 254.0
-margin_right = 274.0
+margin_left = 294.0
+margin_right = 314.0
 margin_bottom = 26.0
 custom_constants/separation = 20
 
 [node name="Label3" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx5"]
-margin_left = 278.0
-margin_right = 338.0
+margin_left = 318.0
+margin_right = 378.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 10 )
 text = "PRESS"
 
 [node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx5" instance=ExtResource( 13 )]
-margin_left = 342.0
+margin_left = 382.0
 margin_top = 5.0
-margin_right = 358.0
-margin_bottom = 21.0
-size_flags_vertical = 4
-action = "ui_accept"
-
-[node name="HBx2" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
-margin_top = 175.0
-margin_right = 446.0
-margin_bottom = 201.0
-
-[node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2"]
-margin_right = 250.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 250, 0 )
-custom_fonts/font = ExtResource( 10 )
-text = "SLIDE"
-
-[node name="VSeparator" type="VSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2"]
-margin_left = 254.0
-margin_right = 274.0
-margin_bottom = 26.0
-custom_constants/separation = 20
-
-[node name="Label3" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2"]
-margin_left = 278.0
-margin_right = 326.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 10 )
-text = "HOLD"
-
-[node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2" instance=ExtResource( 13 )]
-margin_left = 330.0
-margin_top = 5.0
-margin_right = 346.0
-margin_bottom = 21.0
-size_flags_vertical = 4
-action = "ui_down"
-
-[node name="Label2" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2"]
-margin_left = 350.0
-margin_right = 362.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 10 )
-text = "+"
-
-[node name="Label4" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2"]
-margin_left = 366.0
-margin_right = 426.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 10 )
-text = "PRESS"
-
-[node name="ButtonKeyGamepadIcon2" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2" instance=ExtResource( 13 )]
-margin_left = 430.0
-margin_top = 5.0
-margin_right = 446.0
+margin_right = 398.0
 margin_bottom = 21.0
 size_flags_vertical = 4
 action = "ui_accept"
 
 [node name="HBx6" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
-margin_top = 205.0
-margin_right = 446.0
-margin_bottom = 231.0
+margin_top = 111.0
+margin_right = 600.0
+margin_bottom = 137.0
 
 [node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx6"]
-margin_right = 250.0
+margin_right = 290.0
 margin_bottom = 26.0
-rect_min_size = Vector2( 250, 0 )
+rect_min_size = Vector2( 290, 0 )
 custom_fonts/font = ExtResource( 10 )
 text = "BACKWARD"
+align = 2
 
 [node name="VSeparator" type="VSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx6"]
-margin_left = 254.0
-margin_right = 274.0
+margin_left = 294.0
+margin_right = 314.0
 margin_bottom = 26.0
 custom_constants/separation = 20
 
 [node name="Label3" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx6"]
-margin_left = 278.0
-margin_right = 338.0
+margin_left = 318.0
+margin_right = 378.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 10 )
 text = "PRESS"
 
 [node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx6" instance=ExtResource( 13 )]
-margin_left = 342.0
+margin_left = 382.0
 margin_top = 5.0
-margin_right = 358.0
+margin_right = 398.0
 margin_bottom = 21.0
 size_flags_vertical = 4
 action = "ui_focus_prev"
 
+[node name="HBx3" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
+margin_top = 141.0
+margin_right = 600.0
+margin_bottom = 167.0
+
+[node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx3"]
+margin_right = 290.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 290, 0 )
+custom_fonts/font = ExtResource( 10 )
+text = "THROW_SUBWEAPON"
+align = 2
+
+[node name="VSeparator" type="VSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx3"]
+margin_left = 294.0
+margin_right = 314.0
+margin_bottom = 26.0
+custom_constants/separation = 20
+
+[node name="Label4" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx3"]
+margin_left = 318.0
+margin_right = 378.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 10 )
+text = "PRESS"
+
+[node name="ButtonKeyGamepadIcon2" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx3" instance=ExtResource( 13 )]
+margin_left = 382.0
+margin_top = 5.0
+margin_right = 398.0
+margin_bottom = 21.0
+size_flags_vertical = 4
+action = "ui_focus_next"
+
+[node name="HBx9" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
+margin_top = 171.0
+margin_right = 600.0
+margin_bottom = 197.0
+
+[node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx9"]
+margin_right = 290.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 290, 0 )
+custom_fonts/font = ExtResource( 10 )
+text = "ABSORB_CIRCUIT"
+align = 2
+
+[node name="VSeparator" type="VSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx9"]
+margin_left = 294.0
+margin_right = 314.0
+margin_bottom = 26.0
+custom_constants/separation = 20
+
+[node name="Label3" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx9"]
+margin_left = 318.0
+margin_right = 366.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 10 )
+text = "HOLD"
+
+[node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx9" instance=ExtResource( 13 )]
+margin_left = 370.0
+margin_top = 5.0
+margin_right = 386.0
+margin_bottom = 21.0
+size_flags_vertical = 4
+action = "ui_up"
+
 [node name="HBx4" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
-margin_top = 235.0
-margin_right = 446.0
-margin_bottom = 261.0
+margin_top = 201.0
+margin_right = 600.0
+margin_bottom = 227.0
 
 [node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx4"]
-margin_right = 250.0
+margin_right = 290.0
 margin_bottom = 26.0
-rect_min_size = Vector2( 250, 0 )
+rect_min_size = Vector2( 290, 0 )
 custom_fonts/font = ExtResource( 10 )
 text = "USE_POTION"
+align = 2
 
 [node name="VSeparator" type="VSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx4"]
-margin_left = 254.0
-margin_right = 274.0
+margin_left = 294.0
+margin_right = 314.0
 margin_bottom = 26.0
 custom_constants/separation = 20
 
 [node name="Label3" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx4"]
-margin_left = 278.0
-margin_right = 326.0
+margin_left = 318.0
+margin_right = 366.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 10 )
 text = "HOLD"
 
 [node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx4" instance=ExtResource( 13 )]
-margin_left = 330.0
+margin_left = 370.0
 margin_top = 5.0
-margin_right = 346.0
+margin_right = 386.0
 margin_bottom = 21.0
 size_flags_vertical = 4
 action = "ui_down"
 
 [node name="Label2" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx4"]
-margin_left = 350.0
-margin_right = 362.0
+margin_left = 390.0
+margin_right = 402.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 10 )
 text = "+"
 
 [node name="Label4" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx4"]
-margin_left = 366.0
-margin_right = 426.0
+margin_left = 406.0
+margin_right = 466.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 10 )
 text = "PRESS"
 
 [node name="ButtonKeyGamepadIcon2" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx4" instance=ExtResource( 13 )]
-margin_left = 430.0
+margin_left = 470.0
 margin_top = 5.0
-margin_right = 446.0
+margin_right = 486.0
 margin_bottom = 21.0
 size_flags_vertical = 4
-action = "ui_focus_prev"
+action = "ui_focus_next"
+
+[node name="HBx8" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
+margin_top = 231.0
+margin_right = 600.0
+margin_bottom = 257.0
+
+[node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8"]
+margin_right = 290.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 290, 0 )
+custom_fonts/font = ExtResource( 10 )
+text = "USE_ELEMENTAL_CIRCUIT"
+align = 2
+
+[node name="VSeparator" type="VSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8"]
+margin_left = 294.0
+margin_right = 314.0
+margin_bottom = 26.0
+custom_constants/separation = 20
+
+[node name="Label3" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8"]
+margin_left = 318.0
+margin_right = 366.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 10 )
+text = "HOLD"
+
+[node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8" instance=ExtResource( 13 )]
+margin_left = 370.0
+margin_top = 5.0
+margin_right = 386.0
+margin_bottom = 21.0
+size_flags_vertical = 4
+action = "ui_up"
+
+[node name="Label2" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8"]
+margin_left = 390.0
+margin_right = 402.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 10 )
+text = "+"
+
+[node name="Label4" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8"]
+margin_left = 406.0
+margin_right = 454.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 10 )
+text = "HOLD"
+
+[node name="ButtonKeyGamepadIcon2" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8" instance=ExtResource( 13 )]
+margin_left = 458.0
+margin_top = 5.0
+margin_right = 474.0
+margin_bottom = 21.0
+size_flags_vertical = 4
+action = "ui_focus_next"
+
+[node name="HBx2" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
+margin_top = 261.0
+margin_right = 600.0
+margin_bottom = 287.0
+
+[node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2"]
+margin_right = 290.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 290, 0 )
+custom_fonts/font = ExtResource( 10 )
+text = "SLIDE"
+align = 2
+
+[node name="VSeparator" type="VSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2"]
+margin_left = 294.0
+margin_right = 314.0
+margin_bottom = 26.0
+custom_constants/separation = 20
+
+[node name="Label3" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2"]
+margin_left = 318.0
+margin_right = 366.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 10 )
+text = "HOLD"
+
+[node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2" instance=ExtResource( 13 )]
+margin_left = 370.0
+margin_top = 5.0
+margin_right = 386.0
+margin_bottom = 21.0
+size_flags_vertical = 4
+action = "ui_down"
+
+[node name="Label2" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2"]
+margin_left = 390.0
+margin_right = 402.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 10 )
+text = "+"
+
+[node name="Label4" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2"]
+margin_left = 406.0
+margin_right = 466.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 10 )
+text = "PRESS"
+
+[node name="ButtonKeyGamepadIcon2" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx2" instance=ExtResource( 13 )]
+margin_left = 470.0
+margin_top = 5.0
+margin_right = 486.0
+margin_bottom = 21.0
+size_flags_vertical = 4
+action = "ui_accept"
 
 [node name="HSeparator2" type="HSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
-margin_top = 265.0
-margin_right = 446.0
-margin_bottom = 284.0
+margin_top = 291.0
+margin_right = 600.0
+margin_bottom = 310.0
 custom_styles/separator = SubResource( 4 )
 custom_constants/separation = 19
 
 [node name="BtnCloseHelpPanel" parent="ControlPause/ControlHelp/Margin/HBx/VBx" instance=ExtResource( 3 )]
-margin_top = 288.0
-margin_right = 446.0
-margin_bottom = 317.0
+margin_top = 314.0
+margin_right = 600.0
+margin_bottom = 343.0
 focus_neighbour_left = NodePath("../../../../../../Main")
 focus_neighbour_top = NodePath("../../../../../../Main")
 focus_neighbour_right = NodePath("../../../../../../Main")
@@ -934,6 +1134,385 @@ margin_bottom = 27.0
 custom_fonts/font = SubResource( 8 )
 text = "SELECT"
 
+[node name="ControlQuickEquip" type="Control" parent="."]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -320, 101 )
+focus_mode = 2
+script = ExtResource( 22 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="ControlQuickEquip"]
+modulate = Color( 0.152941, 0.152941, 0.152941, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 14 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="ControlQuickEquip"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.698039 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" parent="ControlQuickEquip" instance=ExtResource( 24 )]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -176.0
+margin_right = 0.0
+margin_bottom = 0.0
+custom_styles/panel = ExtResource( 23 )
+
+[node name="Margin" type="MarginContainer" parent="ControlQuickEquip/Panel"]
+margin_top = 4.00473
+margin_right = 683.0
+margin_bottom = 171.885
+custom_constants/margin_right = 25
+custom_constants/margin_top = 5
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 5
+
+[node name="VBx" type="VBoxContainer" parent="ControlQuickEquip/Panel/Margin"]
+margin_left = 10.0
+margin_top = 5.0
+margin_right = 658.0
+margin_bottom = 162.0
+alignment = 1
+
+[node name="LblTitle" type="Label" parent="ControlQuickEquip/Panel/Margin/VBx"]
+margin_right = 648.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+text = "« Elemental Circuit: Hydro Storm »"
+clip_text = true
+
+[node name="LblDesc" type="Label" parent="ControlQuickEquip/Panel/Margin/VBx"]
+margin_top = 30.0
+margin_right = 648.0
+margin_bottom = 127.0
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 10 )
+custom_constants/line_spacing = -2
+text = "Circuito con dos átomos de hydrógeno, junto al elemento faltante desata un ataque lateral."
+valign = 1
+autowrap = true
+clip_text = true
+
+[node name="LblReq" type="Label" parent="ControlQuickEquip/Panel/Margin/VBx"]
+margin_top = 131.0
+margin_right = 648.0
+margin_bottom = 157.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_fonts/font = ExtResource( 10 )
+text = "Time: 10secs - MP: 10"
+align = 2
+clip_text = true
+
+[node name="BaseSlot0" type="Sprite" parent="ControlQuickEquip"]
+position = Vector2( 321, 83 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 20 )
+region_enabled = true
+region_rect = Rect2( 45, 44, 19, 19 )
+
+[node name="BaseSlot1" type="Sprite" parent="ControlQuickEquip"]
+position = Vector2( 321, 147 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 20 )
+region_enabled = true
+region_rect = Rect2( 45, 44, 19, 19 )
+
+[node name="EC_IconM2" type="Sprite" parent="ControlQuickEquip"]
+modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 216, 144 )
+texture = ExtResource( 21 )
+hframes = 25
+frame = 7
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="EC_IconM1" type="Sprite" parent="ControlQuickEquip"]
+modulate = Color( 1, 1, 1, 0.658824 )
+position = Vector2( 256, 144 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 21 )
+hframes = 25
+frame = 7
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="EC_Icon" type="Sprite" parent="ControlQuickEquip"]
+position = Vector2( 320, 149 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 21 )
+hframes = 25
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="EC_Icon2" type="Sprite" parent="ControlQuickEquip"]
+modulate = Color( 1, 1, 1, 0.658824 )
+position = Vector2( 384, 144 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 21 )
+hframes = 25
+frame = 7
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="EC_Icon3" type="Sprite" parent="ControlQuickEquip"]
+modulate = Color( 1, 1, 1, 0.392157 )
+position = Vector2( 424, 144 )
+texture = ExtResource( 21 )
+hframes = 25
+frame = 7
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="EO_IconM2" type="Sprite" parent="ControlQuickEquip"]
+modulate = Color( 1, 1, 1, 0.392157 )
+light_mask = 2
+position = Vector2( 219, 88 )
+texture = ExtResource( 37 )
+hframes = 4
+vframes = 12
+frame = 2
+
+[node name="EO_IconM1" type="Sprite" parent="ControlQuickEquip"]
+modulate = Color( 1, 1, 1, 0.658824 )
+light_mask = 2
+position = Vector2( 258, 84 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 37 )
+hframes = 4
+vframes = 12
+frame = 2
+
+[node name="EO_Icon" type="Sprite" parent="ControlQuickEquip"]
+light_mask = 2
+position = Vector2( 320, 83 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 37 )
+hframes = 4
+vframes = 12
+frame = 2
+
+[node name="EO_Icon2" type="Sprite" parent="ControlQuickEquip"]
+modulate = Color( 1, 1, 1, 0.658824 )
+light_mask = 2
+position = Vector2( 384, 84 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 37 )
+hframes = 4
+vframes = 12
+frame = 2
+
+[node name="EO_Icon3" type="Sprite" parent="ControlQuickEquip"]
+modulate = Color( 1, 1, 1, 0.392157 )
+light_mask = 2
+position = Vector2( 427, 88 )
+texture = ExtResource( 37 )
+hframes = 4
+vframes = 12
+frame = 2
+
+[node name="Base" type="Sprite" parent="ControlQuickEquip"]
+position = Vector2( 321, 115 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 20 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 37, 75 )
+
+[node name="SelectSlot0" type="Sprite" parent="ControlQuickEquip"]
+position = Vector2( 321, 83 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 20 )
+region_enabled = true
+region_rect = Rect2( 41, 7, 29, 29 )
+
+[node name="SelectSlot1" type="Sprite" parent="ControlQuickEquip"]
+position = Vector2( 321, 147 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 20 )
+region_enabled = true
+region_rect = Rect2( 41, 7, 29, 29 )
+
+[node name="HBxHelp" type="HBoxContainer" parent="ControlQuickEquip"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -342.0
+margin_right = -14.0
+margin_bottom = 40.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+custom_constants/separation = 18
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ControlQuickEquip/HBxHelp"]
+margin_left = 23.0
+margin_right = 123.0
+margin_bottom = 40.0
+
+[node name="ButtonKeyGamepadIcon" parent="ControlQuickEquip/HBxHelp/HBoxContainer" instance=ExtResource( 13 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_up"
+
+[node name="ButtonKeyGamepadIcon2" parent="ControlQuickEquip/HBxHelp/HBoxContainer" instance=ExtResource( 13 )]
+margin_left = 20.0
+margin_top = 12.0
+margin_right = 36.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_down"
+
+[node name="Label" type="Label" parent="ControlQuickEquip/HBxHelp/HBoxContainer"]
+margin_left = 40.0
+margin_top = 13.0
+margin_right = 100.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 9 )
+text = "CHANGESLOT"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="ControlQuickEquip/HBxHelp"]
+margin_left = 141.0
+margin_right = 243.0
+margin_bottom = 40.0
+
+[node name="ButtonKeyGamepadIcon" parent="ControlQuickEquip/HBxHelp/HBoxContainer4" instance=ExtResource( 13 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_left"
+
+[node name="ButtonKeyGamepadIcon2" parent="ControlQuickEquip/HBxHelp/HBoxContainer4" instance=ExtResource( 13 )]
+margin_left = 20.0
+margin_top = 12.0
+margin_right = 36.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_right"
+
+[node name="Label" type="Label" parent="ControlQuickEquip/HBxHelp/HBoxContainer4"]
+margin_left = 40.0
+margin_top = 13.0
+margin_right = 102.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 9 )
+text = "CHANGEITEM"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="ControlQuickEquip/HBxHelp"]
+margin_left = 261.0
+margin_right = 305.0
+margin_bottom = 40.0
+
+[node name="ButtonKeyGamepadIcon" parent="ControlQuickEquip/HBxHelp/HBoxContainer5" instance=ExtResource( 13 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="ControlQuickEquip/HBxHelp/HBoxContainer5"]
+margin_left = 20.0
+margin_top = 13.0
+margin_right = 44.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 9 )
+text = "EXIT"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BtnRight" type="TouchScreenButton" parent="ControlQuickEquip"]
+position = Vector2( 120, 88 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 32 )
+pressed = ExtResource( 33 )
+passby_press = true
+action = "ui_right"
+visibility_mode = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BtnLeft" type="TouchScreenButton" parent="ControlQuickEquip"]
+position = Vector2( 45, 88 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 28 )
+pressed = ExtResource( 27 )
+passby_press = true
+action = "ui_left"
+visibility_mode = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BtnUp" type="TouchScreenButton" parent="ControlQuickEquip"]
+position = Vector2( 81, 46 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 30 )
+pressed = ExtResource( 29 )
+passby_press = true
+action = "ui_up"
+visibility_mode = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BtnDown" type="TouchScreenButton" parent="ControlQuickEquip"]
+position = Vector2( 81, 129 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 31 )
+pressed = ExtResource( 34 )
+passby_press = true
+action = "ui_down"
+visibility_mode = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="BtnExit" type="TouchScreenButton" parent="ControlQuickEquip"]
+position = Vector2( 527, 90 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 25 )
+pressed = ExtResource( 26 )
+passby_press = true
+action = "ui_cancel"
+visibility_mode = 1
+__meta__ = {
+"_editor_description_": ""
+}
+
 [node name="ControlFlash" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -946,19 +1525,18 @@ __meta__ = {
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_right = 4.0
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ControlFlash"]
-anims/flash = SubResource( 9 )
+anims/flash = SubResource( 10 )
 
 [connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnContinue" to="." method="pause_menu_opt_selected" binds= [ "continue" ]]
-[connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnSaveAndExit" to="." method="pause_menu_opt_selected" binds= [ "open_exitpanel" ]]
+[connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnEquip" to="." method="pause_menu_opt_selected" binds= [ "equip" ]]
 [connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnHelp" to="." method="pause_menu_opt_selected" binds= [ "help" ]]
+[connection signal="pressed" from="ControlPause/MarginContainer/HBoxContainer/BtnSaveAndExit" to="." method="pause_menu_opt_selected" binds= [ "open_exitpanel" ]]
 [connection signal="pressed" from="ControlPause/ControlHelp/Margin/HBx/VBx/BtnCloseHelpPanel" to="." method="pause_menu_opt_selected" binds= [ "close_help" ]]
 [connection signal="pressed" from="ControlPause/ControlExit/VBx/VBx/BtnQuickSave" to="." method="pause_menu_opt_selected" binds= [ "saveandexit" ]]
 [connection signal="pressed" from="ControlPause/ControlExit/VBx/VBx/BtnExit" to="." method="pause_menu_opt_selected" binds= [ "exit" ]]

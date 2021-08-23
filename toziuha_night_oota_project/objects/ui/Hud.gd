@@ -21,18 +21,30 @@ func _ready():
 	
 func _process(_delta):
 	if can_pause and Input.is_action_just_pressed("ui_select") and !SceneChanger.changing_scene and !DialogBox.active:
+		if $ControlQuickEquip.visible:
+			$ControlQuickEquip.hide_menu()
+		else:
+			pause_game()
+	
+	if Input.is_action_just_pressed("ui_cancel") and $ControlPause.visible and !$ControlQuickEquip.visible and !$ControlPause/ControlHelp.visible and !$ControlPause/ControlExit.visible:
 		pause_game()
+	elif Input.is_action_just_pressed("ui_cancel") and $ControlPause/ControlHelp.visible:
+		pause_menu_opt_selected("close_help")
+	elif Input.is_action_just_pressed("ui_cancel") and $ControlPause/ControlExit.visible:
+		pause_menu_opt_selected("close_exitpanel")
+	
+	
 		
 func show_titleroom(txt="Name Room"):
 	can_pause = false
-	get_tree().paused = true
+	#get_tree().paused = true
 	Audio.play_sfx("cinematic_hit_reverse")
 	$Main/ControlTitleRoom/PanelContainer/MarginContainer/Label.text = txt
 	$Main/ControlTitleRoom/AnimationPlayer.play_backwards("hide")
 	$Main/ControlTitleRoom/Timer.start()
 	yield($Main/ControlTitleRoom/Timer,"timeout")
 	$Main/ControlTitleRoom/AnimationPlayer.play("hide")
-	get_tree().paused = false
+	#get_tree().paused = false
 	can_pause = true
 	
 func update_stats():
@@ -83,12 +95,24 @@ func update_pause_stats():
 			get_node("ControlPause/"+k).modulate = Color(1,1,1,1)
 		else:
 			get_node("ControlPause/"+k).modulate = Color(0.35,0.35,0.35,1)
+
+func set_boss_bar_visible(val=true):
+	$Main/TextureBoss.visible = val
+func set_boss_bar_max(max_val=10):
+	$Main/TextureBoss/HPBar.max_value = max_val
+	$Main/TextureBoss/HPBar.value = max_val
+func update_boss_bar(val=5):
+	$Main/TextureBoss/HPBar.value = val
+
 	
 
 func pause_menu_opt_selected(opt):
 	match opt:
 		"continue":
 			pause_game()
+		"equip":
+			$ControlQuickEquip.show_menu()
+			$ControlQuickEquip.grab_focus()
 		"exit":
 			ControlsOnscreen.show_buttons(false)
 			Vars.set_vars()
@@ -107,11 +131,11 @@ func pause_menu_opt_selected(opt):
 			$ControlPause/ControlExit/VBx/VBx/BtnQuickSave.focus()
 			$ControlPause/ControlExit.visible = true
 		"close_exitpanel":
-			$ControlPause/MarginContainer/HBoxContainer/BtnContinue.focus()
+			$ControlPause/MarginContainer/HBoxContainer/BtnSaveAndExit.focus()
 			$ControlPause/ControlExit.visible = false
 		"close_help":
 			$ControlPause/ControlHelp.visible = false
-			$ControlPause/MarginContainer/HBoxContainer/BtnContinue.grab_focus()
+			$ControlPause/MarginContainer/HBoxContainer/BtnHelp.grab_focus()
 func pause_game():
 	#player muerto o con 0 hp no puede pausar juego
 	if Vars.player["hp_now"] < 1 :

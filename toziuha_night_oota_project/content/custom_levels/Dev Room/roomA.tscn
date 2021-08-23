@@ -5,12 +5,12 @@
 [ext_resource path="res://tilemaps/ForgottenDungeonGreen/Background.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/characters/Xandria.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/RoomChanger.tscn" type="PackedScene" id=5]
-[ext_resource path="res://objects/items/RelicKey.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/enemies/Zombie.tscn" type="PackedScene" id=7]
 [ext_resource path="res://objects/MovingPlatform.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/items/Torch.tscn" type="PackedScene" id=9]
 [ext_resource path="res://objects/SaveStatue.tscn" type="PackedScene" id=10]
 [ext_resource path="res://objects/items/UpgradeStatsItem.tscn" type="PackedScene" id=11]
+[ext_resource path="res://objects/ElementalCircuit.tscn" type="PackedScene" id=12]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -51,46 +51,46 @@ destiny_door = "DoorLeft"
 [node name="PositionSpawn" parent="DoorRight" index="2"]
 position = Vector2( -31.4996, 31.8488 )
 
-[node name="RelicKey" parent="." index="10" instance=ExtResource( 6 )]
-position = Vector2( 279, 374.63 )
-item = "slide"
-
-[node name="RelicKey2" parent="." index="11" instance=ExtResource( 6 )]
-position = Vector2( 316.206, 236 )
-
-[node name="RelicKey3" parent="." index="12" instance=ExtResource( 6 )]
-position = Vector2( 537, 374.63 )
-item = "dodge"
-
-[node name="Torch" parent="." index="13" instance=ExtResource( 9 )]
+[node name="Torch" parent="." index="10" instance=ExtResource( 9 )]
 position = Vector2( 437.222, 275 )
 subweapon_shuriken = true
 
-[node name="Torch2" parent="." index="14" instance=ExtResource( 9 )]
+[node name="Torch2" parent="." index="11" instance=ExtResource( 9 )]
 position = Vector2( 281.5, 70.416 )
 potion_probability = 2
 money_10_probability = 3
 
-[node name="Torch3" parent="." index="15" instance=ExtResource( 9 )]
+[node name="Torch3" parent="." index="12" instance=ExtResource( 9 )]
 position = Vector2( 396, 70.416 )
 potion_probability = 1
 money_1_probability = 7
 money_100_probability = 1
 money_1000_probability = 1
 
-[node name="Torch4" parent="." index="16" instance=ExtResource( 9 )]
+[node name="Torch4" parent="." index="13" instance=ExtResource( 9 )]
 position = Vector2( 523, 70.416 )
 
-[node name="Torch5" parent="." index="17" instance=ExtResource( 9 )]
+[node name="Torch5" parent="." index="14" instance=ExtResource( 9 )]
 position = Vector2( 460, 70.416 )
 potion_probability = 1
 
-[node name="SaveStatue" parent="." index="18" instance=ExtResource( 10 )]
+[node name="SaveStatue" parent="." index="15" instance=ExtResource( 10 )]
 position = Vector2( 140, 320 )
 
-[node name="statsemplus10" parent="." index="19" instance=ExtResource( 11 )]
+[node name="statsemplus10" parent="." index="16" instance=ExtResource( 11 )]
 position = Vector2( 603.925, 382.497 )
 stat = "mp"
 quantity = 10
+
+[node name="ElementalCircuit" parent="." index="17" instance=ExtResource( 12 )]
+position = Vector2( 328, 208 )
+
+[node name="ElementalCircuit2" parent="." index="18" instance=ExtResource( 12 )]
+position = Vector2( 528, 352 )
+circuit = "hability_dodge"
+
+[node name="ElementalCircuit3" parent="." index="19" instance=ExtResource( 12 )]
+position = Vector2( 248, 344 )
+circuit = "hability_slide"
 
 [editable path="DoorRight"]

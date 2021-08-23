@@ -113,7 +113,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 2.6 ),
+"times": PoolRealArray( 0, 3.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -180,13 +180,12 @@ radius = 11.6711
 "enemies",
 ]]
 collision_layer = 4
-collision_mask = 5
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 19
-frame = 2
+frame = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -219,8 +218,8 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="."]
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-position = Vector2( 0.111272, -2.798 )
-scale = Vector2( 3.25646, 2.55342 )
+position = Vector2( -0.376618, 0.377755 )
+scale = Vector2( 1.26951, 1.28055 )
 process_parent = true
 physics_process_parent = true
 

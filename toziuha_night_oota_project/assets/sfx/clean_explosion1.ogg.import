@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/clean_explosion1.ogg-0f12a33131404d2c4b869682810d059d.oggstr"
+
+[deps]
+
+source_file="res://assets/sfx/clean_explosion1.ogg"
+dest_files=[ "res://.import/clean_explosion1.ogg-0f12a33131404d2c4b869682810d059d.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

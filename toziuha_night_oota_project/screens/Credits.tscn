@@ -1,8 +1,376 @@
-[gd_scene format=2]
+[gd_scene load_steps=25 format=2]
 
-[node name="Control" type="Control"]
+[ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=2]
+[ext_resource path="res://assets/img/purple_demon_forest.png" type="Texture" id=3]
+[ext_resource path="res://screens/ui_elements/SocialAndSupportLinks.tscn" type="PackedScene" id=4]
+[ext_resource path="res://screens/Credits.gd" type="Script" id=5]
+[ext_resource path="res://objects/ui/NotificationInGame.tscn" type="PackedScene" id=6]
+[ext_resource path="res://assets/sprites/notification_in_game_panel.png" type="Texture" id=7]
+[ext_resource path="res://objects/ui/Panel_Purple.tres" type="StyleBox" id=8]
+[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://objects/ui/SubButton.tscn" type="PackedScene" id=10]
+[ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=11]
+[ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scripts/control_help_icons_screen_set_visible.gd" type="Script" id=13]
+[ext_resource path="res://assets/sprites/checkbox_focus2.png" type="Texture" id=14]
+[ext_resource path="res://assets/img/social_icons/kofi_crowdfunding.png" type="Texture" id=15]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 90, 47 )
+margin_left = 18.9633
+margin_right = 18.9107
+margin_top = 14.0969
+margin_bottom = 14.0
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -7
+extra_spacing_bottom = -7
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 9 )
+
+[sub_resource type="StyleBoxEmpty" id=4]
+content_margin_left = 51.0
+
+[sub_resource type="DynamicFont" id=5]
+size = 32
+extra_spacing_bottom = 3
+font_data = ExtResource( 9 )
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="DynamicFont" id=8]
+size = 32
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 9 )
+
+[sub_resource type="StyleBoxTexture" id=9]
+content_margin_left = 9.0
+content_margin_right = 9.0
+texture = ExtResource( 7 )
+region_rect = Rect2( 0, 0, 57, 19 )
+margin_left = 15.3423
+margin_right = 14.8467
+
+[node name="Credits" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -496, 40 )
+script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BG" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_left = 25.0
+margin_top = 10.0
+margin_right = 228.0
+margin_bottom = 72.0969
+grow_horizontal = 2
+size_flags_horizontal = 4
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+text = "CREDITS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBxHelp1" type="HBoxContainer" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+margin_right = 224.0
+custom_constants/separation = 18
+alignment = 1
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBxHelp1"]
+margin_left = 11.0
+margin_right = 139.0
+margin_bottom = 40.0
+
+[node name="Btn1" parent="HBxHelp1/HBoxContainer2" instance=ExtResource( 12 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_up"
+
+[node name="Btn2" parent="HBxHelp1/HBoxContainer2" instance=ExtResource( 12 )]
+margin_left = 20.0
+margin_top = 12.0
+margin_right = 36.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_down"
+
+[node name="Btn3" parent="HBxHelp1/HBoxContainer2" instance=ExtResource( 12 )]
+margin_left = 40.0
+margin_top = 12.0
+margin_right = 56.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_left"
+
+[node name="Btn4" parent="HBxHelp1/HBoxContainer2" instance=ExtResource( 12 )]
+margin_left = 60.0
+margin_top = 12.0
+margin_right = 76.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_right"
+
+[node name="Label" type="Label" parent="HBxHelp1/HBoxContainer2"]
+margin_left = 80.0
+margin_top = 13.0
+margin_right = 128.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 3 )
+text = "NAVIGATE"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBxHelp1"]
+margin_left = 157.0
+margin_right = 213.0
+margin_bottom = 40.0
+
+[node name="ButtonKeyGamepadIcon" parent="HBxHelp1/HBoxContainer" instance=ExtResource( 12 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_accept"
+
+[node name="Label" type="Label" parent="HBxHelp1/HBoxContainer"]
+margin_left = 20.0
+margin_top = 13.0
+margin_right = 56.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 3 )
+text = "SELECT"
+
+[node name="HBxHelp2" type="HBoxContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -211.0
+margin_top = -40.0
+margin_right = -19.0
+grow_horizontal = 0
+custom_constants/separation = 18
+alignment = 1
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBxHelp2"]
+margin_left = 61.0
+margin_right = 87.0
+margin_bottom = 40.0
+
+[node name="ButtonKeyGamepadIcon" parent="HBxHelp2/HBoxContainer" instance=ExtResource( 12 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_focus_next"
+
+[node name="Label" type="Label" parent="HBxHelp2/HBoxContainer"]
+margin_left = 20.0
+margin_top = 13.0
+margin_right = 26.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 3 )
+text = "-"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBxHelp2"]
+margin_left = 105.0
+margin_right = 131.0
+margin_bottom = 40.0
+
+[node name="ButtonKeyGamepadIcon" parent="HBxHelp2/HBoxContainer2" instance=ExtResource( 12 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_focus_prev"
+
+[node name="Label" type="Label" parent="HBxHelp2/HBoxContainer2"]
+margin_left = 20.0
+margin_top = 13.0
+margin_right = 26.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 3 )
+text = "+"
+
+[node name="Panel" parent="." instance=ExtResource( 11 )]
+margin_left = 18.0
+margin_top = 86.0
+margin_right = 218.0
+margin_bottom = 143.12
+size_flags_vertical = 0
+custom_styles/panel = ExtResource( 8 )
+
+[node name="Margin" type="MarginContainer" parent="Panel"]
+margin_top = 4.00473
+margin_right = 200.0
+margin_bottom = 53.0047
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="BtnMenu" parent="Panel/Margin" instance=ExtResource( 10 )]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 190.0
+margin_bottom = 39.0
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
+toggle_mode = true
+text = "MAINMENU"
+sfx_accept_sound = "btn_cancel"
+
+[node name="SocialAndSupportLinks" parent="." instance=ExtResource( 4 )]
+margin_top = -226.0
+margin_bottom = -34.0
+custom_constants/separation = 22
+
+[node name="Social" parent="SocialAndSupportLinks" index="1"]
+margin_top = 144.0
+margin_bottom = 192.0
+
+[node name="TextureButton" parent="SocialAndSupportLinks/Social" index="0"]
+margin_bottom = 48.0
+
+[node name="TextureButton2" parent="SocialAndSupportLinks/Social" index="1"]
+margin_bottom = 48.0
+
+[node name="TextureButton3" parent="SocialAndSupportLinks/Social" index="2"]
+margin_bottom = 48.0
+
+[node name="TextureButton4" parent="SocialAndSupportLinks/Social" index="3"]
+margin_bottom = 48.0
+
+[node name="TextureButton5" parent="SocialAndSupportLinks/Social" index="4"]
+margin_bottom = 48.0
+
+[node name="TextEdit" type="TextEdit" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 138.5
+margin_top = -176.0
+margin_right = 341.5
+margin_bottom = 152.0
+focus_mode = 0
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+custom_styles/read_only = SubResource( 6 )
+custom_styles/normal = SubResource( 7 )
+custom_fonts/font = SubResource( 8 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_readonly = Color( 1, 1, 1, 1 )
+text = "Developed by:
+Danny Garay
+
+Pixelart:
+Danny Garay, ansimuz, Szadi art, Blackwolfdave, Rgsdev, vnitti, Eduardo SF.
+
+Music by:
+Symphonie von Neumann, DavidKBD, Arath Project, OrchestrAlone, 4barrelcarb, Ogrebane, remaxim, Johan Brodd.
+
+Sound effects:
+freesound.org, zapsplat.com, Big 5 Audio.
+
+Xandria´s Voice by:
+Meghan Christian (produced by Dillon Becker).
+
+Especial Thanks to:
+Twas on Discord Server.
+
+Made with 
+[Godot Engine]."
+readonly = true
+context_menu_enabled = false
+shortcut_keys_enabled = false
+virtual_keyboard_enabled = false
+selecting_enabled = false
+smooth_scrolling = true
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Notif" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -341.0
+margin_bottom = -192.0
+rect_scale = Vector2( 2, 2 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NotificationInGame" parent="Notif" instance=ExtResource( 6 )]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -62.0
+margin_top = 2.0
+margin_right = -4.0
+margin_bottom = 21.0
+grow_horizontal = 0
+mouse_filter = 2
+custom_styles/panel = SubResource( 9 )
+
+[node name="BtnCrowfunding" type="TextureButton" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -105.0
+margin_top = -150.0
+margin_right = 125.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 230, 300 )
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 15 )
+texture_focused = ExtResource( 14 )
+expand = true
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Panel/Margin/BtnMenu" to="." method="_on_BtnGoMenu_pressed"]
+[connection signal="btn_pressed" from="SocialAndSupportLinks" to="." method="_on_SocialAndSupportLinks_btn_pressed"]
+[connection signal="focus_entered" from="BtnCrowfunding" to="." method="_on_BtnCrowfunding_focus_entered"]
+[connection signal="pressed" from="BtnCrowfunding" to="." method="_on_BtnCrowfunding_pressed"]
+
+[editable path="SocialAndSupportLinks"]

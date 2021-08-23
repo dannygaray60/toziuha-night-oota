@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/electric_zap1.wav-b65dd99a3fce1ae57f59469023e61dae.sample"
+
+[deps]
+
+source_file="res://assets/sfx/electric_zap1.wav"
+dest_files=[ "res://.import/electric_zap1.wav-b65dd99a3fce1ae57f59469023e61dae.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

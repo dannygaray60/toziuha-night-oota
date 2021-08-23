@@ -70,7 +70,9 @@ tracks/0/keys = {
 curve = null
 script = ExtResource( 2 )
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
+[node name="KinematicBody2D" type="KinematicBody2D" parent="." groups=[
+"semisolid",
+]]
 collision_layer = 8
 collision_mask = 79
 motion/sync_to_physics = true
@@ -78,12 +80,13 @@ motion/sync_to_physics = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 position = Vector2( 0, 9 )
 frames = SubResource( 5 )
-frame = 1
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( 0, 9.19612 )
 shape = SubResource( 6 )
+one_way_collision = true
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource( 7 )

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/galloping_horse.wav-0292d7b3eb35e6b465eca981b128ef2c.sample"
+
+[deps]
+
+source_file="res://assets/sfx/galloping_horse.wav"
+dest_files=[ "res://.import/galloping_horse.wav-0292d7b3eb35e6b465eca981b128ef2c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

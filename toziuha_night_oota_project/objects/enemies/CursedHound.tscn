@@ -213,7 +213,6 @@ shape = SubResource( 22 )
 position = Vector2( -0.003, -26.012 )
 texture = ExtResource( 1 )
 hframes = 24
-frame = 5
 
 [node name="RayCastDetectNoFloor" type="RayCast2D" parent="Sprite"]
 position = Vector2( -23.997, 26.012 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/circuit_spell_shoot.ogg-087a7ce364b435ac6e63ea7611cac54b.oggstr"
+
+[deps]
+
+source_file="res://assets/sfx/circuit_spell_shoot.ogg"
+dest_files=[ "res://.import/circuit_spell_shoot.ogg-087a7ce364b435ac6e63ea7611cac54b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

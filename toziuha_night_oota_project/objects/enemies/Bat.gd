@@ -14,6 +14,9 @@ var state = "fly"
 var gravity = 90
 var speed = 70
 
+#una variacion del murcielago mas rapida
+export var blood_bat = false
+
 #desde editor cambiar a blood_bat que es una variedad más rápida
 export var id = "bat"
 var hp_max = Vars.enemy[id]["hp_max"]
@@ -28,7 +31,8 @@ var timer_distance_y = 0.5
 
 func _ready():
 	
-	if id == "blood_bat":
+	if blood_bat:
+		id = "blood_bat"
 		distance_y = 350
 		timer_distance_y = 0.4
 		speed = 120
@@ -79,7 +83,7 @@ func hurt(damage,weapon_position):
 		
 		$Sprite.modulate = Color(1,0,0,1)
 		$TimerHurt.start()
-		Audio.play_sfx("hit4")
+		Audio.play_sfx("knife_stab")
 		
 		Enemy.apply_damage(self,damage,weapon_position)
 

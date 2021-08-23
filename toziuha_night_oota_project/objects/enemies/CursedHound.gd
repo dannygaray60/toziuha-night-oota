@@ -25,10 +25,10 @@ var anim_current
 var player_near_on_floor = false
 
 #debug
-func _process(_delta):
-	ScreenDebugger.dict["State"] = state
-	ScreenDebugger.dict["raycast_front"] = str( $Sprite/RayCastDetectFrontWall.is_colliding() )
-	ScreenDebugger.dict["is_on_wall"] = str( is_on_wall() )
+#func _process(_delta):
+#	ScreenDebugger.dict["State"] = state
+#	ScreenDebugger.dict["raycast_front"] = str( $Sprite/RayCastDetectFrontWall.is_colliding() )
+#	ScreenDebugger.dict["is_on_wall"] = str( is_on_wall() )
 
 func _ready():
 	Enemy.connect("collision_with_player",self,"_on_collision_with_player")
@@ -144,6 +144,7 @@ func jump():
 func _on_AreaDetectPlayer_body_entered(body):
 	if body.is_in_group("player"):
 		if is_on_floor():
+			Audio.play_sfx("roar2")
 			Enemy.update_facing(self,$Sprite)
 		change_state("run")
 

@@ -19,12 +19,25 @@ var settings = {
 # "n":"nombre" - forma para abreviar nombres de personajes en el script
 var chars = {
 	"none" : "", #mostrar titulo vacío
+	"unk" : "???",
 	"x" : "Xandria",
 	"r" : "Rachel",
+	"e" : "Eva",
+	"a" : "Atreu",
 }
 #guardar texturas de imagenes, usando un nombre de referencia con el objeto textura
 var img_textures = {
+	"ferrum_normal" : load("res://assets/img/portraits/ferrum_normal.png"),
 	"xandria_normal" : load("res://assets/img/portraits/xandria_normal.png"),
+	"xandria_serious" : load("res://assets/img/portraits/xandria_serious.png"),
+	"xandria_angry_talk" : load("res://assets/img/portraits/xandria_angry_talk.png"),
+	"xandria_angry_shock" : load("res://assets/img/portraits/xandria_angry_shock.png"),
+	"xandria_angry" : load("res://assets/img/portraits/xandria_angry.png"),
+	"xandria_hurt" : load("res://assets/img/portraits/xandria_hurt.png"),
+	"atreu_talk" : load("res://assets/img/portraits/atreu_talk.png"),
+	"atreu_smile" : load("res://assets/img/portraits/atreu_smile.png"),
+	"atreu_serious" : load("res://assets/img/portraits/atreu_serious.png"),
+	"eva_normal" : load("res://assets/img/portraits/eva_normal.png"),
 	"rachel_normal" : load("res://assets/img/portraits/rachel_normal.png"),
 }
 #guardar streams de e
@@ -68,6 +81,7 @@ func _ready():
 	$Control/BtnContinueIcon.visible = false
 	$TimerTextVel.wait_time = settings["text_velocity"]
 	clear_screen()
+	hide_tuto_panels()
 
 #comenzar el script del dialogo
 func begin():
@@ -103,7 +117,7 @@ func set_title(title=""):
 		$Control/Margin/Panel/Margin/VBx/LblTitle.text = ""
 	else:
 		$Control/Margin/Panel/Margin/VBx/LblTitle.visible = true
-		$Control/Margin/Panel/Margin/VBx/LblTitle.text = "« %s »" % [title] 	
+		$Control/Margin/Panel/Margin/VBx/LblTitle.text = "« %s »" % [title] 
 
 #siguiente linea en el script de dialogo
 func next_line():
@@ -120,6 +134,21 @@ func next_line():
 	var ln = lines[current_line]
 
 	match ln[0]:
+		
+		"fade_in":
+			$ControlFadeBlack/AnimationPlayer.play("fadein")
+			yield($ControlFadeBlack/AnimationPlayer,"animation_finished")
+		"fade_out":
+			$ControlFadeBlack/AnimationPlayer.play_backwards("fadein")
+		
+		"wait_time":
+			yield(get_tree().create_timer( ln[1] ), "timeout")
+		
+		"scene_bg":
+			if ln[1] == "none":
+				$Control/BG.texture = null
+			else:
+				$Control/BG.texture = img_textures[ln[1]]
 
 		"say":
 			set_title(chars[ln[1]])
@@ -169,6 +198,9 @@ func next_line():
 		"focus_all":
 			get_node("Control/c1").self_modulate = Color(1,1,1,1)
 			get_node("Control/c2").self_modulate = Color(1,1,1,1)
+			
+		"screen_shake":
+			$AnimationPlayer.play("screen_shake")
 
 	current_line += 1
 	
@@ -198,6 +230,7 @@ func _on_DialogBox_script_ended():
 
 #funcion para mostrar el panel de dialogo e iniciar el script
 func show_panel(color_panel="red_light"):
+	hide_tuto_panels()
 	active = true
 	$Control.modulate.a = 0
 	$Control.visible = true
@@ -214,6 +247,8 @@ func show_panel(color_panel="red_light"):
 
 #ocultar panel
 func hide_panel():
+	hide_tuto_panels()
+	$Control/BG.texture = null
 	$Tween.interpolate_property($Control,
 		"modulate",Color(1,1,1,1),Color(1,1,1,0),0.5,
 		Tween.TRANS_LINEAR,Tween.TRANS_LINEAR)
@@ -230,3 +265,14 @@ func hide_panel():
 	get_tree().paused = false
 	emit_signal("dialogbox_closed")
 	ControlsOnscreen.show_buttons_in_game()
+
+
+func show_tuto_panels(nametuto):
+	$Control/CtrlTutos.visible = true
+	hide_tuto_panels()
+	get_node("Control/CtrlTutos/Tutos/"+nametuto).visible = true
+#ocultar todos los panels de tutorial
+func hide_tuto_panels():
+	$Control/CtrlTutos.visible = false
+	for t in $Control/CtrlTutos/Tutos.get_children():
+		t.visible = false

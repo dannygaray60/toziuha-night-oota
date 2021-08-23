@@ -163,6 +163,7 @@ func _on_AreaWallHeadFront_body_entered(body):
 func _on_AreaDetectWallFloorFront_body_entered(body):
 	if body is TileMap and state != "dead":
 		jump(true)
+		Enemy.update_facing(self,$Sprite)
 
 
 func _on_AreaDetectNoFloor_body_exited(body):

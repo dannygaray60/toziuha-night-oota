@@ -107,14 +107,14 @@ __meta__ = {
 [node name="HBx" type="HBoxContainer" parent="Margin"]
 margin_left = 20.0
 margin_right = 664.0
-margin_bottom = 454.0
+margin_bottom = 474.0
 size_flags_vertical = 0
 custom_constants/separation = 20
 
 [node name="VBx" type="VBoxContainer" parent="Margin/HBx"]
 margin_right = 367.0
-margin_bottom = 454.0
-custom_constants/separation = 12
+margin_bottom = 474.0
+custom_constants/separation = 9
 
 [node name="Panel0" parent="Margin/HBx/VBx" instance=ExtResource( 5 )]
 margin_right = 155.0
@@ -150,15 +150,15 @@ text = "OPTIONS"
 sfx_accept_sound = "btn_cancel"
 
 [node name="Panel" parent="Margin/HBx/VBx" instance=ExtResource( 5 )]
-margin_top = 69.0
+margin_top = 66.0
 margin_right = 367.0
-margin_bottom = 329.12
+margin_bottom = 355.12
 size_flags_vertical = 0
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/VBx/Panel"]
 margin_top = 4.00473
 margin_right = 367.0
-margin_bottom = 256.005
+margin_bottom = 285.005
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -168,7 +168,7 @@ custom_constants/margin_bottom = 10
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 357.0
-margin_bottom = 242.0
+margin_bottom = 271.0
 custom_constants/separation = 0
 
 [node name="BtnJump" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
@@ -238,10 +238,33 @@ size_flags_vertical = 4
 show_specific_icon = "gamepad"
 action = "ui_focus_prev"
 
-[node name="BtnStart" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
+[node name="BtnSubweapon" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
 margin_top = 87.0
 margin_right = 347.0
 margin_bottom = 116.0
+
+[node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnSubweapon" instance=ExtResource( 4 )]
+margin_right = 327.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+action_mode = 0
+text = "SUBWEAPON"
+
+[node name="Icon" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnSubweapon" instance=ExtResource( 12 )]
+margin_left = 331.0
+margin_top = 6.0
+margin_right = 347.0
+margin_bottom = 22.0
+size_flags_vertical = 4
+show_specific_icon = "gamepad"
+action = "ui_focus_next"
+
+[node name="BtnStart" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
+margin_top = 116.0
+margin_right = 347.0
+margin_bottom = 145.0
 
 [node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnStart" instance=ExtResource( 4 )]
 margin_right = 327.0
@@ -262,9 +285,9 @@ show_specific_icon = "gamepad"
 action = "ui_select"
 
 [node name="BtnUp" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
-margin_top = 116.0
+margin_top = 145.0
 margin_right = 347.0
-margin_bottom = 145.0
+margin_bottom = 174.0
 
 [node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnUp" instance=ExtResource( 4 )]
 margin_right = 327.0
@@ -285,9 +308,9 @@ show_specific_icon = "gamepad"
 action = "ui_up"
 
 [node name="BtnDown" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
-margin_top = 145.0
+margin_top = 174.0
 margin_right = 347.0
-margin_bottom = 174.0
+margin_bottom = 203.0
 
 [node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnDown" instance=ExtResource( 4 )]
 margin_right = 327.0
@@ -308,9 +331,9 @@ show_specific_icon = "gamepad"
 action = "ui_down"
 
 [node name="BtnLeft" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
-margin_top = 174.0
+margin_top = 203.0
 margin_right = 347.0
-margin_bottom = 203.0
+margin_bottom = 232.0
 
 [node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnLeft" instance=ExtResource( 4 )]
 margin_right = 327.0
@@ -331,9 +354,9 @@ show_specific_icon = "gamepad"
 action = "ui_left"
 
 [node name="BtnRight" type="HBoxContainer" parent="Margin/HBx/VBx/Panel/Margin/VBx"]
-margin_top = 203.0
+margin_top = 232.0
 margin_right = 347.0
-margin_bottom = 232.0
+margin_bottom = 261.0
 
 [node name="Btn" parent="Margin/HBx/VBx/Panel/Margin/VBx/BtnRight" instance=ExtResource( 4 )]
 margin_right = 327.0
@@ -354,16 +377,16 @@ show_specific_icon = "gamepad"
 action = "ui_right"
 
 [node name="HSeparator" type="HSeparator" parent="Margin/HBx/VBx"]
-margin_top = 341.0
+margin_top = 364.0
 margin_right = 367.0
-margin_bottom = 401.0
+margin_bottom = 424.0
 rect_min_size = Vector2( 0, 60 )
 custom_styles/separator = SubResource( 3 )
 
 [node name="PanelLbl" parent="Margin/HBx/VBx" instance=ExtResource( 5 )]
-margin_top = 413.0
+margin_top = 433.0
 margin_right = 367.0
-margin_bottom = 454.12
+margin_bottom = 474.12
 size_flags_vertical = 0
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/VBx/PanelLbl"]
@@ -389,7 +412,7 @@ __meta__ = {
 [node name="Margin" type="MarginContainer" parent="Margin/HBx"]
 margin_left = 387.0
 margin_right = 644.0
-margin_bottom = 454.0
+margin_bottom = 474.0
 custom_constants/margin_top = 70
 
 [node name="PanelIcons" type="PanelContainer" parent="Margin/HBx/Margin"]
@@ -1245,6 +1268,7 @@ valign = 1
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnJump/Btn" to="." method="reasign_icon_button" binds= [ "ui_accept", "BtnJump" ]]
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnAttack/Btn" to="." method="reasign_icon_button" binds= [ "ui_cancel", "BtnAttack" ]]
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnBackdash/Btn" to="." method="reasign_icon_button" binds= [ "ui_focus_prev", "BtnBackdash" ]]
+[connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnSubweapon/Btn" to="." method="reasign_icon_button" binds= [ "ui_focus_next", "BtnSubweapon" ]]
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnStart/Btn" to="." method="reasign_icon_button" binds= [ "ui_select", "BtnStart" ]]
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnUp/Btn" to="." method="reasign_icon_button" binds= [ "ui_up", "BtnUp" ]]
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnDown/Btn" to="." method="reasign_icon_button" binds= [ "ui_down", "BtnDown" ]]

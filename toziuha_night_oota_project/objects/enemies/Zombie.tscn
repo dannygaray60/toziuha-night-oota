@@ -85,8 +85,8 @@ hframes = 16
 frame = 1
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-position = Vector2( -4.76837e-07, -25 )
-scale = Vector2( 1.325, 2.65 )
+position = Vector2( -4.76837e-07, -59.25 )
+scale = Vector2( 1.325, 6.075 )
 process_parent = true
 physics_process_parent = true
 

@@ -7,13 +7,13 @@
 [ext_resource path="res://objects/items/Potion.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/enemies/InfectedSkeleton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://tilemaps/ForgottenDungeonGreen/Background.tscn" type="PackedScene" id=7]
-[ext_resource path="res://tilemaps/ForgottenDungeonGreen/MovingPlatform.tscn" type="PackedScene" id=8]
+[ext_resource path="res://objects/MovingPlatform.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/items/Torch.tscn" type="PackedScene" id=9]
 [ext_resource path="res://objects/items/MoneyDrop.tscn" type="PackedScene" id=10]
 [ext_resource path="res://objects/items/UpgradeStatsItem.tscn" type="PackedScene" id=11]
 [ext_resource path="res://objects/enemies/Zombie.tscn" type="PackedScene" id=12]
 [ext_resource path="res://objects/items/Mana.tscn" type="PackedScene" id=13]
-[ext_resource path="res://objects/items/RelicKey.tscn" type="PackedScene" id=14]
+[ext_resource path="res://objects/items/DoorKey.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Curve2D" id=1]
 _data = {

@@ -27,7 +27,7 @@ func set_damage(val=00,color="black"):
 		"_":
 			$Txt.add_font_override("font",font_black)
 		
-	$Txt.text = str(val).pad_zeros(2)
+	$Txt.text = str(val)#.pad_zeros(2)
 
 
 func _on_AnimationPlayer_animation_finished(anim_name):

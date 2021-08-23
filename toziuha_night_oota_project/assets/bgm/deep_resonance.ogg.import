@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/deep_resonance.ogg-98fce96631390da13af2696c6a61bb6d.oggstr"
+
+[deps]
+
+source_file="res://assets/bgm/deep_resonance.ogg"
+dest_files=[ "res://.import/deep_resonance.ogg-98fce96631390da13af2696c6a61bb6d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

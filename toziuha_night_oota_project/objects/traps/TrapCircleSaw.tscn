@@ -63,8 +63,8 @@ curve = null
 script = ExtResource( 2 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-position = Vector2( 2.38419e-07, 2.38419e-07 )
-scale = Vector2( 1.3, 1.3 )
+position = Vector2( 3.8147e-06, 0 )
+scale = Vector2( 6.4, 6.4 )
 
 [node name="Saw" type="Area2D" parent="."]
 collision_layer = 2

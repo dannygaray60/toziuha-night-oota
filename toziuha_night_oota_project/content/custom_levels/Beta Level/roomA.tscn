@@ -12,7 +12,7 @@
 [ext_resource path="res://objects/enemies/Slime.tscn" type="PackedScene" id=10]
 [ext_resource path="res://objects/enemies/InfectedSkeleton.tscn" type="PackedScene" id=11]
 [ext_resource path="res://content/custom_levels/Beta Level/Area2Daboutpoison.gd" type="Script" id=12]
-[ext_resource path="res://objects/items/RelicKey.tscn" type="PackedScene" id=13]
+[ext_resource path="res://objects/items/DoorKey.tscn" type="PackedScene" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 88 )

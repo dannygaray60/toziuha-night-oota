@@ -30,6 +30,7 @@ func _ready():
 	anim_state_machine = $AnimationTree.get("parameters/playback")
 	change_state("pre_show",true)
 	
+	
 func change_state(new_state, forced=false):
 	if (new_state != state or forced) and state != "dead":		
 		state = new_state
@@ -60,7 +61,6 @@ func start_chase():
 
 
 func random_move():
-	
 	if state == "dead":
 		return
 	
@@ -127,5 +127,6 @@ func _on_Tween_tween_completed(_object, _key):
 		start_chase()
 		
 func _on_collision_with_player(body):
-	if body.is_in_group("player"):
+	#si se detecta a jugador pero la animacion no es la de "nacer"
+	if body.is_in_group("player") and anim_state_machine.get_current_node() != "show_skull":
 		random_move()

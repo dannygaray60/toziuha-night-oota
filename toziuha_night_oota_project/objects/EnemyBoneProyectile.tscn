@@ -141,7 +141,9 @@ tracks/3/keys = {
 "values": [ true ]
 }
 
-[node name="Bone" type="KinematicBody2D"]
+[node name="Bone" type="KinematicBody2D" groups=[
+"enemies",
+]]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource( 2 )

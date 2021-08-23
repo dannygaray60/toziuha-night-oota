@@ -1,64 +1,150 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=7 format=2]
 
+[ext_resource path="res://assets/sprites/xandria.png" type="Texture" id=1]
 [ext_resource path="res://assets/img/temporal_background.jpg" type="Texture" id=2]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
-uniform vec4 whiteColor : hint_color = vec4(0.627, 0.812, 0.039, 1.0);
-uniform vec4 lightGreyColor : hint_color = vec4(0.549, 0.749, 0.039, 1.0);
-uniform vec4 darkGreyColor : hint_color = vec4(0.18, 0.451, 0.125, 1.0);
-uniform vec4 blackColor : hint_color = vec4(0.0, 0.247, 0.0, 1.0);
+uniform vec4 line_color : hint_color = vec4(1);
+uniform float line_thickness : hint_range(0, 10) = 1.0;
 
-float min4(float a, float b, float c, float d){
-	return min(a, min(b, min(c, d)));
-}
+void fragment() {
+    vec2 size = TEXTURE_PIXEL_SIZE * line_thickness;
 
-void fragment(){
-	vec4 currentColor = texture(SCREEN_TEXTURE, SCREEN_UV);
-	
-	float blackDistance = distance(currentColor, vec4(vec3(0.0), 1.0));
-	float whiteDistance = distance(currentColor, vec4(vec3(1.0), 1.0));
-	float lightGrayDistance = distance(currentColor, vec4(vec3(0.666, 0.666, 0.666), 1.0));
-	float darkGrayDistance = distance(currentColor, vec4(vec3(0.333, 0.333, 0.333), 1.0));
-	
-	if (
-		whiteDistance == min4(whiteDistance, lightGrayDistance, darkGrayDistance, blackDistance)
-	)
-	{
-		COLOR = whiteColor;
-	}
-	else if (
-		blackDistance == min4(whiteDistance, lightGrayDistance, darkGrayDistance, blackDistance)
-	)
-	{
-		COLOR = blackColor;
-	}
-	else if (
-		darkGrayDistance == min4(whiteDistance, lightGrayDistance, darkGrayDistance, blackDistance)
-	)
-	{
-		COLOR = darkGreyColor;
-	}
-	else if (
-		lightGrayDistance == min4(whiteDistance, lightGrayDistance, darkGrayDistance, blackDistance)
-	)
-	{
-		COLOR = lightGreyColor;
-	}
-	else{
-		COLOR = whiteColor;
-	}
+    float outline = texture(TEXTURE, UV + vec2(-size.x, 0)).a;
+    outline += texture(TEXTURE, UV + vec2(0, size.y)).a;
+    outline += texture(TEXTURE, UV + vec2(size.x, 0)).a;
+    outline += texture(TEXTURE, UV + vec2(0, -size.y)).a;
+    outline += texture(TEXTURE, UV + vec2(-size.x, size.y)).a;
+    outline += texture(TEXTURE, UV + vec2(size.x, size.y)).a;
+    outline += texture(TEXTURE, UV + vec2(-size.x, -size.y)).a;
+    outline += texture(TEXTURE, UV + vec2(size.x, -size.y)).a;
+    outline = min(outline, 1.0);
+
+    vec4 color = texture(TEXTURE, UV);
+    COLOR = mix(color, line_color, outline - color.a);
 }"
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/whiteColor = Color( 0.627, 0.812, 0.039, 1 )
-shader_param/lightGreyColor = Color( 0.549, 0.749, 0.039, 1 )
-shader_param/darkGreyColor = Color( 0.18, 0.451, 0.125, 1 )
-shader_param/blackColor = Color( 0, 0.247, 0, 1 )
+shader_param/line_color = Color( 1, 1, 1, 1 )
+shader_param/line_thickness = 1.0
+
+[sub_resource type="Shader" id=3]
+code = "/*
+Godot 3 2D CRT Shader.
+A 2D shader for Godot 3 simulating a CRT..
+
+Author: hiulit
+Repository: https://github.com/hiulit/Godot-3-2D-CRT-Shader
+Issues: https://github.com/hiulit/Godot-3-2D-CRT-Shader/issues
+License: MIT https://github.com/hiulit/Godot-3-2D-CRT-Shader/blob/master/LICENSE
+*/
+
+shader_type canvas_item;
+
+const float PI = 3.14159265359;
+
+uniform vec2 screen_size = vec2(320.0, 180.0);
+uniform bool show_curvature = true;
+uniform float curvature_x_amount : hint_range(3.0, 15.0, 0.01) = float(6.0); 
+uniform float curvature_y_amount : hint_range(3.0, 15.0, 0.01) = float(4.0);
+uniform vec4 corner_color : hint_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform bool show_vignette = true;
+uniform float vignette_opacity : hint_range(0.0, 1.0, 0.01) = 0.2;
+uniform bool show_horizontal_scan_lines = true;
+uniform float horizontal_scan_lines_amount : hint_range(0.0, 384.0, 0.1) = 180.0;
+uniform float horizontal_scan_lines_opacity : hint_range(0.0, 1.0, 0.01) = 1.0;
+uniform bool show_vertical_scan_lines = false;
+uniform float vertical_scan_lines_amount : hint_range(0.0, 683.0, 0.1) = 320.0;
+uniform float vertical_scan_lines_opacity : hint_range(0.0, 1.0, 0.01) = 1.0;
+uniform float boost : hint_range(1.0, 2.0, 0.01) = 1.2;
+uniform float aberration_amount : hint_range(0.0, 10.0, 0.01) = 0.0;
+
+vec2 uv_curve(vec2 uv) {
+	if (show_curvature) {
+		uv = uv * 2.0 - 1.0;
+		vec2 offset = abs(uv.yx) / vec2(curvature_x_amount, curvature_y_amount);
+		uv = uv + uv * offset * offset;
+		uv = uv * 0.5 + 0.5;
+	}
+
+	return uv;
+}
+
+
+void fragment() {
+	vec2 uv = uv_curve(UV);
+	vec2 screen_uv = uv_curve(SCREEN_UV);
+	vec3 color = texture(SCREEN_TEXTURE, screen_uv).rgb;
+
+	if (aberration_amount > 0.0) {
+		float adjusted_amount = aberration_amount / screen_size.x;
+		color.r = texture(SCREEN_TEXTURE, vec2(screen_uv.x + adjusted_amount, screen_uv.y)).r;
+		color.g = texture(SCREEN_TEXTURE, screen_uv).g;
+		color.b = texture(SCREEN_TEXTURE, vec2(screen_uv.x - adjusted_amount, screen_uv.y)).b;
+	}
+
+	if (show_vignette) {
+		float vignette = uv.x * uv.y * (1.0 - uv.x) * (1.0 - uv.y);
+		vignette = clamp(pow((screen_size.x / 4.0) * vignette, vignette_opacity), 0.0, 1.0);
+		color *= vignette;
+	}
+
+	if (show_horizontal_scan_lines) {
+		float s = sin(screen_uv.y * horizontal_scan_lines_amount * PI * 2.0);
+		s = (s * 0.5 + 0.5) * 0.9 + 0.1;
+		vec4 scan_line = vec4(vec3(pow(s, horizontal_scan_lines_opacity)), 1.0);
+		color *= scan_line.rgb;
+	}
+
+	if (show_vertical_scan_lines) {
+		float s = sin(screen_uv.x * vertical_scan_lines_amount * PI * 2.0);
+		s = (s * 0.5 + 0.5) * 0.9 + 0.1;
+		vec4 scan_line = vec4(vec3(pow(s, vertical_scan_lines_opacity)), 1.0);
+		color *= scan_line.rgb;
+	}
+
+	if (show_horizontal_scan_lines || show_vertical_scan_lines) {
+		color *= boost;
+	}
+
+	// Fill the blank space of the corners, left by the curvature, with black.
+	if (uv.x < 0.0 || uv.x > 1.0 || uv.y < 0.0 || uv.y > 1.0) {
+		color = corner_color.rgb;
+	}
+
+	COLOR = vec4(color, 1.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/screen_size = Vector2( 683, 384 )
+shader_param/show_curvature = true
+shader_param/curvature_x_amount = 6.73
+shader_param/curvature_y_amount = 4.0
+shader_param/corner_color = Color( 0, 0, 0, 1 )
+shader_param/show_vignette = true
+shader_param/vignette_opacity = 0.18
+shader_param/show_horizontal_scan_lines = true
+shader_param/horizontal_scan_lines_amount = 192.0
+shader_param/horizontal_scan_lines_opacity = 0.15
+shader_param/show_vertical_scan_lines = true
+shader_param/vertical_scan_lines_amount = 341.0
+shader_param/vertical_scan_lines_opacity = 0.23
+shader_param/boost = 1.32
+shader_param/aberration_amount = 0.42
 
 [node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="TextureRect" type="TextureRect" parent="."]
 anchor_right = 1.0
@@ -70,8 +156,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="testshader" type="ColorRect" parent="."]
+[node name="xandria" type="Sprite" parent="."]
 material = SubResource( 2 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="testshader" type="ColorRect" parent="."]
+material = SubResource( 4 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {

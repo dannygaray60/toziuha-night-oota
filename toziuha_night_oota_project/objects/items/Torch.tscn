@@ -1,13 +1,17 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/sprites/torch.png" type="Texture" id=1]
 [ext_resource path="res://objects/items/Torch.gd" type="Script" id=2]
+[ext_resource path="res://assets/img/light_textures/light1.png" type="Texture" id=3]
+[ext_resource path="res://test/lighttexture.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 13.9184
 
-[sub_resource type="Animation" id=2]
-resource_name = "destroyed"
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="Animation" id=3]
 length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -21,8 +25,32 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 4, 5, 6, 7, 8, 9, 10 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.92, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("lighttexture:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0.882353, 0.454902, 0, 0.439216 ), Color( 0.882353, 0.454902, 0, 0 ) ]
+}
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.6
 loop = true
 step = 0.05
@@ -38,24 +66,69 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Light2D:energy")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.92, 1.5, 1.6 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("lighttexture:modulate")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 0.882353, 0.454902, 0, 0.439216 ), Color( 0.882353, 0.454902, 0, 0.368627 ), Color( 0.882353, 0.454902, 0, 0.439216 ) ]
+}
 
 [node name="Torch" type="Area2D" groups=[
 "torch",
 ]]
-collision_layer = 0
+collision_layer = 64
 collision_mask = 16
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 position = Vector2( 0.631384, -13.7308 )
 shape = SubResource( 1 )
 
+[node name="lighttexture" type="Sprite" parent="."]
+modulate = Color( 0.882353, 0.454902, 0, 0.439216 )
+self_modulate = Color( 1, 1, 1, 0.34902 )
+material = SubResource( 2 )
+position = Vector2( 0, -16 )
+scale = Vector2( 0.59375, 0.59375 )
+z_index = 1
+texture = ExtResource( 4 )
+
 [node name="Sprite" type="Sprite" parent="."]
+light_mask = 0
 position = Vector2( 0.787985, -13.4908 )
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/destroyed = SubResource( 2 )
-anims/idle = SubResource( 3 )
+anims/destroyed = SubResource( 3 )
+anims/idle = SubResource( 4 )
+
+[node name="Light2D" type="Light2D" parent="." groups=[
+"light2d",
+]]
+position = Vector2( -1.78814e-06, -15 )
+scale = Vector2( 0.270313, 0.270313 )
+enabled = false
+texture = ExtResource( 3 )
+color = Color( 1, 0.6, 0.0823529, 1 )
+range_layer_min = -100

@@ -6,7 +6,7 @@ export var animated = false
 
 export(String, "automatic","keyboard","gamepad") var show_specific_icon
 
-export(String, "ui_select","ui_left","ui_right","ui_up","ui_down","ui_accept","ui_cancel","ui_focus_prev") var action
+export(String, "ui_select","ui_left","ui_right","ui_up","ui_down","ui_accept","ui_cancel","ui_focus_prev","ui_focus_next") var action
 
 func _ready():
 	$Label.visible = false
@@ -53,7 +53,9 @@ func update_icon():
 			"ui_focus_prev":
 				$normal.frame = 34
 				$pressed.frame = 34
-			
+			"ui_focus_next":
+				$normal.frame = 40
+				$pressed.frame = 40
 			_:
 				pass
 	#mostrar icono de gamepad

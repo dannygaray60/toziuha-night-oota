@@ -5,7 +5,7 @@
 [ext_resource path="res://assets/sprites/desolated_town/tree_256px.png" type="Texture" id=3]
 [ext_resource path="res://assets/sprites/desolated_town/fence1_32px.png" type="Texture" id=4]
 [ext_resource path="res://tilemaps/DesolatedTown/ParallaxBackground.tscn" type="PackedScene" id=5]
-[ext_resource path="res://objects/items/RelicKey.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/ElementalCircuit.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/FogParallaxBackground.tscn" type="PackedScene" id=7]
 [ext_resource path="res://objects/LevelBase.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/enemies/ArmoredSkeleton.tscn" type="PackedScene" id=9]
@@ -70,9 +70,6 @@ limit_bottom_camera = 128
 
 [node name="ParallaxBackground" parent="LevelBase" instance=ExtResource( 5 )]
 
-[node name="RelicKey" parent="LevelBase" instance=ExtResource( 6 )]
-position = Vector2( -664, 39.7625 )
-
 [node name="ParallaxBackground2" parent="LevelBase" instance=ExtResource( 7 )]
 
 [node name="ArmoredSkeleton" parent="LevelBase" instance=ExtResource( 9 )]
@@ -81,19 +78,14 @@ position = Vector2( 208, 80 )
 [node name="ArmoredSkeleton2" parent="LevelBase" instance=ExtResource( 9 )]
 position = Vector2( 2248, -257.143 )
 
+[node name="ArmoredSkeleton3" parent="LevelBase" instance=ExtResource( 9 )]
+position = Vector2( -480, 77 )
+
 [node name="Skeleton" parent="LevelBase" instance=ExtResource( 12 )]
 position = Vector2( 704, 16 )
 
 [node name="WeaponUpgrade" parent="LevelBase" instance=ExtResource( 10 )]
 position = Vector2( 760, 8 )
-
-[node name="RelicKey2" parent="LevelBase" instance=ExtResource( 6 )]
-position = Vector2( -488, 42.0555 )
-item = "backdash"
-
-[node name="RelicKey3" parent="LevelBase" instance=ExtResource( 6 )]
-position = Vector2( -376, 35 )
-item = "slide"
 
 [node name="CircleSaw" parent="LevelBase" instance=ExtResource( 11 )]
 position = Vector2( 352, 112 )
@@ -115,6 +107,10 @@ position = Vector2( 488, 56 )
 [node name="UpgradeStatsItem" parent="LevelBase" instance=ExtResource( 15 )]
 position = Vector2( -240, 47.1352 )
 stat = "def"
+
+[node name="UpgradeStatsItem2" parent="LevelBase" instance=ExtResource( 15 )]
+position = Vector2( -865.807, 7.9373 )
+quantity = 10
 
 [node name="TrapSmallSpikes" parent="LevelBase" instance=ExtResource( 16 )]
 position = Vector2( 88, 80 )
@@ -164,15 +160,12 @@ subweapon_shuriken = true
 
 [node name="Torch5" parent="LevelBase" instance=ExtResource( 22 )]
 position = Vector2( 293, 19 )
-em_1_probability = 1
 
 [node name="Torch6" parent="LevelBase" instance=ExtResource( 22 )]
 position = Vector2( 153, 5.2692 )
-em_1_probability = 1
 
 [node name="Torch2" parent="LevelBase" instance=ExtResource( 22 )]
 position = Vector2( 600, -24 )
-em_5_probability = 10
 
 [node name="Torch4" parent="LevelBase" instance=ExtResource( 22 )]
 position = Vector2( 728, 0 )
@@ -180,7 +173,6 @@ subweapon_axe = true
 
 [node name="Torch3" parent="LevelBase" instance=ExtResource( 22 )]
 position = Vector2( 560, -24 )
-em_5_probability = 10
 
 [node name="TrapAxeCurve" parent="LevelBase" instance=ExtResource( 23 )]
 position = Vector2( 1440, -216 )
@@ -270,3 +262,7 @@ end_of_level = true
 
 [node name="SaveStatue" parent="LevelBase" instance=ExtResource( 30 )]
 position = Vector2( -168, 79.1352 )
+
+[node name="ElementalCircuit" parent="." instance=ExtResource( 6 )]
+position = Vector2( -812.249, 4.9373 )
+circuit = "hability_dodge"

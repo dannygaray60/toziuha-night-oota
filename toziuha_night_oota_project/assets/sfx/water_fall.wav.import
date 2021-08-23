@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/water_fall.wav-07f7a3b1031f9f0bfd0e8fe41195a178.sample"
+
+[deps]
+
+source_file="res://assets/sfx/water_fall.wav"
+dest_files=[ "res://.import/water_fall.wav-07f7a3b1031f9f0bfd0e8fe41195a178.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

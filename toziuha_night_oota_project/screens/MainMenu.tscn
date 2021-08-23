@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://screens/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/img/red_demon_forest.png" type="Texture" id=2]
@@ -11,8 +11,8 @@
 [ext_resource path="res://addons/swipe-detector/swipe_detector.gd" type="Script" id=9]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen14.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen4.png" type="Texture" id=11]
-[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen2.png" type="Texture" id=12]
-[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen12.png" type="Texture" id=13]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen18.png" type="Texture" id=12]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen8.png" type="Texture" id=13]
 [ext_resource path="res://screens/ui_elements/SocialAndSupportLinks.tscn" type="PackedScene" id=14]
 [ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=15]
 [ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=16]
@@ -32,6 +32,12 @@ font_data = ExtResource( 8 )
 
 [sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 8 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 8 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 90, 20 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -142,8 +148,8 @@ __meta__ = {
 }
 
 [node name="BtnUp" type="TouchScreenButton" parent="."]
-position = Vector2( 59.1833, 189 )
-scale = Vector2( 3, 3 )
+position = Vector2( 170, 182.878 )
+scale = Vector2( 2, 2 )
 normal = ExtResource( 3 )
 pressed = ExtResource( 5 )
 passby_press = true
@@ -154,8 +160,8 @@ __meta__ = {
 }
 
 [node name="BtnDown" type="TouchScreenButton" parent="."]
-position = Vector2( 59.1833, 267.724 )
-scale = Vector2( 3, 3 )
+position = Vector2( 170, 293 )
+scale = Vector2( 2, 2 )
 normal = ExtResource( 11 )
 pressed = ExtResource( 10 )
 passby_press = true
@@ -166,10 +172,10 @@ __meta__ = {
 }
 
 [node name="BtnRight" type="TouchScreenButton" parent="."]
-position = Vector2( 538, 223 )
-scale = Vector2( 3, 3 )
-normal = ExtResource( 12 )
-pressed = ExtResource( 13 )
+position = Vector2( 76.6326, 240.878 )
+scale = Vector2( 2, 2 )
+normal = ExtResource( 13 )
+pressed = ExtResource( 12 )
 passby_press = true
 action = "ui_accept"
 visibility_mode = 1
@@ -189,8 +195,27 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer"]
+margin_right = 56.0
+margin_bottom = 41.0
+
+[node name="ButtonKeyGamepadIcon" parent="HBoxContainer/HBoxContainer2" instance=ExtResource( 15 )]
+margin_top = 12.0
+margin_bottom = 28.0
+size_flags_vertical = 4
+action = "ui_accept"
+
+[node name="Label2" type="Label" parent="HBoxContainer/HBoxContainer2"]
+margin_left = 20.0
+margin_top = 14.0
+margin_right = 56.0
+margin_bottom = 27.0
+custom_fonts/font = SubResource( 3 )
+text = "SELECT"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
-margin_right = 88.0
+margin_left = 77.0
+margin_right = 165.0
 margin_bottom = 41.0
 
 [node name="ButtonKeyGamepadIcon" parent="HBoxContainer/HBoxContainer" instance=ExtResource( 15 )]
@@ -214,25 +239,6 @@ margin_right = 88.0
 margin_bottom = 27.0
 custom_fonts/font = SubResource( 3 )
 text = "NAVIGATE"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer"]
-margin_left = 109.0
-margin_right = 165.0
-margin_bottom = 41.0
-
-[node name="ButtonKeyGamepadIcon" parent="HBoxContainer/HBoxContainer2" instance=ExtResource( 15 )]
-margin_top = 12.0
-margin_bottom = 28.0
-size_flags_vertical = 4
-action = "ui_accept"
-
-[node name="Label2" type="Label" parent="HBoxContainer/HBoxContainer2"]
-margin_left = 20.0
-margin_top = 14.0
-margin_right = 56.0
-margin_bottom = 27.0
-custom_fonts/font = SubResource( 3 )
-text = "SELECT"
 
 [node name="ControlSocial" type="Control" parent="."]
 visible = false
@@ -318,5 +324,32 @@ __meta__ = {
 
 [node name="ParallaxBackgroundMainMenu" parent="." instance=ExtResource( 18 )]
 
+[node name="HBxPrivacyPolicy" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -45.5
+margin_top = -40.0
+margin_right = 45.5
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="HBxPrivacyPolicy"]
+margin_left = 10.0
+margin_right = 81.0
+margin_bottom = 40.0
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 5 )
+text = "Privacy Policy"
+valign = 1
+
+[node name="TouchBtnPrivacyPolicy" type="TouchScreenButton" parent="HBxPrivacyPolicy"]
+position = Vector2( -41.3674, -1.12247 )
+shape = SubResource( 6 )
+
 [connection signal="swipe_updated" from="SwipeDetector" to="." method="_on_SwipeDetector_swipe_updated"]
 [connection signal="pressed" from="ControlSocial/BtnHideSocialIcons" to="." method="_on_BtnHideSocialIcons_pressed"]
+[connection signal="pressed" from="HBxPrivacyPolicy/TouchBtnPrivacyPolicy" to="." method="_on_TouchBtnPrivacyPolicy_pressed"]

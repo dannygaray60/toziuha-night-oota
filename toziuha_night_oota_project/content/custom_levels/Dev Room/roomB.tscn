@@ -78,7 +78,7 @@ position = Vector2( 344, 736 )
 position = Vector2( 358.555, 107 )
 
 [node name="WeaponUpgrade" parent="." index="10" instance=ExtResource( 11 )]
-position = Vector2( 383.109, 736 )
+position = Vector2( 376, 736 )
 
 [editable path="DoorLeft"]
 [editable path="DoorDown"]

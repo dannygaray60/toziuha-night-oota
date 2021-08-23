@@ -1,6 +1,6 @@
 extends RigidBody2D
 
-var subweapon = "shuriken"
+export var subweapon = "shuriken"
 
 var prev_subweapon = "none"
 

@@ -1,0 +1,34 @@
+[remap]
+
+importer="texture"
+type="StreamTexture"
+path="res://.import/atomsk_luna.jpg-298718e8a46759f12c45808f7a5e50da.stex"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://assets/img/gallery/atomsk_luna.jpg"
+dest_files=[ "res://.import/atomsk_luna.jpg-298718e8a46759f12c45808f7a5e50da.stex" ]
+
+[params]
+
+compress/mode=0
+compress/lossy_quality=0.7
+compress/hdr_mode=0
+compress/bptc_ldr=0
+compress/normal_map=0
+flags/repeat=0
+flags/filter=false
+flags/mipmaps=false
+flags/anisotropic=false
+flags/srgb=2
+process/fix_alpha_border=true
+process/premult_alpha=false
+process/HDR_as_SRGB=false
+process/invert_color=false
+stream=false
+size_limit=0
+detect_3d=false
+svg/scale=1.0

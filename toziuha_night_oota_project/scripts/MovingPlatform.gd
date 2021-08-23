@@ -2,7 +2,7 @@ extends Path2D
 
 #especial thanks to PigDev for this way to make moving platforms
 
-export(float,0.1,1) var playback_speed = 0.3
+export(float,0.1,1) var playback_speed = 0.5
 
 export var loop = false
 

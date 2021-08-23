@@ -3,7 +3,7 @@
 [ext_resource path="res://tilemaps/old_castle/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/characters/Xandria.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/LevelBase.tscn" type="PackedScene" id=3]
-[ext_resource path="res://objects/items/RelicKey.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/ElementalCircuit.tscn" type="PackedScene" id=4]
 [ext_resource path="res://tilemaps/old_castle/Background.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/enemies/FloatingSkull.tscn" type="PackedScene" id=6]
 
@@ -12,38 +12,38 @@
 [node name="Xandria" parent="." index="3" instance=ExtResource( 2 )]
 position = Vector2( -8, 240 )
 
-[node name="RelicKey" parent="." index="4" instance=ExtResource( 4 )]
-position = Vector2( -8, 176 )
-item = "backdash"
-
-[node name="RelicKey3" parent="." index="5" instance=ExtResource( 4 )]
-position = Vector2( -8, 144 )
-item = "slide"
-
-[node name="RelicKey2" parent="." index="6" instance=ExtResource( 4 )]
-position = Vector2( -8, 104 )
-
-[node name="TileMap" parent="." index="7" instance=ExtResource( 1 )]
+[node name="TileMap" parent="." index="4" instance=ExtResource( 1 )]
 tile_data = PoolIntArray( 720884, 1, 0, 720885, 1, 1, 720886, 1, 1, 720887, 1, 1, 720888, 1, 1, 720889, 1, 1, 720890, 1, 1, 720891, 1, 1, 720892, 1, 2, 786420, 1, 131072, 786421, 1, 131073, 786422, 1, 131073, 786423, 1, 131073, 786424, 1, 131073, 786425, 1, 131073, 786426, 1, 131073, 786427, 1, 131073, 786428, 1, 131074, 851956, 3, 0, 851957, 3, 1, 851958, 3, 1, 851959, 3, 1, 851960, 3, 1, 851961, 3, 1, 851962, 3, 1, 851963, 3, 2, 851964, 0, 0, 786438, 1, 0, 786439, 1, 1, 786440, 1, 2, 917492, 3, 65536, 917493, 3, 65537, 917494, 3, 65537, 917495, 3, 65537, 917496, 3, 65537, 917497, 3, 65537, 917498, 3, 65537, 917499, 3, 65538, 917500, 0, 0, 851973, 0, 0, 851974, 1, 131072, 851975, 1, 131073, 851976, 1, 131074, 983028, 3, 65536, 983029, 3, 65537, 983030, 3, 65537, 983031, 3, 65537, 983032, 3, 65537, 983033, 3, 65537, 983034, 3, 65537, 983035, 3, 65538, 1048564, 3, 131072, 1048565, 3, 131073, 1048566, 3, 131073, 1048567, 3, 131073, 1048568, 3, 131073, 1048569, 3, 131073, 1048570, 3, 131073, 1048571, 3, 131074, 1114099, 0, 0, 1114100, 1, 0, 1114101, 1, 1, 1114102, 1, 1, 1114103, 1, 1, 1114104, 1, 1, 1114105, 1, 1, 1114106, 1, 1, 1114107, 1, 1, 1114108, 1, 1, 1114109, 1, 1, 1114110, 1, 1, 1114111, 1, 1, 1048576, 1, 1, 1048577, 1, 1, 1048578, 1, 1, 1048579, 1, 1, 1048580, 1, 1, 1048581, 1, 1, 1048582, 1, 1, 1048583, 1, 1, 1048584, 1, 1, 1048585, 1, 2, 1179634, 0, 0, 1179635, 0, 0, 1179636, 1, 131072, 1179637, 1, 131073, 1179638, 1, 131073, 1179639, 1, 131073, 1179640, 1, 131073, 1179641, 1, 131073, 1179642, 1, 131073, 1179643, 1, 131073, 1179644, 1, 131073, 1179645, 1, 131073, 1179646, 1, 131073, 1179647, 1, 131073, 1114112, 1, 131073, 1114113, 1, 131073, 1114114, 1, 131073, 1114115, 1, 131073, 1114116, 1, 131073, 1114117, 1, 131073, 1114118, 1, 131073, 1114119, 1, 131073, 1114120, 1, 131073, 1114121, 1, 131074, 1245169, 0, 0, 1245170, 0, 0, 1245171, 0, 0, 1310703, 0, 0, 1310704, 0, 0, 1310705, 0, 0, 1310706, 0, 0, 1310707, 0, 0, 1376230, 1, 0, 1376231, 1, 1, 1376232, 1, 1, 1376233, 1, 1, 1376234, 1, 1, 1376235, 1, 1, 1376236, 1, 2, 1376239, 0, 0, 1376240, 0, 0, 1376241, 0, 0, 1376242, 0, 0, 1376243, 0, 0, 1441766, 1, 131072, 1441767, 1, 131073, 1441768, 1, 131073, 1441769, 1, 131073, 1441770, 1, 131073, 1441771, 1, 131073, 1441772, 1, 131074 )
 
-[node name="TileMap semisolid" parent="." index="8" groups=[
+[node name="TileMap semisolid" parent="." index="5" groups=[
 "semisolid",
 ] instance=ExtResource( 1 )]
 tile_data = PoolIntArray( 786401, 2, 0, 786402, 2, 2, 786405, 4, 0, 983007, 2, 0, 983008, 2, 1, 983009, 2, 1, 983010, 2, 2, 983015, 5, 0, 1048539, 2, 0, 1048540, 2, 2, 1048551, 1073741829, 0, 1114087, 5, 0, 1179612, 2, 0, 1179613, 2, 2, 1179622, 6, 0, 1310686, 2, 0, 1310687, 2, 1, 1310688, 2, 1, 1310689, 2, 1, 1310690, 2, 1, 1310691, 2, 2 )
 
-[node name="ParallaxBackground" parent="." index="9" instance=ExtResource( 5 )]
+[node name="ParallaxBackground" parent="." index="6" instance=ExtResource( 5 )]
 
-[node name="FloatingSkull" parent="." index="10" instance=ExtResource( 6 )]
+[node name="FloatingSkull" parent="." index="7" instance=ExtResource( 6 )]
 position = Vector2( -416, 256 )
 
-[node name="FloatingSkull2" parent="." index="11" instance=ExtResource( 6 )]
+[node name="FloatingSkull2" parent="." index="8" instance=ExtResource( 6 )]
 position = Vector2( -80, 80 )
 
-[node name="FloatingSkull3" parent="." index="12" instance=ExtResource( 6 )]
+[node name="FloatingSkull3" parent="." index="9" instance=ExtResource( 6 )]
 position = Vector2( 128, 144 )
 
-[node name="FloatingSkull4" parent="." index="13" instance=ExtResource( 6 )]
+[node name="FloatingSkull4" parent="." index="10" instance=ExtResource( 6 )]
 position = Vector2( -560, 200 )
 
-[node name="FloatingSkull5" parent="." index="14" instance=ExtResource( 6 )]
+[node name="FloatingSkull5" parent="." index="11" instance=ExtResource( 6 )]
 position = Vector2( -208, 320 )
+
+[node name="ElementalCircuit" parent="." index="12" instance=ExtResource( 4 )]
+position = Vector2( 56, 168 )
+
+[node name="ElementalCircuit2" parent="." index="13" instance=ExtResource( 4 )]
+position = Vector2( 104, 176 )
+circuit = "hability_slide"
+
+[node name="ElementalCircuit3" parent="." index="14" instance=ExtResource( 4 )]
+position = Vector2( 16, 224 )
+circuit = "whip_lvl_3"

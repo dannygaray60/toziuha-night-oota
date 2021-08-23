@@ -36,16 +36,141 @@ var subweapons = {
 	},
 	"shuriken":{
 		"name": "Shuriken",
-		"atk_add": 10,
+		"atk_add": 3,
 		"mp_use": 1,
 		"description": "Shuriken ninja.",
 	},
 	
 	"axe":{
 		"name": "Axe",
-		"atk_add": 20,
+		"atk_add": 3,
 		"mp_use": 3,
 		"description": "Hacha grande.",
+	},
+}
+
+#lista de circuitos elementales
+var elemental_circuits = {
+	"hability_double_jump" : {
+		"name" : "UNK",
+		"description" : "",
+		"passive" : true, #false si el circuito es para un ataque especial (y no habilidad pasiva)
+		"frame_icon": 0,
+	},
+	"hability_dodge" : {
+		"name" : "UNK",
+		"description" : "",
+		"passive" : true, #false si el circuito es para un ataque especial (y no habilidad pasiva)
+		"frame_icon": 1,
+	},
+	"hability_slide" : {
+		"name" : "UNK",
+		"description" : "",
+		"passive" : true, #false si el circuito es para un ataque especial (y no habilidad pasiva)
+		"frame_icon": 2,
+	},
+	"hability_circle_whip" : {
+		"name" : "UNK",
+		"description" : "",
+		"passive" : true, #false si el circuito es para un ataque especial (y no habilidad pasiva)
+		"frame_icon": 4,
+	},
+	"hability_hook_whip" : {
+		"name" : "UNK",
+		"description" : "",
+		"passive" : true, #false si el circuito es para un ataque especial (y no habilidad pasiva)
+		"frame_icon": 3,
+	},
+	"whip_lvl_2" : {
+		"name" : "UNK",
+		"description" : "",
+		"passive" : true, #false si el circuito es para un ataque especial (y no habilidad pasiva)
+		"frame_icon": 5,
+	},
+	"whip_lvl_3" : {
+		"name" : "UNK",
+		"description" : "",
+		"passive" : true, #false si el circuito es para un ataque especial (y no habilidad pasiva)
+		"frame_icon": 6,
+	},
+	#sin circuito
+	"none" : {
+		"name" : "",
+		"description" : "",
+		"passive" : false, #false si el circuito es para un ataque especial (y no habilidad pasiva)
+		"frame_icon": 24,
+		"time": 0, #tiempo necesario para usar circuito, 0 significa también pasivo
+		"mp_cost": 0, #costo de maná
+	},
+	#circuitos que son de poderes especiales (circuitos no pasivos)
+	"hydro_amnis" : {
+		"name" : "Hydro Amnis",
+		"description" : "DESC_HYDROAMNIS",
+		"passive" : false, #false si el circuito es para un ataque especial (y no habilidad pasiva)
+		"frame_icon": 7,
+		"time": 1, #tiempo necesario para usar circuito, 0 significa también pasivo
+		"mp_cost": 8, #costo de maná
+	},
+	"vita_pecunia" : {
+		"name" : "Vita Pecunia",
+		"description" : "DESC_VITAPECUNIA",
+		"passive" : false, #false si el circuito es para un ataque especial (y no habilidad pasiva)
+		"frame_icon": 8,
+		"time": 1, #tiempo necesario para usar circuito, 0 significa también pasivo
+		"mp_cost": 10, #costo de maná
+	},
+	"fulgur_sphaera" : {
+		"name" : "Fulgur Sphaera",
+		"description" : "DESC_FULGURSPHAERA",
+		"passive" : false, #false si el circuito es para un ataque especial (y no habilidad pasiva)
+		"frame_icon": 9,
+		"time": 1, #tiempo necesario para usar circuito, 0 significa también pasivo
+		"mp_cost": 5, #costo de maná
+	},
+	
+	
+	
+	
+}
+
+
+#lista de objetos equipables (elementos y otros items)
+var equipable_items = {
+	"none" : {
+		"name" : "",
+		"description" : "",
+		"element" : false, #true si es elemento quimico, false si es objeto equipable
+		"frame_icon": 47,
+	},
+	"melonpan" : {
+		"name" : "Melonpan",
+		"description" : "A delicious melonpan.",
+		"element" : false, #true si es elemento quimico, false si es objeto equipable
+		"frame_icon": 0,
+	},
+	"o" : {
+		"name" : "OXYGEN",
+		"description" : "DESC_OXYGEN",
+		"element" : true, #true si es elemento quimico, false si es objeto equipable
+		"frame_icon": 1,
+	},
+	"cu" : {
+		"name" : "COPPER",
+		"description" : "DESC_COPPER",
+		"element" : true, #true si es elemento quimico, false si es objeto equipable
+		"frame_icon": 2,
+	},
+	"ir" : {
+		"name" : "IRIDIUM",
+		"description" : "DESC_IRIDIUM",
+		"element" : true, #true si es elemento quimico, false si es objeto equipable
+		"frame_icon": 4,
+	},
+	"ti" : {
+		"name" : "TITANIUM",
+		"description" : "DESC_TITATIUM",
+		"element" : true, #true si es elemento quimico, false si es objeto equipable
+		"frame_icon": 3,
 	},
 }
 
@@ -89,7 +214,7 @@ var enemy = {
 	},
 	"cursed_hound":{
 		"name": "CURSEDHOUND",
-		"atk": 7,
+		"atk": 30,
 		"def":0,
 		"hp_max": 2,
 		"description": "Description...",
@@ -126,8 +251,8 @@ var enemy = {
 	"floating_skull":{
 		"name": "FLOATINGSKULL",
 		"atk": 15,
-		"def":3,
-		"hp_max": 7,
+		"def":1,
+		"hp_max": 12,
 		"description": "Description...",
 		#y aqui una lista de objetos que puede dejar al morir...
 		"item_drop": ["none"],
@@ -152,9 +277,9 @@ var enemy = {
 	},	
 	"armored_skeleton":{
 		"name": "ARMOREDSKELETON",
-		"atk": 30,
-		"def":0,
-		"hp_max": 20,
+		"atk": 38,
+		"def":6,
+		"hp_max": 30,
 		"description": "Description...",
 		#y aqui una lista de objetos que puede dejar al morir...
 		"item_drop": ["none"],
@@ -211,6 +336,14 @@ var enemy = {
 		"description": "",
 		"item_drop": [],
 	},
+	"eva_proyectile1":{
+		"name": "",
+		"atk": 34,
+		"def":0,
+		"hp_max": 0,
+		"description": "",
+		"item_drop": [],
+	},
 	
 	
 	"boss_big_bat":{
@@ -223,14 +356,31 @@ var enemy = {
 		"item_drop": ["none"],
 	},
 	
+	"boss_eva1":{
+		"name": "EVA",
+		"atk": 40,
+		"def":12,
+		"hp_max": 1200,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none"],
+	},
+	"puppet_master":{
+		"name": "PUPPETMASTER",
+		"atk": 40,
+		"def":20,
+		"hp_max": 1200,
+		"description": "Description...",
+		#y aqui una lista de objetos que puede dejar al morir...
+		"item_drop": ["none"],
+	},
+	
+	
 }
 
 var player = {}
 
 func _ready():
-	
-	#arreglo para mi control generico de PS2
-	Input.add_joy_mapping("030000004c0500006802000000000000,Generic PS3 Controller Custom,platform:Windows,a:b14,b:b13,x:b15,y:b12,back:b1,start:b2,leftstick:-a0,rightstick:+a2,leftshoulder:b10,rightshoulder:b11,dpup:b4,dpdown:b6,dpleft:b7,dpright:b5,-leftx:+a1,+leftx:+a0,-lefty:-a1,-rightx:-a2,righty:a3,lefttrigger:b8,righttrigger:b9,", true)
 
 	var Conf = load("res://scripts/config.gd").new()
 	Conf.check_configfile()
@@ -268,7 +418,7 @@ func set_vars():
 		#hacia qué lado mira el jugador: -1 : izquierda, 1 : derecha
 		"facing" : 1,
 		#cantidad maxima de pociones para llevar
-		"potion_max": 5,
+		"potion_max": 2,
 		#y la cantidad actual
 		"potion_now": 0,
 		#cantidad de hp que puede dar la pocion
@@ -279,18 +429,32 @@ func set_vars():
 		"hability_dodge" : false,
 		#deslizarse en el suelo
 		"hability_slide" : false,
+		#habilidad para colgarse del latigo
+		"hability_hook_whip" : false,
+		#habilidad para girar el latigo
+		"hability_circle_whip" : false,
 		#llaves para desbloquear puertas especiales
 		"bronze_key": false,
 		"silver_key": false,
 		"golden_key": false,
 		#id de habitacion en la que se encuentra
 		"current_room": "",
+		#index del circuito equipado
+		"current_circuit": 0, #
+		#id del elemento (aleación), u objeto equipado 
+		"current_element_item": 0, #
+		#id de circuitos obtenidos
+		"elemental_circuits": ["none"],
+		#id de elementos obtenidos
+		"elements_items": ["none"],
 		#id de habitaciones visitadas
 		"visited_rooms": [],
 		#id de los items que aumentan estadiscicas
 		"upgrade_items": [],
 		#(nombre de la escena) de los bosses eliminados
 		"defeated_bosses": [],
+		#añadir cualquier string que sirva como flag (si está es true, si no es false)
+		"flags" : [],
 		
 	}
 

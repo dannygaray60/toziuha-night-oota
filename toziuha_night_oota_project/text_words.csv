@@ -2,6 +2,7 @@ keys;en;es
 ATK;Attack;Ataque
 DEF;Defense;Defensa
 HP;Health;Salud
+EQUIP;Equip;Equipo
 SKILLDOUBLEJUMP;Skill:\nDouble Jump;Habilidad:\nSalto Doble
 SKILLSLIDE;Skill:\nSlide;Habilidad:\nDeslizarse
 SKILLBACKDASH;Skill:\nBackdash;Habilidad:\nRetropropulsión
@@ -19,6 +20,23 @@ CUSTOMLVLS;Custom Levels;Niveles Personalizados
 DISABLED;Disabled;Desactivado
 ICONS;Icons;Iconos
 VIDEO_FILTERS;Video Filters;Filtros de Video
+ACCEPT;Accept;Aceptar
+ATTACK;Attack;Atacar
+JUMP;Jump;Saltar
+BACKDASH;Backdash;Retropropulsión
+CROUCH;Crouch;Agacharse
+INAIR;In Air;En el aire
+CHANGESLOT;Change Slot;Cambiar Slot
+CHANGEITEM;Change Item;Cambiar Item
+PAUSEMAP;Pause / Map;Pausa / Mapa
+PREV;Previous;Anterior
+NEXT;Next;Siguiente
+PLAY;Play;Reproducir
+STOP;Stop;Detener
+TOBECONTINUED;To be continued...;Continuará...
+ABSORB_CIRCUIT;Absorb Elemental Circuit;Absorber Circuito Elemental
+USE_ELEMENTAL_CIRCUIT;Use Elemental Circuit;Usar Circuito Elemental
+TUTO1;Basic controls. \nThese can be configured from the options menu. (Compatible with gamepads).;Controles básicos. \nEstos pueden ser configurados desde el menú de opciones. (Compatible con gamepads).
 OPT_BTN_JUMPANDACCEPT;Jump / Accept;Saltar / Aceptar
 OPT_BTN_ATTACKANDCANCEL;Attack / Cancel;Atacar / Cancelar
 OPT_BTN_START;Start / Pause;Inicio / Pausa
@@ -26,6 +44,7 @@ SELECTNEWBTNICONFORX;Select a new icon for «%s».;Selecciona un nuevo icono par
 REMAP_MSG_GAMEPAD;Press a new button for «%s» on your gamepad.;Presiona un nuevo botón para «%s» en su gamepad.
 REMAP_MSG_KEYBRD;Press a new key for «%s».;Presiona una nueva tecla para «%s».
 MSG_OR_PRESS_ESC_TO_CLOSE;Or press «Escape» to close.;O presione «Escape» para cerrar.
+MOVE;Move;Mover
 UP;Up;Arriba
 DOWN;Down;Abajo
 LEFT;Left;Izquierda
@@ -78,6 +97,7 @@ POTION;Potion;Poción
 USE_POTION;Use Potion;Usar Poción
 SLIDE;Slide;Deslizarse
 BACKWARD;Backdash;Retropropulsión
+SUBWEAPON;Sub-weapon;Sub-arma
 HPRESTORED;Restored Health;Salud Restaurada
 THROW_SUBWEAPON;Throw Subweapon;Lanzar Subarma
 INFECTEDSLIME;Infected Slime;Slime Infectado
@@ -99,8 +119,10 @@ HOLD;Hold;Mantén
 PRESS;Press;Presiona
 RELEASE;Release;Suelta
 MISSIONRESULTS;Mission Results;Resultados de Misión
+SELECTMAP;Select Map;Seleccione Mapa
 MONEY;Money;Dinero
 DEATHS;Deaths;Muertes
+LOADING;Loading;Cargando
 PHRASE_DOUBLEJUMP;Now you can make a double jump.;Ahora puedes hacer un segundo salto.
 PHRASE_SLIDE;Press «Down» + «Jump» to slide.;Presiona «Abajo» + «Salto» para deslizarte.
 PHRASE_BACKDASH;Go Backward with «Backdash» button.;Retrocede rápidamente con el botón de «Retropropulsión».
@@ -112,3 +134,16 @@ PHRASEPOTIONINCREASED;Your max of potions that you can have has increased to %d;
 PHRASEWANTLOADORNEWGAME;Do you want continue from a save file or start new game?;¿Desea continuar desde un punto de guardado o comenzar de nuevo?
 PHRASEABOUTQUICKSAVE;Note: The quick save just create a temporal file. If you lose all health points (HP) the last save point (from statues) will be loaded, otherwise the whole level will be restarted.;Nota: El guardado rápido crea un archivo temporal que se elimina al ser cargado. Al perder toda la salud (HP) solo puede regresar a los puntos de guardado realizados con las estatuas, en caso contrario el nivel entero será reiniciado.
 PHRASERESTARTTOAPPLYCHANGES;The game must be restarted to apply changes...;El juego deber ser reiniciado para aplicar los cambios...
+DEVMSG1INTRO;This game is in development, you can report bugs in the github repository (see Credits screen).;Este juego está en etapa de desarrollo, puedes reportar bugs en el repositorio de github (ver pantalla de Créditos).
+DEVMSG2INTRO;Donations and Crowdfunding Campaign at Kofi:;Donaciones y Campaña de Financiamento en Kofi:
+IRIDIUM;Iridium;Iridio
+TITANIUM;Titanium;Titanio
+OXYGEN;Oxygen;Óxigeno
+COPPER;Copper;Cobre
+DESC_OXYGEN;Adds a layer of ferrous oxide powder to the whip, occasionally it can generate an explosion.;Añade una capa de polvo de óxido ferroso al látigo, ocasionalmente puede generar una explosión.
+DESC_IRIDIUM;Fragile and chemically inert metal. It's the second desnsest element and the most resistant to corrosion.;Metal frágil y químicamente inerte. Es el segundo elemento más denso, además de ser el más resistente a la corrosión.
+DESC_TITATIUM;Very light and resistant metal, besides being an inert element. Increases +5 ATK.;Metal muy ligero y resistente, además de ser un elemento inerte. Aumenta +5 ATK.
+DESC_COPPER;It's a soft, malleable, and ductile metal with very high thermal and electrical conductivity.;Es un metal blando, maleable y dúctil con una conductividad térmica y eléctrica muy elevada.
+DESC_HYDROAMNIS;Elemental circuit containing two hydrogen atoms, with the missing element unleashes a liquid attack on the floor.;Circuito elemental que contiene dos átomos de hidrógeno, junto al elemento faltante, desata un ataque líquido en el suelo.
+DESC_VITAPECUNIA;Exchange 200 cordovas for half of health points.;A cambio de 200 cordovas, recupera la mitad de la salud.
+DESC_FULGURSPHAERA;Two balls of energy will surround you for a few seconds, an electrically conductive element is necessary.;Dos bolas de energía te rodearán por algunos segundos, es necesario un elemento conductor eléctrico.

@@ -39,6 +39,15 @@ func paint_room(id_room="",room=[]):
 		#se cambiará el tile a usar
 		if Vars.player["current_room"] == id_room:
 			tile_use = "dot position"
+		#pintar habitaciones que contengan estatua guardado
+		elif room[4] == "s":
+			tile_use = "dot save"
+		#que sirva para teletransporte
+		elif room[4] == "t":
+			tile_use = "dot teleport"
+		#lugares que conducen a otros submapas (como portrait of ruin)
+		elif room[4] == "m":
+			tile_use = "dot submap"
 		
 		#recorrer cada fila de la habitacion
 		#de arriba hacia abajo

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://shaders/wave_background.shader" type="Shader" id=1]
 [ext_resource path="res://assets/sprites/rustic_town_simple/town_builds.png" type="Texture" id=2]
@@ -112,14 +112,19 @@ frame_3/delay_sec = 0.0
 frame_4/texture = ExtResource( 4 )
 frame_4/delay_sec = 0.0
 
-[sub_resource type="ShaderMaterial" id=7]
+[sub_resource type="OpenSimplexNoise" id=7]
+
+[sub_resource type="NoiseTexture" id=8]
+noise = SubResource( 7 )
+
+[sub_resource type="ShaderMaterial" id=9]
 shader = ExtResource( 10 )
 shader_param/root_color = Color( 1, 0.75, 0.3, 1 )
 shader_param/tip_color = Color( 1, 0.03, 0.001, 1 )
 shader_param/fire_alpha = 1.0
 shader_param/fire_speed = 1.0
 shader_param/fire_aperture = 0.22
-shader_param/noise_tex = SubResource( 3 )
+shader_param/noise_tex = SubResource( 8 )
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
 script = ExtResource( 11 )
@@ -225,7 +230,7 @@ motion_mirroring = Vector2( 694, 0 )
 
 [node name="Fire3" type="ColorRect" parent="ParallaxFire3"]
 modulate = Color( 1, 1, 1, 0.203922 )
-material = SubResource( 7 )
+material = SubResource( 9 )
 margin_left = -6.47089
 margin_top = 221.088
 margin_right = 340.529
@@ -236,7 +241,7 @@ __meta__ = {
 
 [node name="Fire4" type="ColorRect" parent="ParallaxFire3"]
 modulate = Color( 1, 1, 1, 0.203922 )
-material = SubResource( 7 )
+material = SubResource( 9 )
 margin_left = 687.512
 margin_top = 220.672
 margin_right = 1034.51

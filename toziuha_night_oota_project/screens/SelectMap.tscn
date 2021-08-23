@@ -73,7 +73,7 @@ grow_horizontal = 0
 size_flags_horizontal = 4
 custom_styles/normal = SubResource( 1 )
 custom_fonts/font = SubResource( 2 )
-text = "CUSTOMLVLS"
+text = "SELECTMAP"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -297,7 +297,7 @@ size_flags_vertical = 4
 [node name="Margin" type="MarginContainer" parent="ControlContinue/Panel"]
 margin_top = 4.00473
 margin_right = 516.0
-margin_bottom = 217.005
+margin_bottom = 241.005
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -333,7 +333,7 @@ custom_constants/separation = 7
 margin_left = 168.0
 margin_top = 41.0
 margin_right = 327.0
-margin_bottom = 193.0
+margin_bottom = 217.0
 size_flags_horizontal = 4
 custom_constants/separation = 20
 alignment = 1
@@ -350,9 +350,9 @@ text = "QUICKLOAD"
 align = 1
 
 [node name="BtnSavePoint" parent="ControlContinue/Panel/Margin/VBx/VBx" instance=ExtResource( 7 )]
-margin_top = 41.0
+margin_top = 49.0
 margin_right = 159.0
-margin_bottom = 70.0
+margin_bottom = 78.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath("../BtnCancel")
@@ -363,9 +363,9 @@ text = "SAVEPOINT"
 align = 1
 
 [node name="BtnCancel" parent="ControlContinue/Panel/Margin/VBx/VBx" instance=ExtResource( 7 )]
-margin_top = 123.0
+margin_top = 98.0
 margin_right = 159.0
-margin_bottom = 152.0
+margin_bottom = 127.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../BtnSavePoint")
 focus_neighbour_right = NodePath(".")
@@ -377,9 +377,9 @@ text = "CANCEL"
 align = 1
 
 [node name="BtnNewGame" parent="ControlContinue/Panel/Margin/VBx/VBx" instance=ExtResource( 7 )]
-margin_top = 82.0
+margin_top = 147.0
 margin_right = 159.0
-margin_bottom = 111.0
+margin_bottom = 176.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath("../BtnQuickLoad")

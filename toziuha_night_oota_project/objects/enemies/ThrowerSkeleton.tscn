@@ -106,7 +106,7 @@ tracks/0/keys = {
 "enemies",
 ]]
 collision_layer = 4
-collision_mask = 29
+collision_mask = 25
 script = ExtResource( 2 )
 __meta__ = {
 "_editor_description_": "al momento de colocarlo en editor, evitar que el raycast que señala abajo debe tocar suelo"

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/prepare_for_war.ogg-197f971644496c06646cb93e567bdf16.oggstr"
+
+[deps]
+
+source_file="res://assets/bgm/prepare_for_war.ogg"
+dest_files=[ "res://.import/prepare_for_war.ogg-197f971644496c06646cb93e567bdf16.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

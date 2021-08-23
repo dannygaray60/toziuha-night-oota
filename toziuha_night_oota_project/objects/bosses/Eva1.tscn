@@ -1,0 +1,583 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://assets/sprites/boss_eva1.png" type="Texture" id=1]
+[ext_resource path="res://objects/bosses/Eva1.gd" type="Script" id=2]
+[ext_resource path="res://test/lighttexture.png" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/elemental_circuit_icons.png" type="Texture" id=4]
+[ext_resource path="res://assets/sprites/elemental_circuit_base.png" type="Texture" id=5]
+[ext_resource path="res://assets/sprites/enemy_skull_head_demon.png" type="Texture" id=6]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 24 )
+
+[sub_resource type="Animation" id=2]
+resource_name = "spin"
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("MagicCircle:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Circuit/TriangleDown:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -360.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Circuit/TriangleUp:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 720.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("TriangleBG:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 720.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("CircleLine:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.24, 0.25, 0.49, 0.509563, 0.749563, 0.77, 0.98 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 2, 2 ), Vector2( 1e-05, 1e-05 ), Vector2( 2, 2 ), Vector2( 1e-05, 1e-05 ), Vector2( 2, 2 ), Vector2( 1e-05, 1e-05 ), Vector2( 2, 2 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("CircleLine:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.25, 0.31, 0.43, 0.509563, 0.569563, 0.689563, 0.77, 0.83, 0.95 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Circuit/Ovals/OvalLine:scale")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.08, 0.17, 0.26, 0.36, 0.45, 0.54, 0.63, 0.7, 0.77, 0.85, 0.92, 0.99 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Circuit/Ovals/OvalLine2:scale")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.08, 0.17, 0.26, 0.36, 0.45, 0.54, 0.63, 0.7, 0.77, 0.85, 0.92, 0.99 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ), Vector2( 1, 1e-05 ), Vector2( 1, 1 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Circuit/Ovals:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Circuit/Icon:modulate")
+tracks/9/interp = 2
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.05, 0.11, 0.17, 0.22, 0.29, 0.36, 0.43, 0.5, 0.562718, 0.632718, 0.702718, 0.772718, 0.87, 0.99 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.145098, 0.145098, 0.145098, 1 ), Color( 1, 1, 1, 1 ), Color( 0.188235, 0.188235, 0.188235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.188235, 0.188235, 0.188235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.188235, 0.188235, 0.188235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.188235, 0.188235, 0.188235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.188235, 0.188235, 0.188235, 1 ), Color( 1, 1, 1, 1 ), Color( 0.188235, 0.188235, 0.188235, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("lighttexture:self_modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.1, 0.21, 0.31, 0.41, 0.51, 0.62, 0.7, 0.81, 0.91 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.160784 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.160784 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.160784 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.160784 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.160784 ) ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
+
+[sub_resource type="Animation" id=4]
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 3, 4, 5, 6 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/fire:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 24 ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 13, 14, 15 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/fire:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 24 ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 1.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6, 1.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "_move_to"
+}, {
+"args": [ "idle" ],
+"method": "change_state"
+} ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("TimerChangePattern")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [ 1 ],
+"method": "start"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/fire:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5, 0.8, 1.1, 1.3, 1.7, 1.8, 1.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 18, 17, 16, 15, 14, 12, 11, 15, 16, 18 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite/fire:position")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2, 0.6, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 9, 7 ), Vector2( 4, 2 ), Vector2( -8, 6 ), Vector2( -11, 6 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "defeated"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 16, 17 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.4, 0.6, 0.9, 1.2, 1.6, 1.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 1, 0, 2, 1, 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/fire:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 24 ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 9, 0, 10, 11, 12 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "start_circuit"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/fire:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 24 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "atk1"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "atk2"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "atk3"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "defeated"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "pre-atk2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachine" id=25]
+states/atk1/node = SubResource( 10 )
+states/atk1/position = Vector2( 366, -41 )
+states/atk2/node = SubResource( 11 )
+states/atk2/position = Vector2( 625, 39 )
+states/atk3/node = SubResource( 12 )
+states/atk3/position = Vector2( 366, 128 )
+states/defeated/node = SubResource( 13 )
+states/defeated/position = Vector2( 125, -72.312 )
+states/idle/node = SubResource( 14 )
+states/idle/position = Vector2( 143, 52 )
+states/pre-atk2/node = SubResource( 15 )
+states/pre-atk2/position = Vector2( 432, 45 )
+transitions = [ "idle", "pre-atk2", SubResource( 16 ), "pre-atk2", "atk2", SubResource( 17 ), "idle", "atk1", SubResource( 18 ), "atk1", "idle", SubResource( 19 ), "idle", "atk3", SubResource( 20 ), "atk3", "idle", SubResource( 21 ), "atk2", "pre-atk2", SubResource( 22 ), "pre-atk2", "idle", SubResource( 23 ), "idle", "defeated", SubResource( 24 ) ]
+start_node = "idle"
+end_node = "defeated"
+graph_offset = Vector2( 0, -126.312 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=26]
+
+[node name="Eva1" type="KinematicBody2D" groups=[
+"enemies",
+]]
+collision_layer = 4
+collision_mask = 25
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -24 )
+shape = SubResource( 1 )
+
+[node name="ElementalCircuit" type="Node2D" parent="."]
+position = Vector2( 0, -64 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ElementalCircuit"]
+playback_speed = 0.5
+anims/spin = SubResource( 2 )
+__meta__ = {
+"_editor_description_": ".1 a .5 de velocidad"
+}
+
+[node name="TriangleBG" type="Node2D" parent="ElementalCircuit"]
+
+[node name="Sprite" type="Sprite" parent="ElementalCircuit/TriangleBG"]
+modulate = Color( 1, 1, 1, 0.819608 )
+position = Vector2( 1.97393, 3.08814 )
+texture = ExtResource( 5 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+frame = 3
+
+[node name="MagicCircle" type="Node2D" parent="ElementalCircuit"]
+
+[node name="Sprite" type="Sprite" parent="ElementalCircuit/MagicCircle"]
+position = Vector2( 0.459562, -0.333148 )
+texture = ExtResource( 5 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+frame = 1
+
+[node name="Circuit" type="Node2D" parent="ElementalCircuit"]
+
+[node name="TriangleDown" type="Node2D" parent="ElementalCircuit/Circuit"]
+
+[node name="Sprite" type="Sprite" parent="ElementalCircuit/Circuit/TriangleDown"]
+modulate = Color( 1, 1, 1, 0.490196 )
+position = Vector2( 1.7882, 3.818 )
+texture = ExtResource( 5 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+frame = 3
+
+[node name="TriangleUp" type="Node2D" parent="ElementalCircuit/Circuit"]
+
+[node name="Sprite" type="Sprite" parent="ElementalCircuit/Circuit/TriangleUp"]
+modulate = Color( 1, 1, 1, 0.537255 )
+position = Vector2( 1.63375, -4.34349 )
+texture = ExtResource( 5 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+frame = 2
+
+[node name="Ovals" type="Node2D" parent="ElementalCircuit/Circuit"]
+
+[node name="OvalLine" type="Sprite" parent="ElementalCircuit/Circuit/Ovals"]
+position = Vector2( 0.589188, 1.03633 )
+rotation = 0.68766
+texture = ExtResource( 5 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+frame = 6
+
+[node name="OvalLine2" type="Sprite" parent="ElementalCircuit/Circuit/Ovals"]
+position = Vector2( 0.589188, 1.03633 )
+rotation = -0.68766
+texture = ExtResource( 5 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+frame = 6
+
+[node name="Icon" type="Sprite" parent="ElementalCircuit/Circuit"]
+texture = ExtResource( 4 )
+hframes = 25
+frame = 24
+
+[node name="CircleLine" type="Sprite" parent="ElementalCircuit"]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 1.33371, 0 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 5 )
+offset = Vector2( -0.046, 0 )
+hframes = 7
+
+[node name="Tween" type="Tween" parent="ElementalCircuit"]
+
+[node name="lighttexture" type="Sprite" parent="ElementalCircuit"]
+modulate = Color( 0, 0.262745, 0.882353, 0.596078 )
+material = SubResource( 3 )
+scale = Vector2( 0.59375, 0.59375 )
+z_index = 1
+texture = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -32 )
+texture = ExtResource( 1 )
+offset = Vector2( 2.462, 0 )
+hframes = 5
+vframes = 8
+frame = 1
+
+[node name="fire" type="Sprite" parent="Sprite"]
+position = Vector2( -11, 6 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 6 )
+offset = Vector2( 0.875, 0 )
+hframes = 25
+frame = 24
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/atk1 = SubResource( 4 )
+anims/atk2 = SubResource( 5 )
+anims/atk3 = SubResource( 6 )
+anims/defeated = SubResource( 7 )
+anims/idle = SubResource( 8 )
+anims/pre-atk2 = SubResource( 9 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 25 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 26 )
+
+[node name="TimerHurt" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+__meta__ = {
+"_editor_description_": "activado al ser herido, mientras esté activo no podrá ser herido
+
+0.3"
+}
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerChangePattern" type="Timer" parent="."]
+one_shot = true
+
+[node name="Positions" type="Node2D" parent="."]
+
+[node name="L" type="Position2D" parent="Positions"]
+position = Vector2( -128, 0 )
+__meta__ = {
+"_gizmo_extents_": 26.0
+}
+
+[node name="R" type="Position2D" parent="Positions"]
+__meta__ = {
+"_gizmo_extents_": 26.0
+}
+
+[connection signal="tree_exiting" from="." to="." method="_on_Eva1_tree_exiting"]
+[connection signal="tween_completed" from="ElementalCircuit/Tween" to="." method="_on_CircuitTween_tween_completed"]
+[connection signal="timeout" from="TimerChangePattern" to="." method="_on_TimerChangePattern_timeout"]

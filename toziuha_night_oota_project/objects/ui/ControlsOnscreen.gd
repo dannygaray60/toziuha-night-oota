@@ -32,7 +32,7 @@ func _ready():
 
 #mostrar u ocultar botones
 func show_buttons(val=false):
-	visible_buttons = Conf.get_conf_value("touchscreenbutton","show_buttons",false)
+	#visible_buttons = Conf.get_conf_value("touchscreenbutton","show_buttons",false)
 	for b in get_children():
 		b.visible = val
 

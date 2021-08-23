@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen1.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen20.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen16.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen5.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen10.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen8.png" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen18.png" type="Texture" id=8]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen7.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen6.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen15.png" type="Texture" id=14]
@@ -182,6 +184,23 @@ normal = ExtResource( 10 )
 pressed = ExtResource( 3 )
 passby_press = true
 action = "ui_focus_prev"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ui_focus_next" type="Position2D" parent="Btn"]
+position = Vector2( 397.647, 214.02 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Btn" type="TouchScreenButton" parent="Btn/ui_focus_next"]
+position = Vector2( -43.6618, -43.544 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 7 )
+pressed = ExtResource( 8 )
+passby_press = true
+action = "ui_focus_next"
 __meta__ = {
 "_editor_description_": ""
 }

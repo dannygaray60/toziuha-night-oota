@@ -107,7 +107,6 @@ anims/death = SubResource( 3 )
 anims/idle = SubResource( 4 )
 
 [node name="TimerStart" type="Timer" parent="."]
-wait_time = 5.0
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 0.283001, -10.3417 )

@@ -13,7 +13,7 @@ func _ready():
 
 func _process(_delta):
 	
-	if can_save and Input.is_action_just_pressed("ui_down") and player_entered:
+	if can_save and Input.is_action_just_pressed("ui_up") and player_entered:
 		
 		#restaurar salud
 		Vars.player["hp_now"] = Vars.player["hp_max"]
@@ -21,6 +21,7 @@ func _process(_delta):
 		get_tree().get_nodes_in_group("player")[0].emit_signal("stats_changed")
 		
 		if Savedata.save_savedata("savegame") == OK:
+			$Light2D.energy = 0
 			can_save = false
 			$ButtonKeyGamepadIcon.visible = false
 			$AnimatedSprite.animation = "saved"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://objects/ui/HSlider.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen15.png" type="Texture" id=2]
@@ -22,6 +22,8 @@
 [ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=20]
 [ext_resource path="res://objects/ui/Hud.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/img/iron_texture.jpg" type="Texture" id=22]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen8.png" type="Texture" id=23]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen18.png" type="Texture" id=24]
 
 [node name="EditTouchscreenButtons" type="CanvasLayer"]
 script = ExtResource( 19 )
@@ -165,6 +167,21 @@ position = Vector2( -43.8649, -43.5405 )
 scale = Vector2( 3, 3 )
 normal = ExtResource( 7 )
 pressed = ExtResource( 8 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ui_focus_next" type="Position2D" parent="Btn"]
+position = Vector2( 523.591, 149.013 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Btn" type="TouchScreenButton" parent="Btn/ui_focus_next"]
+position = Vector2( -43.8649, -43.5405 )
+scale = Vector2( 3, 3 )
+normal = ExtResource( 23 )
+pressed = ExtResource( 24 )
 __meta__ = {
 "_editor_description_": ""
 }

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ambient_forest_wind.ogg-7ab819198a91759edbed3eaf1c6b2f0a.oggstr"
+
+[deps]
+
+source_file="res://assets/sfx/ambient_forest_wind.ogg"
+dest_files=[ "res://.import/ambient_forest_wind.ogg-7ab819198a91759edbed3eaf1c6b2f0a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

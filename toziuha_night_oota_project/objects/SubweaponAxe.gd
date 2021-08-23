@@ -2,6 +2,8 @@ extends KinematicBody2D
 var direction = 1
 var gravity = 800
 var velocity = Vector2.ZERO
+
+var damage = int(Vars.player["atk"]*3)
 	
 func _physics_process(delta):
 	
@@ -11,7 +13,7 @@ func _physics_process(delta):
 	if collision != null:
 		if collision.collider.is_in_group("enemies"):
 			collision.collider.add_collision_exception_with(self)
-			collision.collider.hurt(Vars.player["atk"]+5,position)
+			collision.collider.hurt(damage,position)
 
 	velocity.x = 100*direction
 
@@ -21,7 +23,7 @@ func _ready():
 	else:
 		$Sprite.scale.x = -1
 		$AnimationPlayer.play("show_reverse")
-	velocity.y -= 300
+	velocity.y -= 400
 
 func play_sound():
 	Audio.play_sfx("whip_woosh")

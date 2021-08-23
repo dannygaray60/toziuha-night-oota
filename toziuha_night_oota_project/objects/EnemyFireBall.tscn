@@ -67,7 +67,9 @@ tracks/1/keys = {
 radius = 2.81152
 height = 7.31503
 
-[node name="FireBall" type="KinematicBody2D"]
+[node name="FireBall" type="KinematicBody2D" groups=[
+"enemies",
+]]
 collision_layer = 0
 collision_mask = 0
 script = ExtResource( 2 )
@@ -76,13 +78,14 @@ script = ExtResource( 2 )
 position = Vector2( -2, 0 )
 rotation = 1.5708
 shape = SubResource( 1 )
+disabled = true
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -2, 0 )
 texture = ExtResource( 1 )
 offset = Vector2( 0.875, 0 )
 hframes = 25
-frame = 9
+frame = 14
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/end = SubResource( 2 )

@@ -110,12 +110,12 @@ extents = Vector2( 2.24873, 3.20919 )
 "enemies",
 ]]
 collision_layer = 4
-collision_mask = 29
+collision_mask = 25
 script = ExtResource( 2 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-position = Vector2( -0.589741, -20.5997 )
-scale = Vector2( 0.376677, 0.607206 )
+position = Vector2( -0.58974, -19.6504 )
+scale = Vector2( 1.80534, 2.17048 )
 process_parent = true
 physics_process_parent = true
 

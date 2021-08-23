@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://test/test get angle.gd" type="Script" id=1]
+
+[node name="test get angle" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="A" type="Position2D" parent="."]
+position = Vector2( 263.702, 84.6544 )
+
+[node name="ColorRect" type="ColorRect" parent="A"]
+margin_left = -5.12267
+margin_top = -4.67722
+margin_right = 3.87733
+margin_bottom = 4.32278
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="B" type="Position2D" parent="."]
+position = Vector2( 358.137, 84.6544 )
+
+[node name="ColorRect" type="ColorRect" parent="B"]
+margin_left = -5.12267
+margin_top = -4.67722
+margin_right = 3.87733
+margin_bottom = 4.32278
+__meta__ = {
+"_edit_use_anchors_": false
+}

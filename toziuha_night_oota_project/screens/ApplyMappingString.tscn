@@ -1,0 +1,180 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/img/purple_demon_forest.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=3]
+[ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://screens/ApplyMappingString.gd" type="Script" id=7]
+
+[sub_resource type="StyleBoxTexture" id=1]
+texture = ExtResource( 3 )
+region_rect = Rect2( 0, 0, 90, 47 )
+margin_left = 18.9633
+margin_right = 18.9107
+margin_top = 14.0969
+margin_bottom = 14.0
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -7
+extra_spacing_bottom = -7
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 32
+extra_spacing_bottom = -9
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+extra_spacing_bottom = -9
+font_data = ExtResource( 5 )
+
+[node name="ApplyMappingString" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -408, -96 )
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+margin_left = 16.063
+margin_top = 10.0
+margin_right = 422.937
+margin_bottom = 72.0969
+grow_horizontal = 2
+size_flags_horizontal = 4
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
+text = "Add Mapping String"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -327.0
+margin_top = -100.0
+margin_right = -21.0
+margin_bottom = 32.0
+wrap_enabled = true
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnApply" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -323.5
+margin_top = 48.0
+margin_right = -20.5
+margin_bottom = 88.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 4 )
+text = "Update Mapping String"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnReturn" type="Button" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 18.0
+margin_top = -56.0
+margin_right = 178.0
+margin_bottom = -16.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 4 )
+text = "RETURN"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -467.0
+margin_top = -80.0
+margin_right = -19.0
+custom_fonts/font = SubResource( 3 )
+text = "With \"gamepad-tool\" you can make a -mapping string- this string you must paste on text box. More info with Manual."
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -243.0
+margin_top = 10.0
+margin_bottom = 92.0
+custom_fonts/font = SubResource( 3 )
+text = "Use mouse / keyboard or touchscreen."
+align = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -299.0
+margin_top = 153.0
+margin_right = -43.0
+margin_bottom = 235.0
+custom_fonts/font = SubResource( 3 )
+text = "Press any gamepad button to test."
+align = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -299.0
+margin_top = 124.0
+margin_right = -43.0
+margin_bottom = 150.0
+custom_fonts/font = SubResource( 4 )
+text = "-> XXX <-"
+align = 1
+autowrap = true
+clip_text = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="tree_exiting" from="." to="." method="_on_ApplyMappingString_tree_exiting"]
+[connection signal="pressed" from="BtnApply" to="." method="_on_BtnApply_pressed"]
+[connection signal="pressed" from="BtnReturn" to="." method="_on_BtnReturn_pressed"]

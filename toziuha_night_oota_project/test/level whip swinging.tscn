@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://objects/LevelBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://objects/ChainSwingPoint.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tilemaps/CreepyDawn/TileMap.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tilemaps/CreepyDawn/Background.tscn" type="PackedScene" id=4]
+[ext_resource path="res://objects/characters/Xandria.tscn" type="PackedScene" id=5]
+[ext_resource path="res://objects/AreaPlayerDeath.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/enemies/Bat.tscn" type="PackedScene" id=7]
+[ext_resource path="res://test/level whip swinging.gd" type="Script" id=8]
+[ext_resource path="res://objects/ElementalCircuit.tscn" type="PackedScene" id=9]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 1021.26, 10 )
+
+[node name="level whip swinging" instance=ExtResource( 1 )]
+
+[node name="TileMap" parent="." index="3" instance=ExtResource( 3 )]
+tile_data = PoolIntArray( 524288, 2, 0, 524289, 2, 2, 524290, 2, 3, 524291, 2, 2, 524292, 2, 4, 589824, 2, 131072, 589825, 2, 65537, 589826, 2, 131075, 589827, 2, 131074, 589828, 2, 131076, 655360, 2, 131072, 655361, 2, 131073, 655362, 2, 131075, 655363, 2, 65537, 655364, 2, 131076, 720896, 2, 65536, 720897, 2, 65538, 720898, 2, 65537, 720899, 2, 131074, 720900, 2, 131076, 786432, 2, 65536, 786433, 2, 131073, 786434, 2, 65538, 786435, 2, 65539, 786436, 2, 131076, 851968, 2, 65536, 851969, 2, 65539, 851970, 2, 131074, 851971, 2, 65537, 851972, 2, 131076, 917504, 2, 65536, 917505, 2, 65538, 917506, 2, 65539, 917507, 2, 131073, 917508, 2, 131076, 983040, 2, 65536, 983041, 2, 131073, 983042, 2, 65537, 983043, 2, 131075, 983044, 2, 131076, 1048576, 2, 65536, 1048577, 2, 131075, 1048578, 2, 131074, 1048579, 2, 131075, 1048580, 2, 131076, 1114112, 2, 65536, 1114113, 2, 131073, 1114114, 2, 131074, 1114115, 2, 131074, 1114116, 2, 65540, 1179648, 2, 65536, 1179649, 2, 131073, 1179650, 2, 65537, 1179651, 2, 65538, 1179652, 2, 131076, 1245184, 2, 65536, 1245185, 2, 65537, 1245186, 2, 65539, 1245187, 2, 131075, 1245188, 2, 65540, 1310720, 2, 65536, 1310721, 2, 131075, 1310722, 2, 65539, 1310723, 2, 131074, 1310724, 2, 131076, 1376256, 2, 65536, 1376257, 2, 131075, 1376258, 2, 131074, 1376259, 2, 65539, 1376260, 2, 131076, 1441792, 2, 65536, 1441793, 2, 131075, 1441794, 2, 131075, 1441795, 2, 65537, 1441796, 2, 131076, 1507328, 2, 196608, 1507329, 2, 196611, 1507330, 2, 196610, 1507331, 2, 196610, 1507332, 2, 196612, 4259918, 3, 0, 4259919, 3, 0, 4259920, 3, 0, 4259921, 3, 0, 4325451, 3, 0, 4325452, 3, 0, 4325453, 3, 0 )
+
+[node name="Background" parent="." index="4" instance=ExtResource( 4 )]
+
+[node name="Xandria" parent="." index="5" instance=ExtResource( 5 )]
+position = Vector2( 44.5428, 118.756 )
+limit_left_camera = 0
+limit_bottom_camera = 250
+
+[node name="ChainSwingPoint" parent="." index="6" instance=ExtResource( 2 )]
+position = Vector2( 154.543, 98.4337 )
+
+[node name="ChainSwingPoint2" parent="." index="7" instance=ExtResource( 2 )]
+position = Vector2( 309.14, 91.2984 )
+
+[node name="ChainSwingPoint3" parent="." index="8" instance=ExtResource( 2 )]
+position = Vector2( 441.142, 82.974 )
+
+[node name="ChainSwingPoint4" parent="." index="9" instance=ExtResource( 2 )]
+position = Vector2( 573.142, 83.974 )
+
+[node name="ChainSwingPoint5" parent="." index="10" instance=ExtResource( 2 )]
+position = Vector2( 720.142, 74.974 )
+
+[node name="ChainSwingPoint6" parent="." index="11" instance=ExtResource( 2 )]
+position = Vector2( 843.142, 88.974 )
+
+[node name="ChainSwingPoint7" parent="." index="12" instance=ExtResource( 2 )]
+position = Vector2( 964.142, 42.974 )
+
+[node name="ChainSwingPoint8" parent="." index="13" instance=ExtResource( 2 )]
+position = Vector2( 871.142, -29.026 )
+
+[node name="ChainSwingPoint9" parent="." index="14" instance=ExtResource( 2 )]
+position = Vector2( 985.142, -90.026 )
+
+[node name="AreaPlayerDeath" parent="." index="15" instance=ExtResource( 6 )]
+position = Vector2( -16, 286 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaPlayerDeath" index="0"]
+position = Vector2( 830.27, 58.7329 )
+shape = SubResource( 1 )
+
+[node name="Bat" parent="." index="16" instance=ExtResource( 7 )]
+position = Vector2( 378, 114 )
+
+[node name="Bat2" parent="." index="17" instance=ExtResource( 7 )]
+position = Vector2( 704, 116 )
+
+[node name="Bat3" parent="." index="18" instance=ExtResource( 7 )]
+position = Vector2( 974, 83 )
+
+[node name="Bat4" parent="." index="19" instance=ExtResource( 7 )]
+position = Vector2( 1004, -81 )
+
+[node name="Bat5" parent="." index="20" instance=ExtResource( 7 )]
+position = Vector2( 805, -51 )
+
+[node name="level whip swinging" type="Node2D" parent="." index="21"]
+script = ExtResource( 8 )
+
+[node name="Node2D" type="Node2D" parent="." index="22"]
+
+[node name="ElementalCircuit" parent="Node2D" index="0" instance=ExtResource( 9 )]
+position = Vector2( 81.2537, 95.1161 )
+circuit = "hability_hook_whip"
+
+[connection signal="dead" from="Xandria" to="level whip swinging" method="_on_Xandria_dead"]

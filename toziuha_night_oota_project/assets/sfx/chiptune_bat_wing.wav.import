@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/chiptune_bat_wing.wav-23675ef45ea60e029b7209118855b565.sample"
+
+[deps]
+
+source_file="res://assets/sfx/chiptune_bat_wing.wav"
+dest_files=[ "res://.import/chiptune_bat_wing.wav-23675ef45ea60e029b7209118855b565.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

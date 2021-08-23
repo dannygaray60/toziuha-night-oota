@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/female1_grunting_5.wav-dab022c4dde3640bbd2cdaf4b7852fcf.sample"
+
+[deps]
+
+source_file="res://assets/voice/female1_grunting_5.wav"
+dest_files=[ "res://.import/female1_grunting_5.wav-dab022c4dde3640bbd2cdaf4b7852fcf.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
