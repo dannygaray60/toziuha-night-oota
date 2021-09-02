@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://objects/ui/Panel_Purple.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=2]
@@ -32,6 +32,7 @@
 [ext_resource path="res://assets/img/gallery/atomsk_luna.jpg" type="Texture" id=30]
 [ext_resource path="res://assets/img/gallery/elias_ojeda.jpg" type="Texture" id=31]
 [ext_resource path="res://assets/img/gallery/atomsk_luna2.png" type="Texture" id=32]
+[ext_resource path="res://assets/img/gallery/mariano.png" type="Texture" id=33]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 content_margin_left = 51.0
@@ -125,19 +126,19 @@ scroll_vertical_enabled = false
 semitransparent_unfocused_items = false
 
 [node name="CenterContainer" parent="ScrollContainer" index="0"]
-margin_right = 10362.0
+margin_right = 10754.0
 margin_bottom = 400.0
 
 [node name="MarginContainer" parent="ScrollContainer/CenterContainer" index="0"]
 margin_top = 0.0
-margin_right = 10362.0
+margin_right = 10754.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 0, 400 )
 custom_constants/margin_left = 1700
 
 [node name="HBoxContainer" parent="ScrollContainer/CenterContainer/MarginContainer" index="0"]
 margin_left = 1700.0
-margin_right = 8662.0
+margin_right = 9054.0
 margin_bottom = 400.0
 
 [node name="Sindy Ramos (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="0"]
@@ -199,9 +200,19 @@ texture = ExtResource( 32 )
 expand = true
 stretch_mode = 6
 
-[node name="Eduardo SF (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="6"]
+[node name="Mariano Paz (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="6"]
 margin_left = 2302.0
-margin_right = 2532.0
+margin_right = 2582.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 280, 400 )
+focus_mode = 2
+texture = ExtResource( 33 )
+expand = true
+stretch_mode = 6
+
+[node name="Eduardo SF (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="7"]
+margin_left = 2694.0
+margin_right = 2924.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 230, 400 )
 focus_mode = 2
@@ -209,9 +220,9 @@ texture = ExtResource( 29 )
 expand = true
 stretch_mode = 6
 
-[node name="Marcos Lopez (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="7"]
-margin_left = 2644.0
-margin_right = 2924.0
+[node name="Marcos Lopez (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="8"]
+margin_left = 3036.0
+margin_right = 3316.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 280, 400 )
 focus_mode = 2
@@ -219,9 +230,9 @@ texture = ExtResource( 27 )
 expand = true
 stretch_mode = 6
 
-[node name="Danny Garay (official sketch)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="8"]
-margin_left = 3036.0
-margin_right = 3376.0
+[node name="Danny Garay (official sketch)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="9"]
+margin_left = 3428.0
+margin_right = 3768.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 340, 0 )
 focus_mode = 2
@@ -229,9 +240,9 @@ texture = ExtResource( 18 )
 expand = true
 stretch_mode = 6
 
-[node name="Danny Garay (official sketch)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="9"]
-margin_left = 3488.0
-margin_right = 4038.0
+[node name="Danny Garay (official sketch)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="10"]
+margin_left = 3880.0
+margin_right = 4430.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 550, 400 )
 focus_mode = 2
@@ -239,9 +250,9 @@ texture = ExtResource( 19 )
 expand = true
 stretch_mode = 6
 
-[node name="Danny Garay (official sketch)3" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="10"]
-margin_left = 4150.0
-margin_right = 4550.0
+[node name="Danny Garay (official sketch)3" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="11"]
+margin_left = 4542.0
+margin_right = 4942.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 400, 0 )
 focus_mode = 2
@@ -249,9 +260,9 @@ texture = ExtResource( 20 )
 expand = true
 stretch_mode = 6
 
-[node name="Danny Garay (official sketch)4" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="11"]
-margin_left = 4662.0
-margin_right = 5122.0
+[node name="Danny Garay (official sketch)4" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="12"]
+margin_left = 5054.0
+margin_right = 5514.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 460, 400 )
 focus_mode = 2
@@ -259,9 +270,9 @@ texture = ExtResource( 21 )
 expand = true
 stretch_mode = 6
 
-[node name="Danny Garay (portrait prototype)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="12"]
-margin_left = 5234.0
-margin_right = 5424.0
+[node name="Danny Garay (portrait prototype)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="13"]
+margin_left = 5626.0
+margin_right = 5816.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 190, 0 )
 focus_mode = 2
@@ -269,9 +280,9 @@ texture = ExtResource( 23 )
 expand = true
 stretch_mode = 6
 
-[node name="Danny Garay (portrait prototype)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="13"]
-margin_left = 5536.0
-margin_right = 5756.0
+[node name="Danny Garay (portrait prototype)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="14"]
+margin_left = 5928.0
+margin_right = 6148.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 220, 0 )
 focus_mode = 2
@@ -279,9 +290,9 @@ texture = ExtResource( 24 )
 expand = true
 stretch_mode = 6
 
-[node name="Danny Garay (official)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="14"]
-margin_left = 5868.0
-margin_right = 6328.0
+[node name="Danny Garay (official)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="15"]
+margin_left = 6260.0
+margin_right = 6720.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 460, 400 )
 focus_mode = 2
@@ -289,9 +300,9 @@ texture = ExtResource( 11 )
 expand = true
 stretch_mode = 6
 
-[node name="Danny Garay (official)3" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="15"]
-margin_left = 6440.0
-margin_right = 6620.0
+[node name="Danny Garay (official)3" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="16"]
+margin_left = 6832.0
+margin_right = 7012.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 180, 400 )
 focus_mode = 2
@@ -299,9 +310,9 @@ texture = ExtResource( 26 )
 expand = true
 stretch_mode = 6
 
-[node name="Danny Garay (official) (prototype)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="16"]
-margin_left = 6732.0
-margin_right = 6962.0
+[node name="Danny Garay (official) (prototype)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="17"]
+margin_left = 7124.0
+margin_right = 7354.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 230, 400 )
 focus_mode = 2
