@@ -1,149 +1,149 @@
-keys;en;es
-ATK;Attack;Ataque
-DEF;Defense;Defensa
-HP;Health;Salud
-EQUIP;Equip;Equipo
-SKILLDOUBLEJUMP;Skill:\nDouble Jump;Habilidad:\nSalto Doble
-SKILLSLIDE;Skill:\nSlide;Habilidad:\nDeslizarse
-SKILLBACKDASH;Skill:\nBackdash;Habilidad:\nRetropropulsión
-SKILLDODGE;Skilll:\nTo dodge;Habilidad:\nEsquivar hacia adelante
-POTIONLIMIT;Potion Limit;Límite de poción
-MPLIMIT;MP Limit;Límite de MP
-SAVEPOINT;Save Point (from statues);Punto de guardado (desde estatuas)
-QUICKLOAD;Quick Load;Cargado rápido
-NEWGAME;New Game;Nueva Partida
-PHRASEDONTDOWNLVLS;You don't have any level downloaded.;Actualmente no ha descargado ningún nivel personalizado.
-EMPTYLIST;Empty List;Lista Vacía
-DOWNLOADLVLS;Download Levels;Descargar Niveles
-STORYMODE;Story Mode;Modo Historia
-CUSTOMLVLS;Custom Levels;Niveles Personalizados
-DISABLED;Disabled;Desactivado
-ICONS;Icons;Iconos
-VIDEO_FILTERS;Video Filters;Filtros de Video
-ACCEPT;Accept;Aceptar
-ATTACK;Attack;Atacar
-JUMP;Jump;Saltar
-BACKDASH;Backdash;Retropropulsión
-CROUCH;Crouch;Agacharse
-INAIR;In Air;En el aire
-CHANGESLOT;Change Slot;Cambiar Slot
-CHANGEITEM;Change Item;Cambiar Item
-PAUSEMAP;Pause / Map;Pausa / Mapa
-PREV;Previous;Anterior
-NEXT;Next;Siguiente
-PLAY;Play;Reproducir
-STOP;Stop;Detener
-TOBECONTINUED;To be continued...;Continuará...
-ABSORB_CIRCUIT;Absorb Elemental Circuit;Absorber Circuito Elemental
-USE_ELEMENTAL_CIRCUIT;Use Elemental Circuit;Usar Circuito Elemental
-TUTO1;Basic controls. \nThese can be configured from the options menu. (Compatible with gamepads).;Controles básicos. \nEstos pueden ser configurados desde el menú de opciones. (Compatible con gamepads).
-OPT_BTN_JUMPANDACCEPT;Jump / Accept;Saltar / Aceptar
-OPT_BTN_ATTACKANDCANCEL;Attack / Cancel;Atacar / Cancelar
-OPT_BTN_START;Start / Pause;Inicio / Pausa
-SELECTNEWBTNICONFORX;Select a new icon for «%s».;Selecciona un nuevo icono para «%s».
-REMAP_MSG_GAMEPAD;Press a new button for «%s» on your gamepad.;Presiona un nuevo botón para «%s» en su gamepad.
-REMAP_MSG_KEYBRD;Press a new key for «%s».;Presiona una nueva tecla para «%s».
-MSG_OR_PRESS_ESC_TO_CLOSE;Or press «Escape» to close.;O presione «Escape» para cerrar.
-MOVE;Move;Mover
-UP;Up;Arriba
-DOWN;Down;Abajo
-LEFT;Left;Izquierda
-RIGHT;Right;Derecha
-ATTACK;Attack;Atacar
-JUMP;Jump;Saltar
-ACTIONS_LIST;Action List;Lista de Acciones
-NAVIGATE;Navigate;Navegar
-SELECT;Select;Seleccionar
-RETURN;Return;Regresar
-CHANGE_VOLUME;Change Volume;Cambiar Volumen
-START;Start;Comenzar
-CONTINUE;Continue;Continuar
-DOWNLOADMISSIONS;Download Missions;Descargar Misiones
-STORE;Store;Tienda
-EXTRAS;Extras;Extras
-OPTIONS;Options;Opciones
-CREDITS;Credits;Créditos
-UPDATES;Updates;Actualizaciones
-EXIT;Exit;Salir
-MAINMENU;Main Menu;Menú Principal
-GRAPHICS;Graphics;Gráficos
-AUDIO;Audio;Audio
-KEYBOARD;Keyboard;Teclado
-GAMEPAD;Gamepad;Gamepad
-TOUCHCONTROL;Touch Buttons;Control Táctil
-LANGUAGE;Language;Idioma
-FULLSCREEN;Fullscreen;Pantalla Completa
-BORDERLESS;Borderless Window;Ventana sin borde
-EFFECTS;Effects;Efectos
-MUSIC;Music;Música
-VOICE;Voice;Voz
-SHOWBUTTONS;Show Buttons;Mostrar Botones
-BUTTONSPOSITION;Buttons Position;Posición de Botones
-SAVEANDEXIT;Quick Save & Exit;Guardar rápido y Salir
-EXITNOSAVE;Exit without save;Salir sin guardar
-EXITANDGOMAINMENU;Exit and go to main menu;Salir de la partida y regresar al menú principal
-SAVEDGAME;Saved Game;Partida Guardada
-HELP;Help;Ayuda
-DEFAULT;Default;Por Defecto
-SAVE;Save;Guardar
-CANCEL;Cancel;Cancelar
-TRANSPARENCY;Transparency;Transparencia
-SIZE;Size;Tamaño
-CONF_BTN_ICNS;Change Gamepad icons;Cambiar iconos gamepad
-SHOW_GAMPD_ICNS;Gamepad Icons;Iconos Gamepad
-SHOW_KYBRD_ICNS;Keyboard Icons;Iconos Teclado
-HIDE_BTN_ICNS;Hide Icons;Ocultar Iconos
-POTION;Potion;Poción
-USE_POTION;Use Potion;Usar Poción
-SLIDE;Slide;Deslizarse
-BACKWARD;Backdash;Retropropulsión
-SUBWEAPON;Sub-weapon;Sub-arma
-HPRESTORED;Restored Health;Salud Restaurada
-THROW_SUBWEAPON;Throw Subweapon;Lanzar Subarma
-INFECTEDSLIME;Infected Slime;Slime Infectado
-SKELETON;Skeleton;Esqueleto
-INFECTEDSKELETON;Infected Skeleton;Esqueleto Infectado
-ZOMBIE;Zombie;Zombi
-BAT;Bat;Murciélago
-CURSEDHOUND;Cursed Hound;Sabueso Maldito
-DEMONSKULLHEAD;Demon Skull;Calavera Demoníaca
-BLOODBAT;Blood Bat;Múrciélago Sangriento
-MPPLUS1;Mana Points +1;Puntos de maná +1
-MPPLUS5;Mana Points +5;Puntos de maná +5
-WEAPONLVL;Weapon Lvl%d;Arma Nivel %d
-BRONZEKY;Bronze Key;Llave de Bronce
-SILVERKY;Silver Key;Llave Plateada
-GOLDENKY;Golden Key;Llave Dorada
-SKIP;Skip;Omitir
-HOLD;Hold;Mantén
-PRESS;Press;Presiona
-RELEASE;Release;Suelta
-MISSIONRESULTS;Mission Results;Resultados de Misión
-SELECTMAP;Select Map;Seleccione Mapa
-MONEY;Money;Dinero
-DEATHS;Deaths;Muertes
-LOADING;Loading;Cargando
-PHRASE_DOUBLEJUMP;Now you can make a double jump.;Ahora puedes hacer un segundo salto.
-PHRASE_SLIDE;Press «Down» + «Jump» to slide.;Presiona «Abajo» + «Salto» para deslizarte.
-PHRASE_BACKDASH;Go Backward with «Backdash» button.;Retrocede rápidamente con el botón de «Retropropulsión».
-LOCKEDDOOR;Locked Door;Puerta Bloqueada.
-PHRASEATKINCREASED;Your attack power has increased to +%d.;Tu poder de ataque a aumentado a +%d.
-PHRASEDEFINCREASED;Your defense has increased to +%d.;Tu defensa a aumentado a +%d.
-PHRASEHPINCMPINCREASED;Your mana points limit has increased to +%d.;Tu máxima capacidad de maná a aumentado a +%d.
-PHRASEPOTIONINCREASED;Your max of potions that you can have has increased to %d;El máximo de pociones que puedes llevar a aumentado a %d.
-PHRASEWANTLOADORNEWGAME;Do you want continue from a save file or start new game?;¿Desea continuar desde un punto de guardado o comenzar de nuevo?
-PHRASEABOUTQUICKSAVE;Note: The quick save just create a temporal file. If you lose all health points (HP) the last save point (from statues) will be loaded, otherwise the whole level will be restarted.;Nota: El guardado rápido crea un archivo temporal que se elimina al ser cargado. Al perder toda la salud (HP) solo puede regresar a los puntos de guardado realizados con las estatuas, en caso contrario el nivel entero será reiniciado.
-PHRASERESTARTTOAPPLYCHANGES;The game must be restarted to apply changes...;El juego deber ser reiniciado para aplicar los cambios...
-DEVMSG1INTRO;This game is in development, you can report bugs in the github repository (see Credits screen).;Este juego está en etapa de desarrollo, puedes reportar bugs en el repositorio de github (ver pantalla de Créditos).
-DEVMSG2INTRO;Donations and Crowdfunding Campaign at Kofi:;Donaciones y Campaña de Financiamento en Kofi:
-IRIDIUM;Iridium;Iridio
-TITANIUM;Titanium;Titanio
-OXYGEN;Oxygen;Óxigeno
-COPPER;Copper;Cobre
-DESC_OXYGEN;Adds a layer of ferrous oxide powder to the whip, occasionally it can generate an explosion.;Añade una capa de polvo de óxido ferroso al látigo, ocasionalmente puede generar una explosión.
-DESC_IRIDIUM;Fragile and chemically inert metal. It's the second desnsest element and the most resistant to corrosion.;Metal frágil y químicamente inerte. Es el segundo elemento más denso, además de ser el más resistente a la corrosión.
-DESC_TITATIUM;Very light and resistant metal, besides being an inert element. Increases +5 ATK.;Metal muy ligero y resistente, además de ser un elemento inerte. Aumenta +5 ATK.
-DESC_COPPER;It's a soft, malleable, and ductile metal with very high thermal and electrical conductivity.;Es un metal blando, maleable y dúctil con una conductividad térmica y eléctrica muy elevada.
-DESC_HYDROAMNIS;Elemental circuit containing two hydrogen atoms, with the missing element unleashes a liquid attack on the floor.;Circuito elemental que contiene dos átomos de hidrógeno, junto al elemento faltante, desata un ataque líquido en el suelo.
-DESC_VITAPECUNIA;Exchange 200 cordovas for half of health points.;A cambio de 200 cordovas, recupera la mitad de la salud.
-DESC_FULGURSPHAERA;Two balls of energy will surround you for a few seconds, an electrically conductive element is necessary.;Dos bolas de energía te rodearán por algunos segundos, es necesario un elemento conductor eléctrico.
+keys;en;es;pt
+ATK;Attack;Ataque;Ataque
+DEF;Defense;Defensa;Defesa
+HP;Health;Salud;Vida
+EQUIP;Equip;Equipo;Equipar
+SKILLDOUBLEJUMP;Skill:\nDouble Jump;Habilidad:\nSalto Doble;Habilidade:\nPulo Duplo
+SKILLSLIDE;Skill:\nSlide;Habilidad:\nDeslizarse;Habilidade:\nDeslizar
+SKILLBACKDASH;Skill:\nBackdash;Habilidad:\nRetropropulsión;Habilidade:\nRetroceder
+SKILLDODGE;Skilll:\nTo dodge;Habilidad:\nEsquivar hacia adelante;Esquivar
+POTIONLIMIT;Potion Limit;Límite de poción;Limite de poção
+MPLIMIT;MP Limit;Límite de MP;Limite de MP
+SAVEPOINT;Save Point (from statues);Punto de guardado (desde estatuas);Ponto de salvamento (das estatuas)
+QUICKLOAD;Quick Load;Cargado rápido;Carregamento rápido
+NEWGAME;New Game;Nueva Partida;Novo Jogo
+PHRASEDONTDOWNLVLS;You don't have any level downloaded.;Actualmente no ha descargado ningún nivel personalizado.;Você não tem nenhum nível baixado.
+EMPTYLIST;Empty List;Lista Vacía;Lista Vazia
+DOWNLOADLVLS;Download Levels;Descargar Niveles;Baixar Niveis
+STORYMODE;Story Mode;Modo Historia;Modo Historia
+CUSTOMLVLS;Custom Levels;Niveles Personalizados;Niveis Personalizados
+DISABLED;Disabled;Desactivado;Desativado
+ICONS;Icons;Iconos;Icones
+VIDEO_FILTERS;Video Filters;Filtros de Video;Filtros de Video
+ACCEPT;Accept;Aceptar;Aceitar
+ATTACK;Attack;Atacar;Ataque
+JUMP;Jump;Saltar;Pular
+BACKDASH;Backdash;Retropropulsión;Retroceder
+CROUCH;Crouch;Agacharse;Agachar
+INAIR;In Air;En el aire;No Ar
+CHANGESLOT;Change Slot;Cambiar Slot;Alterar Slot
+CHANGEITEM;Change Item;Cambiar Item;Alterar Item
+PAUSEMAP;Pause / Map;Pausa / Mapa;Pausa / Mapa
+PREV;Previous;Anterior;Anterior
+NEXT;Next;Siguiente;Seguinte
+PLAY;Play;Reproducir;Reproduzir
+STOP;Stop;Detener;Parar
+TOBECONTINUED;To be continued...;Continuará...;Continua...
+ABSORB_CIRCUIT;Absorb Elemental Circuit;Absorber Circuito Elemental;Absorver Circuito Elemental
+USE_ELEMENTAL_CIRCUIT;Use Elemental Circuit;Usar Circuito Elemental;Usar Circuito Elemental
+TUTO1;Basic controls. \nThese can be configured from the options menu. (Compatible with gamepads).;Controles básicos. \nEstos pueden ser configurados desde el menú de opciones. (Compatible con gamepads).;Controles Básicos. \Estes podem ser configurados no Menu de Opções (Compátivel com Gamepads).
+OPT_BTN_JUMPANDACCEPT;Jump / Accept;Saltar / Aceptar;Pular / Aceitar
+OPT_BTN_ATTACKANDCANCEL;Attack / Cancel;Atacar / Cancelar;Atacar / Cancelar
+OPT_BTN_START;Start / Pause;Inicio / Pausa;Iniciar / Pausar
+SELECTNEWBTNICONFORX;Select a new icon for «%s».;Selecciona un nuevo icono para «%s».;Selecione um novo icone para «%s».
+REMAP_MSG_GAMEPAD;Press a new button for «%s» on your gamepad.;Presiona un nuevo botón para «%s» en su gamepad.;Pressione um novo botão para «%s» em seu Gamepad.
+REMAP_MSG_KEYBRD;Press a new key for «%s».;Presiona una nueva tecla para «%s».;Pressione uma nova tecla para «%s».
+MSG_OR_PRESS_ESC_TO_CLOSE;Or press «Escape» to close.;O presione «Escape» para cerrar.;Ou pressione «Escape» para fechar.
+MOVE;Move;Mover;Mover
+UP;Up;Arriba;Acima
+DOWN;Down;Abajo;Abaixo
+LEFT;Left;Izquierda;Esquerda
+RIGHT;Right;Derecha;Direita
+ATTACK;Attack;Atacar;Pular
+JUMP;Jump;Saltar;Pular
+ACTIONS_LIST;Action List;Lista de Acciones;Lista de Ações
+NAVIGATE;Navigate;Navegar;Navegar
+SELECT;Select;Seleccionar;Selecionar
+RETURN;Return;Regresar;Voltar
+CHANGE_VOLUME;Change Volume;Cambiar Volumen;Alterar Volume
+START;Start;Comenzar;Começar
+CONTINUE;Continue;Continuar;Continuar
+DOWNLOADMISSIONS;Download Missions;Descargar Misiones;Baixar Missões
+STORE;Store;Tienda;Loja
+EXTRAS;Extras;Extras;Extras
+OPTIONS;Options;Opciones;Opções
+CREDITS;Credits;Créditos;Créditos
+UPDATES;Updates;Actualizaciones;Atualizações
+EXIT;Exit;Salir;Sair
+MAINMENU;Main Menu;Menú Principal;Menú Principal
+GRAPHICS;Graphics;Gráficos;Gráficos
+AUDIO;Audio;Audio;Audio
+KEYBOARD;Keyboard;Teclado;Teclado
+GAMEPAD;Gamepad;Gamepad;Gamepad
+TOUCHCONTROL;Touch Buttons;Control Táctil;Controle de toque
+LANGUAGE;Language;Idioma;Idioma
+FULLSCREEN;Fullscreen;Pantalla Completa;Tela Cheia
+BORDERLESS;Borderless Window;Ventana sin borde;Janela sem Borda
+EFFECTS;Effects;Efectos;Efeitos
+MUSIC;Music;Música;Música
+VOICE;Voice;Voz;Voz
+SHOWBUTTONS;Show Buttons;Mostrar Botones;Mostrar Botões
+BUTTONSPOSITION;Buttons Position;Posición de Botones;Posição dos Botões
+SAVEANDEXIT;Quick Save & Exit;Guardar rápido y Salir;Salvar rápido e Sair
+EXITNOSAVE;Exit without save;Salir sin guardar;Sair sem salvar
+EXITANDGOMAINMENU;Exit and go to main menu;Salir de la partida y regresar al menú principal;Sair e voltar ao menu principal
+SAVEDGAME;Saved Game;Partida Guardada;Jogo Salvo
+HELP;Help;Ayuda;Ajuda
+DEFAULT;Default;Por Defecto;Padrão
+SAVE;Save;Guardar;Salvar
+CANCEL;Cancel;Cancelar;Cancelar
+TRANSPARENCY;Transparency;Transparencia;Transparencia
+SIZE;Size;Tamaño;Tamanho
+CONF_BTN_ICNS;Change Gamepad icons;Cambiar iconos gamepad;Alterar Icones do Gamepad
+SHOW_GAMPD_ICNS;Gamepad Icons;Iconos Gamepad;Icones do Gamepad
+SHOW_KYBRD_ICNS;Keyboard Icons;Iconos Teclado;Icones do Teclado
+HIDE_BTN_ICNS;Hide Icons;Ocultar Iconos;Ocultar Icones
+POTION;Potion;Poción;Poção
+USE_POTION;Use Potion;Usar Poción;Usar Poção
+SLIDE;Slide;Deslizarse;Deslizar
+BACKWARD;Backdash;Retropropulsión;Retroceder
+SUBWEAPON;Sub-weapon;Sub-arma;Sub-arma
+HPRESTORED;Restored Health;Salud Restaurada;Vida Restaurada
+THROW_SUBWEAPON;Throw Subweapon;Lanzar Subarma;Lançar Subarma
+INFECTEDSLIME;Infected Slime;Slime Infectado;Slime Infectado
+SKELETON;Skeleton;Esqueleto;Esqueleto
+INFECTEDSKELETON;Infected Skeleton;Esqueleto Infectado;Esqueleto Infectado
+ZOMBIE;Zombie;Zombi;Zumbi
+BAT;Bat;Murciélago;Morcego
+CURSEDHOUND;Cursed Hound;Sabueso Maldito;Cão Amaldiçoado
+DEMONSKULLHEAD;Demon Skull;Calavera Demoníaca;Caveira Demoniaca
+BLOODBAT;Blood Bat;Múrciélago Sangriento;Morcego Sangrento
+MPPLUS1;Mana Points +1;Puntos de maná +1;Pontos de mana +1
+MPPLUS5;Mana Points +5;Puntos de maná +5;Pontos de mana +5
+WEAPONLVL;Weapon Lvl%d;Arma Nivel %d;Arma Nivel %d
+BRONZEKY;Bronze Key;Llave de Bronce;Chave de Bronze
+SILVERKY;Silver Key;Llave Plateada;Chave Prateada
+GOLDENKY;Golden Key;Llave Dorada;Chave Dourada
+SKIP;Skip;Omitir;Pular
+HOLD;Hold;Mantén;Manter
+PRESS;Press;Presiona;Pressionar
+RELEASE;Release;Suelta;Soltar
+MISSIONRESULTS;Mission Results;Resultados de Misión;Resultados de Missão
+SELECTMAP;Select Map;Seleccione Mapa;Selecionar Mapa
+MONEY;Money;Dinero;Dinheiro
+DEATHS;Deaths;Muertes;Mortes
+LOADING;Loading;Cargando;Carregando
+PHRASE_DOUBLEJUMP;Now you can make a double jump.;Ahora puedes hacer un segundo salto.;Agora você pode dar um pulo duplo.
+PHRASE_SLIDE;Press «Down» + «Jump» to slide.;Presiona «Abajo» + «Salto» para deslizarte.;Pressione «Abaixo» + «Pular» para deslizar.
+PHRASE_BACKDASH;Go Backward with «Backdash» button.;Retrocede rápidamente con el botón de «Retropropulsión».;Volte rapidamente com o botão de «Retroceder»
+LOCKEDDOOR;Locked Door;Puerta Bloqueada.;Porta Bloqueada
+PHRASEATKINCREASED;Your attack power has increased to +%d.;Tu poder de ataque a aumentado a +%d.;Seu poder de ataque aumentou para +%d.
+PHRASEDEFINCREASED;Your defense has increased to +%d.;Tu defensa a aumentado a +%d.;Sua defesa aumentou para +%d.
+PHRASEHPINCMPINCREASED;Your mana points limit has increased to +%d.;Tu máxima capacidad de maná a aumentado a +%d.;Seu limite de pontos de mana aumentou para +%d.
+PHRASEPOTIONINCREASED;Your max of potions that you can have has increased to %d;El máximo de pociones que puedes llevar a aumentado a %d.;Seu máximo de poções que você pode ter aumentou para %d.
+PHRASEWANTLOADORNEWGAME;Do you want continue from a save file or start new game?;¿Desea continuar desde un punto de guardado o comenzar de nuevo?;Quer continuar a partir de um arquivo salvo ou iniciar um novo jogo?
+PHRASEABOUTQUICKSAVE;Note: The quick save just create a temporal file. If you lose all health points (HP) the last save point (from statues) will be loaded, otherwise the whole level will be restarted.;Nota: El guardado rápido crea un archivo temporal que se elimina al ser cargado. Al perder toda la salud (HP) solo puede regresar a los puntos de guardado realizados con las estatuas, en caso contrario el nivel entero será reiniciado.;O salvamento rápido apenas cria um arquivo temporal. Se você perder todos os pontos de saúde (HP), o último ponto de salvamento (das estátuas) será carregado, caso contrário, todo o nível será reiniciado.
+PHRASERESTARTTOAPPLYCHANGES;The game must be restarted to apply changes...;El juego deber ser reiniciado para aplicar los cambios...;O jogo deve ser reiniciado para aplicar as alterações ...
+DEVMSG1INTRO;This game is in development, you can report bugs in the github repository (see Credits screen).;Este juego está en etapa de desarrollo, puedes reportar bugs en el repositorio de github (ver pantalla de Créditos).;Este jogo está em desenvolvimento, você pode relatar bugs no repositório github (veja a tela Créditos).
+DEVMSG2INTRO;Donations and Crowdfunding Campaign at Kofi:;Donaciones y Campaña de Financiamento en Kofi:;Doações e campanha de Financiamento na Kofi:
+IRIDIUM;Iridium;Iridio;Iridio
+TITANIUM;Titanium;Titanio;Titanio
+OXYGEN;Oxygen;Óxigeno;Óxigenio
+COPPER;Copper;Cobre;Cobre
+DESC_OXYGEN;Adds a layer of ferrous oxide powder to the whip, occasionally it can generate an explosion.;Añade una capa de polvo de óxido ferroso al látigo, ocasionalmente puede generar una explosión.;Adiciona uma camada de pó de óxido ferroso ao chicote, ocasionalmente pode gerar uma explosão.
+DESC_IRIDIUM;Fragile and chemically inert metal. It's the second desnsest element and the most resistant to corrosion.;Metal frágil y químicamente inerte. Es el segundo elemento más denso, además de ser el más resistente a la corrosión.;Metal frágil e quimicamente inerte. É o segundo elemento mais denso e mais resistente à corrosão.
+DESC_TITATIUM;Very light and resistant metal, besides being an inert element. Increases +5 ATK.;Metal muy ligero y resistente, además de ser un elemento inerte. Aumenta +5 ATK.;Metal muito leve e resistente, além de ser um elemento inerte. Aumenta +5 ATK.
+DESC_COPPER;It's a soft, malleable, and ductile metal with very high thermal and electrical conductivity.;Es un metal blando, maleable y dúctil con una conductividad térmica y eléctrica muy elevada.;É um metal macio, maleável e dúctil com condutividade térmica e elétrica muito alta.
+DESC_HYDROAMNIS;Elemental circuit containing two hydrogen atoms, with the missing element unleashes a liquid attack on the floor.;Circuito elemental que contiene dos átomos de hidrógeno, junto al elemento faltante, desata un ataque líquido en el suelo.;Circuito elementar contendo dois átomos de hidrogênio, com o elemento ausente desencadeia um ataque líquido no chão.
+DESC_VITAPECUNIA;Exchange 200 cordovas for half of health points.;A cambio de 200 cordovas, recupera la mitad de la salud.;Troque 200 cordovas por metade dos pontos de saúde.
+DESC_FULGURSPHAERA;Two balls of energy will surround you for a few seconds, an electrically conductive element is necessary.;Dos bolas de energía te rodearán por algunos segundos, es necesario un elemento conductor eléctrico.;Duas bolas de energia o envolverão por alguns segundos, um elemento eletricamente condutor é necessário.
