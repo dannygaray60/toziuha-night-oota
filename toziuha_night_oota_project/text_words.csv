@@ -36,7 +36,7 @@ STOP;Stop;Detener;Parar
 TOBECONTINUED;To be continued...;Continuará...;Continua...
 ABSORB_CIRCUIT;Absorb Elemental Circuit;Absorber Circuito Elemental;Absorver Circuito Elemental
 USE_ELEMENTAL_CIRCUIT;Use Elemental Circuit;Usar Circuito Elemental;Usar Circuito Elemental
-TUTO1;Basic controls. \nThese can be configured from the options menu. (Compatible with gamepads).;Controles básicos. \nEstos pueden ser configurados desde el menú de opciones. (Compatible con gamepads).;Controles Básicos. \Estes podem ser configurados no Menu de Opções (Compátivel com Gamepads).
+TUTO1;Basic controls. \nThese can be configured from the options menu. (Compatible with gamepads).;Controles básicos. \nEstos pueden ser configurados desde el menú de opciones. (Compatible con gamepads).;Controles Básicos. \nEstes podem ser configurados no Menu de Opções (Compátivel com Gamepads).
 OPT_BTN_JUMPANDACCEPT;Jump / Accept;Saltar / Aceptar;Pular / Aceitar
 OPT_BTN_ATTACKANDCANCEL;Attack / Cancel;Atacar / Cancelar;Atacar / Cancelar
 OPT_BTN_START;Start / Pause;Inicio / Pausa;Iniciar / Pausar

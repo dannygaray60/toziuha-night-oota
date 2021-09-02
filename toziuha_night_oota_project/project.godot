@@ -174,7 +174,7 @@ ui_end={
 
 [locale]
 
-translations=PoolStringArray( "res://text_words.en.translation", "res://text_words.es.translation" )
+translations=PoolStringArray( "res://text_words.en.translation", "res://text_words.es.translation", "res://text_words.pt.translation" )
 locale_filter=[ 0, [ "pt" ] ]
 
 [rendering]

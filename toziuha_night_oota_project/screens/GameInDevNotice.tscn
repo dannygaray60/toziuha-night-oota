@@ -68,23 +68,28 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -141.5
-margin_top = -74.0
-margin_right = 141.5
-margin_bottom = -45.0
+margin_left = -237.5
+margin_top = -75.0
+margin_right = 237.5
+margin_bottom = -46.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BtnEng" parent="HBoxContainer2" instance=ExtResource( 5 )]
-margin_right = 139.0
+margin_right = 150.0
 text = "English"
 
 [node name="BtnEsp" parent="HBoxContainer2" instance=ExtResource( 5 )]
-margin_left = 143.0
-margin_right = 283.0
+margin_left = 154.0
+margin_right = 304.0
 text = "Español"
+
+[node name="BtnPT" parent="HBoxContainer2" instance=ExtResource( 5 )]
+margin_left = 308.0
+margin_right = 475.0
+text = "Portuguese"
 
 [node name="HBxHelp" type="HBoxContainer" parent="."]
 anchor_top = 1.0
@@ -232,3 +237,5 @@ custom_styles/panel = SubResource( 3 )
 [connection signal="pressed" from="HBoxContainer2/BtnEng" to="." method="_on_BtnContinue_pressed"]
 [connection signal="focus_entered" from="HBoxContainer2/BtnEsp" to="." method="_on_BtnEsp_focus_entered"]
 [connection signal="pressed" from="HBoxContainer2/BtnEsp" to="." method="_on_BtnContinue_pressed"]
+[connection signal="focus_entered" from="HBoxContainer2/BtnPT" to="." method="_on_BtnPT_focus_entered"]
+[connection signal="pressed" from="HBoxContainer2/BtnPT" to="." method="_on_BtnContinue_pressed"]

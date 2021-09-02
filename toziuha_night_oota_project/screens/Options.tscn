@@ -1378,7 +1378,7 @@ margin_bottom = 34.0
 rect_min_size = Vector2( 190, 0 )
 size_flags_vertical = 5
 custom_fonts/font = SubResource( 6 )
-text = "Português (BR)"
+text = "Português"
 align = 1
 valign = 1
 
@@ -1391,7 +1391,6 @@ focus_neighbour_right = NodePath("../../../../../../..")
 focus_neighbour_bottom = NodePath("../../English/CheckBox")
 focus_next = NodePath("../../English/CheckBox")
 focus_previous = NodePath("../../Espanol/CheckBox")
-disabled = true
 group = SubResource( 12 )
 
 [node name="HBxHelp2" type="HBoxContainer" parent="."]
@@ -1612,5 +1611,6 @@ custom_styles/panel = SubResource( 13 )
 [connection signal="pressed" from="Margin/HBx/PanelLang/Margin/VBx/Espanol/CheckBox" to="." method="option_changed" binds= [ "es", "other", "lang" ]]
 [connection signal="focus_entered" from="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "PortuguesBR", "Lang" ]]
 [connection signal="focus_exited" from="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "PortuguesBR", "Lang" ]]
+[connection signal="pressed" from="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR/CheckBox" to="." method="option_changed" binds= [ "pt", "other", "lang" ]]
 
 [editable path="Margin/HBx/PanelControls/Margin/VBx/BtnJump/Icon"]

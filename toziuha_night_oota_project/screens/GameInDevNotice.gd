@@ -20,7 +20,7 @@ func _on_BtnContinue_pressed():
 
 func _on_BtnEng_focus_entered():
 	Conf.set_conf_value("other","lang","en")
-
-
 func _on_BtnEsp_focus_entered():
 	Conf.set_conf_value("other","lang","es")
+func _on_BtnPT_focus_entered():
+	Conf.set_conf_value("other","lang","pt")
