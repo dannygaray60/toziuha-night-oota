@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://objects/bosses/BossBloodBat.gd" type="Script" id=1]
 [ext_resource path="res://assets/sprites/boss_blood_bat.png" type="Texture" id=2]
+[ext_resource path="res://objects/HitboxEnemy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "attack"
@@ -96,8 +97,9 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 32, 24 )
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 13.7299
+height = 17.8164
 
 [sub_resource type="AnimationNodeAnimation" id=8]
 animation = "attack"
@@ -153,11 +155,15 @@ end_node = "dead-floor"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=22]
 
+[sub_resource type="CapsuleShape2D" id=23]
+radius = 21.0798
+height = 51.6264
+
 [node name="BossBloodBat" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 collision_layer = 4
-collision_mask = 17
+collision_mask = 0
 script = ExtResource( 1 )
 
 [node name="PosSpawnOrb" type="Position2D" parent="."]
@@ -172,9 +178,12 @@ anims/pos-attack = SubResource( 5 )
 anims/wakeup = SubResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 7 )
+rotation = -1.5708
 shape = SubResource( 7 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -0.23597 )
 texture = ExtResource( 2 )
 hframes = 8
 vframes = 6
@@ -186,3 +195,10 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 process_mode = 0
 parameters/playback = SubResource( 22 )
+
+[node name="HitboxEnemy" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxEnemy"]
+position = Vector2( 0, 1 )
+rotation = -1.5708
+shape = SubResource( 23 )

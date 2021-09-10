@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/sprites/trap_large_spikes.png" type="Texture" id=1]
 [ext_resource path="res://objects/traps/TrapLargeSpikes.gd" type="Script" id=2]
+[ext_resource path="res://objects/traps/TrapLargeSpikes_Area2D.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "blink"
@@ -44,9 +45,12 @@ script = ExtResource( 2 )
 position = Vector2( -1.19209e-06, 12 )
 scale = Vector2( 4.4, 5.2 )
 
-[node name="AreaSpikes" type="Area2D" parent="."]
+[node name="AreaSpikes" type="Area2D" parent="." groups=[
+"enemies",
+]]
 position = Vector2( 0, 17 )
 collision_layer = 2
+script = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AreaSpikes"]
 polygon = PoolVector2Array( -4.47205, -29.972, -6.85315, -17.2728, -6.85315, -17.2728, -6.77069, 34.0083, -1.07607, 33.7434, -1.09798, -17.2337, -2.35057, -30.0269 )
@@ -68,7 +72,6 @@ wait_time = 2.0
 one_shot = true
 
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
-[connection signal="body_entered" from="AreaSpikes" to="." method="_on_AreaSpikes_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="animation_started" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_started"]
 [connection signal="timeout" from="TimerStartMove" to="." method="_on_TimerStartMove_timeout"]

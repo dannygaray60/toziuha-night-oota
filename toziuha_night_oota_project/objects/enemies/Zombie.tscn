@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/sprites/enemy_zombie.png" type="Texture" id=1]
 [ext_resource path="res://objects/enemies/Zombie.gd" type="Script" id=2]
+[ext_resource path="res://objects/HitboxEnemy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="Animation" id=1]
 length = 2.0
@@ -50,16 +51,19 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 6.19846, 20.1512 )
+extents = Vector2( 4.51548, 20.1512 )
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 64, 24 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 5.77069, 20.7986 )
 
 [node name="Zombie" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 collision_layer = 4
-collision_mask = 25
+collision_mask = 8
 script = ExtResource( 2 )
 
 [node name="TimerHurt" type="Timer" parent="."]
@@ -79,23 +83,32 @@ position = Vector2( -0.44532, -20.2359 )
 shape = SubResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( -2, -25 )
+position = Vector2( 0, -25 )
 texture = ExtResource( 1 )
+offset = Vector2( -2.489, 0 )
 hframes = 16
 frame = 1
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
-position = Vector2( -4.76837e-07, -59.25 )
-scale = Vector2( 1.325, 6.075 )
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 1.90735e-06, -59.25 )
+scale = Vector2( 2.4, 6.075 )
 process_parent = true
 physics_process_parent = true
 
 [node name="AreaDetectPlayer" type="Area2D" parent="."]
+modulate = Color( 1, 1, 1, 0.254902 )
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaDetectPlayer"]
 position = Vector2( 0, -24 )
 shape = SubResource( 5 )
+
+[node name="HitboxEnemy" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitboxEnemy"]
+position = Vector2( 0, -21 )
+shape = SubResource( 6 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]

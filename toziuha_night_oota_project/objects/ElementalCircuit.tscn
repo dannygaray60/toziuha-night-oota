@@ -161,7 +161,9 @@ radius = 50.0606
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 1
 
-[node name="ElementalCircuit" type="Node2D"]
+[node name="ElementalCircuit" type="Node2D" groups=[
+"elemental_circuit",
+]]
 script = ExtResource( 2 )
 
 [node name="TriangleBG" type="Node2D" parent="."]

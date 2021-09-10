@@ -2,82 +2,74 @@ extends KinematicBody2D
 
 var texture_blood_bat = preload("res://assets/sprites/enemy_bloodbat.png")
 
-var Enemy = load("res://scripts/enemy.gd").new()
+var cE = load("res://scripts/enemy.gd").new()
 
 #velocidad de movimiento
 var velocity = Vector2()
 #direcion en x o y
 var direction = Vector2()
 
-var facing = -1
-var state = "fly"
 var gravity = 90
 var speed = 70
 
 #una variacion del murcielago mas rapida
 export var blood_bat = false
 
-#desde editor cambiar a blood_bat que es una variedad más rápida
-export var id = "bat"
-var hp_max = Vars.enemy[id]["hp_max"]
-var hp_now = hp_max
-var atk = Vars.enemy[id]["atk"]
-var def = Vars.enemy[id]["def"]
-var default_def = Vars.enemy[id]["def"]
-
 var direction_y = "up"
 var distance_y = 300
-var timer_distance_y = 0.5
+var timer_distance_y = 0.3
 
 func _ready():
 	
 	if blood_bat:
-		id = "blood_bat"
+		cE.set_vars("blood_bat")
 		distance_y = 350
-		timer_distance_y = 0.4
+		timer_distance_y = 0.5
 		speed = 120
 		$Sprite.texture = texture_blood_bat
+	else:
+		cE.set_vars("bat")
 		
 	gravity = distance_y
 	$TimerMoveY.wait_time = timer_distance_y
-	
+	$TimerMoveY.start()
 	change_state("fly",true)
 
 func _physics_process(delta):
 	
-	if state == "fly":
-		velocity.x = speed*facing
+	if cE.state == "fly":
+		velocity.x = speed * cE.facing
 
-	if state in ["sleep","dead"]:
+	if cE.state in ["sleep","dead"]:
 		velocity.x = 0
 
-	if direction_y == "up" and state == "fly":
+	if direction_y == "up" and cE.state == "fly":
 		velocity.y -= gravity*delta
-	elif direction_y == "down" and state in ["fly","dead"]:
+	if direction_y == "down" and cE.state in ["fly","dead"]:
 		velocity.y += gravity*delta
 	
 	velocity = move_and_slide(velocity, Vector2.UP,true)
 	
-	Enemy.check_body_collisions(self)
+	#cE.check_body_collisions(self)
 
 
 func change_state(new_state, forced=false):
-	if (new_state != state or forced) and state != "dead":
+	if (new_state != cE.state or forced) and cE.state != "dead":
 		
-		if state == "fly":
+		if cE.state == "fly":
 			$TimerMoveY.start()
-		else:
-			$TimerMoveY.stop()
+#		else:
+#			$TimerMoveY.stop()
 			
-		state = new_state
-		$AnimationPlayer.play(state)
+		cE.state = new_state
+		$AnimationPlayer.play(cE.state)
 		
 func hurt(damage,weapon_position):
 	
-	if $TimerHurt.get_time_left() == 0 and state != "dead" and hp_now > 0:
+	if cE.state != "dead" and cE.hp_now > 0:
 		
 		direction_y = "down"
-		state = "sleep"
+		cE.state = "sleep"
 		velocity = Vector2(0,0)
 		$TimerMoveY.stop()
 		
@@ -85,13 +77,13 @@ func hurt(damage,weapon_position):
 		$TimerHurt.start()
 		Audio.play_sfx("knife_stab")
 		
-		Enemy.apply_damage(self,damage,weapon_position)
+		cE.apply_damage(self,damage,weapon_position)
 
-		if hp_now <= 0:
+		if cE.hp_now <= 0:
 			gravity += 200
 			$Sprite.modulate = Color(1,1,1,1)
-			disable_collisions()
-			Enemy.drop_item_and_show_name(self)
+			$HitboxEnemy.set_disabled_collision(true)
+			cE.drop_item_and_show_name(self)
 			Audio.play_sfx("crazy_bat_death")
 			change_state("dead")
 			$Sprite.modulate = Color(1,1,1,1)
@@ -99,36 +91,25 @@ func hurt(damage,weapon_position):
 
 	yield($TimerHurt,"timeout")
 	change_state("fly")
-	Enemy.update_facing(self,$Sprite)
+	$TimerMoveY.start()
+	cE.update_facing(self,$Sprite)
 	$Sprite.modulate = Color(1,1,1,1)
-
-
-func disable_collisions():
-	#quitar layer enemy
-	set_collision_layer_bit(2,false)
-	#ya no chocará con jugador
-	set_collision_mask_bit(0,false)
-	#contra otros enemigos
-	set_collision_mask_bit(2,false)
-	#ni con el arma del jugador
-	set_collision_mask_bit(4,false)
-
 
 #---------- señales -------------
 
 func _on_TimerMoveY_timeout():
-	velocity.y = 0
-	if direction_y == "up":
-		direction_y = "down"
-	else:
-		direction_y = "up"
-
+	if cE.state != "dead":
+		velocity.y = 0
+		if direction_y == "up":
+			direction_y = "down"
+		else:
+			direction_y = "up"
 
 func _on_VisibilityEnabler2D_screen_exited():
-	if state == "dead":
+	if cE.state == "dead":
 		queue_free()
 	else:
-		Enemy.update_facing(self,$Sprite)
+		cE.update_facing(self,$Sprite)
 
 func _on_VisibilityEnabler2D_screen_entered():
 #	position.y = Functions.get_main_level_scene().get_player().position.y - 20

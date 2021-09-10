@@ -349,7 +349,7 @@ visible = false
 
 [node name="run" type="Sprite" parent="Control/CtrlTutos/Tutos/FirstMoves"]
 material = SubResource( 6 )
-position = Vector2( 111, 128 )
+position = Vector2( 111, 167 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 10 )
 hframes = 15
@@ -361,9 +361,9 @@ __meta__ = {
 
 [node name="ButtonKeyGamepadIcon" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
 margin_left = 212.0
-margin_top = 71.0
+margin_top = 110.0
 margin_right = 228.0
-margin_bottom = 87.0
+margin_bottom = 126.0
 rect_scale = Vector2( 2, 2 )
 
 [node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/FirstMoves/ButtonKeyGamepadIcon"]
@@ -378,70 +378,11 @@ __meta__ = {
 "_editor_description_": "Poison - Healing - Cursed"
 }
 
-[node name="ButtonKeyGamepadIcon6" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
-margin_left = 282.0
-margin_top = 218.0
-margin_right = 298.0
-margin_bottom = 234.0
-rect_scale = Vector2( 2, 2 )
-action = "ui_accept"
-
-[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/FirstMoves/ButtonKeyGamepadIcon6"]
-margin_left = 24.0
-margin_right = 65.0
-margin_bottom = 13.0
-custom_fonts/font = ExtResource( 11 )
-text = "ACCEPT"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": "Poison - Healing - Cursed"
-}
-
-[node name="ButtonKeyGamepadIcon7" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
-margin_left = 101.0
-margin_top = 218.0
-margin_right = 117.0
-margin_bottom = 234.0
-rect_scale = Vector2( 2, 2 )
-
-[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/FirstMoves/ButtonKeyGamepadIcon7"]
-margin_left = 24.0
-margin_right = 65.0
-margin_bottom = 13.0
-custom_fonts/font = ExtResource( 11 )
-text = "CANCEL"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": "Poison - Healing - Cursed"
-}
-
-[node name="ButtonKeyGamepadIcon8" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
-margin_left = 461.0
-margin_top = 218.0
-margin_right = 477.0
-margin_bottom = 234.0
-rect_scale = Vector2( 2, 2 )
-action = "ui_select"
-
-[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/FirstMoves/ButtonKeyGamepadIcon8"]
-margin_left = 24.0
-margin_right = 65.0
-margin_bottom = 13.0
-custom_fonts/font = ExtResource( 11 )
-text = "PAUSEMAP"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": "Poison - Healing - Cursed"
-}
-
 [node name="ButtonKeyGamepadIcon4" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
 margin_left = 59.0
-margin_top = 40.0
+margin_top = 79.0
 margin_right = 75.0
-margin_bottom = 56.0
+margin_bottom = 95.0
 rect_scale = Vector2( 2, 2 )
 action = "ui_left"
 
@@ -466,7 +407,7 @@ action = "ui_down"
 
 [node name="atk" type="Sprite" parent="Control/CtrlTutos/Tutos/FirstMoves"]
 material = SubResource( 6 )
-position = Vector2( 216, 128 )
+position = Vector2( 216, 167 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 10 )
 hframes = 15
@@ -485,7 +426,7 @@ frame = 15
 
 [node name="jump" type="Sprite" parent="Control/CtrlTutos/Tutos/FirstMoves"]
 material = SubResource( 6 )
-position = Vector2( 381, 128 )
+position = Vector2( 381, 167 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 10 )
 hframes = 15
@@ -498,7 +439,7 @@ __meta__ = {
 [node name="backdash2" type="Sprite" parent="Control/CtrlTutos/Tutos/FirstMoves"]
 modulate = Color( 1, 1, 1, 0.364706 )
 material = SubResource( 6 )
-position = Vector2( 578, 128 )
+position = Vector2( 578, 167 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 10 )
 hframes = 15
@@ -511,7 +452,7 @@ __meta__ = {
 [node name="backdash" type="Sprite" parent="Control/CtrlTutos/Tutos/FirstMoves"]
 modulate = Color( 1, 1, 1, 0.94902 )
 material = SubResource( 6 )
-position = Vector2( 546, 128 )
+position = Vector2( 546, 167 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 10 )
 hframes = 15
@@ -523,7 +464,7 @@ __meta__ = {
 
 [node name="backdash3" type="Sprite" parent="Control/CtrlTutos/Tutos/FirstMoves"]
 material = SubResource( 6 )
-position = Vector2( 498, 128 )
+position = Vector2( 498, 167 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 10 )
 hframes = 15
@@ -535,9 +476,9 @@ __meta__ = {
 
 [node name="ButtonKeyGamepadIcon2" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
 margin_left = 363.0
-margin_top = 42.0
+margin_top = 82.0
 margin_right = 379.0
-margin_bottom = 58.0
+margin_bottom = 98.0
 rect_scale = Vector2( 2, 2 )
 action = "ui_accept"
 
@@ -555,9 +496,9 @@ __meta__ = {
 
 [node name="ButtonKeyGamepadIcon3" parent="Control/CtrlTutos/Tutos/FirstMoves" instance=ExtResource( 6 )]
 margin_left = 466.0
-margin_top = 90.0
+margin_top = 126.0
 margin_right = 482.0
-margin_bottom = 106.0
+margin_bottom = 142.0
 rect_scale = Vector2( 2, 2 )
 action = "ui_focus_prev"
 

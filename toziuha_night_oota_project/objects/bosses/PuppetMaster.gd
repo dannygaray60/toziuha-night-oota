@@ -3,19 +3,19 @@ extends KinematicBody2D
 export (NodePath) var player
 export (NodePath) var invoke_object
 
-var Enemy = load("res://scripts/enemy.gd").new()
+var cE = load("res://scripts/enemy.gd").new()
 
-var id = "puppet_master"#puppet_master
+#var id = "puppet_master"
 
-var hp_max = Vars.enemy[id]["hp_max"]
-var hp_now = hp_max
+#var hp_max = Vars.enemy[id]["hp_max"]
+#var hp_now = hp_max
 
 var anim_state_machine
 
 var final_boss = false
 
-var facing = -1
-var state = "idle"
+#var facing = -1
+#var state = "idle"
 
 var chasing = false
 var chase_duration = 1
@@ -27,9 +27,11 @@ var center_position_room = Vector2(0,0)
 
 func _ready():
 	
+	cE.set_vars("puppet_master")
+	
 	center_position_room = $PositionCenter.global_position
 	
-	Enemy.connect("collision_with_player",self,"_on_collision_with_player")
+#	Enemy.connect("collision_with_player",self,"_on_collision_with_player")
 	anim_state_machine = $AnimationTree.get("parameters/playback")
 	
 	#desactivar todo y poner invisible el boss
@@ -40,10 +42,10 @@ func _ready():
 	
 
 func change_state(new_state):
-	if new_state != state and state != "dead":
-		state = new_state
-		anim_state_machine.travel(state)
-		if state == "fly":
+	if new_state != cE.state and cE.state != "dead":
+		cE.state = new_state
+		anim_state_machine.travel(cE.state)
+		if cE.state == "fly":
 			start_chase()
 
 #que el boss aparezca 
@@ -63,7 +65,7 @@ func show_body():
 func start_battle():
 	change_state("fly")
 	enabled_collisions(true)
-	Functions.get_main_level_scene().get_node("Hud").set_boss_bar_max(Vars.enemy[id]["hp_max"])
+	Functions.get_main_level_scene().get_node("Hud").set_boss_bar_max(Vars.enemy[cE.id]["hp_max"])
 	Functions.get_main_level_scene().get_node("Hud").set_boss_bar_visible()
 	start_chase()
 	
@@ -76,8 +78,8 @@ func end_battle():
 	$Tween.start()
 	$Timer.start(2.5)
 	yield($Timer,"timeout")
-	Enemy.open_doors_on_boss_death(self)
-	Enemy.add_boss_orb(center_position_room,self)
+	cE.open_doors_on_boss_death(self)
+	cE.add_boss_orb(center_position_room,self)
 	queue_free()
 
 func get_target_position(targetnode=null):
@@ -90,20 +92,20 @@ func get_target_position(targetnode=null):
 	return target_pos
 
 func start_chase():
-	if state != "dead" and modulate.a == 1:
+	if cE.state != "dead" and modulate.a == 1:
 		
 		$Tween.stop_all()
 		randomize()
 		chase_duration = randi() % 3 + 1
 		
-		Enemy.update_facing(self,$Sprite)
+		cE.update_facing(self,$Sprite)
 		chasing = true
 		$Tween.interpolate_property(self, "position", position, get_target_position(Functions.get_main_level_scene().get_player()), chase_duration, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$Tween.start()
 
 
 func random_move():
-	if state == "dead" or state == "spawn" or modulate.a != 1:
+	if cE.state == "dead" or cE.state == "spawn" or modulate.a != 1:
 		return
 	
 	$Tween.stop_all()
@@ -123,17 +125,17 @@ func random_move():
 	
 func hurt(damage,weapon_position):
 	
-	if $TimerHurt.get_time_left() == 0 and state != "dead" and hp_now > 0 and modulate.a == 1:
+	if cE.state != "dead" and cE.hp_now > 0 and modulate.a == 1:
 		#$Tween.stop_all()
 		$Sprite.modulate = Color(1,0,0,1)
 		$TimerHurt.start()
 		Audio.play_sfx("hit4")
 		
-		Enemy.apply_damage(self,damage,weapon_position)
+		cE.apply_damage(self,damage,weapon_position)
 		
-		Functions.get_main_level_scene().get_node("Hud").update_boss_bar(hp_now)
+		Functions.get_main_level_scene().get_node("Hud").update_boss_bar(cE.hp_now)
 
-		if hp_now <= 0:
+		if cE.hp_now <= 0:
 			$HitBox.set_deferred("monitoring",false)
 			Functions.get_main_level_scene().get_node("Hud").show_flash()
 			Functions.get_main_level_scene().get_node("Hud").set_boss_bar_visible(false)
@@ -148,7 +150,7 @@ func hurt(damage,weapon_position):
 		
 		$TimerAutoInvoke.start()
 		received_hits += 1
-		if received_hits == 10 and state != "spawn":
+		if received_hits == 10 and cE.state != "spawn":
 			change_state("spawn")
 			received_hits = 0
 			$Tween.stop_all()
@@ -158,11 +160,11 @@ func hurt(damage,weapon_position):
 
 	yield($TimerHurt,"timeout")
 	random_move()
-	Enemy.update_facing(self,$Sprite)
+	cE.update_facing(self,$Sprite)
 	$Sprite.modulate = Color(1,1,1,1)
 
 func start_spawn():
-	if state != "dead" and player is NodePath:
+	if cE.state != "dead" and player is NodePath:
 		get_node(invoke_object).global_position = get_node(player).global_position
 		get_node(invoke_object).invoke()
 		#print("hacer aparecer skeleton, state:"+state)
@@ -170,7 +172,9 @@ func start_spawn():
 func enabled_collisions(val=false):
 	if val:
 		$CollisionShape2D.set_deferred("disabled",false)
+		$HitboxEnemy.set_disabled_collision(false)
 	else:
+		$HitboxEnemy.set_disabled_collision(true)
 		$CollisionShape2D.set_deferred("disabled",true)
 	#quitar layer enemy
 	#set_collision_layer_bit(2,val)
@@ -182,16 +186,17 @@ func enabled_collisions(val=false):
 func _on_collision_with_player(body):
 	#si se detecta a jugador y solo si ha terminado de aparecer (con modulate)
 	if body.is_in_group("player") and modulate.a == 1:
-		body.hurt(id,global_position)
+#		body.hurt(id,global_position)
 		random_move()
+	
 
 func _on_Tween_tween_completed(_object, _key):
-	if state == "fly":
+	if cE.state == "fly":
 		start_chase()
 
 
 func _on_TimerAutoInvoke_timeout():
-	if state != "dead" and hp_now > 0 and state != "spawn":
+	if cE.state != "dead" and cE.hp_now > 0 and cE.state != "spawn":
 		change_state("spawn")
 		received_hits = 0
 		$Tween.stop_all()
@@ -199,6 +204,6 @@ func _on_TimerAutoInvoke_timeout():
 		$Tween.interpolate_property(self, "global_position", global_position, center_position_room, 1, Tween.TRANS_LINEAR, Tween.EASE_IN)
 		$Tween.start()
 
-func _on_Area2DDetectSubweapon_body_entered(body):
-	if body.is_in_group("subweapon"):
-		hurt( body.damage,body.global_position )
+#func _on_Area2DDetectSubweapon_body_entered(body):
+#	if body.is_in_group("subweapon"):
+#		hurt( body.damage,body.global_position )

@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/sprites/enemy_skull_head_demon.png" type="Texture" id=1]
 [ext_resource path="res://objects/enemies/DemonSkullHead.gd" type="Script" id=2]
+[ext_resource path="res://objects/HitboxEnemy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4.09567, 7.59356 )
@@ -76,11 +77,14 @@ tracks/0/keys = {
 "values": [ 2 ]
 }
 
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 5.75, 7.59356 )
+
 [node name="DemonSkullHead" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 collision_layer = 4
-collision_mask = 29
+collision_mask = 12
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -111,6 +115,12 @@ anims/idle = SubResource( 4 )
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( 0.283001, -10.3417 )
 scale = Vector2( 2.79428, 1.9104 )
+
+[node name="HitboxEnemy" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxEnemy"]
+position = Vector2( 0, -7.614 )
+shape = SubResource( 5 )
 
 [connection signal="timeout" from="TimerHurt" to="." method="_on_TimerHurt_timeout"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

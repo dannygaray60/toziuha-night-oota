@@ -19,6 +19,6 @@ func _ready():
 			$AnimationPlayer.play("PingPongPathFollow")
 
 
-func _on_Saw_body_entered(body):
-	if body.is_in_group("player"):
-		body.hurt("circle_saw",$Saw.position)
+#func _on_Saw_body_entered(body):
+#	if body.is_in_group("player"):
+#		body.hurt("circle_saw",$Saw.position)

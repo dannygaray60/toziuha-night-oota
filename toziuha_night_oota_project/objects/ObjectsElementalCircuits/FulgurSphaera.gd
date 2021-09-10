@@ -33,9 +33,10 @@ func _on_AnimSprites_animation_finished(anim_name):
 
 
 func _on_Sphaera_area_entered(area_body,area_name):
-	if area_body.is_in_group("torch"):
-		Audio.play_sfx("electric_zap")
-		area_body.destroy()
-	if area_body.is_in_group("enemies"):
-		Audio.play_sfx("electric_zap")
-		area_body.hurt(int(Vars.player["atk"]*4),get_node(area_name).global_position)
+#	if area_body.is_in_group("torch"):
+#		Audio.play_sfx("electric_zap")
+#		area_body.destroy()
+#	if area_body.is_in_group("enemies"):
+#		Audio.play_sfx("electric_zap")
+#		area_body.hurt(int(Vars.player["atk"]*4),get_node(area_name).global_position)
+	pass

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/sprites/trap_axe.png" type="Texture" id=1]
 [ext_resource path="res://objects/traps/TrapAxeCurve.gd" type="Script" id=2]
+[ext_resource path="res://objects/traps/TrapAxeCurve_Area2D.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=1]
 resource_name = "move"
@@ -38,10 +39,14 @@ tracks/0/keys = {
 }
 
 [node name="TrapAxeCurve" type="Node2D"]
+z_index = 1
 script = ExtResource( 2 )
 
-[node name="Area" type="Area2D" parent="."]
+[node name="Area" type="Area2D" parent="." groups=[
+"enemies",
+]]
 collision_layer = 2
+script = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area"]
 polygon = PoolVector2Array( -15.9491, 40.7021, -12.3907, 51.4712, -12.1097, 51.6585, -6.49109, 56.0598, -0.497858, 57.7454, -0.404213, 57.9326, 6.90003, 56.1534, 6.99368, 56.1534, 12.0505, 51.8458, 15.8899, 41.3576, 9.42843, 46.2271, 1.46867, 45.9462, -9.30041, 45.7589 )
@@ -54,5 +59,3 @@ texture = ExtResource( 1 )
 playback_speed = 0.8
 anims/move = SubResource( 1 )
 anims/move_circle = SubResource( 2 )
-
-[connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]

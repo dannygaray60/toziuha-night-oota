@@ -4,7 +4,7 @@
 [ext_resource path="res://objects/SubweaponShuriken.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 7.84858
+radius = 5.8277
 
 [sub_resource type="Animation" id=2]
 resource_name = "show"
@@ -75,7 +75,7 @@ radius = 8.086
 "subweapon",
 ]]
 collision_layer = 16
-collision_mask = 44
+collision_mask = 8
 gravity_scale = 0.0
 contacts_reported = 4
 contact_monitor = true
@@ -101,14 +101,16 @@ scale = Vector2( 0.948546, 0.873503 )
 wait_time = 0.5
 one_shot = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="SubWeaponArea" type="Area2D" parent="." groups=[
+"player_weapon",
+]]
 collision_layer = 16
-collision_mask = 0
+collision_mask = 4
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubWeaponArea"]
 shape = SubResource( 4 )
 
 [connection signal="body_shape_entered" from="." to="." method="_on_SubweaponShuriken_body_shape_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="TimerDelete" to="." method="_on_TimerDelete_timeout"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="SubWeaponArea" to="." method="_on_SubWeaponArea_area_entered"]

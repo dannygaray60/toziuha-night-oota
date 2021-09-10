@@ -1,22 +1,26 @@
-extends Node2D
+extends Area2D
+
+#class enemy
+var cE = load("res://scripts/enemy.gd").new()
 
 export var static_spike = false
 export (float,0.2,3) var time_start = 1
 
 func _ready():
+	cE.set_vars("small_spikes")
 	
 	if static_spike:
-		$Area2D/Sprite.frame = 7
-		$Area2D/CollisionShape2D.disabled = false
+		$Sprite.frame = 7
+		$CollisionShape2D.disabled = false
 	else:
-		$Area2D/Sprite.frame = 0
+		$Sprite.frame = 0
 	
 	$Timer.wait_time = time_start
 	
 
-func _on_Area2D_body_entered(body):
-	if body.is_in_group("player"):
-		body.hurt("small_spikes",$Area2D.position)
+#func _on_Area2D_body_entered(body):
+#	if body.is_in_group("player"):
+#		body.hurt("small_spikes",$Area2D.position)
 
 
 func play_sound():

@@ -132,3 +132,5 @@ enabled = false
 texture = ExtResource( 3 )
 color = Color( 1, 0.6, 0.0823529, 1 )
 range_layer_min = -100
+
+[connection signal="area_entered" from="." to="." method="_on_Torch_area_entered"]

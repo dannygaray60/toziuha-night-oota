@@ -1,13 +1,31 @@
 extends Node
 
+signal collision_with_player
+
 var boss_orb = preload("res://objects/OrbBoss.tscn")
 var boss_orb_instance = null
-
-signal collision_with_player
 
 #referencia del nodo de jugador
 var player = null
 
+#-------variables básicas del enemigo -----------
+var id = "zombie"
+var state = "idle"
+var hp_max = 0
+var hp_now = 0
+var atk = 0
+var def = 0
+var facing = -1
+
+func set_vars(e_id):
+	id = e_id
+	hp_max = Vars.enemy[id]["hp_max"]
+	hp_now = hp_max
+	atk = Vars.enemy[id]["atk"]
+	def = Vars.enemy[id]["def"]
+	facing = -1
+
+#guardar referencia de player en caso de no haber uno
 func check_player_node():
 	if player == null:
 		player = Functions.get_main_level_scene().get_player()
@@ -20,29 +38,29 @@ func update_facing(enemynode=null,sprite=null,force=false):
 
 	check_player_node()
 	
-	if enemynode.state != "dead" or force:
+	if state != "dead" or force:
 
-		enemynode.facing = Functions.get_new_facing_with_player(enemynode,player)
+		facing = Functions.get_new_facing_with_player(enemynode,player)
 
 		#volteo de sprite
-		sprite.scale.x = -1 * enemynode.facing
+		sprite.scale.x = -1 * facing
 
 #voltear sprite y facing con un valor contrario al actual del facing
-func inverse_facing(enemynode=null,sprite=null):
-	if enemynode.state != "dead":
-		enemynode.facing = enemynode.facing * -1
-		sprite.scale.x = -1 * enemynode.facing
+func inverse_facing(sprite=null):
+	if state != "dead":
+		facing = facing * -1
+		sprite.scale.x = -1 * facing
 		
 #------- aplicar daño a enemigo --------
-func apply_damage(enemynode=null, damage=0, weapon_position=Vector2(0,0), def=0):
+func apply_damage(enemynode=null, damage=0, weapon_position=Vector2(0,0)):
+		
 		#damage a entero por si acaso
 		damage = int(damage)
-		if def == 0:
-			def = Vars.enemy[enemynode.id]["def"]
+
 		#damage calcule
 		#reducir damage gracias a defensa
 		damage = Functions.get_value(damage,"-",def)
-		enemynode.hp_now -= damage
+		hp_now -= damage
 		
 		var indicator_position = Vector2(enemynode.global_position.x,weapon_position.y)
 		Functions.show_damage_indicator(damage,indicator_position,"red")
@@ -51,10 +69,10 @@ func apply_damage(enemynode=null, damage=0, weapon_position=Vector2(0,0), def=0)
 #Spawnear objeto del enemigo cuando muere y mostrar nombre en la esquina como notificacion
 func drop_item_and_show_name(enemynode=null):
 	#items que deja al morir
-	var list_items = Vars.enemy[enemynode.id]["item_drop"]
+	var list_items = Vars.enemy[id]["item_drop"]
 
 	#mostrar el nombre del enemigo eliminado
-	Functions.show_hud_notif(tr(Vars.enemy[enemynode.id]["name"]))
+	Functions.show_hud_notif(tr(Vars.enemy[id]["name"]))
 	
 	#spawnear item como recompensa
 	if !list_items.empty():

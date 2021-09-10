@@ -6,11 +6,6 @@ export var time_start = 2
 func _ready():
 	$TimerStartMove.wait_time = time_start
 
-func _on_AreaSpikes_body_entered(body):
-	if body.is_in_group("player"):
-		body.hurt("large_spikes",$AreaSpikes.position)
-
-
 func _on_AnimationPlayer_animation_finished(anim_name):
 
 	match anim_name:

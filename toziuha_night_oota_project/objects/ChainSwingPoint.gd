@@ -1,5 +1,8 @@
 extends Area2D
 
+var impact_anim = preload("res://objects/ui/SimpleImpactVFX.tscn")
+var impact_anim_instance = null
+
 #hacia donde se mueve el pendulo
 var dir_mov = "center"
 
@@ -84,18 +87,34 @@ func chain_release():
 		
 
 func _on_ChainSwingPoint_area_entered(area):
-	if area.is_in_group("player_weapon") and player == null and Vars.player["hability_hook_whip"]:
+	
+	if !area.monitoring:
+		return
+	
+	#solo se considera las areas que pertenecen al latigo	
+	if area.name in ["AreaLvl1","AreaLvl2","AreaLvl3","AreaCircle"]:
+		pass
+	else:
+		return
+	
+	#si se ha golpeado sin tener la habilidad necesaria
+	if area.is_in_group("player_weapon") and player == null and !Vars.player["hability_hook_whip"]:
+		Audio.play_sfx("btn_incorrect")
+		impact_anim_instance = impact_anim.instance()
+		impact_anim_instance.global_position = global_position
+		Functions.get_main_level_scene().add_child(impact_anim_instance)
+	elif area.is_in_group("player_weapon") and player == null and Vars.player["hability_hook_whip"]:
 		var player_direction = "left"
-		player = area.get_parent().get_parent().get_parent()
+		player = get_tree().get_nodes_in_group("player")[0]#area.get_parent().get_parent().get_parent()
 		
-		if abs(player.position.x - position.x) <= 0:
-			player_direction = "center"
-		elif player.position.x > position.x:
-			player_direction = "right"
-		
-		if (player_direction == "left" and player.facing == -1) or (player_direction == "right" and player.facing == 1):
-			player = null
-			return
+#		if abs(player.position.x - position.x) <= 0:
+#			player_direction = "center"
+#		if player.position.x > position.x:
+#			player_direction = "right"
+#
+#		if (player_direction == "left" and player.facing == -1) or (player_direction == "right" and player.facing == 1):
+#			player = null
+#			return
 		
 		
 		

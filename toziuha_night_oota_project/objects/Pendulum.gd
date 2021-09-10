@@ -15,6 +15,8 @@ export (float) var damping = 0.995 							#Arbitrary dampening force
 var angular_velocity = 0.0
 var angular_acceleration = 0.0
 
+var last_direction = "center"
+
 #func _ready()->void:
 #	set_start_position(global_position, end_position)
 
@@ -60,11 +62,20 @@ func _physics_process(delta)->void:
 #	update()												#update draw
 
 func game_input()->void:
+	
+	#limitar un maximo de angulo para poder balancearse
+	if abs(angle) > 0.8:
+		return
+	
 	var dir:float = 0
 	if move_pendulum and Input.is_action_just_pressed("ui_right"):
 		dir += 1
 	elif move_pendulum and Input.is_action_just_pressed("ui_left"):
 		dir -= 1
+	
+	#cooldown para evitar mover repetidamente
+#	if $Timer.get_time_left() == 0:
+#		$Timer.start()
 	add_angular_velocity(dir * 0.02) 						#give a kick to the swing
 	
 	#aumentar distancia del pendulo o disminuir

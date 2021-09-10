@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var cE = load("res://scripts/enemy.gd").new()
+
 var velocity = Vector2(0,0)
 
 var inactive = false
@@ -14,6 +16,8 @@ var height_arc = -80
 var speed = 70
 
 func _ready():
+
+	cE.set_vars("fireball")
 	
 	speed = speed * direction
 	velocity.x = speed
@@ -35,31 +39,17 @@ func _physics_process(delta):
 func delete_fireball():
 	call_deferred("queue_free")
 
-
-func _on_FireBall_body_entered(body):
-	if body.is_in_group("player") and !inactive:
-		inactive = true
-		speed = 0
-		body.hurt("fireball",position)
-		$AnimationPlayer.play("end")
-
-
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "end":
 		delete_fireball()
 
-
-#arma del jugador toca bola de fuego
-func _on_Area2D_area_entered(area):
-	if area.is_in_group("player_weapon") and area.monitoring:
-		Audio.play_sfx("fireball_enemy_destroyed")
-		$AnimationPlayer.play("end")
-
-
-func _on_AnimationPlayer_animation_started(anim_name):
-	if anim_name == "end":
-		$Area2D/CollisionShape2D.set_deferred("disabled",true)
-
+func hurt(_damage,_weapon_pos):
+	inactive = true
+	speed = 0
+	$CollisionShape2D.set_deferred("disabled",true)
+	$HitboxEnemy.set_deferred("monitoring",false)
+	Audio.play_sfx("fireball_enemy_destroyed")
+	$AnimationPlayer.play("end")
 
 func _on_VisibilityNotifier2D_screen_exited():
 	delete_fireball()

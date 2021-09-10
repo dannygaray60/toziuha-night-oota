@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://assets/sprites/boss_eva1.png" type="Texture" id=1]
 [ext_resource path="res://objects/bosses/Eva1.gd" type="Script" id=2]
@@ -6,9 +6,10 @@
 [ext_resource path="res://assets/sprites/elemental_circuit_icons.png" type="Texture" id=4]
 [ext_resource path="res://assets/sprites/elemental_circuit_base.png" type="Texture" id=5]
 [ext_resource path="res://assets/sprites/enemy_skull_head_demon.png" type="Texture" id=6]
+[ext_resource path="res://objects/HitboxEnemy.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 8, 24 )
+extents = Vector2( 6.88614, 24 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "spin"
@@ -418,11 +419,14 @@ graph_offset = Vector2( 0, -126.312 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=26]
 
+[sub_resource type="RectangleShape2D" id=27]
+extents = Vector2( 9.6702, 24 )
+
 [node name="Eva1" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 collision_layer = 4
-collision_mask = 25
+collision_mask = 8
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -526,7 +530,7 @@ texture = ExtResource( 1 )
 offset = Vector2( 2.462, 0 )
 hframes = 5
 vframes = 8
-frame = 1
+frame = 2
 
 [node name="fire" type="Sprite" parent="Sprite"]
 position = Vector2( -11, 6 )
@@ -577,6 +581,12 @@ __meta__ = {
 __meta__ = {
 "_gizmo_extents_": 26.0
 }
+
+[node name="HitboxEnemy" parent="." instance=ExtResource( 7 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxEnemy"]
+position = Vector2( 0, -24 )
+shape = SubResource( 27 )
 
 [connection signal="tree_exiting" from="." to="." method="_on_Eva1_tree_exiting"]
 [connection signal="tween_completed" from="ElementalCircuit/Tween" to="." method="_on_CircuitTween_tween_completed"]

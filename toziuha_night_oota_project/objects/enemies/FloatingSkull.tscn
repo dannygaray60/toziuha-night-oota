@@ -1,9 +1,11 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/sprites/enemy_floating_skull.png" type="Texture" id=1]
 [ext_resource path="res://objects/enemies/FloatingSkull.gd" type="Script" id=2]
+[ext_resource path="res://objects/HitboxEnemy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
+radius = 8.37656
 
 [sub_resource type="Animation" id=2]
 resource_name = "dead"
@@ -20,28 +22,19 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 12, 13, 14, 15, 16, 17, 18 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0.7 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [ true ],
+"method": "disable_collisions"
+}, {
 "args": [  ],
 "method": "queue_free"
 } ]
@@ -79,8 +72,8 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 18 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -88,8 +81,10 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"values": [ {
+"args": [ true ],
+"method": "disable_collisions"
+} ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -106,28 +101,19 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 18, 17, 16, 17, 16, 14, 12, 0 ]
 }
-tracks/1/type = "value"
-tracks/1/path = NodePath("CollisionShape2D:disabled")
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 3.1 ),
+"times": PoolRealArray( 3.8, 4 ),
 "transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 4 ),
-"transitions": PoolRealArray( 1 ),
 "values": [ {
+"args": [ false ],
+"method": "disable_collisions"
+}, {
 "args": [  ],
 "method": "start_chase"
 } ]
@@ -176,20 +162,23 @@ graph_offset = Vector2( 0, -20.636 )
 [sub_resource type="CircleShape2D" id=17]
 radius = 11.6711
 
+[sub_resource type="CircleShape2D" id=18]
+radius = 11.5221
+
 [node name="FloatingSkull" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 collision_layer = 4
+collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 hframes = 19
-frame = 18
+frame = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
-disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/dead = SubResource( 2 )
@@ -228,6 +217,11 @@ collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2DDetectPlayer"]
 shape = SubResource( 17 )
+
+[node name="HitboxEnemy" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxEnemy"]
+shape = SubResource( 18 )
 
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]

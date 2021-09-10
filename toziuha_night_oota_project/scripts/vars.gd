@@ -30,20 +30,20 @@ var is_on_onewaycollisionplatform = false
 var subweapons = {
 	"none":{
 		"name": "None",
-		"atk_add": 0,
+		"atk_multiplier": 0,
 		"mp_use": 0,
 		"description": ".",
 	},
 	"shuriken":{
 		"name": "Shuriken",
-		"atk_add": 3,
+		"atk_multiplier": 2,
 		"mp_use": 1,
 		"description": "Shuriken ninja.",
 	},
 	
 	"axe":{
 		"name": "Axe",
-		"atk_add": 3,
+		"atk_multiplier": 4,
 		"mp_use": 3,
 		"description": "Hacha grande.",
 	},
@@ -197,7 +197,7 @@ var enemy = {
 	"zombie":{
 		"name": "ZOMBIE",
 		"atk": 10,
-		"def":0,
+		"def": 0,
 		"hp_max": 5,
 		"description": "Description...",
 		#y aqui una lista de objetos que puede dejar al morir...
@@ -205,8 +205,8 @@ var enemy = {
 	},
 	"slime":{
 		"name": "Slime",
-		"atk": 15,
-		"def":3,
+		"atk": 17,
+		"def":2,
 		"hp_max": 7,
 		"description": "Description...",
 		#y aqui una lista de objetos que puede dejar al morir...
@@ -232,9 +232,9 @@ var enemy = {
 	},
 	"blood_bat":{
 		"name": "BLOODBAT",
-		"atk": 10,
-		"def":3,
-		"hp_max": 7,
+		"atk": 7,
+		"def":0,
+		"hp_max": 2,
 		"description": "Description...",
 		#y aqui una lista de objetos que puede dejar al morir...
 		"item_drop": ["none","none","none"],
@@ -300,7 +300,7 @@ var enemy = {
 		"name": "",
 		"atk": 20,
 		"def":0,
-		"hp_max": 0,
+		"hp_max": 1,
 		"description": "",
 		"item_drop": [],
 	},
@@ -308,23 +308,23 @@ var enemy = {
 		"name": "",
 		"atk": 20,
 		"def":0,
-		"hp_max": 0,
+		"hp_max": 1,
 		"description": "",
 		"item_drop": [],
 	},
 	"large_spikes":{
 		"name": "",
-		"atk": 10,
+		"atk": 20,
 		"def":0,
-		"hp_max": 0,
+		"hp_max": 1,
 		"description": "",
 		"item_drop": [],
 	},
 	"small_spikes":{
 		"name": "",
-		"atk": 5,
+		"atk": 10,
 		"def":0,
-		"hp_max": 0,
+		"hp_max": 1,
 		"description": "",
 		"item_drop": [],
 	},
@@ -332,7 +332,7 @@ var enemy = {
 		"name": "",
 		"atk": 15,
 		"def":0,
-		"hp_max": 0,
+		"hp_max": 1,
 		"description": "",
 		"item_drop": [],
 	},
@@ -340,7 +340,7 @@ var enemy = {
 		"name": "",
 		"atk": 34,
 		"def":0,
-		"hp_max": 0,
+		"hp_max": 1,
 		"description": "",
 		"item_drop": [],
 	},
@@ -358,17 +358,17 @@ var enemy = {
 	
 	"boss_eva1":{
 		"name": "EVA",
-		"atk": 40,
+		"atk": 30,
 		"def":12,
-		"hp_max": 1200,
+		"hp_max": 1000,
 		"description": "Description...",
 		#y aqui una lista de objetos que puede dejar al morir...
 		"item_drop": ["none"],
 	},
 	"puppet_master":{
 		"name": "PUPPETMASTER",
-		"atk": 40,
-		"def":20,
+		"atk": 30,
+		"def":22,
 		"hp_max": 1200,
 		"description": "Description...",
 		#y aqui una lista de objetos que puede dejar al morir...

@@ -50,9 +50,10 @@ func _on_DetectFloor_body_entered(body):
 
 
 func _on_Area2D_area_entered(area_body):
-	if area_body.is_in_group("torch"):
-		area_body.destroy()
-	if area_body.is_in_group("enemies"):
-		$Sprite/Area2D.set_deferred("monitoring",false)
-		area_body.hurt(int(Vars.player["atk"]*2.5),global_position)
-		$Sprite/Area2D.set_deferred("monitoring",true)
+#	if area_body.is_in_group("torch"):
+#		area_body.destroy()
+#	if area_body.is_in_group("enemies"):
+#		$Sprite/Area2D.set_deferred("monitoring",false)
+#		area_body.hurt(int(Vars.player["atk"]*2.5),global_position)
+#		$Sprite/Area2D.set_deferred("monitoring",true)
+	pass

@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://assets/sprites/enemy_hound.png" type="Texture" id=1]
 [ext_resource path="res://objects/enemies/CursedHound.gd" type="Script" id=2]
+[ext_resource path="res://objects/HitboxEnemy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="AnimationNodeAnimation" id=1]
 animation = "dead"
@@ -161,19 +162,22 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=22]
-extents = Vector2( 14.4323, 8.78378 )
+extents = Vector2( 11.885, 8.78378 )
 
 [sub_resource type="RectangleShape2D" id=23]
-extents = Vector2( 32.003, 3.25332 )
+extents = Vector2( 48.003, 3.25332 )
 
 [sub_resource type="RectangleShape2D" id=24]
 extents = Vector2( 80, 109 )
+
+[sub_resource type="RectangleShape2D" id=25]
+extents = Vector2( 16.9164, 8.78378 )
 
 [node name="CursedHound" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 collision_layer = 4
-collision_mask = 25
+collision_mask = 8
 script = ExtResource( 2 )
 __meta__ = {
 "_editor_description_": "colocar cuerpo pegado al suelo al editar nivel"
@@ -213,6 +217,7 @@ shape = SubResource( 22 )
 position = Vector2( -0.003, -26.012 )
 texture = ExtResource( 1 )
 hframes = 24
+frame = 5
 
 [node name="RayCastDetectNoFloor" type="RayCast2D" parent="Sprite"]
 position = Vector2( -23.997, 26.012 )
@@ -232,11 +237,11 @@ collision_mask = 8
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/AreaDetectPlayerNearOnFloor"]
-position = Vector2( -48, 23 )
+position = Vector2( -64, 23 )
 shape = SubResource( 23 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Sprite/AreaDetectPlayerNearOnFloor"]
-position = Vector2( 48, 23 )
+position = Vector2( 64, 23 )
 shape = SubResource( 23 )
 
 [node name="AreaDetectPlayer" type="Area2D" parent="."]
@@ -253,6 +258,12 @@ position = Vector2( 3.8147e-06, -8 )
 scale = Vector2( 13.3812, 3.725 )
 process_parent = true
 physics_process_parent = true
+
+[node name="HitboxEnemy" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxEnemy"]
+position = Vector2( 0, -8.823 )
+shape = SubResource( 25 )
 
 [connection signal="timeout" from="TimerChangeFacing" to="." method="_on_TimerChangeFacing_timeout"]
 [connection signal="body_entered" from="Sprite/AreaDetectPlayerNearOnFloor" to="." method="_on_AreaDetectPlayerNearOnFloor_body_entered"]

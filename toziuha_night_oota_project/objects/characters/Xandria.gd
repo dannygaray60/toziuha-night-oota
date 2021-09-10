@@ -47,7 +47,7 @@ export var gravity = 700
 #gravedad cuando se está atacando, esta debe ser un poco menor
 var gravity_attack = 500
 #velocidad para desplazamiento
-export var speed = 100
+export var speed = 110
 
 #cantidad de saltos realizados
 var num_jumps = 0
@@ -215,12 +215,12 @@ func _physics_process(delta):
 		else:
 			is_on_onewaycol = false
 		
-		if collision.collider.is_in_group("enemies"):
-			var cpos = collision.collider.get_position()
-			hurt(collision.collider.id,cpos)
-			
-		if collision.collider.is_in_group("poison"):
-			change_condition("poison")
+#		if collision.collider.is_in_group("enemies"):
+#			var cpos = collision.collider.get_position()
+#			hurt(collision.collider.id,cpos)
+#
+#		if collision.collider.is_in_group("poison"):
+#			change_condition("poison")
 
 
 func _get_input():
@@ -279,6 +279,7 @@ func _get_input():
 
 	#desactivar ataque circular al soltar botón ataque
 	if anim_current == "attack-circle" and Input.is_action_just_released("ui_cancel"):
+		
 		change_state("idle")
 	
 	#agacharse
@@ -298,7 +299,7 @@ func _get_input():
 		_attack()
 		
 	#accion para lanzar subarma
-	if Input.is_action_just_pressed("ui_focus_next") and state != "attack-crouch" and state != "crouch" and state != "charging":
+	if !$Sprite/RayCastUp.is_colliding() and Input.is_action_just_pressed("ui_focus_next") and state != "attack-crouch" and state != "crouch" and state != "charging":
 		_throw_subweapon()
 		
 	#accion para usar un item curativo
@@ -413,9 +414,12 @@ func _jump():
 		return
 		
 	if (!Vars.player["hability_double_jump"] and num_jumps == 0) or (Vars.player["hability_double_jump"] and num_jumps <= 1):
-		Audio.play_sfx("jump")
+		
 		if num_jumps > 0:
 			anim_state_machine.start("jump2")
+			Audio.play_sfx("jump2")
+		else:
+			Audio.play_sfx("jump")
 
 		change_state("jump")
 		#para arreglar saltos al moverse en rampa
@@ -444,7 +448,7 @@ func _attack():
 		elif state != "crouch":
 			change_state("attack")
 
-		$TimerAttack.start() #duracion de la animacion
+		$TimerAttack.start(0.56) #duracion de la animacion
 		weapon_attack()
 
 func _throw_subweapon():
@@ -454,16 +458,11 @@ func _throw_subweapon():
 	if anim_current != "throw" and Vars.player["subweapon"] != "none" and Vars.player["mp_now"] >= Vars.subweapons[Vars.player["subweapon"]]["mp_use"]:
 		can_throw = true #usado para throw_subweapon que se llama desde animationplayer
 		change_state("throw")
-		
+
 #cambiar textura del latigo dependiendo de nivel
 func weapon_change_level(lvl=1):
 	$Sprite/Weapon/ChainWhip.texture = weapon_textures [lvl-1]
 	weapon_enable_collision(lvl)
-#	$Sprite/Weapon/AreaLvl2/CollisionPolygon2D.disabled = true
-#	$Sprite/Weapon/AreaLvl3/CollisionPolygon2D.disabled = true
-#	if lvl < 2:
-#		lvl = 2
-#	get_node("Sprite/Weapon/AreaLvl%d/CollisionPolygon2D"%[lvl]).disabled = false
 
 #reproducir sonido de arma y además activar o desactivar las colisiones necesarias
 func weapon_attack():
@@ -484,18 +483,15 @@ func weapon_attack():
 	Audio.play_sfx("chains")
 
 #sonido woosh del latigo
-func weapon_sound_woosh():
-	Audio.play_sfx("whip_woosh")
+func weapon_sound_woosh(normal=true):
+	if normal:
+		Audio.play_sfx("whip_woosh")
+	else:
+		Audio.play_sfx("whip_woosh_light")
 	
 #activar la colision del arma especificada (las demás se desactivan)
 func weapon_enable_collision(lvl=0):
 	#desactivar todas las colisiones (y ocultarlas para propositos de testeo
-	get_node("Sprite/Weapon/AreaLvl2/CollisionPolygon2D").polygon = []
-	get_node("Sprite/Weapon/AreaLvl2").monitoring = false
-	get_node("Sprite/Weapon/AreaLvl2").visible = false
-	get_node("Sprite/Weapon/AreaLvl3/CollisionPolygon2D").polygon = []
-	get_node("Sprite/Weapon/AreaLvl3").monitoring = false
-	get_node("Sprite/Weapon/AreaLvl3").visible = false
 	
 	#si no se especifica se oculta el sprite del arma y se deja desactivada todas las colisiones con el bloque de codigo anterior
 	if lvl == 0:
@@ -504,21 +500,30 @@ func weapon_enable_collision(lvl=0):
 		if lvl < 2:
 			lvl = 2
 		$Sprite/Weapon/ChainWhip.visible = true
-		get_node("Sprite/Weapon/AreaLvl"+str(lvl)).monitoring = true
-		get_node("Sprite/Weapon/AreaLvl"+str(lvl)).visible = true
-		
+	
+	#desactivar colisiones y dejar en true area del nivel de arma actual
+	for w_lvl in [2,3]:
+		get_node("Sprite/Weapon/AreaLvl%d/CollisionPolygon2D"%[w_lvl]).polygon = []
+		if w_lvl == lvl:
+			get_node("Sprite/Weapon/AreaLvl%d"%[w_lvl]).monitoring = true
+			get_node("Sprite/Weapon/AreaLvl%d"%[w_lvl]).visible = true
+		else:
+			get_node("Sprite/Weapon/AreaLvl%d"%[w_lvl]).monitoring = false
+			get_node("Sprite/Weapon/AreaLvl%d"%[w_lvl]).visible = false
+	
 #activar o desactivar area de latigo segun el nivel
 #para usarse en attack-circle
 #gasta estamina
-func whip_enabled_collision(enable_col=true):
-	get_node("Sprite/Weapon/AreaLvl2").monitoring = enable_col
+func circle_whip_area_enable(enable=true):
+	$Sprite/Weapon/AreaCircle.set_deferred("monitoring",enable)
+	$Sprite/Weapon/AreaCircle.set_deferred("visible",enable)
 
 #quitar frames y desactivar colisiones del arma
 func weapon_cancel():
 	$Sprite/Weapon/PosImpact/WhipLevel3Blood.stop_emit()
 	weapon_enable_collision()
 	$Sprite/Weapon/ChainWhip.frame = 0
-	
+	circle_whip_area_enable(false)
 	charge_circuit_cancel()
 
 func charge_circuit_cancel():
@@ -599,7 +604,7 @@ func _check_states():
 		if !is_on_floor() and velocity.y<0 and state!="jump":
 			change_state("jump")
 		
-		if !is_on_floor() and velocity.y>0 and state!="fall":
+		if !is_on_floor() and velocity.y>0 and state!="fall" and state != "throw":
 			change_state("fall")
 		
 		#arreglar de que animacion de carga se quede a pesar de no estar presionando arriba
@@ -609,17 +614,20 @@ func _check_states():
 		
 		#corregir animacion de attack circle aun con el boton sin presionar
 		if state == "idle" and anim_current == "attack-circle" and !Input.is_action_pressed("ui_cancel"):
+			
 			change_state("idle")
 
 #variable id del colisionador y posicion del mismo
-func hurt(enemy_id=null,hurt_pos=null):
+func hurt(enemy_danger):
 	
 	if state == "hurt" or $TimerNoHurt.get_time_left() != 0:
 		return
 		
+	
+		
 	Audio.play_sfx("hit-player")
 		
-	weapon_cancel()	
+	weapon_cancel()
 	
 	Input.action_release("ui_cancel")
 	
@@ -629,21 +637,23 @@ func hurt(enemy_id=null,hurt_pos=null):
 		a.chain_release()
 	
 	var damage = 0
+	
 	#calculo de daño y mostrarlo
-	if enemy_id != null:
-		damage = Vars.enemy[enemy_id]["atk"] - Vars.player["def"]
+	if enemy_danger != null:
+		damage = enemy_danger.cE.atk - Vars.player["def"]
 		#evitar valores negativos
 		if damage <= 0:
 			damage = 5 #minimo de daño a recibir
 		#establecer daño en hp
 		Vars.player["hp_now"] = Functions.get_value(Vars.player["hp_now"],"-",damage)
-	
+
 	#emitir señal de daño luego de haberlo calculado
 	emit_signal("damaged")
 	
 	#screen shake
 	get_node("PlayerCamera").add_trauma(0.45)
 	
+	#vibracion de control
 	#Input.start_joy_vibration(0,1,1,1)
 	
 	#muerte del jugador el resto del codigo no se ejecutará
@@ -662,7 +672,8 @@ func hurt(enemy_id=null,hurt_pos=null):
 	velocity.x = 0
 	direction.x = 0
 	
-	if hurt_pos.x > get_position().x:
+	#knockback
+	if enemy_danger.global_position.x > get_position().x:
 		facing = 1
 		$Sprite.scale.x = 1
 		velocity.x += (70 * -1)
@@ -697,7 +708,7 @@ func death():
 	Audio.play_voice("xandria-death")
 	
 	#tomado de hurt()
-	weapon_cancel()	
+	weapon_cancel()
 	
 	anim_state_machine.start("dead")
 	state = "dead"
@@ -719,21 +730,9 @@ func nohurt(time=1.5,change_alpha=true):
 		$Sprite.self_modulate.a = .5
 	enable_collision_with_danger(false)
 	
-#funcion para activar o desactivar colissions que hacen daño al jugador
+#funcion para activar o desactivar el hitbox
 func enable_collision_with_danger(v=true):
-	var enemies=get_tree().get_nodes_in_group("enemies")
-#	var proyectiles=get_tree().get_nodes_in_group("proyectiles")
-	#desactivamos o activamos colision contra enemigos
-	#por ejemplo, si el bit (en el editor) es 1, en codigo sera 0
-	set_collision_mask_bit(2,v)
-	#proyectiles
-	for en in enemies:
-		if is_instance_valid(en) and (en.get("hp_now") and en.hp_now > 0):# and en.hp_now > 0:#en.state != "dead":
-			en.set_collision_mask_bit(0,v)
-#	for pr in proyectiles:
-#		if is_instance_valid(pr):
-##			pr.set_collision_mask_bit(7,v)
-#			pass
+	$HitBox.set_deferred("monitoring",v)
 
 #cambiar estado manualmente
 func change_state(new_state):
@@ -867,6 +866,7 @@ func _on_TimerAttack_timeout():
 			if Vars.player["hability_circle_whip"] and state in ["attack","idle"] and Input.is_action_pressed("ui_cancel") and $TimerBtnAttackPress.get_time_left() <= 0.4 and $Sprite/Weapon/ChainWhip.visible:
 #				print(str($TimerBtnAttackPress.get_time_left()))
 				anim_state_machine.start("attack-circle")
+				circle_whip_area_enable(true)
 			#animacion de reposo luego de atacar agachado y mantenerse agachado
 			elif (Input.is_action_pressed("ui_down") or $Sprite/RayCastUp.is_colliding()) and is_on_floor():
 				if Input.is_action_pressed("ui_down") and state == "attack-crouch":
@@ -886,7 +886,7 @@ func _on_TimerAttack_timeout():
 #nota: codigo relacionado en el final de change_state()
 func throw_subweapon():
 	if can_throw :
-		$TimerAttack.start(0.56)
+		$TimerAttack.start(0.4)
 		#descontar uso de subarma al maná
 		Vars.player["mp_now"] = Functions.get_value(Vars.player["mp_now"],"-",Vars.subweapons[Vars.player["subweapon"]]["mp_use"])
 		emit_signal("stats_changed")
@@ -969,40 +969,23 @@ func _on_Xandria_tree_exiting():
 	Vars.player_facing = facing
 
 
+#to do: eliminar funcion
 #cuando un area u objeto entra al area del arma que ataca
-func _on_WeaponArea_body_entered(body_area):
-	#destruir antorchas o parecidos
-	if body_area.is_in_group("torch"):
-		body_area.destroy()
-	#aplicar daño a enemigos
-	if body_area.is_in_group("enemies"):
-		var total_atk = Vars.player["atk"]
-		#añadir ataque segun elemento
-		if Vars.player["elements_items"][Vars.player["current_element_item"]] == "ti":
-			total_atk += 5
-		#añadir atk dependiendo del nivel del arma
-		match Vars.player["weapon_lvl"]:
-#			2:
-#				total_atk += 3
-			3:
-				total_atk += 20
-		#daño a la mitad estando envenenado
-		if Vars.player["condition"] == "poison":
-			total_atk = total_atk / 2
-		#si se ataca en circulo el ataque será solo un minimo
-		if anim_current == "attack-circle" and total_atk > 5:
-			total_atk = 5#total_atk / 3
-		#camera shake
-		get_node("PlayerCamera").add_trauma(0.2,true)
-		#send hurt data to enemy
-		body_area.hurt(total_atk,$Sprite/Weapon/PosImpact.global_position)
-
+func _on_WeaponArea_body_entered(_body_area):
+	pass
 
 #iniciar carga de magia (o recoger circuito elemental)
 func _on_TimerStartCharging_timeout():
 	if Input.is_action_pressed("ui_up") and is_on_floor() and state != "crouch" and state != "attack" and state != "attack-crouch":
-		#reestablecer los decibelios por defecto ya que se usará fadein de sonido
-		#Audio.get_node("sfx/precharge_elemental_circuit").volume_db = 11
 		Audio.play_sfx("precharge_elemental_circuit",true)
 		change_state("charging")
 		emit_signal("absorb_circuit_started")
+
+#jugador toca algo que le hace daño (enemigos, trampas)
+func _on_HitBox_activated(body_area):
+	var obj = body_area
+	if obj.is_in_group("enemies"):
+		if body_area.cE.hp_now > 0:
+			hurt(body_area)
+			if obj.is_in_group("poison"):
+				change_condition("poison")

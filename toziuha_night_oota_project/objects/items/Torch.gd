@@ -106,3 +106,8 @@ func destroy():
 		Audio.play_sfx("torch_destroyed")
 		destroyed = true
 		$AnimationPlayer.play("destroyed")
+
+
+func _on_Torch_area_entered(area):
+	if area.monitoring and (area.is_in_group("player_weapon") or area.is_in_group("subweapon") or area.is_in_group("elemental_circuit")):
+		destroy()

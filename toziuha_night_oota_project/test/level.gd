@@ -3,8 +3,12 @@ extends Node2D
 func _ready():
 	pass
 	Vars.player["hability_double_jump"] = true
+	Vars.player["hability_circle_whip"] = true
+	#Vars.player["atk"] = 0
+	Vars.player["hability_slide"] = true
 	Vars.player["mp_now"] = 999
 	Vars.player["money"] = 99999
+#	Vars.player["hability_hook_whip"] = true
 	
 	
 	Vars.player["elemental_circuits"].append("hydro_amnis")

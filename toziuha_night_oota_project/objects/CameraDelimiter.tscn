@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objects/CameraDelimiter.gd" type="Script" id=1]
+
+[node name="CameraDelimiter" type="Position2D" groups=[
+"camera_delimiter",
+]]
+script = ExtResource( 1 )
+__meta__ = {
+"_gizmo_extents_": 300.0
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

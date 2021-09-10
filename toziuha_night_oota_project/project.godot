@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Control",
+"class": "Joystick",
+"language": "GDScript",
+"path": "res://addons/Joystick/Joystick.gd"
+}, {
 "base": "Node",
 "class": "PhysicsHelper",
 "language": "GDScript",
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://objects/PlayerCamera.gd"
 } ]
 _global_script_class_icons={
+"Joystick": "",
 "PhysicsHelper": "",
 "ShakeCamera2D": ""
 }
@@ -50,9 +56,6 @@ DialogBox="*res://objects/ui/DialogBox.tscn"
 
 window/size/width=683
 window/size/height=384
-window/size/test_width=683
-window/size/test_height=384
-window/vsync/vsync_via_compositor=true
 window/handheld/orientation="sensor_landscape"
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"

@@ -75,7 +75,7 @@ radius = 15.2282
 "subweapon",
 ]]
 collision_layer = 0
-collision_mask = 36
+collision_mask = 0
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -94,12 +94,13 @@ anims/show_reverse = SubResource( 3 )
 position = Vector2( -3.8147e-06, -3.8147e-06 )
 scale = Vector2( 8.28303, 7.11458 )
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="SubWeaponArea" type="Area2D" parent="." groups=[
+"player_weapon",
+]]
 collision_layer = 16
 collision_mask = 36
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubWeaponArea"]
 shape = SubResource( 4 )
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
-[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

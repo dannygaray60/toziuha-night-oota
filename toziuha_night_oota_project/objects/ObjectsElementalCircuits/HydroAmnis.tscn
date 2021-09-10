@@ -112,9 +112,7 @@ tracks/1/keys = {
 [sub_resource type="CanvasItemMaterial" id=7]
 blend_mode = 1
 
-[node name="HydroAmnis" type="KinematicBody2D" groups=[
-"hydro_amnis",
-]]
+[node name="HydroAmnis" type="KinematicBody2D"]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource( 1 )
@@ -132,11 +130,15 @@ collision_mask = 8
 position = Vector2( 0, 10 )
 shape = SubResource( 1 )
 
-[node name="Area2D" type="Area2D" parent="Sprite"]
+[node name="HydroAmnisArea" type="Area2D" parent="Sprite" groups=[
+"continuous_damage",
+"player_weapon",
+]]
 position = Vector2( 0, 15 )
-collision_mask = 8
+collision_layer = 16
+collision_mask = 44
 
-[node name="Collision" type="CollisionShape2D" parent="Sprite/Area2D"]
+[node name="Collision" type="CollisionShape2D" parent="Sprite/HydroAmnisArea"]
 position = Vector2( 0, -10 )
 shape = SubResource( 2 )
 
@@ -158,13 +160,13 @@ one_shot = true
 [node name="lighttexture" type="Sprite" parent="."]
 modulate = Color( 0, 0.262745, 0.882353, 0 )
 material = SubResource( 7 )
-position = Vector2( -2.95193, -10.7371 )
+position = Vector2( 1.05954, -8.37742 )
 scale = Vector2( 0.558398, 0.239676 )
 z_index = 1
 texture = ExtResource( 3 )
 
 [connection signal="body_entered" from="Sprite/DetectFloor" to="." method="_on_DetectFloor_body_entered"]
-[connection signal="area_entered" from="Sprite/Area2D" to="." method="_on_Area2D_area_entered"]
-[connection signal="body_entered" from="Sprite/Area2D" to="." method="_on_Area2D_area_entered"]
+[connection signal="area_entered" from="Sprite/HydroAmnisArea" to="." method="_on_Area2D_area_entered"]
+[connection signal="body_entered" from="Sprite/HydroAmnisArea" to="." method="_on_Area2D_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="TimerEnd" to="." method="_on_TimerEnd_timeout"]

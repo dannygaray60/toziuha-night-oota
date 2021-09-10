@@ -31,20 +31,11 @@ func _ready():
 
 func _process(_delta):
 	
-	if can_use:
-	
-		#iniciar carga
-		if Input.is_action_just_pressed("ui_focus_next") and Input.is_action_pressed("ui_up") and get_parent().get_parent().state == "charging":
-			if is_completed_requeriments():
-				start_circuit()
-			else:
-				Audio.play_sfx("btn_incorrect")
-		
-		#detener carga
-		if Input.is_action_just_released("ui_focus_next") and changing_circuit:
-			cancel_circuit()
-			#cancelar animacion de carga en personaje
-			get_parent().get_parent().change_state("idle")
+	#detener carga
+	if Input.is_action_just_released("ui_down") and changing_circuit:
+		cancel_circuit()
+		#cancelar animacion de carga en personaje
+		get_parent().get_parent().change_state("idle")
 
 #iniciar animacion
 func start_circuit():
@@ -111,6 +102,13 @@ func is_completed_requeriments():
 			if player_element() == "cu" and Vars.player["mp_now"] >= Vars.elemental_circuits["fulgur_sphaera"]["mp_cost"]:
 				val = true
 	return val
+
+#comprobar si el jugador está dentro del area de un circuito a absorber
+func is_player_entered_external_circuit():
+	for ec in get_tree().get_nodes_in_group("elemental_circuit"):
+		if ec.player_entered:
+			return true
+	return false
 
 #retornar el id de circuito equipado o none
 func player_circuit():
@@ -192,8 +190,16 @@ func _on_Tween_tween_completed(object, key):
 
 func _on_player_circuit_started():
 	#sin circuitos no se hará nada
-	if !Vars.player["elemental_circuits"].empty() : #hacer: agregar metodo para comprobar requerimientos de circuito
+	if !Vars.player["elemental_circuits"].empty() :
 		
 		load_circuit_data()
 		
-		can_use = true		
+		can_use = true
+		
+		#si el jugador no entró en un circuito externo
+		if !is_player_entered_external_circuit():
+			#se cumplen con los requisitos del circuito
+			if is_completed_requeriments():
+				start_circuit()
+			else:
+				Audio.play_sfx("btn_incorrect")

@@ -4,7 +4,7 @@ signal cl_gas_show
 signal cl_gas_hide
 signal defeated
 
-var Enemy = load("res://scripts/enemy.gd").new()
+var cE = load("res://scripts/enemy.gd").new()
 
 
 var i = 0
@@ -14,10 +14,10 @@ var proyectile2 = preload("res://objects/EvaProyectile2.tscn")
 var spawn_object = null
 
 
-var id = "boss_eva1"
+#var id = "boss_eva1"
 
-var hp_max = Vars.enemy[id]["hp_max"]
-var hp_now = hp_max
+#var hp_max = Vars.enemy[id]["hp_max"]
+#var hp_now = hp_max
 
 var anim_state_machine
 
@@ -26,8 +26,8 @@ var velocity = Vector2()
 #direcion en x o y
 var direction = Vector2()
 
-var facing = -1
-var state = "idle"
+#var facing = -1
+#var state = "idle"
 var gravity = 600
 var speed = 220
 
@@ -36,17 +36,19 @@ var battle_phase = 0
 
 var gas_atk = 0 # si es cero se da el ataque de gas
 
-func _process(_delta):
-	ScreenDebugger.dict["phase"] = str(battle_phase)
+#func _process(_delta):
+#	ScreenDebugger.dict["phase"] = str(battle_phase)
 
 func _ready():
+	
+	cE.set_vars("boss_eva1")
 	
 	$ElementalCircuit.scale = Vector2(0,0)
 	
 	#Enemy.connect("collision_with_player",self,"_on_collision_with_player")
 	anim_state_machine = $AnimationTree.get("parameters/playback")
 	
-	Enemy.update_facing(self,$Sprite)
+	cE.update_facing(self,$Sprite)
 	
 	change_state("idle")
 	
@@ -54,26 +56,26 @@ func _ready():
 
 func _physics_process(delta):
 
-	if is_on_floor() and state in ["idle","dead"]:
+	if is_on_floor() and cE.state in ["idle","dead"]:
 		velocity.x = 0
 
 	velocity.y += gravity*delta
 	
 	velocity = move_and_slide(velocity, Vector2.UP,true)
 	
-	Enemy.check_body_collisions(self)
+	#Enemy.check_body_collisions(self)
 
 
 func start_battle():
 	#song...
 	Audio.play_voice("eva-laugh")
-	Functions.get_main_level_scene().get_node("Hud").set_boss_bar_max(Vars.enemy[id]["hp_max"])
+	Functions.get_main_level_scene().get_node("Hud").set_boss_bar_max(Vars.enemy[cE.id]["hp_max"])
 	Functions.get_main_level_scene().get_node("Hud").set_boss_bar_visible()
 	$TimerChangePattern.start(1)
 
 func hurt(_total_atk,_global_position):
 	
-	if $TimerHurt.get_time_left() == 0 and state != "dead" and hp_now > 0:
+	if cE.state != "dead" and cE.hp_now > 0:
 		
 		#sonido de dolor randomizado
 		var voices = ["none","none","eva-damage1","eva-damage2","eva-damage3","eva-damage4","eva-damage5","eva-damage6"]
@@ -89,18 +91,19 @@ func hurt(_total_atk,_global_position):
 		
 		Audio.play_sfx("hit4")
 		
-		if state == "atk2":
+		if cE.state == "atk2":
 			_total_atk += 8
 		
-		Enemy.apply_damage(self,_total_atk,_global_position)
+		cE.apply_damage(self,_total_atk,_global_position)
 		
-		if hp_now <= (hp_max/2) :
+		if cE.hp_now <= (cE.hp_max/2) :
 			battle_phase = 1
 		
-		Functions.get_main_level_scene().get_node("Hud").update_boss_bar(hp_now)
+		Functions.get_main_level_scene().get_node("Hud").update_boss_bar(cE.hp_now)
 
 		#muerte de jefe
-		if hp_now <= 0:
+		if cE.hp_now <= 0:
+			$HitboxEnemy.set_disabled_collision(true)
 			$TimerChangePattern.stop()
 			stop_circuit()
 			$Sprite.modulate = Color(1,1,1,1)
@@ -111,26 +114,26 @@ func hurt(_total_atk,_global_position):
 			Audio.stop_music()
 			#visible = false
 			emit_signal("defeated")
-			state = "dead"
+			cE.state = "dead"
 			anim_state_machine.travel("defeated")
 			#queue_free()
 			return
 		
 		yield($TimerHurt,"timeout")
-		Enemy.update_facing(self,$Sprite)
+		cE.update_facing(self,$Sprite)
 		$Sprite.modulate = Color(1,1,1,1)
 		
 func change_state(new_state):
-	if new_state != state and state != "dead":
-		Enemy.update_facing(self,$Sprite)
-		state = new_state
-		anim_state_machine.travel(state)
+	if new_state != cE.state and cE.state != "dead":
+		cE.update_facing(self,$Sprite)
+		cE.state = new_state
+		anim_state_machine.travel(cE.state)
 
 #embestir hacia la izquierda o derecha
 func _move_to():
 	#Enemy.update_facing(self,$Sprite)
 	#facing = Functions.get_new_facing_with_player(self,Functions.get_main_level_scene().get_player())
-	velocity.x += speed * facing
+	velocity.x += speed * cE.facing
 	Audio.play_sfx("spike_slash2")
 
 func start_circuit():
@@ -202,7 +205,7 @@ func _on_CircuitTween_tween_completed(_object, key):
 
 func _on_TimerChangePattern_timeout():
 	
-	if hp_now <= 0:
+	if cE.hp_now <= 0:
 		return
 	
 	var patterns = []

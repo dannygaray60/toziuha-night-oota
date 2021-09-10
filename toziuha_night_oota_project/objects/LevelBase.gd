@@ -8,7 +8,7 @@ export var title_room = ""
 
 export(String, "silence","the_beginning_of_darkness", "caverns_theme", "cave_theme", "ambient_forest_wind") var music = "silence"
 
-var player = null	
+var player = null
 
 func _ready():
 	$Hud.can_quicksave = enable_quicksave

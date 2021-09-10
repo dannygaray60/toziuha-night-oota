@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/sprites/enemy_armor_skeleton.png" type="Texture" id=1]
 [ext_resource path="res://objects/enemies/ArmoredSkeleton.gd" type="Script" id=2]
+[ext_resource path="res://objects/HitboxEnemy.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 19.1118, 29 )
+extents = Vector2( 14.875, 29 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 3, 10 )
@@ -143,11 +144,14 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 18.3994, 29 )
+
 [node name="ArmoredSkeleton" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 collision_layer = 4
-collision_mask = 25
+collision_mask = 8
 script = ExtResource( 2 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
@@ -199,6 +203,7 @@ position = Vector2( -32, 19 )
 shape = SubResource( 4 )
 
 [node name="Area2DSword" type="Area2D" parent="Sprite"]
+visible = false
 collision_layer = 4
 
 [node name="CollisionSword1" type="CollisionShape2D" parent="Sprite/Area2DSword"]
@@ -221,11 +226,16 @@ anims/walk = SubResource( 10 )
 wait_time = 0.3
 one_shot = true
 
+[node name="HitboxEnemy" parent="." instance=ExtResource( 3 )]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxEnemy"]
+position = Vector2( 0, -29 )
+shape = SubResource( 11 )
+
 [connection signal="screen_entered" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_entered"]
 [connection signal="screen_exited" from="VisibilityEnabler2D" to="." method="_on_VisibilityEnabler2D_screen_exited"]
 [connection signal="body_exited" from="Sprite/Area2DDetectNoFloor" to="." method="_on_Area2DDetectNoFloor_body_exited"]
 [connection signal="body_entered" from="Sprite/Area2DDetectPlayer" to="." method="_on_Area2DDetectPlayer_body_entered"]
 [connection signal="body_entered" from="Sprite/Area2DDetectPlayerNear" to="." method="_on_Area2DDetectPlayerNear_body_entered"]
 [connection signal="body_exited" from="Sprite/Area2DDetectPlayerNear" to="." method="_on_Area2DDetectPlayerNear_body_exited"]
-[connection signal="body_entered" from="Sprite/Area2DSword" to="." method="_on_Area2DSword_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

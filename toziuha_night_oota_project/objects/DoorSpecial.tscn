@@ -258,7 +258,7 @@ __meta__ = {
 
 [node name="Body" type="StaticBody2D" parent="door_special_up"]
 collision_layer = 8
-collision_mask = 53
+collision_mask = 49
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="door_special_up/Body"]
 modulate = Color( 1, 1, 1, 0.403922 )
@@ -281,7 +281,7 @@ __meta__ = {
 [node name="Body" type="StaticBody2D" parent="door_special_down"]
 scale = Vector2( 1, -1 )
 collision_layer = 8
-collision_mask = 21
+collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="door_special_down/Body"]
 modulate = Color( 1, 1, 1, 0.403922 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=2]
+[gd_scene load_steps=81 format=2]
 
 [ext_resource path="res://assets/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Audio.gd" type="Script" id=2]
@@ -56,6 +56,7 @@
 [ext_resource path="res://assets/sfx/smash_wood_pieces_inverse.wav" type="AudioStream" id=54]
 [ext_resource path="res://assets/sfx/spike_slash.wav" type="AudioStream" id=55]
 [ext_resource path="res://assets/sfx/charging_elemental_circuit.ogg" type="AudioStream" id=56]
+[ext_resource path="res://assets/sfx/jumpv2.wav" type="AudioStream" id=57]
 [ext_resource path="res://assets/sfx/circuit_spell_shoot.ogg" type="AudioStream" id=58]
 [ext_resource path="res://assets/sfx/clean_explosion2.ogg" type="AudioStream" id=59]
 [ext_resource path="res://assets/sfx/water_fall.ogg" type="AudioStream" id=60]
@@ -233,13 +234,30 @@ bus = "Effects"
 
 [node name="jump" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 1 )
-volume_db = 2.0
+volume_db = -8.0
+bus = "Effects"
+
+[node name="jump2" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 57 )
+volume_db = -8.0
+pitch_scale = 0.87
 bus = "Effects"
 
 [node name="whip_woosh" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 1 )
 pitch_scale = 0.8
 bus = "Effects"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="whip_woosh_light" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource( 1 )
+pitch_scale = 1.44
+bus = "Effects"
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="backdash" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 1 )
