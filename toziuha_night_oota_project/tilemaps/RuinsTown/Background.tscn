@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://shaders/wave_background.shader" type="Shader" id=1]
 [ext_resource path="res://assets/sprites/rustic_town_simple/town_builds.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/sprites/exterior_ruins/background1.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/exterior_ruins/background5.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/exterior_ruins/background2.png" type="Texture" id=8]
+[ext_resource path="res://scripts/FireColorRectShader.gd" type="Script" id=9]
 [ext_resource path="res://shaders/fire2d.shader" type="Shader" id=10]
 [ext_resource path="res://tilemaps/RuinsTown/Background.gd" type="Script" id=11]
 
@@ -164,6 +165,7 @@ margin_top = 58.0
 margin_right = 341.0
 margin_bottom = 441.0
 rect_scale = Vector2( 1, 1.12 )
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -176,6 +178,7 @@ margin_top = 58.0
 margin_right = 1034.54
 margin_bottom = 441.0
 rect_scale = Vector2( -1, 1.12 )
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -235,6 +238,7 @@ margin_left = -6.47089
 margin_top = 221.088
 margin_right = 340.529
 margin_bottom = 440.088
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -247,6 +251,7 @@ margin_top = 220.672
 margin_right = 1034.51
 margin_bottom = 439.672
 rect_scale = Vector2( -1, 1 )
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -82,12 +82,13 @@
 [ext_resource path="res://assets/sfx/precharge_elemental_circuit.ogg" type="AudioStream" id=80]
 
 [node name="Audio" type="Node"]
-pause_mode = 2
+pause_mode = 1
 script = ExtResource( 2 )
 
 [node name="sfx" type="Node" parent="."]
 
 [node name="elemental_circuit_absorbed" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
 stream = ExtResource( 19 )
 volume_db = -2.0
 pitch_scale = 0.7
@@ -95,12 +96,12 @@ bus = "Effects"
 
 [node name="precharge_elemental_circuit" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 80 )
-volume_db = 11.0
+volume_db = 6.0
 bus = "Effects"
 
 [node name="precharge_elemental_circuit_eva" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 80 )
-volume_db = 12.0
+volume_db = 7.0
 pitch_scale = 0.8
 bus = "Effects"
 
@@ -122,12 +123,12 @@ bus = "Effects"
 
 [node name="level_end" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 48 )
-volume_db = 4.0
+volume_db = -2.0
 bus = "Effects"
 
 [node name="boss_defeated_jingle" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 49 )
-volume_db = 8.0
+volume_db = 3.0
 bus = "Effects"
 
 [node name="boss_orb_generating" type="AudioStreamPlayer" parent="sfx"]
@@ -148,7 +149,7 @@ bus = "Effects"
 
 [node name="boss_orb_heartbeat" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 46 )
-volume_db = 15.0
+volume_db = 10.0
 bus = "Effects"
 
 [node name="glass_break" type="AudioStreamPlayer" parent="sfx"]
@@ -158,40 +159,35 @@ bus = "Effects"
 
 [node name="cinematic_hit_reverse" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 42 )
-volume_db = 5.0
 bus = "Effects"
 
 [node name="door_opening" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
 stream = ExtResource( 39 )
-volume_db = 9.0
+volume_db = 4.0
 pitch_scale = 0.53
 bus = "Effects"
 
 [node name="door_closed" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
 stream = ExtResource( 43 )
-volume_db = 10.0
+volume_db = 8.0
 pitch_scale = 0.53
-bus = "Effects"
-
-[node name="text_bip" type="AudioStreamPlayer" parent="sfx"]
-stream = ExtResource( 37 )
-volume_db = 5.0
 bus = "Effects"
 
 [node name="potion_use" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 19 )
-volume_db = 3.0
 bus = "Effects"
 
 [node name="item_pick1" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 18 )
-volume_db = 3.0
+volume_db = 2.0
 pitch_scale = 1.3
 bus = "Effects"
 
 [node name="item_pick2" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 18 )
-volume_db = 4.0
+volume_db = 2.0
 bus = "Effects"
 
 [node name="torch_destroyed" type="AudioStreamPlayer" parent="sfx"]
@@ -202,19 +198,19 @@ bus = "Effects"
 
 [node name="weapon_upgrade" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 36 )
-volume_db = 5.0
+volume_db = 3.0
 pitch_scale = 0.7
 bus = "Effects"
 
 [node name="mp_drop" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 35 )
-volume_db = 6.0
+volume_db = 5.0
 pitch_scale = 1.5
 bus = "Effects"
 
 [node name="mp_drop2" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 35 )
-volume_db = 5.0
+volume_db = 4.0
 bus = "Effects"
 
 [node name="coin" type="AudioStreamPlayer" parent="sfx"]
@@ -276,11 +272,12 @@ bus = "Effects"
 
 [node name="chains" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 6 )
+volume_db = -5.0
 bus = "Effects"
 
 [node name="chains2" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 6 )
-volume_db = -10.0
+volume_db = -5.0
 pitch_scale = 1.33
 bus = "Effects"
 
@@ -313,17 +310,20 @@ pitch_scale = 0.7
 bus = "Effects"
 
 [node name="clean_explosion1" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
 stream = ExtResource( 61 )
 volume_db = 3.095
 pitch_scale = 0.65
 bus = "Effects"
 
 [node name="clean_explosion2" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
 stream = ExtResource( 59 )
-volume_db = 3.095
+volume_db = 2.0
 bus = "Effects"
 
 [node name="clean_explosion3" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
 stream = ExtResource( 78 )
 pitch_scale = 0.65
 bus = "Effects"
@@ -380,12 +380,12 @@ bus = "Effects"
 
 [node name="knife_stab" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 32 )
-volume_db = 5.0
+volume_db = 4.0
 bus = "Effects"
 
 [node name="box_glass_items_drop_smash" type="AudioStreamPlayer" parent="sfx"]
 stream = ExtResource( 53 )
-volume_db = 4.0
+volume_db = 2.0
 pitch_scale = 0.75
 bus = "Effects"
 
@@ -427,124 +427,161 @@ bus = "Effects"
 stream = ExtResource( 63 )
 bus = "Effects"
 
+[node name="text_bip" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
+stream = ExtResource( 37 )
+volume_db = 5.0
+bus = "Effects"
+
 [node name="btn_main_menu" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
 stream = ExtResource( 23 )
-volume_db = 8.0
+volume_db = 4.0
 bus = "Effects"
 
 [node name="btn_move" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
 stream = ExtResource( 26 )
 volume_db = 1.0
 pitch_scale = 0.8
 bus = "Effects"
 
 [node name="btn_accept" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
 stream = ExtResource( 24 )
 volume_db = 7.0
 pitch_scale = 0.8
 bus = "Effects"
 
 [node name="btn_accept_main_menu" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
 stream = ExtResource( 29 )
 bus = "Effects"
 
 [node name="btn_cancel" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
 stream = ExtResource( 25 )
 volume_db = 7.0
 pitch_scale = 0.9
 bus = "Effects"
 
 [node name="btn_incorrect" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
 stream = ExtResource( 27 )
 volume_db = -2.0
 pitch_scale = 1.2
 bus = "Effects"
 
 [node name="checkbox_change_value" type="AudioStreamPlayer" parent="sfx"]
+pause_mode = 2
 stream = ExtResource( 30 )
 bus = "Effects"
 
 [node name="music" type="Node" parent="."]
+pause_mode = 2
 
 [node name="ambient_forest_wind" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 75 )
 volume_db = 9.0
 bus = "Effects"
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="xandria\'s_theme" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 77 )
 volume_db = 3.0
 bus = "Music"
 __meta__ = {
-"_editor_description_": "4"
+"_editor_description_": ""
 }
 
 [node name="nameless_symphony" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 4 )
 volume_db = 5.0
 bus = "Music"
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="the_beginning_of_darkness" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 72 )
-volume_db = 8.0
+volume_db = 3.0
 bus = "Music"
 __meta__ = {
-"_editor_description_": "1"
+"_editor_description_": ""
 }
 
 [node name="cathedral_theme" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 74 )
-volume_db = 4.0
+volume_db = -4.0
 bus = "Music"
 __meta__ = {
-"_editor_description_": "4"
+"_editor_description_": ""
 }
 
 [node name="fatal_answer" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 76 )
-volume_db = 4.0
+volume_db = 2.0
 bus = "Music"
 __meta__ = {
-"_editor_description_": "4"
+"_editor_description_": ""
 }
 
 [node name="caverns_theme" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 73 )
-volume_db = 6.0
+volume_db = 2.0
 bus = "Music"
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="prepare_for_war" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 71 )
-volume_db = 9.0
+volume_db = 4.0
 bus = "Music"
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="deep_resonance" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 79 )
-volume_db = 9.0
+volume_db = 5.0
 bus = "Music"
 __meta__ = {
-"_editor_description_": "4"
+"_editor_description_": ""
 }
 
 [node name="rondo_of_darkness" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 22 )
-volume_db = -2.0
+volume_db = -3.0
 bus = "Music"
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="war_prelude" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 51 )
-volume_db = 3.0
+volume_db = -5.0
 bus = "Music"
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="cave_theme" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 21 )
-volume_db = 6.0
 bus = "Music"
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="boss_theme" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 28 )
-volume_db = 12.0
+volume_db = 5.0
 bus = "Music"
+__meta__ = {
+"_editor_description_": ""
+}
 
 [node name="voice" type="Node" parent="."]
 __meta__ = {

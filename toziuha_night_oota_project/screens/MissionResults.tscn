@@ -142,7 +142,7 @@ custom_styles/panel = ExtResource( 6 )
 [node name="Margin" type="MarginContainer" parent="PanelDetails"]
 margin_top = 4.00473
 margin_right = 376.0
-margin_bottom = 80.0047
+margin_bottom = 80.0048
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10

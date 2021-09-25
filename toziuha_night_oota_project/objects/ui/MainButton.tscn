@@ -55,7 +55,9 @@ color = Color( 1, 1, 1, 1 )
 extra_spacing_top = -2
 font_data = ExtResource( 2 )
 
-[node name="MainButton" type="Button"]
+[node name="MainButton" type="Button" groups=[
+"level_btn",
+]]
 margin_right = 452.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 452, 110 )

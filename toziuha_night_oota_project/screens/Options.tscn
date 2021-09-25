@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=2]
@@ -48,20 +48,24 @@ font_data = ExtResource( 8 )
 [sub_resource type="ButtonGroup" id=7]
 
 [sub_resource type="DynamicFont" id=8]
+extra_spacing_bottom = -2
 font_data = ExtResource( 8 )
 
-[sub_resource type="RectangleShape2D" id=9]
-extents = Vector2( 90, 10 )
-
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=9]
 font_data = ExtResource( 8 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 190, 10 )
 
 [sub_resource type="DynamicFont" id=11]
 font_data = ExtResource( 8 )
 
-[sub_resource type="ButtonGroup" id=12]
+[sub_resource type="DynamicFont" id=12]
+font_data = ExtResource( 8 )
 
-[sub_resource type="StyleBoxTexture" id=13]
+[sub_resource type="ButtonGroup" id=13]
+
+[sub_resource type="StyleBoxTexture" id=14]
 content_margin_left = 9.0
 content_margin_right = 9.0
 texture = ExtResource( 16 )
@@ -108,7 +112,6 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -328.0
-margin_bottom = 23.0
 custom_constants/margin_right = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
@@ -271,16 +274,15 @@ group = SubResource( 4 )
 text = "LANGUAGE"
 
 [node name="PanelVideo" type="PanelContainer" parent="Margin/HBx"]
-visible = false
 margin_left = 258.0
 margin_right = 602.0
-margin_bottom = 224.0
+margin_bottom = 280.0
 size_flags_vertical = 0
 custom_styles/panel = SubResource( 5 )
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelVideo"]
 margin_right = 344.0
-margin_bottom = 224.0
+margin_bottom = 280.0
 custom_constants/margin_right = 15
 custom_constants/margin_top = 5
 custom_constants/margin_left = 15
@@ -290,12 +292,13 @@ custom_constants/margin_bottom = 5
 margin_left = 15.0
 margin_top = 5.0
 margin_right = 329.0
-margin_bottom = 219.0
+margin_bottom = 275.0
 
 [node name="BtnFilters" parent="Margin/HBx/PanelVideo/Margin/VBx" instance=ExtResource( 4 )]
 margin_right = 314.0
 rect_min_size = Vector2( 190, 0 )
 focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../Vfx/Slider")
 focus_neighbour_right = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
@@ -464,7 +467,6 @@ margin_right = 314.0
 margin_bottom = 34.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../../BtnFilters")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
 group = SubResource( 7 )
@@ -509,6 +511,56 @@ focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
 group = SubResource( 7 )
+
+[node name="Vfx" type="HBoxContainer" parent="Margin/HBx/PanelVideo/Margin/VBx"]
+margin_top = 218.0
+margin_right = 314.0
+margin_bottom = 270.0
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelVideo/Margin/VBx/Vfx"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 48.0
+margin_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelVideo/Margin/VBx/Vfx"]
+margin_left = 62.0
+margin_right = 152.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 90, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 6 )
+text = "QUALITY"
+align = 1
+valign = 1
+
+[node name="Slider" parent="Margin/HBx/PanelVideo/Margin/VBx/Vfx" instance=ExtResource( 7 )]
+margin_left = 166.0
+margin_right = 256.0
+rect_min_size = Vector2( 90, 0 )
+focus_neighbour_bottom = NodePath("../../BtnFilters")
+focus_previous = NodePath(".")
+max_value = 2.0
+rounded = true
+
+[node name="VfxLblInfo" type="Label" parent="Margin/HBx/PanelVideo/Margin/VBx"]
+visible = false
+margin_top = 274.0
+margin_right = 314.0
+margin_bottom = 299.0
+rect_min_size = Vector2( 90, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 8 )
+text = "[0: Lights Off & Shaders Off] - [1: Simple Lights & Shaders On] - [2: Dynamic Lights On & Shaders ON]"
+align = 1
+valign = 1
+autowrap = true
 
 [node name="PanelAudio" type="PanelContainer" parent="Margin/HBx"]
 visible = false
@@ -666,7 +718,7 @@ margin_left = 40.0
 margin_top = 1.0
 margin_right = 120.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 text = "CHANGE_VOLUME"
 
 [node name="PanelControls" type="PanelContainer" parent="Margin/HBx"]
@@ -1139,15 +1191,15 @@ margin_right = 371.0
 margin_bottom = 313.0
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Margin/HBx/PanelGamepad/Margin/VBx/HBoxContainer"]
-position = Vector2( 0, -2 )
-shape = SubResource( 9 )
+position = Vector2( 0, -1 )
+shape = SubResource( 10 )
 action = "ui_focus_prev"
 
 [node name="Label" type="Label" parent="Margin/HBx/PanelGamepad/Margin/VBx/HBoxContainer"]
 margin_top = 1.0
 margin_right = 29.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
 text = "Press"
 
 [node name="ButtonKeyGamepadIcon" parent="Margin/HBx/PanelGamepad/Margin/VBx/HBoxContainer" instance=ExtResource( 12 )]
@@ -1161,7 +1213,7 @@ margin_left = 53.0
 margin_top = 1.0
 margin_right = 59.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
 text = "+"
 
 [node name="ButtonKeyGamepadIcon2" parent="Margin/HBx/PanelGamepad/Margin/VBx/HBoxContainer" instance=ExtResource( 12 )]
@@ -1175,13 +1227,13 @@ margin_left = 83.0
 margin_top = 1.0
 margin_right = 371.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
 text = "(or touch here) to fix issues (if buttons doesn't work)."
 
 [node name="PanelControlsTouchScreen" type="PanelContainer" parent="Margin/HBx"]
 visible = false
-margin_left = 645.0
-margin_right = 989.0
+margin_left = 258.0
+margin_right = 602.0
 margin_bottom = 77.0
 size_flags_vertical = 0
 custom_styles/panel = SubResource( 5 )
@@ -1254,10 +1306,11 @@ visible = false
 margin_top = 71.0
 margin_right = 314.0
 margin_bottom = 84.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 12 )
 text = "PHRASERESTARTTOAPPLYCHANGES"
 
 [node name="PanelLang" type="PanelContainer" parent="Margin/HBx"]
+visible = false
 margin_left = 258.0
 margin_right = 602.0
 margin_bottom = 120.0
@@ -1314,7 +1367,7 @@ focus_neighbour_top = NodePath("../../PortuguesBR/CheckBox")
 focus_neighbour_right = NodePath("../../../../../../..")
 focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../PortuguesBR/CheckBox")
-group = SubResource( 12 )
+group = SubResource( 13 )
 
 [node name="Espanol" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
 margin_top = 38.0
@@ -1352,7 +1405,7 @@ focus_neighbour_left = NodePath("../../../../../../..")
 focus_neighbour_right = NodePath("../../../../../../..")
 focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../../../../../..")
-group = SubResource( 12 )
+group = SubResource( 13 )
 
 [node name="PortuguesBR" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
 margin_top = 76.0
@@ -1391,7 +1444,7 @@ focus_neighbour_right = NodePath("../../../../../../..")
 focus_neighbour_bottom = NodePath("../../English/CheckBox")
 focus_next = NodePath("../../English/CheckBox")
 focus_previous = NodePath("../../Espanol/CheckBox")
-group = SubResource( 12 )
+group = SubResource( 13 )
 
 [node name="HBxHelp2" type="HBoxContainer" parent="."]
 anchor_left = 1.0
@@ -1424,7 +1477,7 @@ margin_left = 20.0
 margin_top = 13.0
 margin_right = 56.0
 margin_bottom = 26.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 text = "SELECT"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBxHelp2"]
@@ -1442,7 +1495,7 @@ margin_left = 20.0
 margin_top = 13.0
 margin_right = 56.0
 margin_bottom = 26.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 text = "RETURN"
 
 [node name="ControlRemap" type="Control" parent="."]
@@ -1525,6 +1578,9 @@ custom_fonts/font = ExtResource( 13 )
 text = "MSG_OR_PRESS_ESC_TO_CLOSE"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Notif" type="Control" parent="."]
 anchor_right = 1.0
@@ -1546,7 +1602,7 @@ margin_right = -4.0
 margin_bottom = 21.0
 grow_horizontal = 0
 mouse_filter = 2
-custom_styles/panel = SubResource( 13 )
+custom_styles/panel = SubResource( 14 )
 
 [connection signal="pressed" from="Margin/HBx/VBx/Panel0/Margin/VBx/BtnMenu" to="." method="select_section" binds= [ "main_menu" ]]
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnVideo" to="." method="select_section" binds= [ "BtnVideo" ]]
@@ -1572,6 +1628,9 @@ custom_styles/panel = SubResource( 13 )
 [connection signal="focus_entered" from="Margin/HBx/PanelVideo/Margin/VBx/HideBtnIcons/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "HideBtnIcons", "Video" ]]
 [connection signal="focus_exited" from="Margin/HBx/PanelVideo/Margin/VBx/HideBtnIcons/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "HideBtnIcons", "Video" ]]
 [connection signal="toggled" from="Margin/HBx/PanelVideo/Margin/VBx/HideBtnIcons/CheckBox" to="." method="option_changed_icon_visibility" binds= [ "hide" ]]
+[connection signal="focus_entered" from="Margin/HBx/PanelVideo/Margin/VBx/Vfx/Slider" to="." method="_on_ItemPanel_focus_entered" binds= [ "Vfx", "Video" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelVideo/Margin/VBx/Vfx/Slider" to="." method="_on_ItemPanel_focus_exited" binds= [ "Vfx", "Video" ]]
+[connection signal="value_changed" from="Margin/HBx/PanelVideo/Margin/VBx/Vfx/Slider" to="." method="option_changed" binds= [ "video", "vfx_lvl" ]]
 [connection signal="focus_entered" from="Margin/HBx/PanelAudio/Margin/VBx/Sfx/Slider" to="." method="_on_ItemPanel_focus_entered" binds= [ "Sfx" ]]
 [connection signal="focus_exited" from="Margin/HBx/PanelAudio/Margin/VBx/Sfx/Slider" to="." method="_on_ItemPanel_focus_exited" binds= [ "Sfx" ]]
 [connection signal="value_changed" from="Margin/HBx/PanelAudio/Margin/VBx/Sfx/Slider" to="." method="option_changed" binds= [ "audio", "sfx" ]]

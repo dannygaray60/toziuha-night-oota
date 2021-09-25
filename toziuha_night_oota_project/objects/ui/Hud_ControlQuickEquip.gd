@@ -88,19 +88,24 @@ func change_slot():
 	update_panel_text()
 
 func update_panel_text():
+	
 	#colocar info dependiendo del slot seleccionado y el item
 	if selected_slot == 1 and get_circuit()["name"] != "":
-		$Panel/Margin/VBx/LblTitle.text = "« Elemental Circuit: %s »" % [get_circuit()["name"]]
-		$Panel/Margin/VBx/LblDesc.text = get_circuit()["description"]
-		$Panel/Margin/VBx/LblReq.text = "Time: %s secs - MP: %s" % [str(get_circuit()["time"]).pad_zeros(2),str(get_circuit()["mp_cost"]).pad_zeros(3)]
+		Tr._load("res://dialogs/elemental_circuits_descriptions.ini")
+		$Panel/Margin/VBx/LblTitle.text = "« %s: %s »" % [tr("ELEMENTAL_CIRCUIT"),get_circuit()["name"]]
+		$Panel/Margin/VBx/LblDesc.text = Tr._(get_circuit()["description"])
+		$Panel/Margin/VBx/LblReq.text = "%s: %s secs - MP: %s" % [tr("TIME"),str(get_circuit()["time"]).pad_zeros(2),str(get_circuit()["mp_cost"]).pad_zeros(3)]
+	
 	elif selected_slot == 0 and Vars.player["current_element_item"] != 0:
+		Tr._load("res://dialogs/elements_and_items_descriptions.ini")
 		$Panel/Margin/VBx/LblTitle.text = "« %s »" % [ tr(get_element(Vars.player["elements_items"][Vars.player["current_element_item"]])["name"]) ]
-		$Panel/Margin/VBx/LblDesc.text = tr(get_element(Vars.player["elements_items"][Vars.player["current_element_item"]])["description"])
-		$Panel/Margin/VBx/LblReq.text = "Time: N/A - MP: N/A"		
+		$Panel/Margin/VBx/LblDesc.text = Tr._(get_element(Vars.player["elements_items"][Vars.player["current_element_item"]])["description"])
+		$Panel/Margin/VBx/LblReq.text = "%s: N/A - MP: N/A"%[tr("TIME")]
+	
 	else:
-		$Panel/Margin/VBx/LblTitle.text = "« Empty Slot »"
-		$Panel/Margin/VBx/LblDesc.text = "Description: N/A."
-		$Panel/Margin/VBx/LblReq.text = "Time: N/A - MP: N/A"
+		$Panel/Margin/VBx/LblTitle.text = "« %s »" % [tr("EMPTY_SLOT")]
+		$Panel/Margin/VBx/LblDesc.text = "%s: N/A." %[tr("DESCRIPTION")]
+		$Panel/Margin/VBx/LblReq.text = "%s: N/A - MP: N/A"%[tr("TIME")]
 
 func load_elemental_circuits():
 	#si hay circuitos obtenidos

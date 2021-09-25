@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://objects/ui/HudMinimapControl.gd" type="Script" id=1]
+[ext_resource path="res://objects/ui/HudMinimap.gd" type="Script" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.545098 )
+
+[node name="HudMinimap" type="CanvasLayer"]
+layer = 3
+script = ExtResource( 2 )
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -211.0
+margin_top = 16.0
+margin_right = -24.0
+margin_bottom = 112.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer"]
+margin_right = 187.0
+margin_bottom = 96.0
+
+[node name="Control" type="Control" parent="PanelContainer/MarginContainer"]
+margin_right = 187.0
+margin_bottom = 96.0
+script = ExtResource( 1 )
+cell_colors = {
+0: Color( 1, 1, 1, 1 )
+}

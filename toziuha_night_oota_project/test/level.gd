@@ -7,6 +7,7 @@ func _ready():
 	#Vars.player["atk"] = 0
 	Vars.player["hability_slide"] = true
 	Vars.player["mp_now"] = 999
+	Vars.player["hp_now"] = 1
 	Vars.player["money"] = 99999
 #	Vars.player["hability_hook_whip"] = true
 	

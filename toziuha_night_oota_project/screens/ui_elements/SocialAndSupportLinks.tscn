@@ -28,7 +28,7 @@ __meta__ = {
 
 [node name="Support" type="VBoxContainer" parent="."]
 margin_right = 200.0
-margin_bottom = 122.0
+margin_bottom = 81.0
 mouse_filter = 2
 size_flags_horizontal = 3
 custom_constants/separation = 1
@@ -63,6 +63,7 @@ expand = true
 stretch_mode = 5
 
 [node name="TextureButton2" type="TextureButton" parent="Support"]
+visible = false
 margin_top = 82.0
 margin_right = 200.0
 margin_bottom = 122.0
@@ -78,7 +79,7 @@ expand = true
 stretch_mode = 5
 
 [node name="Social" type="HBoxContainer" parent="."]
-margin_top = 134.0
+margin_top = 93.0
 margin_right = 200.0
 margin_bottom = 176.0
 mouse_filter = 2
@@ -90,7 +91,7 @@ __meta__ = {
 
 [node name="TextureButton" type="TextureButton" parent="Social"]
 margin_right = 36.0
-margin_bottom = 42.0
+margin_bottom = 83.0
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
 mouse_default_cursor_shape = 2
@@ -103,7 +104,7 @@ stretch_mode = 4
 [node name="TextureButton2" type="TextureButton" parent="Social"]
 margin_left = 40.0
 margin_right = 77.0
-margin_bottom = 42.0
+margin_bottom = 83.0
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
 mouse_default_cursor_shape = 2
@@ -116,7 +117,7 @@ stretch_mode = 4
 [node name="TextureButton3" type="TextureButton" parent="Social"]
 margin_left = 81.0
 margin_right = 118.0
-margin_bottom = 42.0
+margin_bottom = 83.0
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
 mouse_default_cursor_shape = 2
@@ -129,7 +130,7 @@ stretch_mode = 4
 [node name="TextureButton4" type="TextureButton" parent="Social"]
 margin_left = 122.0
 margin_right = 159.0
-margin_bottom = 42.0
+margin_bottom = 83.0
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
 mouse_default_cursor_shape = 2
@@ -142,7 +143,7 @@ stretch_mode = 4
 [node name="TextureButton5" type="TextureButton" parent="Social"]
 margin_left = 163.0
 margin_right = 200.0
-margin_bottom = 42.0
+margin_bottom = 83.0
 focus_next = NodePath(".")
 focus_previous = NodePath(".")
 mouse_default_cursor_shape = 2
@@ -155,7 +156,7 @@ stretch_mode = 4
 [connection signal="focus_entered" from="Support/TextureButton4" to="." method="_on_Btn_focus_entered"]
 [connection signal="pressed" from="Support/TextureButton4" to="." method="go_url" binds= [ "https://ko-fi.com/dannygaray60" ]]
 [connection signal="focus_entered" from="Support/TextureButton3" to="." method="_on_Btn_focus_entered"]
-[connection signal="pressed" from="Support/TextureButton3" to="." method="go_url" binds= [ "https://dannygaray60.itch.io/toziuha-night-order-of-the-alchemists?password=xandria" ]]
+[connection signal="pressed" from="Support/TextureButton3" to="." method="go_url" binds= [ "https://dannygaray60.itch.io/toziuha-night-order-of-the-alchemists" ]]
 [connection signal="focus_entered" from="Support/TextureButton2" to="." method="_on_Btn_focus_entered"]
 [connection signal="pressed" from="Support/TextureButton2" to="." method="go_url" binds= [ "https://www.patreon.com/dannygaray60" ]]
 [connection signal="focus_entered" from="Social/TextureButton" to="." method="_on_Btn_focus_entered"]

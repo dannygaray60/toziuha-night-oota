@@ -1,8 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/sprites/torch.png" type="Texture" id=1]
 [ext_resource path="res://objects/items/Torch.gd" type="Script" id=2]
-[ext_resource path="res://assets/img/light_textures/light1.png" type="Texture" id=3]
 [ext_resource path="res://test/lighttexture.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -26,24 +25,12 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8, 9, 10 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Light2D:energy")
+tracks/1/path = NodePath("lighttexture:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 1.92, 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("lighttexture:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -67,24 +54,12 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Light2D:energy")
+tracks/1/path = NodePath("lighttexture:modulate")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
-"update": 0,
-"values": [ 1.92, 1.5, 1.6 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("lighttexture:modulate")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2, 0.6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
@@ -118,19 +93,10 @@ position = Vector2( 0.787985, -13.4908 )
 texture = ExtResource( 1 )
 hframes = 4
 vframes = 3
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/destroyed = SubResource( 3 )
 anims/idle = SubResource( 4 )
-
-[node name="Light2D" type="Light2D" parent="." groups=[
-"light2d",
-]]
-position = Vector2( -1.78814e-06, -15 )
-scale = Vector2( 0.270313, 0.270313 )
-enabled = false
-texture = ExtResource( 3 )
-color = Color( 1, 0.6, 0.0823529, 1 )
-range_layer_min = -100
 
 [connection signal="area_entered" from="." to="." method="_on_Torch_area_entered"]

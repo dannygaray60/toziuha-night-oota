@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cover.jpg-dd1b6bf625c47159e589a5edec8f76ce.stex"
+path="res://.import/light2.png-82d732852d1ed9ac7ca7bd9af36aa7a8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/custom_levels/Test Shaders Town/cover.jpg"
-dest_files=[ "res://.import/cover.jpg-dd1b6bf625c47159e589a5edec8f76ce.stex" ]
+source_file="res://assets/img/light_textures/light2.png"
+dest_files=[ "res://.import/light2.png-82d732852d1ed9ac7ca7bd9af36aa7a8.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

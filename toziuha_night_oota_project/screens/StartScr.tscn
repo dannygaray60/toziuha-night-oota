@@ -7,9 +7,8 @@
 [ext_resource path="res://assets/sfx/cinematic_hit_enter_to_main_menu.ogg" type="AudioStream" id=5]
 [ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/img/render_xandria.png" type="Texture" id=8]
 [ext_resource path="res://assets/video/trailer_short_demo.ogv" type="VideoStream" id=9]
-[ext_resource path="res://assets/img/xandria_i_montramy.png" type="Texture" id=10]
+[ext_resource path="res://assets/img/xandria_iken_art_main/x_whip.png" type="Texture" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -56,7 +55,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("xandria_i_montramy:modulate")
+tracks/1/path = NodePath("Xandria:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -68,7 +67,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("xandria_i_montramy:position")
+tracks/2/path = NodePath("Xandria:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -77,7 +76,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 224, 304 ) ]
+"values": [ Vector2( 160, 432 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Logo:material:shader_param/dissolve_value")
@@ -95,19 +94,19 @@ tracks/3/keys = {
 [sub_resource type="Animation" id=7]
 length = 6.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("xandria_i_montramy:position")
+tracks/0/path = NodePath("Xandria:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2.8 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 2.8, 6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 409, 304 ), Vector2( 224, 304 ) ]
+"values": [ Vector2( 409, 432 ), Vector2( 224, 432 ), Vector2( 160, 432 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("xandria_i_montramy:modulate")
+tracks/1/path = NodePath("Xandria:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -136,13 +135,14 @@ extents = Vector2( 400, 300 )
 
 [sub_resource type="DynamicFont" id=9]
 size = 32
-outline_size = 1
+outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=10]
 size = 32
-extra_spacing_bottom = 3
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=11]
@@ -152,9 +152,14 @@ font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=12]
 size = 32
+extra_spacing_bottom = 3
 font_data = ExtResource( 6 )
 
-[sub_resource type="RectangleShape2D" id=13]
+[sub_resource type="DynamicFont" id=13]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="RectangleShape2D" id=14]
 extents = Vector2( 90, 30 )
 
 [node name="StartScr" type="Control"]
@@ -184,20 +189,14 @@ margin_top = 6.0
 margin_right = -10.0
 margin_bottom = 32.0
 custom_fonts/font = SubResource( 1 )
-text = "version 1.0 - beta"
+text = "version 1.1 - beta"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Xandria" type="Sprite" parent="."]
-visible = false
-position = Vector2( 352, 320 )
-scale = Vector2( 0.4, 0.4 )
-texture = ExtResource( 8 )
-
-[node name="xandria_i_montramy" type="Sprite" parent="."]
-position = Vector2( 224, 304 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 160, 432 )
+scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 10 )
 
 [node name="Logo" type="TextureRect" parent="."]
@@ -220,6 +219,7 @@ __meta__ = {
 
 [node name="Voice" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -6.0
 bus = "VoiceStart"
 
 [node name="CinematicHit" type="AudioStreamPlayer" parent="."]
@@ -269,7 +269,7 @@ margin_top = 16.0
 margin_right = 683.0
 margin_bottom = 42.0
 custom_fonts/font = SubResource( 9 )
-text = "Touch here to start"
+text = "TOUCH_HERE_TO_START"
 align = 1
 
 [node name="LblPC" type="HBoxContainer" parent="VBx"]
@@ -281,16 +281,17 @@ custom_constants/separation = 17
 alignment = 1
 
 [node name="Label" type="Label" parent="VBx/LblPC"]
-margin_left = 244.0
-margin_right = 302.0
+margin_left = 238.0
+margin_right = 298.0
 margin_bottom = 26.0
-custom_fonts/font = SubResource( 9 )
-text = "Press"
+grow_horizontal = 0
+custom_fonts/font = SubResource( 10 )
+text = "PRESS"
 align = 1
 
 [node name="ButtonKeyGamepadIcon" parent="VBx/LblPC" instance=ExtResource( 7 )]
-margin_left = 319.0
-margin_right = 335.0
+margin_left = 315.0
+margin_right = 331.0
 margin_bottom = 26.0
 animated = true
 action = "ui_accept"
@@ -304,14 +305,14 @@ position = Vector2( 8, 15 )
 scale = Vector2( 2, 2 )
 
 [node name="Label" parent="VBx/LblPC/ButtonKeyGamepadIcon" index="2"]
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
 
 [node name="Label2" type="Label" parent="VBx/LblPC"]
-margin_left = 352.0
-margin_right = 438.0
+margin_left = 348.0
+margin_right = 444.0
 margin_bottom = 26.0
-custom_fonts/font = SubResource( 9 )
-text = "to start"
+custom_fonts/font = SubResource( 10 )
+text = "TO_START"
 align = 1
 
 [node name="BGBlack" type="ColorRect" parent="."]
@@ -367,19 +368,19 @@ margin_left = -8.0
 margin_top = -14.0
 margin_right = 8.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 12 )
 
 [node name="Label" type="Label" parent="VideoPlayer/HBxHelp"]
 margin_left = 38.0
 margin_top = 7.0
 margin_right = 134.0
 margin_bottom = 33.0
-custom_fonts/font = SubResource( 12 )
+custom_fonts/font = SubResource( 13 )
 text = "CONTINUE"
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="VideoPlayer"]
 position = Vector2( 513.311, -8 )
-shape = SubResource( 13 )
+shape = SubResource( 14 )
 action = "ui_accept"
 
 [connection signal="timeout" from="TimerStartCinematic" to="." method="_on_TimerStartCinematic_timeout"]

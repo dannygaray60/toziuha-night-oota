@@ -202,4 +202,5 @@ func _on_player_circuit_started():
 			if is_completed_requeriments():
 				start_circuit()
 			else:
-				Audio.play_sfx("btn_incorrect")
+#				Audio.play_sfx("btn_incorrect")
+				pass

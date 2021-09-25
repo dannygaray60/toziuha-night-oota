@@ -2,7 +2,7 @@ extends Control
 
 func _ready():
 	Audio.play_music("rondo_of_darkness")
-	$BtnCrowfunding.grab_focus()
+	$SocialAndSupportLinks/Support/TextureButton4.grab_focus()
 	#$SocialAndSupportLinks/Support/TextureButton4.grab_focus()
 
 
@@ -18,12 +18,3 @@ func _on_SocialAndSupportLinks_btn_pressed():
 
 func _on_BtnGoMenu_pressed():
 	SceneChanger.change_scene("res://screens/MainMenu.tscn")
-
-
-func _on_BtnCrowfunding_pressed():
-	if OS.shell_open("https://ko-fi.com/Blog/Post/Toziuha-Night--Crowdfunding-campaign-E1E85UKXN") == OK:
-		$Notif/NotificationInGame.show_notif("Opening external link...",3)
-
-
-func _on_BtnCrowfunding_focus_entered():
-	Audio.play_sfx("btn_move")

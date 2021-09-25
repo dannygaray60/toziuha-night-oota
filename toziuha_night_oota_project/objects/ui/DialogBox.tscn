@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fonts_tres/Pixelart_Simple_16px.tres" type="DynamicFont" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://fonts_tres/DamageIndicatorPlayer.tres" type="DynamicFont" id=11]
 [ext_resource path="res://assets/sprites/subweapons_xandria.png" type="Texture" id=12]
 [ext_resource path="res://assets/sprites/chain_swing_point.png" type="Texture" id=13]
+[ext_resource path="res://assets/img/tuto_map.png" type="Texture" id=14]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 8 )
@@ -99,8 +100,13 @@ shader_param/alpha_tail = 0.5
 shader_param/alpha_factor = 1.2
 shader_param/noise_margin = 0.68
 
-[sub_resource type="Animation" id=7]
-resource_name = "fadein"
+[sub_resource type="DynamicFont" id=7]
+size = 32
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 7 )
+
+[sub_resource type="Animation" id=8]
 tracks/0/type = "value"
 tracks/0/path = NodePath("ColorRect:modulate")
 tracks/0/interp = 1
@@ -126,8 +132,7 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "screen_shake"
+[sub_resource type="Animation" id=9]
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
@@ -145,7 +150,7 @@ tracks/0/keys = {
 
 [node name="DialogBox" type="CanvasLayer"]
 pause_mode = 2
-layer = 2
+layer = 3
 script = ExtResource( 5 )
 
 [node name="TimerTextVel" type="Timer" parent="."]
@@ -312,7 +317,7 @@ custom_fonts/font = SubResource( 2 )
 text = "SKIP"
 
 [node name="TouchScreenButton" type="TouchScreenButton" parent="Control"]
-position = Vector2( 550.311, -8 )
+position = Vector2( 541.311, -8 )
 shape = SubResource( 3 )
 action = "ui_select"
 
@@ -717,41 +722,9 @@ __meta__ = {
 [node name="ElementalCircuits" type="Node2D" parent="Control/CtrlTutos/Tutos"]
 visible = false
 
-[node name="sprite" type="Sprite" parent="Control/CtrlTutos/Tutos/ElementalCircuits"]
-material = SubResource( 6 )
-position = Vector2( 168, 148 )
-scale = Vector2( 2, 2 )
-texture = ExtResource( 10 )
-hframes = 15
-vframes = 12
-frame = 131
-__meta__ = {
-"_editor_description_": "z index : 0"
-}
-
-[node name="ButtonKeyGamepadIcon" parent="Control/CtrlTutos/Tutos/ElementalCircuits" instance=ExtResource( 6 )]
-margin_left = 126.028
-margin_top = 83.0
-margin_right = 142.028
-margin_bottom = 99.0
-rect_scale = Vector2( 2, 2 )
-action = "ui_up"
-
-[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/ElementalCircuits/ButtonKeyGamepadIcon"]
-margin_left = 24.0
-margin_right = 65.0
-margin_bottom = 13.0
-custom_fonts/font = ExtResource( 11 )
-text = "HOLD"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": "Poison - Healing - Cursed"
-}
-
 [node name="sprite2" type="Sprite" parent="Control/CtrlTutos/Tutos/ElementalCircuits"]
 material = SubResource( 6 )
-position = Vector2( 376.028, 147 )
+position = Vector2( 323, 160 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 10 )
 hframes = 15
@@ -762,25 +735,12 @@ __meta__ = {
 }
 
 [node name="ButtonKeyGamepadIcon3" parent="Control/CtrlTutos/Tutos/ElementalCircuits" instance=ExtResource( 6 )]
-margin_left = 293.028
-margin_top = 85.0
-margin_right = 309.028
-margin_bottom = 101.0
+margin_left = 240.0
+margin_top = 98.0
+margin_right = 256.0
+margin_bottom = 114.0
 rect_scale = Vector2( 2, 2 )
 action = "ui_up"
-
-[node name="Lbl2" type="Label" parent="Control/CtrlTutos/Tutos/ElementalCircuits/ButtonKeyGamepadIcon3"]
-margin_left = 50.0
-margin_top = 0.5
-margin_right = 91.0
-margin_bottom = 13.5
-custom_fonts/font = ExtResource( 11 )
-text = "+"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": "Poison - Healing - Cursed"
-}
 
 [node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/ElementalCircuits/ButtonKeyGamepadIcon3"]
 margin_left = 24.0
@@ -794,21 +754,68 @@ __meta__ = {
 "_editor_description_": "Poison - Healing - Cursed"
 }
 
-[node name="ButtonKeyGamepadIcon2" parent="Control/CtrlTutos/Tutos/ElementalCircuits" instance=ExtResource( 6 )]
-margin_left = 461.028
-margin_top = 84.0
-margin_right = 477.028
-margin_bottom = 100.0
-rect_scale = Vector2( 2, 2 )
-action = "ui_focus_next"
+[node name="ShowMap" type="Node2D" parent="Control/CtrlTutos/Tutos"]
+visible = false
 
-[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/ElementalCircuits/ButtonKeyGamepadIcon2"]
+[node name="tuto_map" type="Sprite" parent="Control/CtrlTutos/Tutos/ShowMap"]
+position = Vector2( 354.028, 142 )
+texture = ExtResource( 14 )
+
+[node name="ButtonKeyGamepadIcon3" parent="Control/CtrlTutos/Tutos/ShowMap" instance=ExtResource( 6 )]
+margin_left = 262.0
+margin_top = 215.0
+margin_right = 278.0
+margin_bottom = 231.0
+rect_scale = Vector2( 2, 2 )
+action = "ui_select"
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/ShowMap/ButtonKeyGamepadIcon3"]
 margin_left = 24.0
 margin_right = 65.0
 margin_bottom = 13.0
 custom_fonts/font = ExtResource( 11 )
-text = "HOLD"
+text = "PAUSE_SLASH_MAP"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="Lbl" type="Label" parent="Control/CtrlTutos/Tutos/ShowMap"]
+margin_left = 408.0
+margin_top = 152.0
+margin_right = 478.0
+margin_bottom = 178.0
+custom_fonts/font = SubResource( 7 )
+text = "VISITED"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="Lbl2" type="Label" parent="Control/CtrlTutos/Tutos/ShowMap"]
+margin_left = 336.0
+margin_top = 152.0
+margin_right = 395.0
+margin_bottom = 178.0
+grow_horizontal = 0
+custom_fonts/font = SubResource( 7 )
+text = "SAVE"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "Poison - Healing - Cursed"
+}
+
+[node name="Lbl3" type="Label" parent="Control/CtrlTutos/Tutos/ShowMap"]
+margin_left = 260.0
+margin_top = 98.0
+margin_right = 342.0
+margin_bottom = 124.0
+grow_horizontal = 0
+custom_fonts/font = SubResource( 7 )
+text = "POSITION"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false,
 "_editor_description_": "Poison - Healing - Cursed"
@@ -1244,7 +1251,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ControlFadeBlack"]
-anims/fadein = SubResource( 7 )
+anims/fadein = SubResource( 8 )
 
 [node name="ColorRect" type="ColorRect" parent="ControlFadeBlack"]
 modulate = Color( 1, 1, 1, 0 )
@@ -1256,7 +1263,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/screen_shake = SubResource( 8 )
+anims/screen_shake = SubResource( 9 )
 
 [connection signal="script_ended" from="." to="." method="_on_DialogBox_script_ended"]
 

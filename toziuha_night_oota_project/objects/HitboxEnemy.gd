@@ -56,7 +56,7 @@ func _on_HitboxEnemy_area_body_entered(area):
 		
 			#daño a la mitad estando envenenado
 			if Vars.player["condition"] == "poison":
-				total_atk = total_atk / 2		
+				total_atk = total_atk / 2
 
 			#esto pasará si hay un jugador en la escena
 			for p in get_tree().get_nodes_in_group("player"):
@@ -64,7 +64,7 @@ func _on_HitboxEnemy_area_body_entered(area):
 				#solo aplica si el jugador es xandria
 				if p.name == "Xandria":
 					if p.anim_current == "attack-circle" and total_atk > 5:
-						total_atk = int(total_atk / 3)
+						total_atk = int(total_atk / 2.5)
 				
 				#camera shake
 				p.get_node("PlayerCamera").add_trauma(0.2,true)
@@ -74,6 +74,12 @@ func _on_HitboxEnemy_area_body_entered(area):
 				#send hurt data to enemy
 				get_parent().hurt(total_atk,p.get_node("Sprite/Weapon/PosImpact").global_position)
 		
+		#daño que produce si el enemigo toca los pies de personaje deslizandose
+		#slide damage
+		if area.name == "AreaFootSlide":
+			total_atk = int( Vars.player["atk"] / 4 )
+			get_parent().hurt(total_atk,area.global_position)	
+	
 		#calculo de daño y aplicarlo si el ataque fue de subarmas o hechizos
 		elif area.name == "SubWeaponArea":
 			#las subarmas multiplican el poder de ataque base

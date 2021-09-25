@@ -39,9 +39,10 @@ func _on_TimerEnd_timeout():
 
 
 func _on_TimerStartCinematic_timeout():
-	Audio.stop_music()
-	$VideoPlayer.visible = true
-	$VideoPlayer.play()
+#	Audio.stop_music()
+#	$VideoPlayer.visible = true
+#	$VideoPlayer.play()
+	pass
 
 func _on_VideoPlayer_finished():
 	pressed = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen1.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen20.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen10.png" type="Texture" id=6]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen8.png" type="Texture" id=7]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen18.png" type="Texture" id=8]
+[ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_dpad_diag_small.png" type="Texture" id=9]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen7.png" type="Texture" id=10]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen6.png" type="Texture" id=11]
 [ext_resource path="res://assets/sprites/hud_controls_onscreen/hud_controls_onscreen15.png" type="Texture" id=14]
@@ -23,33 +24,68 @@
 [sub_resource type="ConvexPolygonShape2D" id=4]
 
 [node name="ControlsOnscreen" type="CanvasLayer"]
-layer = 0
+layer = 3
 script = ExtResource( 17 )
+__meta__ = {
+"_editor_description_": "layer 0"
+}
 
-[node name="DpadButtonShape" type="CollisionPolygon2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="DpadButtonShape" type="CollisionPolygon2D" parent="Node2D"]
 position = Vector2( 640, -53.4481 )
 polygon = PoolVector2Array( 10.6529, -3.92694, 4.89859, -11.4671, -25.4081, -15.4041, -25.2506, 17.3538, 5.29544, 13.2368, 10.7521, 6.09351, 17.2225, 1.03955 )
 __meta__ = {
 "_editor_description_": "este shape se copiará mediante codigo a cada uno de los shapes de los botones del dpad"
 }
 
-[node name="DpadButtonShape2" type="CollisionPolygon2D" parent="."]
+[node name="DpadButtonShape2" type="CollisionPolygon2D" parent="Node2D"]
 position = Vector2( 720, -56 )
-polygon = PoolVector2Array( 10.6529, -3.92694, 4.89859, -11.4671, 3.84375, -11.5, 1.90778, -23.9378, -24, -24, -24, 24, 2.86902, 24.0658, 4.51154, 13.2628, 5.29544, 13.2368, 10.7521, 6.09351, 17.2225, 1.03955 )
+polygon = PoolVector2Array( 10.6529, -3.92694, 4.89859, -11.4671, 3.84375, -11.5, 1.90778, -23.9378, -48, -24, -48, 24, 2.86902, 24.0658, 4.51154, 13.2628, 5.29544, 13.2368, 10.7521, 6.09351, 17.2225, 1.03955 )
 __meta__ = {
 "_editor_description_": "este shape se copiará mediante codigo a cada uno de los shapes de los botones del dpad"
 }
 
-[node name="Dpad" type="Node2D" parent="."]
+[node name="Dpad" type="Node2D" parent="Node2D"]
 position = Vector2( 116.253, 285.218 )
 
-[node name="ui_left" type="Position2D" parent="Dpad"]
+[node name="ul" type="Sprite" parent="Node2D/Dpad" groups=[
+"touch_btn",
+]]
+position = Vector2( -57.253, -56.218 )
+scale = Vector2( -3, 3 )
+texture = ExtResource( 9 )
+
+[node name="ur" type="Sprite" parent="Node2D/Dpad" groups=[
+"touch_btn",
+]]
+position = Vector2( 55.747, -56.218 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 9 )
+
+[node name="dl" type="Sprite" parent="Node2D/Dpad" groups=[
+"touch_btn",
+]]
+position = Vector2( -59.253, 55.782 )
+scale = Vector2( -3, -3 )
+texture = ExtResource( 9 )
+
+[node name="dr" type="Sprite" parent="Node2D/Dpad" groups=[
+"touch_btn",
+]]
+position = Vector2( 53.747, 55.782 )
+scale = Vector2( 3, -3 )
+texture = ExtResource( 9 )
+
+[node name="ui_left" type="Position2D" parent="Node2D/Dpad"]
 position = Vector2( -56, 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Btn" type="TouchScreenButton" parent="Dpad/ui_left"]
+[node name="Btn" type="TouchScreenButton" parent="Node2D/Dpad/ui_left" groups=[
+"touch_btn",
+]]
 position = Vector2( -40, -48 )
 scale = Vector2( 3, 3 )
 normal = ExtResource( 1 )
@@ -61,14 +97,16 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="ui_right" type="Position2D" parent="Dpad"]
+[node name="ui_right" type="Position2D" parent="Node2D/Dpad"]
 position = Vector2( 57, 1 )
 scale = Vector2( -1, 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Btn" type="TouchScreenButton" parent="Dpad/ui_right"]
+[node name="Btn" type="TouchScreenButton" parent="Node2D/Dpad/ui_right" groups=[
+"touch_btn",
+]]
 position = Vector2( -36.0877, -48 )
 scale = Vector2( 3, 3 )
 normal = ExtResource( 1 )
@@ -80,14 +118,16 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="ui_up" type="Position2D" parent="Dpad"]
+[node name="ui_up" type="Position2D" parent="Node2D/Dpad"]
 position = Vector2( -3.24265, -56.4749 )
 rotation = 1.5708
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Btn" type="TouchScreenButton" parent="Dpad/ui_up"]
+[node name="Btn" type="TouchScreenButton" parent="Node2D/Dpad/ui_up" groups=[
+"touch_btn",
+]]
 position = Vector2( -36.0877, -48 )
 scale = Vector2( 3, 3 )
 normal = ExtResource( 1 )
@@ -99,14 +139,16 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="ui_down" type="Position2D" parent="Dpad"]
+[node name="ui_down" type="Position2D" parent="Node2D/Dpad"]
 position = Vector2( 0, 57.1736 )
 rotation = 4.71239
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Btn" type="TouchScreenButton" parent="Dpad/ui_down"]
+[node name="Btn" type="TouchScreenButton" parent="Node2D/Dpad/ui_down" groups=[
+"touch_btn",
+]]
 position = Vector2( -36.0877, -48 )
 scale = Vector2( 3, 3 )
 normal = ExtResource( 1 )
@@ -118,15 +160,17 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="Btn" type="Node2D" parent="."]
+[node name="Btn" type="Node2D" parent="Node2D"]
 
-[node name="ui_select" type="Position2D" parent="Btn"]
+[node name="ui_select" type="Position2D" parent="Node2D/Btn"]
 position = Vector2( 640, 32 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Btn" type="TouchScreenButton" parent="Btn/ui_select"]
+[node name="Btn" type="TouchScreenButton" parent="Node2D/Btn/ui_select" groups=[
+"touch_btn",
+]]
 position = Vector2( -29.8059, -29.4314 )
 scale = Vector2( 2, 2 )
 normal = ExtResource( 6 )
@@ -137,13 +181,15 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="ui_cancel" type="Position2D" parent="Btn"]
+[node name="ui_cancel" type="Position2D" parent="Node2D/Btn"]
 position = Vector2( 472, 320 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Btn" type="TouchScreenButton" parent="Btn/ui_cancel"]
+[node name="Btn" type="TouchScreenButton" parent="Node2D/Btn/ui_cancel" groups=[
+"touch_btn",
+]]
 position = Vector2( -43.6618, -43.544 )
 scale = Vector2( 3, 3 )
 normal = ExtResource( 5 )
@@ -154,13 +200,15 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="ui_accept" type="Position2D" parent="Btn"]
+[node name="ui_accept" type="Position2D" parent="Node2D/Btn"]
 position = Vector2( 624, 304 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Btn" type="TouchScreenButton" parent="Btn/ui_accept"]
+[node name="Btn" type="TouchScreenButton" parent="Node2D/Btn/ui_accept" groups=[
+"touch_btn",
+]]
 position = Vector2( -43.6618, -43.544 )
 scale = Vector2( 3, 3 )
 normal = ExtResource( 11 )
@@ -171,13 +219,15 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="ui_focus_prev" type="Position2D" parent="Btn"]
+[node name="ui_focus_prev" type="Position2D" parent="Node2D/Btn"]
 position = Vector2( 528, 232 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Btn" type="TouchScreenButton" parent="Btn/ui_focus_prev"]
+[node name="Btn" type="TouchScreenButton" parent="Node2D/Btn/ui_focus_prev" groups=[
+"touch_btn",
+]]
 position = Vector2( -43.6618, -43.544 )
 scale = Vector2( 3, 3 )
 normal = ExtResource( 10 )
@@ -188,13 +238,15 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="ui_focus_next" type="Position2D" parent="Btn"]
+[node name="ui_focus_next" type="Position2D" parent="Node2D/Btn"]
 position = Vector2( 397.647, 214.02 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Btn" type="TouchScreenButton" parent="Btn/ui_focus_next"]
+[node name="Btn" type="TouchScreenButton" parent="Node2D/Btn/ui_focus_next" groups=[
+"touch_btn",
+]]
 position = Vector2( -43.6618, -43.544 )
 scale = Vector2( 3, 3 )
 normal = ExtResource( 7 )

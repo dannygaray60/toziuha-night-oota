@@ -168,7 +168,7 @@ var equipable_items = {
 	},
 	"ti" : {
 		"name" : "TITANIUM",
-		"description" : "DESC_TITATIUM",
+		"description" : "DESC_TITANIUM",
 		"element" : true, #true si es elemento quimico, false si es objeto equipable
 		"frame_icon": 3,
 	},
@@ -178,7 +178,7 @@ var equipable_items = {
 var enemy = {
 	"skeleton":{
 		"name": "SKELETON",
-		"atk": 17,
+		"atk": 8,
 		"def":2,
 		"hp_max": 7,
 		"description": "Description...",
@@ -187,7 +187,7 @@ var enemy = {
 	},
 	"infected_skeleton":{
 		"name": "INFECTEDSKELETON",
-		"atk": 17,
+		"atk": 10,
 		"def":2,
 		"hp_max": 7,
 		"description": "Description...",
@@ -196,7 +196,7 @@ var enemy = {
 	},
 	"zombie":{
 		"name": "ZOMBIE",
-		"atk": 10,
+		"atk": 5,
 		"def": 0,
 		"hp_max": 5,
 		"description": "Description...",
@@ -205,7 +205,7 @@ var enemy = {
 	},
 	"slime":{
 		"name": "Slime",
-		"atk": 17,
+		"atk": 9,
 		"def":2,
 		"hp_max": 7,
 		"description": "Description...",
@@ -214,7 +214,7 @@ var enemy = {
 	},
 	"cursed_hound":{
 		"name": "CURSEDHOUND",
-		"atk": 30,
+		"atk": 29,
 		"def":0,
 		"hp_max": 2,
 		"description": "Description...",
@@ -241,7 +241,7 @@ var enemy = {
 	},
 	"blood_skeleton":{
 		"name": "BLOODSKELETON",
-		"atk": 10,
+		"atk": 8,
 		"def":0,
 		"hp_max": 1,
 		"description": "Description...",
@@ -250,7 +250,7 @@ var enemy = {
 	},
 	"floating_skull":{
 		"name": "FLOATINGSKULL",
-		"atk": 15,
+		"atk": 11,
 		"def":1,
 		"hp_max": 12,
 		"description": "Description...",
@@ -259,7 +259,7 @@ var enemy = {
 	},
 	"demon_skull_head":{
 		"name": "DEMONSKULLHEAD",
-		"atk": 10,
+		"atk": 9,
 		"def":3,
 		"hp_max": 7,
 		"description": "Description...",
@@ -268,7 +268,7 @@ var enemy = {
 	},
 	"thrower_skeleton":{
 		"name": "THROWERSKELETON",
-		"atk": 17,
+		"atk": 12,
 		"def":2,
 		"hp_max": 7,
 		"description": "Description...",
@@ -277,7 +277,7 @@ var enemy = {
 	},	
 	"armored_skeleton":{
 		"name": "ARMOREDSKELETON",
-		"atk": 38,
+		"atk": 20,
 		"def":6,
 		"hp_max": 30,
 		"description": "Description...",
@@ -286,7 +286,7 @@ var enemy = {
 	},
 	"infected_slime":{
 		"name": "INFECTEDSLIME",
-		"atk": 15,
+		"atk": 10,
 		"def":3,
 		"hp_max": 7,
 		"description": "Description...",
@@ -298,7 +298,7 @@ var enemy = {
 
 	"fireball":{
 		"name": "",
-		"atk": 20,
+		"atk": 10,
 		"def":0,
 		"hp_max": 1,
 		"description": "",
@@ -306,7 +306,7 @@ var enemy = {
 	},
 	"curved_axe":{
 		"name": "",
-		"atk": 20,
+		"atk": 25,
 		"def":0,
 		"hp_max": 1,
 		"description": "",
@@ -322,7 +322,7 @@ var enemy = {
 	},
 	"small_spikes":{
 		"name": "",
-		"atk": 10,
+		"atk": 13,
 		"def":0,
 		"hp_max": 1,
 		"description": "",
@@ -338,7 +338,7 @@ var enemy = {
 	},
 	"eva_proyectile1":{
 		"name": "",
-		"atk": 34,
+		"atk": 25,
 		"def":0,
 		"hp_max": 1,
 		"description": "",
@@ -358,7 +358,7 @@ var enemy = {
 	
 	"boss_eva1":{
 		"name": "EVA",
-		"atk": 30,
+		"atk": 28,
 		"def":12,
 		"hp_max": 1000,
 		"description": "Description...",

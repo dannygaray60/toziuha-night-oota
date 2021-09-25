@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=2]
@@ -13,8 +13,6 @@
 [ext_resource path="res://objects/ui/Panel.tscn" type="PackedScene" id=11]
 [ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=12]
 [ext_resource path="res://scripts/control_help_icons_screen_set_visible.gd" type="Script" id=13]
-[ext_resource path="res://assets/sprites/checkbox_focus2.png" type="Texture" id=14]
-[ext_resource path="res://assets/img/social_icons/kofi_crowdfunding.png" type="Texture" id=15]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )
@@ -41,6 +39,9 @@ content_margin_left = 51.0
 [sub_resource type="DynamicFont" id=5]
 size = 32
 extra_spacing_bottom = 3
+font_data = ExtResource( 9 )
+
+[sub_resource type="DynamicFont" id=10]
 font_data = ExtResource( 9 )
 
 [sub_resource type="StyleBoxEmpty" id=6]
@@ -257,34 +258,66 @@ sfx_accept_sound = "btn_cancel"
 
 [node name="SocialAndSupportLinks" parent="." instance=ExtResource( 4 )]
 margin_top = -226.0
+margin_right = 224.0
 margin_bottom = -34.0
-custom_constants/separation = 22
+custom_constants/separation = 25
+
+[node name="Support" parent="SocialAndSupportLinks" index="0"]
+margin_right = 206.0
+margin_bottom = 117.0
+custom_constants/separation = 12
+
+[node name="TextureButton4" parent="SocialAndSupportLinks/Support" index="0"]
+margin_right = 206.0
+
+[node name="TextureButton3" parent="SocialAndSupportLinks/Support" index="1"]
+margin_top = 52.0
+margin_right = 206.0
+margin_bottom = 92.0
+
+[node name="Label" type="Label" parent="SocialAndSupportLinks/Support" index="3"]
+margin_top = 104.0
+margin_right = 206.0
+margin_bottom = 117.0
+custom_fonts/font = SubResource( 10 )
+text = "AVAILABLE_PC_ANDROID"
+align = 1
 
 [node name="Social" parent="SocialAndSupportLinks" index="1"]
-margin_top = 144.0
+margin_top = 142.0
+margin_right = 206.0
 margin_bottom = 192.0
 
 [node name="TextureButton" parent="SocialAndSupportLinks/Social" index="0"]
-margin_bottom = 48.0
+margin_right = 38.0
+margin_bottom = 50.0
 
 [node name="TextureButton2" parent="SocialAndSupportLinks/Social" index="1"]
-margin_bottom = 48.0
+margin_left = 42.0
+margin_right = 80.0
+margin_bottom = 50.0
 
 [node name="TextureButton3" parent="SocialAndSupportLinks/Social" index="2"]
-margin_bottom = 48.0
+margin_left = 84.0
+margin_right = 122.0
+margin_bottom = 50.0
 
 [node name="TextureButton4" parent="SocialAndSupportLinks/Social" index="3"]
-margin_bottom = 48.0
+margin_left = 126.0
+margin_right = 164.0
+margin_bottom = 50.0
 
 [node name="TextureButton5" parent="SocialAndSupportLinks/Social" index="4"]
-margin_bottom = 48.0
+margin_left = 168.0
+margin_right = 206.0
+margin_bottom = 50.0
 
 [node name="TextEdit" type="TextEdit" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = 138.5
+margin_left = -77.5
 margin_top = -176.0
 margin_right = 341.5
 margin_bottom = 152.0
@@ -297,24 +330,43 @@ custom_fonts/font = SubResource( 8 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_readonly = Color( 1, 1, 1, 1 )
 text = "Developed by:
-Danny Garay
+------------
+Danny Garay (dannygaray60@gmail.com)
 
 Pixelart:
+-------
 Danny Garay, ansimuz, Szadi art, Blackwolfdave, Rgsdev, vnitti, Eduardo SF.
 
 Music by:
-Symphonie von Neumann, DavidKBD, Arath Project, OrchestrAlone, 4barrelcarb, Ogrebane, remaxim, Johan Brodd.
+---------
+Lydium Music, DavidKBD, Arath Project, OrchestrAlone, 4barrelcarb, Ogrebane, remaxim, Johan Brodd.
 
 Sound effects:
+------------
 freesound.org, zapsplat.com, Big 5 Audio.
 
 Xandria´s Voice by:
+--------------------
 Meghan Christian (produced by Dillon Becker).
 
+Translation:
+----------
+Portuguese: KillerKill 
+
+Thanks to ko-fi supporters:
+-------------------------
+Pirsom, Neil Manthorne,
+ShinginKitsune, krismichael, Logan, Avinash Gill,
+CASTLEVANIA ART COMMUNITY, projectredsuns66,
+Jeudy, Chris Zerotani, Crag Nous, Mister KonaSoni, Core Flux, AnnerArmandoTojin, Xombiemike, AncientOgre.
+
 Especial Thanks to:
+-----------------
 Twas on Discord Server.
+Godot Engine en Español (facebook community)
 
 Made with 
+----------
 [Godot Engine]."
 readonly = true
 context_menu_enabled = false
@@ -349,28 +401,7 @@ grow_horizontal = 0
 mouse_filter = 2
 custom_styles/panel = SubResource( 9 )
 
-[node name="BtnCrowfunding" type="TextureButton" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -105.0
-margin_top = -150.0
-margin_right = 125.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 230, 300 )
-texture_normal = ExtResource( 15 )
-texture_pressed = ExtResource( 15 )
-texture_focused = ExtResource( 14 )
-expand = true
-stretch_mode = 4
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [connection signal="pressed" from="Panel/Margin/BtnMenu" to="." method="_on_BtnGoMenu_pressed"]
 [connection signal="btn_pressed" from="SocialAndSupportLinks" to="." method="_on_SocialAndSupportLinks_btn_pressed"]
-[connection signal="focus_entered" from="BtnCrowfunding" to="." method="_on_BtnCrowfunding_focus_entered"]
-[connection signal="pressed" from="BtnCrowfunding" to="." method="_on_BtnCrowfunding_pressed"]
 
 [editable path="SocialAndSupportLinks"]

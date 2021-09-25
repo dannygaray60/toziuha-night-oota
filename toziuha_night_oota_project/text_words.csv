@@ -3,12 +3,18 @@ ATK;Attack;Ataque;Ataque
 DEF;Defense;Defensa;Defesa
 HP;Health;Salud;Vida
 EQUIP;Equip;Equipo;Equipar
+TIME;Time;Tiempo;Tiempo
+DESCRIPTION;Description;Descripción;Descripción
+EMPTY_SLOT;Empty Slot;Slot Vacío;Slot Vacío
 SKILLDOUBLEJUMP;Skill:\nDouble Jump;Habilidad:\nSalto Doble;Habilidade:\nPulo Duplo
 SKILLSLIDE;Skill:\nSlide;Habilidad:\nDeslizarse;Habilidade:\nDeslizar
 SKILLBACKDASH;Skill:\nBackdash;Habilidad:\nRetropropulsión;Habilidade:\nRetroceder
 SKILLDODGE;Skilll:\nTo dodge;Habilidad:\nEsquivar hacia adelante;Esquivar
 POTIONLIMIT;Potion Limit;Límite de poción;Limite de poção
+HPLIMIT;HP Limit;Límite de HP;Limite de HP
 MPLIMIT;MP Limit;Límite de MP;Limite de MP
+HEALTHFULL;Full Health;Salud LLena;Saúde completa
+NOTPOTIONS;Without Potion;Sin Poción;Sem Poção
 SAVEPOINT;Save Point (from statues);Punto de guardado (desde estatuas);Ponto de salvamento (das estatuas)
 QUICKLOAD;Quick Load;Cargado rápido;Carregamento rápido
 NEWGAME;New Game;Nueva Partida;Novo Jogo
@@ -19,6 +25,9 @@ STORYMODE;Story Mode;Modo Historia;Modo Historia
 CUSTOMLVLS;Custom Levels;Niveles Personalizados;Niveis Personalizados
 DISABLED;Disabled;Desactivado;Desativado
 ICONS;Icons;Iconos;Icones
+QUALITY;Quality;Calidad;Qualidade
+TO_START;to start;para iniciar;para começar
+TOUCH_HERE_TO_START;Touch here to start;Toca aquí para iniciar;Toque aqui para começar
 VIDEO_FILTERS;Video Filters;Filtros de Video;Filtros de Video
 ACCEPT;Accept;Aceptar;Aceitar
 ATTACK;Attack;Atacar;Ataque
@@ -33,10 +42,12 @@ PREV;Previous;Anterior;Anterior
 NEXT;Next;Siguiente;Seguinte
 PLAY;Play;Reproducir;Reproduzir
 STOP;Stop;Detener;Parar
+POSITION;Position;Posición;Posição
 TOBECONTINUED;To be continued...;Continuará...;Continua...
+ELEMENTAL_CIRCUIT;Elemental Circuit;Circuito Elemental;Circuito Elemental
 ABSORB_CIRCUIT;Absorb Elemental Circuit;Absorber Circuito Elemental;Absorver Circuito Elemental
 USE_ELEMENTAL_CIRCUIT;Use Elemental Circuit;Usar Circuito Elemental;Usar Circuito Elemental
-TUTO1;Basic controls. \nThese can be configured from the options menu. (Compatible with gamepads).;Controles básicos. \nEstos pueden ser configurados desde el menú de opciones. (Compatible con gamepads).;Controles Básicos. \nEstes podem ser configurados no Menu de Opções (Compátivel com Gamepads).
+PAUSE_SLASH_MAP;Pause / Map; Pausa / Mapa;Pausa / Mapa
 OPT_BTN_JUMPANDACCEPT;Jump / Accept;Saltar / Aceptar;Pular / Aceitar
 OPT_BTN_ATTACKANDCANCEL;Attack / Cancel;Atacar / Cancelar;Atacar / Cancelar
 OPT_BTN_START;Start / Pause;Inicio / Pausa;Iniciar / Pausar
@@ -44,12 +55,13 @@ SELECTNEWBTNICONFORX;Select a new icon for «%s».;Selecciona un nuevo icono par
 REMAP_MSG_GAMEPAD;Press a new button for «%s» on your gamepad.;Presiona un nuevo botón para «%s» en su gamepad.;Pressione um novo botão para «%s» em seu Gamepad.
 REMAP_MSG_KEYBRD;Press a new key for «%s».;Presiona una nueva tecla para «%s».;Pressione uma nova tecla para «%s».
 MSG_OR_PRESS_ESC_TO_CLOSE;Or press «Escape» to close.;O presione «Escape» para cerrar.;Ou pressione «Escape» para fechar.
+MSG_OR_PRESS_BACK_TO_CLOSE;Or press «Back» to close.;O presione «Atrás» para cerrar.;Ou pressione «Atrás» para fechar.
 MOVE;Move;Mover;Mover
 UP;Up;Arriba;Acima
 DOWN;Down;Abajo;Abaixo
 LEFT;Left;Izquierda;Esquerda
 RIGHT;Right;Derecha;Direita
-ATTACK;Attack;Atacar;Pular
+ATTACK;Attack;Atacar;Ataque
 JUMP;Jump;Saltar;Pular
 ACTIONS_LIST;Action List;Lista de Acciones;Lista de Ações
 NAVIGATE;Navigate;Navegar;Navegar
@@ -77,6 +89,8 @@ BORDERLESS;Borderless Window;Ventana sin borde;Janela sem Borda
 EFFECTS;Effects;Efectos;Efeitos
 MUSIC;Music;Música;Música
 VOICE;Voice;Voz;Voz
+SAVE;Save;Guardado;Salvar
+VISITED;Visited;Visitado;Visitado
 SHOWBUTTONS;Show Buttons;Mostrar Botones;Mostrar Botões
 BUTTONSPOSITION;Buttons Position;Posición de Botones;Posição dos Botões
 SAVEANDEXIT;Quick Save & Exit;Guardar rápido y Salir;Salvar rápido e Sair
@@ -123,27 +137,16 @@ SELECTMAP;Select Map;Seleccione Mapa;Selecionar Mapa
 MONEY;Money;Dinero;Dinheiro
 DEATHS;Deaths;Muertes;Mortes
 LOADING;Loading;Cargando;Carregando
-PHRASE_DOUBLEJUMP;Now you can make a double jump.;Ahora puedes hacer un segundo salto.;Agora você pode dar um pulo duplo.
-PHRASE_SLIDE;Press «Down» + «Jump» to slide.;Presiona «Abajo» + «Salto» para deslizarte.;Pressione «Abaixo» + «Pular» para deslizar.
-PHRASE_BACKDASH;Go Backward with «Backdash» button.;Retrocede rápidamente con el botón de «Retropropulsión».;Volte rapidamente com o botão de «Retroceder»
 LOCKEDDOOR;Locked Door;Puerta Bloqueada.;Porta Bloqueada
-PHRASEATKINCREASED;Your attack power has increased to +%d.;Tu poder de ataque a aumentado a +%d.;Seu poder de ataque aumentou para +%d.
-PHRASEDEFINCREASED;Your defense has increased to +%d.;Tu defensa a aumentado a +%d.;Sua defesa aumentou para +%d.
-PHRASEHPINCMPINCREASED;Your mana points limit has increased to +%d.;Tu máxima capacidad de maná a aumentado a +%d.;Seu limite de pontos de mana aumentou para +%d.
-PHRASEPOTIONINCREASED;Your max of potions that you can have has increased to %d;El máximo de pociones que puedes llevar a aumentado a %d.;Seu máximo de poções que você pode ter aumentou para %d.
-PHRASEWANTLOADORNEWGAME;Do you want continue from a save file or start new game?;¿Desea continuar desde un punto de guardado o comenzar de nuevo?;Quer continuar a partir de um arquivo salvo ou iniciar um novo jogo?
-PHRASEABOUTQUICKSAVE;Note: The quick save just create a temporal file. If you lose all health points (HP) the last save point (from statues) will be loaded, otherwise the whole level will be restarted.;Nota: El guardado rápido crea un archivo temporal que se elimina al ser cargado. Al perder toda la salud (HP) solo puede regresar a los puntos de guardado realizados con las estatuas, en caso contrario el nivel entero será reiniciado.;O salvamento rápido apenas cria um arquivo temporal. Se você perder todos os pontos de saúde (HP), o último ponto de salvamento (das estátuas) será carregado, caso contrário, todo o nível será reiniciado.
-PHRASERESTARTTOAPPLYCHANGES;The game must be restarted to apply changes...;El juego deber ser reiniciado para aplicar los cambios...;O jogo deve ser reiniciado para aplicar as alterações ...
-DEVMSG1INTRO;This game is in development, you can report bugs in the github repository (see Credits screen).;Este juego está en etapa de desarrollo, puedes reportar bugs en el repositorio de github (ver pantalla de Créditos).;Este jogo está em desenvolvimento, você pode relatar bugs no repositório github (veja a tela Créditos).
-DEVMSG2INTRO;Donations and Crowdfunding Campaign at Kofi:;Donaciones y Campaña de Financiamento en Kofi:;Doações e campanha de Financiamento na Kofi:
+AVAILABLE_PC_ANDROID;Available for PC & Android;Disponible para PC y Android;Disponível para PC e Android
 IRIDIUM;Iridium;Iridio;Iridio
 TITANIUM;Titanium;Titanio;Titanio
 OXYGEN;Oxygen;Óxigeno;Óxigenio
 COPPER;Copper;Cobre;Cobre
-DESC_OXYGEN;Adds a layer of ferrous oxide powder to the whip, occasionally it can generate an explosion.;Añade una capa de polvo de óxido ferroso al látigo, ocasionalmente puede generar una explosión.;Adiciona uma camada de pó de óxido ferroso ao chicote, ocasionalmente pode gerar uma explosão.
-DESC_IRIDIUM;Fragile and chemically inert metal. It's the second desnsest element and the most resistant to corrosion.;Metal frágil y químicamente inerte. Es el segundo elemento más denso, además de ser el más resistente a la corrosión.;Metal frágil e quimicamente inerte. É o segundo elemento mais denso e mais resistente à corrosão.
-DESC_TITATIUM;Very light and resistant metal, besides being an inert element. Increases +5 ATK.;Metal muy ligero y resistente, además de ser un elemento inerte. Aumenta +5 ATK.;Metal muito leve e resistente, além de ser um elemento inerte. Aumenta +5 ATK.
-DESC_COPPER;It's a soft, malleable, and ductile metal with very high thermal and electrical conductivity.;Es un metal blando, maleable y dúctil con una conductividad térmica y eléctrica muy elevada.;É um metal macio, maleável e dúctil com condutividade térmica e elétrica muito alta.
-DESC_HYDROAMNIS;Elemental circuit containing two hydrogen atoms, with the missing element unleashes a liquid attack on the floor.;Circuito elemental que contiene dos átomos de hidrógeno, junto al elemento faltante, desata un ataque líquido en el suelo.;Circuito elementar contendo dois átomos de hidrogênio, com o elemento ausente desencadeia um ataque líquido no chão.
-DESC_VITAPECUNIA;Exchange 200 cordovas for half of health points.;A cambio de 200 cordovas, recupera la mitad de la salud.;Troque 200 cordovas por metade dos pontos de saúde.
-DESC_FULGURSPHAERA;Two balls of energy will surround you for a few seconds, an electrically conductive element is necessary.;Dos bolas de energía te rodearán por algunos segundos, es necesario un elemento conductor eléctrico.;Duas bolas de energia o envolverão por alguns segundos, um elemento eletricamente condutor é necessário.
+PHRASE_SLIDE;Press «Down» + «Jump» to slide.;Presiona «Abajo» + «Salto» para deslizarte.;Pressione «Abaixo» + «Pular» para deslizar.
+PHRASEWANTLOADORNEWGAME;Do you want continue from a save file or start new game?;¿Desea continuar desde un punto de guardado o comenzar de nuevo?;Quer continuar a partir de um arquivo salvo ou iniciar um novo jogo?
+PHRASEABOUTQUICKSAVE;Note: The quick save just create a temporal file. If you lose all health points (HP) the last save point (from statues) will be loaded, otherwise the whole level will be restarted.;Nota: El guardado rápido crea un archivo temporal que se elimina al ser cargado. Al perder toda la salud (HP) solo puede regresar a los puntos de guardado realizados con las estatuas, en caso contrario el nivel entero será reiniciado.;O salvamento rápido apenas cria um arquivo temporal. Se você perder todos os pontos de saúde (HP), o último ponto de salvamento (das estátuas) será carregado, caso contrário, todo o nível será reiniciado.
+PHRASERESTARTTOAPPLYCHANGES;The game must be restarted to apply changes...;El juego deber ser reiniciado para aplicar los cambios...;O jogo deve ser reiniciado para aplicar as alterações ...
+DEVMSG1INTRO;This game is in development, you can report bugs in the github repository or our discord (see Credits screen).;Este juego está en etapa de desarrollo, puedes reportar bugs en el repositorio de github y en nuestro discord (ver pantalla de Créditos).;Este jogo está em desenvolvimento, você pode relatar bugs no repositório github e discord (veja a tela Créditos).
+DEVMSG2INTRO;Support this project on itch.io:;Apoya este proyecto en itch.io:;Apoiar este projeto em itch.io:
+

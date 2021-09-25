@@ -29,7 +29,7 @@ func _player_action(action):
 			if music_list[selected_music] in ["cathedral_theme","caverns_theme"]:
 				$Panel2/Margin/HBx/LbArtist.text = "DavidKBD"
 			elif music_list[selected_music] in ["xandria's_theme","the_beginning_of_darkness","fatal_answer","prepare_for_war"]:
-				$Panel2/Margin/HBx/LbArtist.text = "Symphonie von Neumann"
+				$Panel2/Margin/HBx/LbArtist.text = "Lydium Music"
 			elif music_list[selected_music] in ["rondo_of_darkness","cave_theme"]:
 				$Panel2/Margin/HBx/LbArtist.text = "Arath Project"
 			elif music_list[selected_music] == "deep_resonance":

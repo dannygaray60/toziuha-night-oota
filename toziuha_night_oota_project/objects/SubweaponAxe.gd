@@ -10,7 +10,8 @@ var velocity = Vector2.ZERO
 func _physics_process(delta):
 	
 	velocity.y += gravity * delta
-	var collision = move_and_collide(velocity*delta)
+	move_and_collide(velocity*delta)
+#	var collision = move_and_collide(velocity*delta)
 	
 #	if collision != null:
 #		if collision.collider.is_in_group("enemies"):

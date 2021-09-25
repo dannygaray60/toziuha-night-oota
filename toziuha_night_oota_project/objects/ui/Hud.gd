@@ -33,8 +33,13 @@ func _process(_delta):
 	elif Input.is_action_just_pressed("ui_cancel") and $ControlPause/ControlExit.visible:
 		pause_menu_opt_selected("close_exitpanel")
 	
-	
-		
+
+func show_blood_overlay(val=true):
+	if val:
+		$BloodCanvas/BloodOverlay.modulate.a = 0.5
+	else:
+		$BloodCanvas/BloodOverlay.modulate.a = 0.0
+
 func show_titleroom(txt="Name Room"):
 	can_pause = false
 	#get_tree().paused = true
@@ -61,10 +66,12 @@ func update_stats():
 		
 	#calcular cual es el porcentaje de vida, si es menos o igual a 20% entonces hay peligro
 	var hp_percent = ( float(Vars.player["hp_now"])/float(Vars.player["hp_max"]) ) * 100
-	if hp_percent <= 20:
+	if hp_percent <= 35:
 		$Main/Texture/HPBar.texture_progress = hp_danger_bar_sprite
+		show_blood_overlay()
 	else:
 		$Main/Texture/HPBar.texture_progress = hp_good_bar_sprite
+		show_blood_overlay(false)
 		
 	$Main/Texture/HPBar.max_value = Vars.player["hp_max"]
 	$Main/Texture/HPBar.value = Vars.player["hp_now"]
@@ -141,11 +148,13 @@ func pause_game():
 	if Vars.player["hp_now"] < 1 :
 		return
 	if get_tree().paused:
+		ControlsOnscreen.show_buttons_in_game() #mostrar controles
 		$ControlPause/ControlHelp.visible = false
 		$ControlPause/ControlExit.visible = false
 		Audio.play_sfx("btn_cancel")
 		get_tree().paused = false
 	else:
+		ControlsOnscreen.show_buttons(false) #Ocultar controles tactiles
 		Audio.play_sfx("btn_accept")
 		get_tree().paused = true
 	update_pause_stats()
@@ -158,3 +167,11 @@ func pause_game():
 
 func show_flash():
 	$ControlFlash/AnimationPlayer.play("flash")
+
+#al perder foco, pausamos juego
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_FOCUS_OUT:
+		if !get_tree().paused:
+			Input.action_press("ui_select")
+	elif what==MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST and OS.get_name()=="Android":
+		Input.action_press("ui_select")

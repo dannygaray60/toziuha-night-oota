@@ -2,6 +2,9 @@ extends Control
 
 func _ready():
 	
+	#ocultar botones
+	ControlsOnscreen.show_buttons(false)
+	
 	Audio.play_sfx("boss_orb_generated2")
 	$PanelActions/HBx/BtnContinue.focus()
 

@@ -118,8 +118,8 @@ __meta__ = {
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 modulate = Color( 1, 1, 1, 0.682353 )
-position = Vector2( 0, -25 )
-scale = Vector2( 2, 2.8 )
+position = Vector2( -0.10511, -19.475 )
+scale = Vector2( 1.8108, 2.2475 )
 process_parent = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

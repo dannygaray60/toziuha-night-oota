@@ -8,9 +8,9 @@ func _ready():
 	$ButtonKeyGamepadIcon.visible = false
 	#si se cargó desde archivo de estatua se reposicionará jugador frente a estatua
 	if Vars.loaded_from_statue_save:
+		get_tree().get_nodes_in_group("player")[0].global_position = global_position
 		Vars.loaded_from_statue_save = false
-		get_tree().get_nodes_in_group("player")[0].position = position
-
+		
 func _process(_delta):
 	
 	if can_save and Input.is_action_just_pressed("ui_up") and player_entered:

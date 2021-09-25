@@ -80,6 +80,20 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="BtnPressSelected" parent="." instance=ExtResource( 7 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -184.0
+margin_top = -35.0
+margin_right = -9.0
+margin_bottom = -6.0
+grow_horizontal = 0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "SELECT"
+
 [node name="PanelReturn" parent="." instance=ExtResource( 2 )]
 margin_left = 24.0
 margin_top = 17.0
@@ -389,6 +403,7 @@ group = SubResource( 6 )
 text = "NEWGAME"
 align = 1
 
+[connection signal="pressed" from="BtnPressSelected" to="." method="_on_BtnPressSelected_pressed"]
 [connection signal="pressed" from="PanelReturn/MarginContainer/BtnReturn" to="." method="_on_BtnReturn_pressed"]
 [connection signal="pressed" from="ControlContinue/Panel/Margin/VBx/VBx/BtnQuickLoad" to="." method="load_level" binds= [ "quickload" ]]
 [connection signal="pressed" from="ControlContinue/Panel/Margin/VBx/VBx/BtnSavePoint" to="." method="load_level" binds= [ "savestatue" ]]

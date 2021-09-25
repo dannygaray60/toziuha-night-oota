@@ -1,16 +1,16 @@
 extends ParallaxBackground
 
+var Conf = load("res://scripts/config.gd").new()
+
+var lvl = 0
+
 func _enter_tree():
-	
-	if OS.get_name() in ["Android"]:
-		#$ParallaxFire/Fire.material = null
-
-#		$ParallaxBuilds/RuinsBuilds.material = null
-#		$ParallaxBuilds2/RuinsBuilds.material = null
-#		$ParallaxBuilds2/RuinsBuilds2.material = null
-
-#		$ParallaxFire4/Fire3.material = null
-#		$ParallaxFire4/Fire4.material = null
-#		$ParallaxFire3/Fire3.material = null
-#		$ParallaxFire3/Fire4.material = null
-		pass
+	lvl = Conf.get_conf_value("video", "vfx_lvl", 2)
+	#desactivar shaders
+	if lvl == 0:
+		#edificios ondulantes
+		$ParallaxBuilds2/RuinsBuilds.material = null
+		$ParallaxBuilds2/RuinsBuilds2.material = null
+		$ParallaxBuilds/RuinsBuilds.material = null
+		
+		

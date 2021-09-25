@@ -17,6 +17,11 @@ func _ready():
 	
 	load_config_and_set_controls()
 	
+	#cambiar el texto que sale debajo al momento de remapear botones
+	#solo android
+	if OS.get_name() == "Android":
+		$ControlRemap/Label.text = tr("MSG_OR_PRESS_BACK_TO_CLOSE")
+	
 	#con play_sound(dentro del script del boton) evitamos que suene el botón al recibir el primer focus
 	$Margin/HBx/VBx/Panel0/Margin/VBx/BtnMenu.focus()
 
@@ -105,11 +110,15 @@ func select_section(opt):
 			$Margin/HBx/PanelLang.visible = true
 			$Margin/HBx/PanelLang/Margin/VBx/English/CheckBox.focus()
 
-#mostrar iconos en el panel de audio	
+#mostrar iconos en el panel de audio y video
 func _on_ItemPanel_focus_entered(extra_arg_0,panel="Audio"):
 	get_node("Margin/HBx/Panel%s/Margin/VBx/%s/Icon"%[panel,extra_arg_0]).modulate.a = 1
+	if extra_arg_0 == "Vfx" and panel == "Video":
+		$Margin/HBx/PanelVideo/Margin/VBx/VfxLblInfo.visible = true
 func _on_ItemPanel_focus_exited(extra_arg_0,panel="Audio"):
 	get_node("Margin/HBx/Panel%s/Margin/VBx/%s/Icon"%[panel,extra_arg_0]).modulate.a = 0
+	if extra_arg_0 == "Vfx" and panel == "Video":
+		$Margin/HBx/PanelVideo/Margin/VBx/VfxLblInfo.visible = false
 
 #una opción se cambió desde pantalla, esto se aplicará al archivo config
 func option_changed(value,section,key):
@@ -135,6 +144,8 @@ func load_config_and_set_controls():
 			$Margin/HBx/PanelVideo/Margin/VBx/ShowGamepadIcons/CheckBox.set_pressed(true)
 		"hide":
 			$Margin/HBx/PanelVideo/Margin/VBx/HideBtnIcons/CheckBox.set_pressed(true)
+	#vfx
+	$Margin/HBx/PanelVideo/Margin/VBx/Vfx/Slider.set_value(Conf.get_conf_value("video","vfx_lvl",2))
 	#-----audio
 	$Margin/HBx/PanelAudio/Margin/VBx/Sfx/Slider.set_value(Conf.get_conf_value("audio","sfx",1) * 100)
 	$Margin/HBx/PanelAudio/Margin/VBx/Bgm/Slider.set_value(Conf.get_conf_value("audio","bgm",1) * 100)
@@ -205,7 +216,7 @@ func apply_remap(event):
 	#comprobar si el boton elegido ya ha sido remapeado
 	var valid_input = true
 	#los codigos del config de la seccion keyboard o gamepad
-	var saved_codes = []
+#	var saved_codes = []
 	#codigo del boton presionado del keyboard o gamepad
 	var code = 0
 	
@@ -216,16 +227,18 @@ func apply_remap(event):
 	
 	#obtener lista de los codigos del boton (en keyboard o gamepad)
 	for k in Conf.conf.get_section_keys(remap_type):
-		saved_codes.append(Conf.conf.get_value(remap_type,k,0))
-	
-	if code in saved_codes:
-		valid_input = false
-	
-	if !valid_input:
-		Audio.play_sfx("btn_incorrect")
-		$Notif/NotificationInGame.show_notif("The button/key is in use, please choose another one.",3)
-		return
-	
+		
+		#si el input seleccionado coincide con otro establecido
+		#se debe hacer un intercambio
+		if code == Conf.conf.get_value(remap_type,k,0):			
+			#obtener key, codigo
+			var prev_saved_event = [k,code] #el que estaba guardado antes
+			var new_saved_event = [remap_action, Conf.conf.get_value(remap_type,remap_action,0)] #el que el usuario quiere cambiar
+
+			#el previo ahora su codigo será el codigo que antes el nuevo tenia
+			Conf.set_conf_value(remap_type,prev_saved_event[0],new_saved_event[1])
+
+
 	#recorrer los eventos de la accion
 	for ev in InputMap.get_action_list(remap_action):
 		#si el tipo de mapeo es de teclado y el evento es también de teclado
@@ -273,3 +286,10 @@ func _on_BtnConfIcons_pressed():
 
 func _on_BtnFilters_pressed():
 	SceneChanger.change_scene("res://screens/SelectVideoFilter.tscn")
+
+#al presionar boton atras en android
+#se oculta la capa de remapeo si esta visible
+func _notification(what):
+	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST and OS.get_name() == "Android":
+		if $ControlRemap.visible:
+			hide_screen_remap()

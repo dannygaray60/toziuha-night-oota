@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://objects/Pendulum.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/ChainSwingPoint.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/chain_link.png" type="Texture" id=3]
 [ext_resource path="res://objects/PlayerCamera.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/sprites/chain_swing_point.png" type="Texture" id=5]
-[ext_resource path="res://assets/img/light_textures/light1.png" type="Texture" id=6]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 11.8609
@@ -103,17 +102,5 @@ position = Vector2( 0, 0 )
 current = false
 smoothing_speed = 20.0
 target = NodePath("..")
-
-[node name="Light2D" type="Light2D" parent="." groups=[
-"light2d",
-]]
-position = Vector2( 0.0828199, 3.48688 )
-scale = Vector2( 0.125335, 0.11811 )
-texture = ExtResource( 6 )
-texture_scale = 1.76
-color = Color( 0.988235, 0.0392157, 0.0392157, 1 )
-energy = 3.0
-range_layer_min = -100
-range_item_cull_mask = 3
 
 [connection signal="area_entered" from="." to="." method="_on_ChainSwingPoint_area_entered"]

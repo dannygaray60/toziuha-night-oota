@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://objects/ui/Panel_Purple.tres" type="StyleBox" id=1]
 [ext_resource path="res://assets/font/m5x7.ttf" type="DynamicFontData" id=2]
@@ -33,6 +33,10 @@
 [ext_resource path="res://assets/img/gallery/elias_ojeda.jpg" type="Texture" id=31]
 [ext_resource path="res://assets/img/gallery/atomsk_luna2.png" type="Texture" id=32]
 [ext_resource path="res://assets/img/gallery/mariano.png" type="Texture" id=33]
+[ext_resource path="res://assets/img/gallery/by_luis_vasquez.jpg" type="Texture" id=34]
+[ext_resource path="res://assets/img/gallery/xandria_i_montramy.png" type="Texture" id=35]
+[ext_resource path="res://assets/img/xandria_iken_art_main/x_whip.png" type="Texture" id=36]
+[ext_resource path="res://assets/img/xandria_iken_art_main/x_no_whip.png" type="Texture" id=37]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 content_margin_left = 51.0
@@ -126,183 +130,63 @@ scroll_vertical_enabled = false
 semitransparent_unfocused_items = false
 
 [node name="CenterContainer" parent="ScrollContainer" index="0"]
-margin_right = 10754.0
+margin_right = 12232.0
 margin_bottom = 400.0
 
 [node name="MarginContainer" parent="ScrollContainer/CenterContainer" index="0"]
 margin_top = 0.0
-margin_right = 10754.0
+margin_right = 12232.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 0, 400 )
 custom_constants/margin_left = 1700
 
 [node name="HBoxContainer" parent="ScrollContainer/CenterContainer/MarginContainer" index="0"]
 margin_left = 1700.0
-margin_right = 9054.0
+margin_right = 10532.0
 margin_bottom = 400.0
 
-[node name="Sindy Ramos (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="0"]
-margin_right = 200.0
+[node name="Iken (official)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="0"]
+margin_right = 270.0
 margin_bottom = 400.0
-rect_min_size = Vector2( 200, 400 )
+rect_min_size = Vector2( 270, 400 )
 focus_mode = 2
-texture = ExtResource( 17 )
+texture = ExtResource( 36 )
 expand = true
 stretch_mode = 6
 
-[node name="neu_digitalart (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="1"]
-margin_left = 312.0
-margin_right = 662.0
+[node name="Iken (official)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="1"]
+margin_left = 382.0
+margin_right = 652.0
 margin_bottom = 400.0
-rect_min_size = Vector2( 350, 400 )
+rect_min_size = Vector2( 270, 400 )
 focus_mode = 2
-texture = ExtResource( 25 )
+texture = ExtResource( 37 )
 expand = true
 stretch_mode = 6
 
-[node name="Paolo Menoni (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="2"]
-margin_left = 774.0
-margin_right = 1014.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 240, 400 )
-focus_mode = 2
-texture = ExtResource( 28 )
-expand = true
-stretch_mode = 6
-
-[node name="Elías Ojeda (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="3"]
-margin_left = 1126.0
-margin_right = 1406.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 280, 400 )
-focus_mode = 2
-texture = ExtResource( 31 )
-expand = true
-stretch_mode = 6
-
-[node name="Atomsk Luna (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="4"]
-margin_left = 1518.0
-margin_right = 1798.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 280, 400 )
-focus_mode = 2
-texture = ExtResource( 30 )
-expand = true
-stretch_mode = 6
-
-[node name="Atomsk Luna (fanart)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="5"]
-margin_left = 1910.0
-margin_right = 2190.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 280, 400 )
-focus_mode = 2
-texture = ExtResource( 32 )
-expand = true
-stretch_mode = 6
-
-[node name="Mariano Paz (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="6"]
-margin_left = 2302.0
-margin_right = 2582.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 280, 400 )
-focus_mode = 2
-texture = ExtResource( 33 )
-expand = true
-stretch_mode = 6
-
-[node name="Eduardo SF (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="7"]
-margin_left = 2694.0
-margin_right = 2924.0
+[node name="Montramy (commision)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="2"]
+margin_left = 764.0
+margin_right = 994.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 230, 400 )
 focus_mode = 2
-texture = ExtResource( 29 )
+texture = ExtResource( 35 )
 expand = true
 stretch_mode = 6
 
-[node name="Marcos Lopez (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="8"]
-margin_left = 3036.0
-margin_right = 3316.0
+[node name="Danny Garay (official) (prototype)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="3"]
+margin_left = 1106.0
+margin_right = 1366.0
 margin_bottom = 400.0
-rect_min_size = Vector2( 280, 400 )
+rect_min_size = Vector2( 260, 400 )
 focus_mode = 2
-texture = ExtResource( 27 )
+texture = ExtResource( 22 )
 expand = true
 stretch_mode = 6
 
-[node name="Danny Garay (official sketch)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="9"]
-margin_left = 3428.0
-margin_right = 3768.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 340, 0 )
-focus_mode = 2
-texture = ExtResource( 18 )
-expand = true
-stretch_mode = 6
-
-[node name="Danny Garay (official sketch)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="10"]
-margin_left = 3880.0
-margin_right = 4430.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 550, 400 )
-focus_mode = 2
-texture = ExtResource( 19 )
-expand = true
-stretch_mode = 6
-
-[node name="Danny Garay (official sketch)3" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="11"]
-margin_left = 4542.0
-margin_right = 4942.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 400, 0 )
-focus_mode = 2
-texture = ExtResource( 20 )
-expand = true
-stretch_mode = 6
-
-[node name="Danny Garay (official sketch)4" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="12"]
-margin_left = 5054.0
-margin_right = 5514.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 460, 400 )
-focus_mode = 2
-texture = ExtResource( 21 )
-expand = true
-stretch_mode = 6
-
-[node name="Danny Garay (portrait prototype)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="13"]
-margin_left = 5626.0
-margin_right = 5816.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 190, 0 )
-focus_mode = 2
-texture = ExtResource( 23 )
-expand = true
-stretch_mode = 6
-
-[node name="Danny Garay (portrait prototype)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="14"]
-margin_left = 5928.0
-margin_right = 6148.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 220, 0 )
-focus_mode = 2
-texture = ExtResource( 24 )
-expand = true
-stretch_mode = 6
-
-[node name="Danny Garay (official)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="15"]
-margin_left = 6260.0
-margin_right = 6720.0
-margin_bottom = 400.0
-rect_min_size = Vector2( 460, 400 )
-focus_mode = 2
-texture = ExtResource( 11 )
-expand = true
-stretch_mode = 6
-
-[node name="Danny Garay (official)3" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="16"]
-margin_left = 6832.0
-margin_right = 7012.0
+[node name="Danny Garay (official)3" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="4"]
+margin_left = 1478.0
+margin_right = 1658.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 180, 400 )
 focus_mode = 2
@@ -310,17 +194,178 @@ texture = ExtResource( 26 )
 expand = true
 stretch_mode = 6
 
-[node name="Danny Garay (official) (prototype)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="17"]
-margin_left = 7124.0
-margin_right = 7354.0
+[node name="Danny Garay (official)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="5"]
+margin_left = 1770.0
+margin_right = 2230.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 460, 400 )
+focus_mode = 2
+texture = ExtResource( 11 )
+expand = true
+stretch_mode = 6
+
+[node name="Sindy Ramos (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="6"]
+margin_left = 2342.0
+margin_right = 2542.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 200, 400 )
+focus_mode = 2
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 6
+
+[node name="neu_digitalart (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="7"]
+margin_left = 2654.0
+margin_right = 3004.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 350, 400 )
+focus_mode = 2
+texture = ExtResource( 25 )
+expand = true
+stretch_mode = 6
+
+[node name="Paolo Menoni (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="8"]
+margin_left = 3116.0
+margin_right = 3356.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 240, 400 )
+focus_mode = 2
+texture = ExtResource( 28 )
+expand = true
+stretch_mode = 6
+
+[node name="Elías Ojeda (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="9"]
+margin_left = 3468.0
+margin_right = 3748.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 280, 400 )
+focus_mode = 2
+texture = ExtResource( 31 )
+expand = true
+stretch_mode = 6
+
+[node name="Atomsk Luna (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="10"]
+margin_left = 3860.0
+margin_right = 4140.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 280, 400 )
+focus_mode = 2
+texture = ExtResource( 30 )
+expand = true
+stretch_mode = 6
+
+[node name="Atomsk Luna (fanart)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="11"]
+margin_left = 4252.0
+margin_right = 4532.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 280, 400 )
+focus_mode = 2
+texture = ExtResource( 32 )
+expand = true
+stretch_mode = 6
+
+[node name="Mariano Paz (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="12"]
+margin_left = 4644.0
+margin_right = 4924.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 280, 400 )
+focus_mode = 2
+texture = ExtResource( 33 )
+expand = true
+stretch_mode = 6
+
+[node name="Eduardo SF (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="13"]
+margin_left = 5036.0
+margin_right = 5266.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 230, 400 )
 focus_mode = 2
-texture = ExtResource( 22 )
+texture = ExtResource( 29 )
+expand = true
+stretch_mode = 6
+
+[node name="Luis Vasquez (fanart)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="14"]
+margin_left = 5378.0
+margin_right = 5608.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 230, 400 )
+focus_mode = 2
+texture = ExtResource( 34 )
+expand = true
+stretch_mode = 6
+
+[node name="Marcos Lopez (fanart)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="15"]
+margin_left = 5720.0
+margin_right = 6000.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 280, 400 )
+focus_mode = 2
+texture = ExtResource( 27 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (official sketch)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="16"]
+margin_left = 6112.0
+margin_right = 6452.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 340, 0 )
+focus_mode = 2
+texture = ExtResource( 18 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (official sketch)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="17"]
+margin_left = 6564.0
+margin_right = 7114.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 550, 400 )
+focus_mode = 2
+texture = ExtResource( 19 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (official sketch)3" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="18"]
+margin_left = 7226.0
+margin_right = 7626.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 400, 0 )
+focus_mode = 2
+texture = ExtResource( 20 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (official sketch)4" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="19"]
+margin_left = 7738.0
+margin_right = 8198.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 460, 400 )
+focus_mode = 2
+texture = ExtResource( 21 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (portrait prototype)" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="20"]
+margin_left = 8310.0
+margin_right = 8500.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 190, 0 )
+focus_mode = 2
+texture = ExtResource( 23 )
+expand = true
+stretch_mode = 6
+
+[node name="Danny Garay (portrait prototype)2" type="TextureRect" parent="ScrollContainer/CenterContainer/MarginContainer/HBoxContainer" index="21"]
+margin_left = 8612.0
+margin_right = 8832.0
+margin_bottom = 400.0
+rect_min_size = Vector2( 220, 0 )
+focus_mode = 2
+texture = ExtResource( 24 )
 expand = true
 stretch_mode = 6
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 anchor_right = 1.0
 margin_bottom = 40.0
 color = Color( 0, 0, 0, 0.552941 )
@@ -344,18 +389,19 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -32.0
+margin_right = -35.0
 grow_horizontal = 0
 mouse_filter = 2
 custom_constants/separation = 18
-alignment = 1
+alignment = 2
 script = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBxHelp"]
-margin_left = 271.0
-margin_right = 337.0
+margin_left = 508.0
+margin_right = 574.0
 margin_bottom = 32.0
 
 [node name="Btn1" parent="HBxHelp/HBoxContainer" instance=ExtResource( 10 )]
@@ -382,8 +428,8 @@ custom_fonts/font = SubResource( 3 )
 text = "MOVE"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBxHelp"]
-margin_left = 355.0
-margin_right = 411.0
+margin_left = 592.0
+margin_right = 648.0
 margin_bottom = 32.0
 
 [node name="Btn1" parent="HBxHelp/HBoxContainer2" instance=ExtResource( 10 )]
@@ -427,13 +473,14 @@ custom_fonts/font = SubResource( 4 )
 text = "RETURN"
 
 [node name="Title" type="Label" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -327.5
-margin_top = 4.0
-margin_right = 327.5
-margin_bottom = 34.0969
-grow_horizontal = 2
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 176.0
+margin_top = -30.0
+margin_right = -267.0
+margin_bottom = 0.0968933
+grow_horizontal = 0
 size_flags_horizontal = 4
 custom_styles/normal = SubResource( 5 )
 custom_fonts/font = SubResource( 6 )
@@ -450,7 +497,7 @@ action = "ui_cancel"
 visibility_mode = 1
 
 [node name="BtnL" type="TouchScreenButton" parent="."]
-position = Vector2( 208, 328 )
+position = Vector2( 414, 328 )
 scale = Vector2( 2, 2 )
 normal = ExtResource( 13 )
 pressed = ExtResource( 14 )
@@ -462,7 +509,7 @@ __meta__ = {
 }
 
 [node name="BtnDown" type="TouchScreenButton" parent="."]
-position = Vector2( 411, 328 )
+position = Vector2( 470, 328 )
 scale = Vector2( 2, 2 )
 normal = ExtResource( 15 )
 pressed = ExtResource( 16 )

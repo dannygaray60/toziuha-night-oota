@@ -7,7 +7,8 @@ func _on_AreaPick_body_entered(body):
 		
 		#si el jugador ya no puede llevar mas pociones
 		if Vars.player["potion_now"] == Vars.player["potion_max"]:
-			pass
+			#Audio.play_sfx("btn_incorrect")
+			body.show_quick_notif("POTIONLIMIT")
 		else:
 			Functions.show_hud_notif(tr("POTION"))
 			Vars.player["potion_now"] += 1

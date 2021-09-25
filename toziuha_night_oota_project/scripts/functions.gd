@@ -145,3 +145,11 @@ func show_damage_indicator(damage,position_to_show,color="black"): #black, red, 
 			lvl_base.call_deferred("add_child",impact_vfx_instance)
 			
 		lvl_base.call_deferred("add_child",damage_indicator_instance)
+
+
+#For two elements a and b, if the given method returns true, element b will be after element a in the array.
+class MyCustomSorter:
+	static func sort_ascending(a, b):
+		if a[0] < b[0]:
+			return true
+		return false

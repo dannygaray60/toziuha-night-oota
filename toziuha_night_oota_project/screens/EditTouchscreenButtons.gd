@@ -16,11 +16,13 @@ func _ready():
 		b.scale = Vector2($VBoxContainer/Size/SliderSize.value,$VBoxContainer/Size/SliderSize.value)
 		b.get_node("Btn").connect("released",self,"button_pressed",["none"])
 		b.get_node("Btn").connect("pressed",self,"button_pressed",[b.name])
+		print("btn: %s pos: %s scale: %s"%[b.name,b.position,b.scale])
 		
 	$Dpad.scale = Vector2($VBoxContainer/Size/SliderSize.value,$VBoxContainer/Size/SliderSize.value)
 	for dpad in $Dpad.get_children():
 		dpad.get_node("Btn").connect("released",self,"button_pressed",["none"])
 		dpad.get_node("Btn").connect("pressed",self,"button_pressed",["dpad"])
+	print("dpad pos: %s scale: %s"%[$Dpad.position,$Dpad.scale])
 
 	$Btn.modulate.a = $VBoxContainer/Transparency/SliderTransparency.value
 	$Dpad.modulate.a = $VBoxContainer/Transparency/SliderTransparency.value
@@ -48,15 +50,15 @@ func selected_action(opt):
 		"cancel":
 			SceneChanger.change_scene("res://screens/Options.tscn")
 		"default":
-			$VBoxContainer/Transparency/SliderTransparency.value = 0.6
+			$VBoxContainer/Transparency/SliderTransparency.value = 0.4
 			$VBoxContainer/Size/SliderSize.value = 0.9
 			#posiciones por defecto
-			$Btn/ui_select.position =Vector2( 649.494, 32.4725 )
-			$Btn/ui_accept.position = Vector2(636, 281)
-			$Btn/ui_cancel.position = Vector2(558.256, 325.756)
-			$Btn/ui_focus_prev.position = Vector2(557, 232)
-			$Btn/ui_focus_next.position = Vector2(631.968, 184.526)
-			$Dpad.position = Vector2(96, 258)
+			$Btn/ui_select.position =Vector2(649.494019, 32.4725)
+			$Btn/ui_accept.position = Vector2(642.981018, 295.200012)
+			$Btn/ui_cancel.position = Vector2(578.948975, 342.399994)
+			$Btn/ui_focus_prev.position = Vector2(576.281006, 256.53299)
+			$Btn/ui_focus_next.position = Vector2(642.981018, 212.266998)
+			$Dpad.position = Vector2(83.240601, 297.559998)
 
 
 func _on_SliderOpacity_value_changed(value):

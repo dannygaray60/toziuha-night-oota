@@ -11,6 +11,7 @@ export(String, "silence","the_beginning_of_darkness", "caverns_theme", "cave_the
 var player = null
 
 func _ready():
+	
 	$Hud.can_quicksave = enable_quicksave
 	
 	get_player()
@@ -89,7 +90,7 @@ func _on_Tween_tween_all_completed():
 		if Savedata.load_savedata("savegame") == OK:
 			
 			Vars.loaded_from_statue_save = true
-			
+
 			#aumentar contador y guardar valor
 			Vars.player["deaths"] += 1
 			Savedata.save_savedata("savegame")

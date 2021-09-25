@@ -50,18 +50,19 @@ func play_music(name_music,fadein=true):
 			var original_db = int(get_node("music/"+name_music).editor_description)
 			
 			
-			
-			get_node("music/"+name_music).volume_db = -30
-			
-			$Tween.interpolate_property(
-				get_node("music/"+name_music),
-				"volume_db",
-				get_node("music/"+name_music).volume_db,
-				original_db,
-				3
-			)
-			$Tween.start()
-			pass
+			if fadein:
+				get_node("music/"+name_music).volume_db = -30
+				$Tween.interpolate_property(
+					get_node("music/"+name_music),
+					"volume_db",
+					get_node("music/"+name_music).volume_db,
+					original_db,
+					3
+				)
+				$Tween.start()
+			else:
+				get_node("music/"+name_music).volume_db = original_db
+
 		get_node("music/"+name_music).play()
 
 func stop_music():

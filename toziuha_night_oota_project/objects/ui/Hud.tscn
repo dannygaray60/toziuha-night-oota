@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://assets/sprites/hud.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/hp_bar_good.png" type="Texture" id=2]
@@ -37,6 +37,7 @@
 [ext_resource path="res://assets/sprites/boss_bar_base.png" type="Texture" id=35]
 [ext_resource path="res://assets/sprites/boss_bar.png" type="Texture" id=36]
 [ext_resource path="res://assets/sprites/elements_and_equip_items.png" type="Texture" id=37]
+[ext_resource path="res://assets/sprites/blood_layout.png" type="Texture" id=38]
 
 [sub_resource type="StyleBoxTexture" id=1]
 content_margin_left = 9.0
@@ -111,11 +112,29 @@ tracks/0/keys = {
 "hud",
 ]]
 pause_mode = 2
-layer = 2
+layer = 3
 script = ExtResource( 7 )
+
+[node name="BloodCanvas" type="CanvasLayer" parent="."]
+
+[node name="BloodOverlay" type="TextureRect" parent="BloodCanvas"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 0.568627, 0.0392157, 0.0392157, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource( 38 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": "min alpha 0
+max alpha .5"
+}
 
 [node name="Main" type="Control" parent="."]
 pause_mode = 1
+modulate = Color( 1, 1, 1, 0.243137 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -538,8 +557,8 @@ margin_bottom = 374.0
 alignment = 1
 
 [node name="VBx" type="VBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx"]
-margin_left = 50.0
-margin_right = 650.0
+margin_left = 31.0
+margin_right = 631.0
 margin_bottom = 364.0
 rect_min_size = Vector2( 600, 0 )
 alignment = 1
@@ -785,10 +804,44 @@ margin_bottom = 21.0
 size_flags_vertical = 4
 action = "ui_up"
 
-[node name="HBx4" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
+[node name="HBx8" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
 margin_top = 201.0
 margin_right = 600.0
 margin_bottom = 227.0
+
+[node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8"]
+margin_right = 290.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 290, 0 )
+custom_fonts/font = ExtResource( 10 )
+text = "USE_ELEMENTAL_CIRCUIT"
+align = 2
+
+[node name="VSeparator" type="VSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8"]
+margin_left = 294.0
+margin_right = 314.0
+margin_bottom = 26.0
+custom_constants/separation = 20
+
+[node name="Label3" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8"]
+margin_left = 318.0
+margin_right = 366.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 10 )
+text = "HOLD"
+
+[node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8" instance=ExtResource( 13 )]
+margin_left = 370.0
+margin_top = 5.0
+margin_right = 386.0
+margin_bottom = 21.0
+size_flags_vertical = 4
+action = "ui_up"
+
+[node name="HBx4" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
+margin_top = 231.0
+margin_right = 600.0
+margin_bottom = 257.0
 
 [node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx4"]
 margin_right = 290.0
@@ -837,62 +890,6 @@ text = "PRESS"
 margin_left = 470.0
 margin_top = 5.0
 margin_right = 486.0
-margin_bottom = 21.0
-size_flags_vertical = 4
-action = "ui_focus_next"
-
-[node name="HBx8" type="HBoxContainer" parent="ControlPause/ControlHelp/Margin/HBx/VBx"]
-margin_top = 231.0
-margin_right = 600.0
-margin_bottom = 257.0
-
-[node name="Label" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8"]
-margin_right = 290.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 290, 0 )
-custom_fonts/font = ExtResource( 10 )
-text = "USE_ELEMENTAL_CIRCUIT"
-align = 2
-
-[node name="VSeparator" type="VSeparator" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8"]
-margin_left = 294.0
-margin_right = 314.0
-margin_bottom = 26.0
-custom_constants/separation = 20
-
-[node name="Label3" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8"]
-margin_left = 318.0
-margin_right = 366.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 10 )
-text = "HOLD"
-
-[node name="ButtonKeyGamepadIcon" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8" instance=ExtResource( 13 )]
-margin_left = 370.0
-margin_top = 5.0
-margin_right = 386.0
-margin_bottom = 21.0
-size_flags_vertical = 4
-action = "ui_up"
-
-[node name="Label2" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8"]
-margin_left = 390.0
-margin_right = 402.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 10 )
-text = "+"
-
-[node name="Label4" type="Label" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8"]
-margin_left = 406.0
-margin_right = 454.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 10 )
-text = "HOLD"
-
-[node name="ButtonKeyGamepadIcon2" parent="ControlPause/ControlHelp/Margin/HBx/VBx/HBx8" instance=ExtResource( 13 )]
-margin_left = 458.0
-margin_top = 5.0
-margin_right = 474.0
 margin_bottom = 21.0
 size_flags_vertical = 4
 action = "ui_focus_next"

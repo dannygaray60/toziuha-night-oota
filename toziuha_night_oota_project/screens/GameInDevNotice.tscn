@@ -36,6 +36,7 @@ __meta__ = {
 }
 
 [node name="BG" type="TextureRect" parent="."]
+modulate = Color( 0.615686, 0.615686, 0.615686, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 1 )
@@ -46,22 +47,19 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -158.5
-margin_top = 53.0
-margin_right = 134.5
-margin_bottom = 82.0
+margin_left = -127.5
+margin_top = 46.0
+margin_right = 83.5
+margin_bottom = 75.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="BtnKofi" parent="HBoxContainer" instance=ExtResource( 5 )]
-margin_right = 293.0
-text = "ko-fi.com/dannygaray60"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 anchor_left = 0.5
@@ -69,9 +67,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -237.5
-margin_top = -75.0
+margin_top = -140.0
 margin_right = 237.5
-margin_bottom = -46.0
+margin_bottom = -111.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -91,6 +89,26 @@ margin_left = 308.0
 margin_right = 475.0
 text = "Portuguese"
 
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -127.5
+margin_top = 112.0
+margin_right = 83.5
+margin_bottom = 141.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtnAccept" parent="HBoxContainer3" instance=ExtResource( 5 )]
+margin_left = 44.0
+margin_right = 167.0
+size_flags_horizontal = 5
+text = "ACCEPT"
+
 [node name="HBxHelp" type="HBoxContainer" parent="."]
 anchor_top = 1.0
 anchor_right = 1.0
@@ -105,8 +123,8 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBxHelp"]
-margin_left = 271.0
-margin_right = 337.0
+margin_left = 251.0
+margin_right = 357.0
 margin_bottom = 32.0
 
 [node name="Btn1" parent="HBxHelp/HBoxContainer" instance=ExtResource( 3 )]
@@ -123,18 +141,34 @@ margin_bottom = 24.0
 size_flags_vertical = 4
 action = "ui_right"
 
-[node name="Label" type="Label" parent="HBxHelp/HBoxContainer"]
+[node name="Btn3" parent="HBxHelp/HBoxContainer" instance=ExtResource( 3 )]
 margin_left = 40.0
+margin_top = 8.0
+margin_right = 56.0
+margin_bottom = 24.0
+size_flags_vertical = 4
+action = "ui_up"
+
+[node name="Btn4" parent="HBxHelp/HBoxContainer" instance=ExtResource( 3 )]
+margin_left = 60.0
+margin_top = 8.0
+margin_right = 76.0
+margin_bottom = 24.0
+size_flags_vertical = 4
+action = "ui_down"
+
+[node name="Label" type="Label" parent="HBxHelp/HBoxContainer"]
+margin_left = 80.0
 margin_top = 9.0
-margin_right = 66.0
+margin_right = 106.0
 margin_bottom = 22.0
 rect_pivot_offset = Vector2( 142, -89 )
 custom_fonts/font = SubResource( 1 )
 text = "MOVE"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBxHelp"]
-margin_left = 355.0
-margin_right = 411.0
+margin_left = 375.0
+margin_right = 431.0
 margin_bottom = 32.0
 
 [node name="Btn1" parent="HBxHelp/HBoxContainer2" instance=ExtResource( 3 )]
@@ -153,8 +187,7 @@ text = "SELECT"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
-margin_top = 42.0
-margin_bottom = 296.0
+margin_bottom = 224.0
 mouse_filter = 2
 custom_constants/margin_right = 20
 custom_constants/margin_top = 10
@@ -168,7 +201,7 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 10.0
 margin_right = 663.0
-margin_bottom = 244.0
+margin_bottom = 214.0
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 margin_right = 643.0
@@ -183,7 +216,8 @@ autowrap = true
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
 margin_top = 59.0
 margin_right = 643.0
-margin_bottom = 85.0
+margin_bottom = 111.0
+size_flags_vertical = 3
 custom_fonts/font = SubResource( 2 )
 text = "DEVMSG1INTRO"
 align = 1
@@ -191,21 +225,44 @@ valign = 1
 autowrap = true
 
 [node name="Label3" type="Label" parent="MarginContainer/VBoxContainer"]
-margin_top = 89.0
+margin_top = 115.0
 margin_right = 643.0
-margin_bottom = 115.0
+margin_bottom = 141.0
 custom_fonts/font = SubResource( 2 )
 text = "-------"
 align = 1
 valign = 1
 autowrap = true
 
-[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer"]
-margin_top = 119.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 145.0
 margin_right = 643.0
-margin_bottom = 145.0
+margin_bottom = 174.0
+size_flags_vertical = 0
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 382.0
+margin_bottom = 26.0
+size_flags_horizontal = 3
+size_flags_vertical = 0
 custom_fonts/font = SubResource( 2 )
 text = "DEVMSG2INTRO"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="BtnKofi" parent="MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource( 5 )]
+margin_left = 386.0
+margin_right = 643.0
+size_flags_horizontal = 5
+text = "dannygaray60.itch.io"
+
+[node name="Label4" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_top = 178.0
+margin_right = 643.0
+margin_bottom = 204.0
+custom_fonts/font = SubResource( 2 )
+text = "-------"
 align = 1
 valign = 1
 autowrap = true
@@ -232,10 +289,8 @@ grow_horizontal = 0
 mouse_filter = 2
 custom_styles/panel = SubResource( 3 )
 
-[connection signal="pressed" from="HBoxContainer/BtnKofi" to="." method="_on_BtnKofi_pressed"]
 [connection signal="focus_entered" from="HBoxContainer2/BtnEng" to="." method="_on_BtnEng_focus_entered"]
-[connection signal="pressed" from="HBoxContainer2/BtnEng" to="." method="_on_BtnContinue_pressed"]
 [connection signal="focus_entered" from="HBoxContainer2/BtnEsp" to="." method="_on_BtnEsp_focus_entered"]
-[connection signal="pressed" from="HBoxContainer2/BtnEsp" to="." method="_on_BtnContinue_pressed"]
 [connection signal="focus_entered" from="HBoxContainer2/BtnPT" to="." method="_on_BtnPT_focus_entered"]
-[connection signal="pressed" from="HBoxContainer2/BtnPT" to="." method="_on_BtnContinue_pressed"]
+[connection signal="pressed" from="HBoxContainer3/BtnAccept" to="." method="_on_BtnAccept_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/BtnKofi" to="." method="_on_BtnKofi_pressed"]

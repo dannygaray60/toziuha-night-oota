@@ -22,6 +22,12 @@ export(String, "story_mode","custom_levels") var list_mode = "custom_levels"
 
 func _ready():
 	
+	#boton especial para emitir pressed en el botón seleccionado
+	#solo visible en android donde puede ser necesario
+	if OS.get_name() != "Android":
+		$BtnPressSelected.visible = false
+	$BtnPressSelected.get_node("Icon").visible = true
+	
 	Audio.play_music("boss_theme")
 		
 	if !scan_levels():
@@ -44,44 +50,71 @@ func _ready():
 
 func scan_levels():
 	scan_path = "res://content/"+list_mode
+	
+	#lista de carpetas (sus nombres)
 	var level_dirs = get_dirs(scan_path)
-	#filtrar las carpetas que sean de niveles
+	
+	#guardará: array de items, cada item = [numero_orden,nombrecarpeta]
+	#la lista ya estará filtrada de las carpetas que si sean niveles
+	#(que cumpla requisitos de archivos necesarios)
+	var level_dirs_db = []
+	
+	
+	for d in level_dirs:
+		var files = get_files(scan_path+"/"+d)
+		#si en la carpeta falta un data.ini
+		#no será considerado un nivel y será eliminado de la lista
+		if files.has("data.ini"):
+			level_ini = ConfigFile.new() #reiniciar para no tener datos restantes
+			#el string de los .ini debe ir entre comillas de lo contrario manda error
+			level_ini.load(scan_path+"/"+d+"/"+"data.ini")
+			level_dirs_db.append([
+				level_ini.get_value("info","order",999999),
+				d
+			])
+	
+	#reordenar elementos usando un int como numero de orden
+	#con ordenes repetidos se usara a-z como orden
+	level_dirs_db.sort_custom(Functions.MyCustomSorter, "sort_ascending")
+
 	#solo para los niveles externos
 	if list_mode == "custom_levels":
-		for d in level_dirs:
+		#var d = [int (order), nombre carpeta]
+		for d in level_dirs_db:
 			#archivos dentro de la carpeta de la carpeta actual escaneada
-			var files = get_files(scan_path+"/"+d)
-			#si en la carpeta falta un data.ini
-			#no será considerado un nivel y será eliminado de la lista
-			if !files.has("data.ini"):
-#				level_dirs.erase(d)
-				pass
-			#el nivel es valido entonces agregamos datos
-			else:
-				level_ini = ConfigFile.new() #reiniciar para no tener datos restantes
-				#el string de los .ini debe ir entre comillas de lo contrario manda error
-				level_ini.load(scan_path+"/"+d+"/"+"data.ini")
-				#instanciar botón
-				lvl_btn_instance = lvl_btn.instance()
-				#añadir datos al botón
-				lvl_btn_instance.dir_name = d
-				lvl_btn_instance.title = level_ini.get_value("info","title","No title...")
-				lvl_btn_instance.description = level_ini.get_value("info","description","Description not available...")
-				lvl_btn_instance.made_by = level_ini.get_value("info","made_by","Unknown")
-				#añadir el nombre del archivo de escena que será la primera en cargar
-				lvl_btn_instance.main_scene = level_ini.get_value("info","main_scene","")
-				#si no hay un nombre de escena principal, el botón será desactivado
-				if lvl_btn_instance.main_scene == "":
-					lvl_btn_instance.disabled = true
-				#si existe imagen del cover (cover.jpg)
-				if ResourceLoader.exists(scan_path+"/%s/cover.jpg"%[d]):
-					lvl_btn_instance.cover = load(scan_path+"/%s/cover.jpg"%[d])
-				#conectar señal y si la conexion fue exitosa se añade el botón
-				if lvl_btn_instance.connect("pressed",self,"_on_selected_level",[lvl_btn_instance.name]) == OK:
-					#añadir el botón a la pantalla
-					$PanelBtns/Scroll/Margin/VBx.add_child(lvl_btn_instance)
-				#limpiar la instancia
-				lvl_btn_instance = null
+			var files = get_files(scan_path+"/"+d[1])
+
+			level_ini = ConfigFile.new() #reiniciar para no tener datos restantes
+			#el string de los .ini debe ir entre comillas de lo contrario manda error
+			level_ini.load(scan_path+"/"+d[1]+"/"+"data.ini")
+
+			level_ini = ConfigFile.new() #reiniciar para no tener datos restantes
+			#el string de los .ini debe ir entre comillas de lo contrario manda error
+			level_ini.load(scan_path+"/"+d[1]+"/"+"data.ini")
+			#instanciar botón
+			lvl_btn_instance = lvl_btn.instance()
+			#añadir datos al botón
+			lvl_btn_instance.dir_name = d[1]
+			lvl_btn_instance.title = level_ini.get_value("info","title","No title...")
+			lvl_btn_instance.description = level_ini.get_value("info","description","Description not available...")
+			lvl_btn_instance.made_by = level_ini.get_value("info","made_by","Unknown")
+			#añadir el nombre del archivo de escena que será la primera en cargar
+			lvl_btn_instance.main_scene = level_ini.get_value("info","main_scene","")
+			#si no hay un nombre de escena principal, el botón será desactivado
+			if lvl_btn_instance.main_scene == "":
+				lvl_btn_instance.disabled = true
+			#si existe imagen del cover (cover.jpg)
+			if ResourceLoader.exists(scan_path+"/%s/cover.jpg"%[d[1]]):
+				lvl_btn_instance.cover = load(scan_path+"/%s/cover.jpg"%[d[1]])
+			#conectar señal y si la conexion fue exitosa se añade el botón
+			if lvl_btn_instance.connect("pressed",self,"_on_selected_level",[lvl_btn_instance.name]) == OK:
+				#señal focused
+				lvl_btn_instance.connect("focus_entered",self,"_on_BtnLevelFocusChange")
+				lvl_btn_instance.connect("focus_exited",self,"_on_BtnLevelFocusChange")
+				#añadir el botón a la pantalla
+				$PanelBtns/Scroll/Margin/VBx.add_child(lvl_btn_instance)
+			#limpiar la instancia
+			lvl_btn_instance = null
 	
 	#si no hay niveles válidos, terminamos escaneado y retornamos false
 	if level_dirs.empty():
@@ -199,3 +232,14 @@ func get_files(path):
 		f = dir.get_next()
 	#retornara un string con el nombre y extension del archivo
 	return files
+
+func _on_BtnLevelFocusChange():
+	if OS.get_name() != "Android":
+		return
+	if get_focus_owner() != null and get_focus_owner().is_in_group("level_btn"):
+		$BtnPressSelected.visible = true
+	else:
+		$BtnPressSelected.visible = false
+
+func _on_BtnPressSelected_pressed():
+	get_focus_owner().emit_signal("pressed")

@@ -45,7 +45,7 @@ export var jump_velocity = 280
 #valor de la gravedad
 export var gravity = 700
 #gravedad cuando se está atacando, esta debe ser un poco menor
-var gravity_attack = 500
+var gravity_attack = 100#500
 #velocidad para desplazamiento
 export var speed = 110
 
@@ -270,7 +270,8 @@ func _get_input():
 	_move()
 	
 	#iniciar estado de carga para obtener circuito elemental
-	if Input.is_action_just_pressed("ui_up") and is_on_floor() and state != "crouch" and state != "attack" and state != "attack-crouch":
+	#izq y der no debe estar presionado
+	if Input.is_action_just_pressed("ui_up") and (!Input.is_action_pressed("ui_left") and !Input.is_action_pressed("ui_right")) and is_on_floor() and state != "crouch" and state != "attack" and state != "attack-crouch":
 		$TimerStartCharging.start()
 	elif Input.is_action_just_released("ui_up"):
 		$TimerStartCharging.stop()
@@ -298,14 +299,13 @@ func _get_input():
 		$TimerBtnAttackPress.start()
 		_attack()
 		
-	#accion para lanzar subarma
-	if !$Sprite/RayCastUp.is_colliding() and Input.is_action_just_pressed("ui_focus_next") and state != "attack-crouch" and state != "crouch" and state != "charging":
-		_throw_subweapon()
-		
 	#accion para usar un item curativo
 	if Input.is_action_pressed("ui_down") and Input.is_action_just_pressed("ui_focus_next"):
 		_use_health_item()
 		
+	#accion para lanzar subarma
+	if !Input.is_action_pressed("ui_down") and !$Sprite/RayCastUp.is_colliding() and Input.is_action_just_pressed("ui_focus_next") and state != "attack-crouch" and state != "crouch" and state != "charging":
+		_throw_subweapon()
 		
 	#salto
 	if Input.is_action_just_pressed("ui_accept"):
@@ -367,11 +367,19 @@ func _use_health_item():
 		Timers.get_node("TimerHeal").start()
 		Timers.get_node("TimerHealingEnd").start()
 		emit_signal("stats_changed")
+	#con la vida llena y con al menos una pocion
+	elif Vars.player["hp_now"] == Vars.player["hp_max"] and Vars.player["potion_now"] > 0:
+		Audio.play_sfx("btn_incorrect")
+		show_quick_notif("HEALTHFULL")
+	#sin pociones
+	elif Vars.player["potion_now"] == 0:
+		Audio.play_sfx("btn_incorrect")
+		show_quick_notif("NOTPOTIONS")
 
 func _backdash():
-	if state != "slide" and state != "attack-crouch" and is_on_floor() and state != "backdash" and state != "crouch" and anim_current != "backdash" and anim_current != "pos-backdash":
+	if Vars.player["sp_now"] > 20 and state != "slide" and state != "attack-crouch" and is_on_floor() and state != "backdash" and state != "crouch" and anim_current != "backdash" and anim_current != "pos-backdash":
 
-		decrease_stamina(15)
+		decrease_stamina(20)
 		
 		$TimerBackdash.start()
 		weapon_cancel()
@@ -493,6 +501,9 @@ func weapon_sound_woosh(normal=true):
 func weapon_enable_collision(lvl=0):
 	#desactivar todas las colisiones (y ocultarlas para propositos de testeo
 	
+	$Sprite/Weapon/AreaFootSlide.monitoring = false
+	$Sprite/Weapon/AreaFootSlide.visible = false
+	
 	#si no se especifica se oculta el sprite del arma y se deja desactivada todas las colisiones con el bloque de codigo anterior
 	if lvl == 0:
 		$Sprite/Weapon/ChainWhip.visible = false
@@ -579,6 +590,9 @@ func _check_states():
 		#arreglar estado crouch cuando no está presionado abajo y no hay
 		#colision con cabeza estando agachado
 		if state == "crouch" and !Input.is_action_pressed("ui_down") and !$Sprite/RayCastUp.is_colliding():
+			change_state("idle")
+		#cancelar carga si por alguna razón sigue la animacion activa a pesar de no tener presionado "arriba"
+		if state == "charging" and is_on_floor() and !Input.is_action_pressed("ui_up"):
 			change_state("idle")
 	else:
 		
@@ -980,6 +994,7 @@ func _on_TimerStartCharging_timeout():
 		Audio.play_sfx("precharge_elemental_circuit",true)
 		change_state("charging")
 		emit_signal("absorb_circuit_started")
+		
 
 #jugador toca algo que le hace daño (enemigos, trampas)
 func _on_HitBox_activated(body_area):

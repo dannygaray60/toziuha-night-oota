@@ -7,15 +7,11 @@ export var destiny_door = ""
 
 func _ready():
 	$TimerDontDetect.start()
-	
-	#obtener al jugador y colocarlo delante de la puerta en caso de...
-	var player = get_tree().get_nodes_in_group("player")
 
 	#si hay jugador y hay una puerta a spawnear y la puerta coincide
-	if player.size() == 1 and Vars.player_door_spawn != "" and Vars.player_door_spawn == name:
-		player[0].global_position = $PositionSpawn.global_position
-	else:
-		player = null
+	#esto no debería pasar si se cargó el escenario desde estatua
+	if !Vars.loaded_from_statue_save and Functions.get_main_level_scene().get_player() != null and Vars.player_door_spawn != "" and Vars.player_door_spawn == name:
+		Functions.get_main_level_scene().get_player().global_position = $PositionSpawn.global_position
 	
 	
 
@@ -36,6 +32,8 @@ func _on_RoomChanger_body_entered(body):
 			go_to = destiny_filename
 		
 		if f.file_exists(go_to):
+			#deshabilitar hitbox de jugador
+			body.enable_collision_with_danger(false)
 			#deshabilitar input (no funciona)
 			#body.set_process_input(false)
 			Vars.player_door_spawn = destiny_door

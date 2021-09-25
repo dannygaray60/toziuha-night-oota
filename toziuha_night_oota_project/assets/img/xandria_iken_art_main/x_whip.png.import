@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cover.jpg-378d5c6c6ac5b80c26d81dc5c6c312c5.stex"
+path="res://.import/x_whip.png-a318308a176816c38c05956c4967d8b8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://content/custom_levels/Beta Level/cover.jpg"
-dest_files=[ "res://.import/cover.jpg-378d5c6c6ac5b80c26d81dc5c6c312c5.stex" ]
+source_file="res://assets/img/xandria_iken_art_main/x_whip.png"
+dest_files=[ "res://.import/x_whip.png-a318308a176816c38c05956c4967d8b8.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
