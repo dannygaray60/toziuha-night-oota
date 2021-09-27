@@ -3,9 +3,9 @@ ATK;Attack;Ataque;Ataque
 DEF;Defense;Defensa;Defesa
 HP;Health;Salud;Vida
 EQUIP;Equip;Equipo;Equipar
-TIME;Time;Tiempo;Tiempo
+TIME;Time;Tiempo;Tempo
 DESCRIPTION;Description;Descripción;Descripción
-EMPTY_SLOT;Empty Slot;Slot Vacío;Slot Vacío
+EMPTY_SLOT;Empty Slot;Slot Vacío;Slot Vazio
 SKILLDOUBLEJUMP;Skill:\nDouble Jump;Habilidad:\nSalto Doble;Habilidade:\nPulo Duplo
 SKILLSLIDE;Skill:\nSlide;Habilidad:\nDeslizarse;Habilidade:\nDeslizar
 SKILLBACKDASH;Skill:\nBackdash;Habilidad:\nRetropropulsión;Habilidade:\nRetroceder
