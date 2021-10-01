@@ -193,6 +193,9 @@ func _physics_process(delta):
 	#comprobar en cada frame si tocamos suelo por primera vez
 	#(luego de haber estado en el aire
 	if is_on_floor() and !was_on_floor:
+#		if Vars.joy_vibrate:
+#			print(abs(velocity.y))
+#			Input.start_joy_vibration(0,0.1,0.2,0.2)
 		Audio.play_sfx("foot_floor")
 		
 	#-------------- deteccion de colisiones con enemigos o plataformas ----------------------
@@ -668,10 +671,13 @@ func hurt(enemy_danger):
 	get_node("PlayerCamera").add_trauma(0.45)
 	
 	#vibracion de control
-	#Input.start_joy_vibration(0,1,1,1)
+	if Vars.joy_vibrate:
+		Input.start_joy_vibration(0,0.2,0.3,0.7)
 	
 	#muerte del jugador el resto del codigo no se ejecutará
 	if Vars.player["hp_now"] < 1:
+		if Vars.joy_vibrate:
+			Input.start_joy_vibration(0,0.2,0.9,1)
 		death()
 		return
 

@@ -26,7 +26,7 @@ func _player_action(action):
 			$Panel1/Margin/HBx/LblNameMusic.text = music_list[selected_music]
 			$Panel2.visible = true
 			#mostrar el autor de la canción
-			if music_list[selected_music] in ["cathedral_theme","caverns_theme"]:
+			if music_list[selected_music] in ["the_mystic_forest","cathedral_theme","caverns_theme"]:
 				$Panel2/Margin/HBx/LbArtist.text = "DavidKBD"
 			elif music_list[selected_music] in ["xandria's_theme","the_beginning_of_darkness","fatal_answer","prepare_for_war"]:
 				$Panel2/Margin/HBx/LbArtist.text = "Lydium Music"

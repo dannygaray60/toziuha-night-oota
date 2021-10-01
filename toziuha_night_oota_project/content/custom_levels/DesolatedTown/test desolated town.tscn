@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://tilemaps/DesolatedTown/TileMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://objects/characters/Xandria.tscn" type="PackedScene" id=2]
@@ -37,6 +37,8 @@
 [ext_resource path="res://objects/bosses/PuppetMaster.tscn" type="PackedScene" id=35]
 [ext_resource path="res://objects/InvokeEnemy.tscn" type="PackedScene" id=36]
 [ext_resource path="res://content/custom_levels/DesolatedTown/Area2DStartBossbattle.gd" type="Script" id=37]
+[ext_resource path="res://shaders/dissolve.gdshader" type="Shader" id=38]
+[ext_resource path="res://content/custom_levels/DesolatedTown/test desolated town.gd" type="Script" id=39]
 
 [sub_resource type="Curve2D" id=1]
 _data = {
@@ -49,14 +51,42 @@ extents = Vector2( 2368, 64 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 472, 10 )
 
+[sub_resource type="OpenSimplexNoise" id=4]
+
+[sub_resource type="NoiseTexture" id=5]
+flags = 3
+noise = SubResource( 4 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 38 )
+shader_param/dissolve_value = 0.0
+shader_param/dissolve_texture = SubResource( 5 )
+
+[sub_resource type="Animation" id=7]
+resource_name = "hide"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Node2D/ColorRect:material:shader_param/dissolve_value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
 [node name="test desolated town" type="Node2D"]
-visible = false
+script = ExtResource( 39 )
 __meta__ = {
 "_edit_horizontal_guides_": [ -664.0 ]
 }
 
 [node name="LevelBase" parent="." instance=ExtResource( 8 )]
-music = "war_prelude"
+enable_quicksave = false
+music = "the_mystic_forest"
 
 [node name="tree_256px" type="Sprite" parent="LevelBase"]
 position = Vector2( 0, -48 )
@@ -103,7 +133,7 @@ position = Vector2( 704, 16 )
 position = Vector2( -1408, -600 )
 
 [node name="CircleSaw" parent="LevelBase" instance=ExtResource( 11 )]
-position = Vector2( 352, 112 )
+position = Vector2( 1698.93, 173 )
 curve = SubResource( 1 )
 playback_speed = 0.6
 
@@ -422,4 +452,24 @@ position = Vector2( 2880, -357.143 )
 stat = "def"
 quantity = 17
 
+[node name="blackshader" type="CanvasLayer" parent="."]
+
+[node name="Node2D" type="Node2D" parent="blackshader"]
+
+[node name="ColorRect" type="ColorRect" parent="blackshader/Node2D"]
+modulate = Color( 0, 0, 0, 1 )
+material = SubResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 704.0
+margin_bottom = 432.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayerShader" type="AnimationPlayer" parent="blackshader"]
+anims/hide = SubResource( 7 )
+
 [connection signal="body_entered" from="LevelBase/Area2DStartBossbattle" to="LevelBase/Area2DStartBossbattle" method="_on_Area2DStartBossbattle_body_entered"]
+[connection signal="animation_finished" from="blackshader/AnimationPlayerShader" to="." method="_on_AnimationPlayerShader_animation_finished"]

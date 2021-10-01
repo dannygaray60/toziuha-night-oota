@@ -108,7 +108,7 @@ func select_section(opt):
 		"BtnLang":
 			selected_section = opt
 			$Margin/HBx/PanelLang.visible = true
-			$Margin/HBx/PanelLang/Margin/VBx/English/CheckBox.focus()
+			$Margin/HBx/PanelLang/Margin/VBx/Vibration/CheckBox.focus()
 
 #mostrar iconos en el panel de audio y video
 func _on_ItemPanel_focus_entered(extra_arg_0,panel="Audio"):
@@ -156,9 +156,12 @@ func load_config_and_set_controls():
 	match Conf.get_conf_value("other", "lang", "en"):
 		"es":
 			$Margin/HBx/PanelLang/Margin/VBx/Espanol/CheckBox.set_pressed(true)
+		"pt":
+			$Margin/HBx/PanelLang/Margin/VBx/PortuguesBR/CheckBox.set_pressed(true)
 		_:
 			$Margin/HBx/PanelLang/Margin/VBx/English/CheckBox.set_pressed(true)
-
+	#vibracion
+	$Margin/HBx/PanelLang/Margin/VBx/Vibration/CheckBox.set_pressed(Conf.get_conf_value("other","gamepad_vibration",true))
 
 func _on_BtnConfigure_pressed():
 	SceneChanger.change_scene("res://screens/EditTouchscreenButtons.tscn")
@@ -293,3 +296,6 @@ func _notification(what):
 	if what == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST and OS.get_name() == "Android":
 		if $ControlRemap.visible:
 			hide_screen_remap()
+
+func _on_CheckBox_vibration_toggled(button_pressed):
+	Conf.set_conf_value("other","gamepad_vibration",button_pressed)

@@ -1955,7 +1955,7 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 hframes = 15
 vframes = 12
-frame = 3
+frame = 5
 script = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": "z index : 0"

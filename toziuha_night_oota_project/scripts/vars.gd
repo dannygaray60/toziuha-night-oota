@@ -26,6 +26,9 @@ var loaded_from_statue_save = false
 #el jugador esta en una plataforma que permite bajarse de ella? (one way collision)
 var is_on_onewaycollisionplatform = false
 
+#si el control vibrará
+var joy_vibrate = true
+
 #lista de subarmas
 var subweapons = {
 	"none":{
@@ -178,7 +181,7 @@ var equipable_items = {
 var enemy = {
 	"skeleton":{
 		"name": "SKELETON",
-		"atk": 8,
+		"atk": 9,
 		"def":2,
 		"hp_max": 7,
 		"description": "Description...",
@@ -187,7 +190,7 @@ var enemy = {
 	},
 	"infected_skeleton":{
 		"name": "INFECTEDSKELETON",
-		"atk": 10,
+		"atk": 11,
 		"def":2,
 		"hp_max": 7,
 		"description": "Description...",
@@ -268,7 +271,7 @@ var enemy = {
 	},
 	"thrower_skeleton":{
 		"name": "THROWERSKELETON",
-		"atk": 12,
+		"atk": 15,
 		"def":2,
 		"hp_max": 7,
 		"description": "Description...",

@@ -112,7 +112,12 @@ func update_icon():
 				if event.as_text() in ["A","B","C","D","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","1","2","3","4","5","6","7","8","9","0"]:
 					$Label.text = "%s" % event.as_text()
 				else:
-					$Label.text = "?"
+					#si el texto tiene un max de dos caracteres
+					if event.as_text().length() < 2:
+						$Label.text = event.as_text()
+					#colocar solo las dos primeras letras
+					else:
+						$Label.text = event.as_text()[0]+event.as_text()[1]#"?"
 				$Label.visible = true
 	#u ocultar icono
 	else:

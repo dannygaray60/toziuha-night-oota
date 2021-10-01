@@ -1,5 +1,7 @@
 extends Control
 
+var Conf = load("res://scripts/config.gd").new()
+
 var lvl_btn = preload("res://objects/ui/MainButton.tscn")
 var lvl_btn_instance = null
 
@@ -203,6 +205,8 @@ func load_level(mode="newgame"):
 		#establecer nueva ruta hacia donde ir al cargar
 		if mode in ["quickload","savestatue"]:
 			go_to = "%s/%s.tscn"%[Vars.level_dir_path,Vars.player["current_room"]]
+		#vibracion
+		Vars.joy_vibrate = Conf.get_conf_value("other", "gamepad_vibration", true)
 		#cambiar escenario
 		SceneChanger.change_scene(go_to)
 

@@ -1,0 +1,481 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://assets/img/iron_texture.jpg" type="Texture" id=1]
+[ext_resource path="res://content/custom_levels/Dracula'sRevengeTrailer/oJ_qHy.png" type="Texture" id=2]
+[ext_resource path="res://content/custom_levels/Dracula'sRevengeTrailer/nheva1.ogg" type="AudioStream" id=3]
+[ext_resource path="res://content/custom_levels/Dracula'sRevengeTrailer/main.gd" type="Script" id=4]
+[ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://content/custom_levels/Dracula'sRevengeTrailer/img (6).png" type="Texture" id=6]
+[ext_resource path="res://content/custom_levels/Dracula'sRevengeTrailer/chaos_of_battle.jpg" type="Texture" id=7]
+[ext_resource path="res://content/custom_levels/Dracula'sRevengeTrailer/img (3).png" type="Texture" id=8]
+[ext_resource path="res://content/custom_levels/Dracula'sRevengeTrailer/img (1).png" type="Texture" id=9]
+[ext_resource path="res://content/custom_levels/Dracula'sRevengeTrailer/img (4).png" type="Texture" id=10]
+[ext_resource path="res://content/custom_levels/Dracula'sRevengeTrailer/img (2).png" type="Texture" id=11]
+[ext_resource path="res://content/custom_levels/Dracula'sRevengeTrailer/img (5).png" type="Texture" id=12]
+[ext_resource path="res://content/custom_levels/Dracula'sRevengeTrailer/kZyCbs.png" type="Texture" id=13]
+[ext_resource path="res://content/custom_levels/Dracula'sRevengeTrailer/drlogo.png" type="Texture" id=14]
+[ext_resource path="res://fonts_tres/DamageIndicatorPlayer.tres" type="DynamicFont" id=15]
+[ext_resource path="res://objects/ui/ButtonKeyGamepadIcon.tscn" type="PackedScene" id=16]
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+length = 63.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("impale:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 16.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 544, 112 ), Vector2( 152, 104 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 5.5, 9.1, 11.2, 14, 18.6, 22.5, 26.2, 30.9, 35.6, 40.2, 43.1, 47.9, 51.5, 53.9, 56.6, 59.7, 64.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"values": [ {
+"args": [ "d1" ],
+"method": "set_label_text"
+}, {
+"args": [ "d2" ],
+"method": "set_label_text"
+}, {
+"args": [ "d3" ],
+"method": "set_label_text"
+}, {
+"args": [  ],
+"method": "hide_label_text"
+}, {
+"args": [ "d4" ],
+"method": "set_label_text"
+}, {
+"args": [ "d5" ],
+"method": "set_label_text"
+}, {
+"args": [ "d6" ],
+"method": "set_label_text"
+}, {
+"args": [  ],
+"method": "hide_label_text"
+}, {
+"args": [ "d7" ],
+"method": "set_label_text"
+}, {
+"args": [ "d8" ],
+"method": "set_label_text"
+}, {
+"args": [ "d9" ],
+"method": "set_label_text"
+}, {
+"args": [  ],
+"method": "hide_label_text"
+}, {
+"args": [ "d10" ],
+"method": "set_label_text"
+}, {
+"args": [ "d11" ],
+"method": "set_label_text"
+}, {
+"args": [ "d12" ],
+"method": "set_label_text"
+}, {
+"args": [  ],
+"method": "hide_label_text"
+}, {
+"args": [ "d13" ],
+"method": "set_label_text"
+}, {
+"args": [  ],
+"method": "hide_label_text"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("impale:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 10.5, 11.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("xandria1:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 11.5, 13, 26.9, 53.5, 53.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("xandria1:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 11.5, 18.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 544, 216 ), Vector2( 144, 216 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("castle:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 16.3, 22.7, 26.9, 29.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("castle:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 13.7, 40.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1096, 264 ), Vector2( 256, 192 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Label:valign")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 27.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 1, 2 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("girl1:position")
+tracks/8/interp = 2
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 27.9, 30.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -177.267, 184 ), Vector2( -190, 184 ), Vector2( 192, 184 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("girl1:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 25.8, 26.6, 38.8, 40.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("rachel1:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 42.6, 44.7 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -160, 208 ), Vector2( -160, 208 ), Vector2( 112, 208 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("rachel2:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 43.3, 45.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 896, 192 ), Vector2( 896, 192 ), Vector2( 480, 192 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("rachel1:modulate")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 45.2, 46.1, 46.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("rachel2:modulate")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 45.2, 46.1, 46.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("i1:position")
+tracks/14/interp = 2
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 42.2, 45.5, 55.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -208, 208 ), Vector2( -208, 208 ), Vector2( 608, 208 ) ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("i2:position")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 45.5, 50 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 872, 200 ), Vector2( 472, 200 ) ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("i1:modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0, 53.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("flashrect:modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0, 63, 63.5, 63.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("kZyCbs:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 63.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1184, -24 ) ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("kZyCbs:modulate")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0, 63.4, 63.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Shader" id=3]
+code = "/*
+Shader from Godot Shaders - the free shader library.
+godotshaders.com/shader/pixelate
+
+This shader is under CC0 license. Feel free to use, improve and 
+change this shader according to your needs and consider sharing 
+the modified result to godotshaders.com.
+*/
+
+shader_type canvas_item;
+
+uniform int amount = 40;
+
+void fragment()
+{
+	vec2 grid_uv = round(UV * float(amount)) / float(amount);
+	
+	vec4 text = texture(TEXTURE, grid_uv);
+	
+	COLOR = text;
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/amount = 476
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -7
+extra_spacing_bottom = -7
+font_data = ExtResource( 5 )
+
+[node name="main" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color( 1, 0.501961, 0.141176, 1 )
+margin_right = 688.0
+margin_bottom = 392.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/show = SubResource( 1 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
+
+[node name="impale" type="Sprite" parent="."]
+self_modulate = Color( 0.486275, 0.486275, 0.486275, 1 )
+material = SubResource( 4 )
+position = Vector2( 544, 112 )
+texture = ExtResource( 7 )
+
+[node name="xandria1" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 515.831, 216 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 6 )
+
+[node name="castle" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 1096, 264 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+
+[node name="girl1" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( -177.267, 184 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 8 )
+
+[node name="rachel1" type="Sprite" parent="."]
+position = Vector2( -160, 208 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 9 )
+
+[node name="rachel2" type="Sprite" parent="."]
+position = Vector2( 896, 192 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 10 )
+
+[node name="i1" type="Sprite" parent="."]
+position = Vector2( -208.363, 208 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 11 )
+
+[node name="i2" type="Sprite" parent="."]
+visible = false
+position = Vector2( 863.111, 200 )
+scale = Vector2( 0.6, 0.6 )
+texture = ExtResource( 12 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 24.0
+margin_top = 40.0
+margin_right = 656.0
+margin_bottom = 360.0
+custom_fonts/font = SubResource( 2 )
+text = "Text"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Label"]
+
+[node name="kZyCbs" type="Sprite" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 1184, -24 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 13 )
+
+[node name="logo" type="Sprite" parent="kZyCbs"]
+position = Vector2( -424, 76 )
+scale = Vector2( 0.4, 0.4 )
+texture = ExtResource( 14 )
+
+[node name="Label" type="Label" parent="kZyCbs"]
+margin_left = -588.0
+margin_top = 184.0
+margin_right = -512.0
+margin_bottom = 198.0
+custom_fonts/font = ExtResource( 15 )
+text = "Song by Nheva"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="kZyCbs"]
+margin_left = -314.5
+margin_top = 184.0
+margin_right = -238.5
+margin_bottom = 198.0
+custom_fonts/font = ExtResource( 15 )
+text = "CONTINUE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonKeyGamepadIcon" parent="kZyCbs/Label2" instance=ExtResource( 16 )]
+margin_left = -21.5
+margin_top = -1.0
+margin_right = -5.5
+margin_bottom = 15.0
+animated = true
+action = "ui_select"
+
+[node name="flashrect" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 704.0
+margin_bottom = 400.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

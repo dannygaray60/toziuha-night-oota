@@ -6,7 +6,7 @@ export var enable_quicksave = true
 #dejar vacío para no mostrar nada
 export var title_room = ""
 
-export(String, "silence","the_beginning_of_darkness", "caverns_theme", "cave_theme", "ambient_forest_wind") var music = "silence"
+export(String, "silence","the_beginning_of_darkness", "caverns_theme", "cave_theme", "the_mystic_forest", "ambient_forest_wind") var music = "silence"
 
 var player = null
 

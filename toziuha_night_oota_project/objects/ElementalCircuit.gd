@@ -69,14 +69,21 @@ func _on_AreaDetectPlayer_body_exited(body):
 func _on_absorb_circuit_started():
 	if player_entered:
 		
+		
 		$Tween.interpolate_property($Circuit,"scale",Vector2(1,1),Vector2(0,0),$TimerToAbsorb.wait_time)
 		$Tween.start()
 		
 		$TimerToAbsorb.start()
 		$AnimationPlayer.playback_speed = 0.5
+		
+		if Vars.joy_vibrate:
+			Input.start_joy_vibration(0,0.2,0.3,$TimerToAbsorb.wait_time)
 	
 func _on_absorb_circuit_canceled():
 	if player_entered:
+		
+		if Vars.joy_vibrate:
+			Input.stop_joy_vibration(0)
 		
 		$Tween.stop($Circuit,"scale")
 		$Tween.interpolate_property($Circuit,"scale",$Circuit.scale,Vector2(1,1),0.3)

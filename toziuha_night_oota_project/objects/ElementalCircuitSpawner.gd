@@ -66,9 +66,15 @@ func start_circuit():
 		$CircuitProgressBar.max_value = current_circuit_data["time"]
 		$Tween.interpolate_property($CircuitProgressBar,"value",0,$CircuitProgressBar.max_value,$CircuitProgressBar.max_value)
 		$Tween.start()
+		
+		if Vars.joy_vibrate:
+			Input.start_joy_vibration(0,0.2,0.3,current_circuit_data["time"])
 
 #cancelar carga de circuito equipado
 func cancel_circuit():
+	
+	if Vars.joy_vibrate:
+		Input.stop_joy_vibration(0)
 	
 	Audio.stop_sfx("charging_elemental_circuit2")
 	

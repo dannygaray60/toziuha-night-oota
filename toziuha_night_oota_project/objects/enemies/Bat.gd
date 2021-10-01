@@ -82,6 +82,8 @@ func hurt(damage,weapon_position):
 		if cE.hp_now <= 0:
 			gravity += 200
 			$Sprite.modulate = Color(1,1,1,1)
+			#para evitar que bat choque con plataformas estando muerto
+			set_collision_layer_bit(2,false)
 			$HitboxEnemy.set_disabled_collision(true)
 			cE.drop_item_and_show_name(self)
 			Audio.play_sfx("crazy_bat_death")

@@ -14,14 +14,11 @@ func check_configfile(configfile="user://settings.cfg"):
 	# Store a variable if and only if it hasn't been defined yet
 	
 	#-------- seccion de video #disabled
-	if OS.get_name() == "Android":
-		check_conf_setting("video", "filter", "disabled")
-	else:
-		check_conf_setting("video", "filter", "scanlines")
+	check_conf_setting("video", "filter", "disabled")
 	check_conf_setting("video", "fullscreen", false)
 	check_conf_setting("video", "borderless", false)
 	#iconos de botones: gamepad, keyboard, hide
-	if OS.has_touchscreen_ui_hint(): #si la pantalla es tactil
+	if OS.has_touchscreen_ui_hint() or Input.get_connected_joypads().size() > 0: #si la pantalla es tactil o hay un gamepad conectado
 		check_conf_setting("video", "icons_buttons", "gamepad")
 	else:
 		check_conf_setting("video", "icons_buttons", "keyboard")
@@ -37,7 +34,7 @@ func check_configfile(configfile="user://settings.cfg"):
 	
 	#-------- seccion de audio
 	check_conf_setting("audio", "sfx", 0.7)
-	check_conf_setting("audio", "bgm", 0.8)
+	check_conf_setting("audio", "bgm", 0.65)
 	check_conf_setting("audio", "voice", 0.6)
 	
 	#---- obtener la lista de acciones y sus eventos del inputmap
@@ -114,6 +111,8 @@ func check_configfile(configfile="user://settings.cfg"):
 	if get_conf_value("other","gamepad_mapping_string","") != "":
 		Input.add_joy_mapping(get_conf_value("other","gamepad_mapping_string",""), true)
 
+	check_conf_setting("other", "gamepad_vibration", true)
+	
 	#guardar cambios predeterminados en el config nuevo
 	err = conf.save(configfile)
 	

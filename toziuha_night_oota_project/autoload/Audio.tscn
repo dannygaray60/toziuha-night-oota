@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=2]
+[gd_scene load_steps=82 format=2]
 
 [ext_resource path="res://assets/sfx/jump.wav" type="AudioStream" id=1]
 [ext_resource path="res://autoload/Audio.gd" type="Script" id=2]
@@ -80,6 +80,7 @@
 [ext_resource path="res://assets/sfx/fall_explosion.wav" type="AudioStream" id=78]
 [ext_resource path="res://assets/bgm/deep_resonance.ogg" type="AudioStream" id=79]
 [ext_resource path="res://assets/sfx/precharge_elemental_circuit.ogg" type="AudioStream" id=80]
+[ext_resource path="res://assets/bgm/the_mystic_forest.ogg" type="AudioStream" id=81]
 
 [node name="Audio" type="Node"]
 pause_mode = 1
@@ -520,6 +521,14 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="the_mystic_forest" type="AudioStreamPlayer" parent="music"]
+stream = ExtResource( 81 )
+volume_db = -2.0
+bus = "Music"
+__meta__ = {
+"_editor_description_": ""
+}
+
 [node name="fatal_answer" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 76 )
 volume_db = 2.0
@@ -660,3 +669,4 @@ pitch_scale = 0.75
 bus = "Voice"
 
 [node name="Tween" type="Tween" parent="."]
+pause_mode = 2

@@ -271,9 +271,10 @@ focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../../../../../..")
 toggle_mode = true
 group = SubResource( 4 )
-text = "LANGUAGE"
+text = "OTHER"
 
 [node name="PanelVideo" type="PanelContainer" parent="Margin/HBx"]
+visible = false
 margin_left = 258.0
 margin_right = 602.0
 margin_bottom = 280.0
@@ -1310,16 +1311,15 @@ custom_fonts/font = SubResource( 12 )
 text = "PHRASERESTARTTOAPPLYCHANGES"
 
 [node name="PanelLang" type="PanelContainer" parent="Margin/HBx"]
-visible = false
 margin_left = 258.0
 margin_right = 602.0
-margin_bottom = 120.0
+margin_bottom = 166.0
 size_flags_vertical = 0
 custom_styles/panel = SubResource( 5 )
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelLang"]
 margin_right = 344.0
-margin_bottom = 120.0
+margin_bottom = 166.0
 custom_constants/margin_right = 15
 custom_constants/margin_top = 5
 custom_constants/margin_left = 15
@@ -1329,11 +1329,54 @@ custom_constants/margin_bottom = 5
 margin_left = 15.0
 margin_top = 5.0
 margin_right = 329.0
-margin_bottom = 115.0
+margin_bottom = 161.0
 
-[node name="English" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
+[node name="Vibration" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
 margin_right = 314.0
 margin_bottom = 34.0
+custom_constants/separation = 14
+
+[node name="Icon" type="TextureRect" parent="Margin/HBx/PanelLang/Margin/VBx/Vibration"]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 48.0
+margin_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 48, 32 )
+texture = ExtResource( 9 )
+expand = true
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="Margin/HBx/PanelLang/Margin/VBx/Vibration"]
+margin_left = 62.0
+margin_right = 252.0
+margin_bottom = 34.0
+rect_min_size = Vector2( 190, 0 )
+size_flags_vertical = 5
+custom_fonts/font = SubResource( 6 )
+text = "VIBRATION"
+align = 1
+valign = 1
+
+[node name="CheckBox" parent="Margin/HBx/PanelLang/Margin/VBx/Vibration" instance=ExtResource( 11 )]
+margin_left = 266.0
+margin_right = 314.0
+margin_bottom = 34.0
+focus_neighbour_left = NodePath("../../../../../../..")
+focus_neighbour_top = NodePath("../../PortuguesBR/CheckBox")
+focus_neighbour_right = NodePath("../../../../../../..")
+focus_next = NodePath("../../../../../../..")
+focus_previous = NodePath("../../PortuguesBR/CheckBox")
+
+[node name="HSeparator" type="HSeparator" parent="Margin/HBx/PanelLang/Margin/VBx"]
+margin_top = 38.0
+margin_right = 314.0
+margin_bottom = 42.0
+
+[node name="English" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
+margin_top = 46.0
+margin_right = 314.0
+margin_bottom = 80.0
 custom_constants/separation = 14
 
 [node name="Icon" type="TextureRect" parent="Margin/HBx/PanelLang/Margin/VBx/English"]
@@ -1363,16 +1406,15 @@ margin_left = 266.0
 margin_right = 314.0
 margin_bottom = 34.0
 focus_neighbour_left = NodePath("../../../../../../..")
-focus_neighbour_top = NodePath("../../PortuguesBR/CheckBox")
 focus_neighbour_right = NodePath("../../../../../../..")
 focus_next = NodePath("../../../../../../..")
 focus_previous = NodePath("../../PortuguesBR/CheckBox")
 group = SubResource( 13 )
 
 [node name="Espanol" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
-margin_top = 38.0
+margin_top = 84.0
 margin_right = 314.0
-margin_bottom = 72.0
+margin_bottom = 118.0
 custom_constants/separation = 14
 
 [node name="Icon" type="TextureRect" parent="Margin/HBx/PanelLang/Margin/VBx/Espanol"]
@@ -1408,9 +1450,9 @@ focus_previous = NodePath("../../../../../../..")
 group = SubResource( 13 )
 
 [node name="PortuguesBR" type="HBoxContainer" parent="Margin/HBx/PanelLang/Margin/VBx"]
-margin_top = 76.0
+margin_top = 122.0
 margin_right = 314.0
-margin_bottom = 110.0
+margin_bottom = 156.0
 custom_constants/separation = 14
 
 [node name="Icon" type="TextureRect" parent="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR"]
@@ -1441,7 +1483,7 @@ margin_right = 314.0
 margin_bottom = 34.0
 focus_neighbour_left = NodePath("../../../../../../..")
 focus_neighbour_right = NodePath("../../../../../../..")
-focus_neighbour_bottom = NodePath("../../English/CheckBox")
+focus_neighbour_bottom = NodePath("../../Vibration/CheckBox")
 focus_next = NodePath("../../English/CheckBox")
 focus_previous = NodePath("../../Espanol/CheckBox")
 group = SubResource( 13 )
@@ -1662,6 +1704,9 @@ custom_styles/panel = SubResource( 14 )
 [connection signal="focus_exited" from="Margin/HBx/PanelControlsTouchScreen/Margin/VBx/Show/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "Show", "ControlsTouchScreen" ]]
 [connection signal="toggled" from="Margin/HBx/PanelControlsTouchScreen/Margin/VBx/Show/CheckBox" to="." method="option_changed" binds= [ "touchscreenbutton", "show_buttons" ]]
 [connection signal="pressed" from="Margin/HBx/PanelControlsTouchScreen/Margin/VBx/BtnConfigure" to="." method="_on_BtnConfigure_pressed"]
+[connection signal="focus_entered" from="Margin/HBx/PanelLang/Margin/VBx/Vibration/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "Vibration", "Lang" ]]
+[connection signal="focus_exited" from="Margin/HBx/PanelLang/Margin/VBx/Vibration/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "Vibration", "Lang" ]]
+[connection signal="toggled" from="Margin/HBx/PanelLang/Margin/VBx/Vibration/CheckBox" to="." method="_on_CheckBox_vibration_toggled"]
 [connection signal="focus_entered" from="Margin/HBx/PanelLang/Margin/VBx/English/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "English", "Lang" ]]
 [connection signal="focus_exited" from="Margin/HBx/PanelLang/Margin/VBx/English/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "English", "Lang" ]]
 [connection signal="pressed" from="Margin/HBx/PanelLang/Margin/VBx/English/CheckBox" to="." method="option_changed" binds= [ "en", "other", "lang" ]]

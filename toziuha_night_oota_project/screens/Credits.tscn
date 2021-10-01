@@ -41,20 +41,20 @@ size = 32
 extra_spacing_bottom = 3
 font_data = ExtResource( 9 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 9 )
-
-[sub_resource type="StyleBoxEmpty" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="StyleBoxEmpty" id=8]
+
+[sub_resource type="DynamicFont" id=9]
 size = 32
 outline_size = 1
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 9 )
 
-[sub_resource type="StyleBoxTexture" id=9]
+[sub_resource type="StyleBoxTexture" id=10]
 content_margin_left = 9.0
 content_margin_right = 9.0
 texture = ExtResource( 7 )
@@ -66,6 +66,7 @@ margin_right = 14.8467
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( -496, 40 )
+mouse_filter = 1
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -279,7 +280,7 @@ margin_bottom = 92.0
 margin_top = 104.0
 margin_right = 206.0
 margin_bottom = 117.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 6 )
 text = "AVAILABLE_PC_ANDROID"
 align = 1
 
@@ -322,11 +323,11 @@ margin_top = -176.0
 margin_right = 341.5
 margin_bottom = 152.0
 focus_mode = 0
-mouse_filter = 2
+mouse_filter = 1
 mouse_default_cursor_shape = 0
-custom_styles/read_only = SubResource( 6 )
-custom_styles/normal = SubResource( 7 )
-custom_fonts/font = SubResource( 8 )
+custom_styles/read_only = SubResource( 7 )
+custom_styles/normal = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 custom_colors/font_color_readonly = Color( 1, 1, 1, 1 )
 text = "Developed by:
@@ -399,7 +400,7 @@ margin_right = -4.0
 margin_bottom = 21.0
 grow_horizontal = 0
 mouse_filter = 2
-custom_styles/panel = SubResource( 9 )
+custom_styles/panel = SubResource( 10 )
 
 [connection signal="pressed" from="Panel/Margin/BtnMenu" to="." method="_on_BtnGoMenu_pressed"]
 [connection signal="btn_pressed" from="SocialAndSupportLinks" to="." method="_on_SocialAndSupportLinks_btn_pressed"]

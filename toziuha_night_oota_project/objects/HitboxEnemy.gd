@@ -69,6 +69,9 @@ func _on_HitboxEnemy_area_body_entered(area):
 				#camera shake
 				p.get_node("PlayerCamera").add_trauma(0.2,true)
 				
+				if Vars.joy_vibrate:
+					Input.start_joy_vibration(0,0.1,0.7,0.2)
+				
 				total_atk = int(total_atk)
 		
 				#send hurt data to enemy

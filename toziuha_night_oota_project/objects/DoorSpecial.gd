@@ -38,6 +38,8 @@ func _ready():
 
 func shake_camera():
 	if player != null:
+		if Vars.joy_vibrate:
+			Input.start_joy_vibration(0,0.1,0.3,0.2)
 		player.get_node("PlayerCamera").add_trauma(0.2,true)
 
 func _on_Area2D_body_entered(body):
