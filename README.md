@@ -8,7 +8,7 @@ Free Metroidvania inspired on Castlevania Order of Ecclesia
 #Note:
 Only Source code is under MIT license. The assets (images, music, sprites etc) aren't free and some assets rights are properties for their owners
 
-[![Alt text](https://img.youtube.com/vi/Gupuz72cVv4/0.jpg)](https://www.youtube.com/watch?v=Gupuz72cVv4)
+[![Alt text](https://img.youtube.com/vi/TU1qQsZmNXs/0.jpg)](https://www.youtube.com/watch?v=TU1qQsZmNXs)
 
 Toziuha Night is a 2D side-scrolling action platformer with features of a metroidvania RPG. Travel through different non-linear maps set in a dark fantasy world; such as a gloomy forest, demon-infested dungeons, a ruined village and even Count Dracula's castle.
 
