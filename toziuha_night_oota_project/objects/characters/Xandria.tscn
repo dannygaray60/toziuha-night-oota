@@ -952,7 +952,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 0.741176, 0, 0, 1 ), Color( 0.741176, 0, 0, 1 ), Color( 0.411765, 0.0196078, 0.0196078, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("CollisionStand:disabled")
+tracks/3/path = NodePath("CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -1775,7 +1775,7 @@ graph_offset = Vector2( -848.515, -257.721 )
 [sub_resource type="Animation" id=151]
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("CollisionStand:shape:extents")
+tracks/0/path = NodePath("CollisionShape2D:shape:extents")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1787,7 +1787,7 @@ tracks/0/keys = {
 "values": [ Vector2( 4.92596, 14.8455 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CollisionStand:position")
+tracks/1/path = NodePath("CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1813,7 +1813,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=152]
 tracks/0/type = "value"
-tracks/0/path = NodePath("CollisionStand:shape:extents")
+tracks/0/path = NodePath("CollisionShape2D:shape:extents")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1825,7 +1825,7 @@ tracks/0/keys = {
 "values": [ Vector2( 4.87552, 9.94327 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CollisionStand:position")
+tracks/1/path = NodePath("CollisionShape2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1852,7 +1852,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=153]
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("CollisionStand:position")
+tracks/0/path = NodePath("CollisionShape2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -1864,7 +1864,7 @@ tracks/0/keys = {
 "values": [ Vector2( -0.0234375, -21.25 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CollisionStand:shape:extents")
+tracks/1/path = NodePath("CollisionShape2D:shape:extents")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -1898,7 +1898,7 @@ __meta__ = {
 "_editor_description_": ".05 accel"
 }
 
-[node name="CollisionStand" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 self_modulate = Color( 0.560784, 0.980392, 0, 1 )
 position = Vector2( -0.0234375, -21.25 )
 shape = SubResource( 1 )

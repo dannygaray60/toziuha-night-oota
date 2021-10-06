@@ -184,12 +184,12 @@ __meta__ = {
 [node name="lblVersion" type="Label" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -202.0
+margin_left = -219.0
 margin_top = 6.0
-margin_right = -10.0
+margin_right = -3.0
 margin_bottom = 32.0
 custom_fonts/font = SubResource( 1 )
-text = "version 1.1 - beta"
+text = "version 1.1.3 - beta"
 __meta__ = {
 "_edit_use_anchors_": false
 }

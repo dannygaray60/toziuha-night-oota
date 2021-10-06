@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/font/alkhemikal.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/sprites/main_menu_button_box.png" type="Texture" id=2]
@@ -55,7 +55,7 @@ font_data = ExtResource( 8 )
 font_data = ExtResource( 8 )
 
 [sub_resource type="RectangleShape2D" id=10]
-extents = Vector2( 190, 10 )
+extents = Vector2( 230, 20 )
 
 [sub_resource type="DynamicFont" id=11]
 font_data = ExtResource( 8 )
@@ -65,7 +65,10 @@ font_data = ExtResource( 8 )
 
 [sub_resource type="ButtonGroup" id=13]
 
-[sub_resource type="StyleBoxTexture" id=14]
+[sub_resource type="RectangleShape2D" id=14]
+extents = Vector2( 300, 30 )
+
+[sub_resource type="StyleBoxTexture" id=15]
 content_margin_left = 9.0
 content_margin_right = 9.0
 texture = ExtResource( 16 )
@@ -112,6 +115,8 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -328.0
+margin_right = -3.0
+mouse_filter = 2
 custom_constants/margin_right = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
@@ -121,14 +126,15 @@ __meta__ = {
 
 [node name="HBx" type="HBoxContainer" parent="Margin"]
 margin_left = 20.0
-margin_right = 663.0
-margin_bottom = 308.0
+margin_right = 665.0
+margin_bottom = 323.0
+mouse_filter = 2
 size_flags_vertical = 0
-custom_constants/separation = 43
+custom_constants/separation = 29
 
 [node name="VBx" type="VBoxContainer" parent="Margin/HBx"]
 margin_right = 215.0
-margin_bottom = 308.0
+margin_bottom = 323.0
 custom_constants/separation = 12
 
 [node name="HSeparator" type="HSeparator" parent="Margin/HBx/VBx"]
@@ -960,16 +966,17 @@ show_specific_icon = "keyboard"
 action = "ui_right"
 
 [node name="PanelGamepad" type="PanelContainer" parent="Margin/HBx"]
-visible = false
-margin_left = 258.0
-margin_right = 659.0
+margin_left = 244.0
+margin_right = 645.0
 margin_bottom = 323.0
+mouse_filter = 2
 size_flags_vertical = 0
 custom_styles/panel = SubResource( 5 )
 
 [node name="Margin" type="MarginContainer" parent="Margin/HBx/PanelGamepad"]
 margin_right = 401.0
 margin_bottom = 323.0
+mouse_filter = 2
 custom_constants/margin_right = 15
 custom_constants/margin_top = 5
 custom_constants/margin_left = 15
@@ -1191,10 +1198,10 @@ margin_top = 297.0
 margin_right = 371.0
 margin_bottom = 313.0
 
-[node name="TouchScreenButton" type="TouchScreenButton" parent="Margin/HBx/PanelGamepad/Margin/VBx/HBoxContainer"]
-position = Vector2( 0, -1 )
+[node name="TouchScreenButtonRemapString" type="TouchScreenButton" parent="Margin/HBx/PanelGamepad/Margin/VBx/HBoxContainer"]
+visible = false
+position = Vector2( -14, -1 )
 shape = SubResource( 10 )
-action = "ui_focus_prev"
 
 [node name="Label" type="Label" parent="Margin/HBx/PanelGamepad/Margin/VBx/HBoxContainer"]
 margin_top = 1.0
@@ -1311,8 +1318,9 @@ custom_fonts/font = SubResource( 12 )
 text = "PHRASERESTARTTOAPPLYCHANGES"
 
 [node name="PanelLang" type="PanelContainer" parent="Margin/HBx"]
-margin_left = 258.0
-margin_right = 602.0
+visible = false
+margin_left = 645.0
+margin_right = 989.0
 margin_bottom = 166.0
 size_flags_vertical = 0
 custom_styles/panel = SubResource( 5 )
@@ -1624,6 +1632,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TouchScreenHideRemapWindow" type="TouchScreenButton" parent="ControlRemap/Label"]
+visible = false
+position = Vector2( -115.5, -16 )
+shape = SubResource( 14 )
+
 [node name="Notif" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1644,7 +1657,7 @@ margin_right = -4.0
 margin_bottom = 21.0
 grow_horizontal = 0
 mouse_filter = 2
-custom_styles/panel = SubResource( 14 )
+custom_styles/panel = SubResource( 15 )
 
 [connection signal="pressed" from="Margin/HBx/VBx/Panel0/Margin/VBx/BtnMenu" to="." method="select_section" binds= [ "main_menu" ]]
 [connection signal="pressed" from="Margin/HBx/VBx/Panel/Margin/VBx/BtnVideo" to="." method="select_section" binds= [ "BtnVideo" ]]
@@ -1716,5 +1729,6 @@ custom_styles/panel = SubResource( 14 )
 [connection signal="focus_entered" from="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR/CheckBox" to="." method="_on_ItemPanel_focus_entered" binds= [ "PortuguesBR", "Lang" ]]
 [connection signal="focus_exited" from="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR/CheckBox" to="." method="_on_ItemPanel_focus_exited" binds= [ "PortuguesBR", "Lang" ]]
 [connection signal="pressed" from="Margin/HBx/PanelLang/Margin/VBx/PortuguesBR/CheckBox" to="." method="option_changed" binds= [ "pt", "other", "lang" ]]
+[connection signal="pressed" from="ControlRemap/Label/TouchScreenHideRemapWindow" to="." method="_on_TouchScreenHideRemapWindow_pressed"]
 
 [editable path="Margin/HBx/PanelControls/Margin/VBx/BtnJump/Icon"]

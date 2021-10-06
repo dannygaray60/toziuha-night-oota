@@ -18,10 +18,11 @@ func check_configfile(configfile="user://settings.cfg"):
 	check_conf_setting("video", "fullscreen", false)
 	check_conf_setting("video", "borderless", false)
 	#iconos de botones: gamepad, keyboard, hide
-	if OS.has_touchscreen_ui_hint() or Input.get_connected_joypads().size() > 0: #si la pantalla es tactil o hay un gamepad conectado
-		check_conf_setting("video", "icons_buttons", "gamepad")
+#	if OS.has_touchscreen_ui_hint() or Input.get_connected_joypads().size() > 0: #si la pantalla es tactil o hay un gamepad conectado
+	if Input.get_connected_joypads().size() > 0: #si hay un gamepad conectado
+		conf.set_value("video", "icons_buttons", "gamepad")
 	else:
-		check_conf_setting("video", "icons_buttons", "keyboard")
+		conf.set_value("video", "icons_buttons", "keyboard")
 	
 	#nivel de efectos visuales
 	# 0 - shaders opcionales desactivados y light2d desactivado (se usa el additive mode en cambio)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://objects/characters/Xandria.tscn" type="PackedScene" id=1]
 [ext_resource path="res://test/level.gd" type="Script" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://objects/items/Torch.tscn" type="PackedScene" id=21]
 [ext_resource path="res://objects/CameraDelimiter.tscn" type="PackedScene" id=22]
 [ext_resource path="res://objects/items/Potion.tscn" type="PackedScene" id=23]
+[ext_resource path="res://objects/MovingPlatform.tscn" type="PackedScene" id=24]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -396,6 +397,11 @@ _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 0, -32, 0, 0, 0, 0, 0, 0 )
 }
 
+[sub_resource type="Curve2D" id=11]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 56 )
+}
+
 [node name="level" type="Node2D"]
 script = ExtResource( 2 )
 __meta__ = {
@@ -439,7 +445,7 @@ position = Vector2( 800, 560 )
 position = Vector2( 352, 336 )
 
 [node name="SubweaponChanger" parent="LevelBase" instance=ExtResource( 10 )]
-position = Vector2( 72, 256 )
+position = Vector2( -64, 248 )
 subweapon = "axe"
 
 [node name="Skeleton" parent="LevelBase" instance=ExtResource( 11 )]
@@ -522,7 +528,14 @@ position = Vector2( 744, 408 )
 limit = "BOTTOM-RIGHT"
 
 [node name="Xandria" parent="LevelBase" instance=ExtResource( 1 )]
-position = Vector2( 128, 336 )
+position = Vector2( 120, 312 )
 
 [node name="Potion" parent="LevelBase" instance=ExtResource( 23 )]
 position = Vector2( 192, 304 )
+
+[node name="MovingPlatform" parent="LevelBase" instance=ExtResource( 24 )]
+position = Vector2( 80, 248 )
+curve = SubResource( 11 )
+
+[node name="MovingPlatform2" parent="LevelBase" instance=ExtResource( 24 )]
+position = Vector2( 16, 288 )

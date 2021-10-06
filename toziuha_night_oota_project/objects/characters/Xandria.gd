@@ -341,7 +341,9 @@ func _get_input():
 		pass
 	#Player is jumping
 	#esta fisica solo se aplica durante el primer salto
-	elif Input.is_action_just_released('ui_accept') and num_jumps <= 1 and velocity.y <= -120 and state in ["jump","attack"]:
+#	elif Input.is_action_just_released('ui_accept') and num_jumps <= 1 and velocity.y <= -120 and state in ["jump","attack"]:
+	elif Input.is_action_just_released('ui_accept') and num_jumps <= 1 and abs(velocity.y) > 80 and state in ["jump","attack"]:
+		#print(abs(velocity.y))
 		#Jump Height depends on how long you will hold key
 		velocity += Vector2.UP * (-0.5) * (low_jump_multiplier)
 

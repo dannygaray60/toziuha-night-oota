@@ -112,7 +112,9 @@ tracks/1/keys = {
 [sub_resource type="CanvasItemMaterial" id=7]
 blend_mode = 1
 
-[node name="HydroAmnis" type="KinematicBody2D"]
+[node name="HydroAmnis" type="KinematicBody2D" groups=[
+"hydro_amnis",
+]]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource( 1 )

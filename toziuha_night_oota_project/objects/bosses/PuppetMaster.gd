@@ -107,7 +107,7 @@ func start_chase():
 func random_move():
 	if cE.state == "dead" or cE.state == "spawn" or modulate.a != 1:
 		return
-	
+
 	$Tween.stop_all()
 	randomize()
 	var opt = randi() % 4
@@ -126,6 +126,7 @@ func random_move():
 func hurt(damage,weapon_position):
 	
 	if cE.state != "dead" and cE.hp_now > 0 and modulate.a == 1:
+
 		#$Tween.stop_all()
 		$Sprite.modulate = Color(1,0,0,1)
 		$TimerHurt.start()
@@ -159,12 +160,13 @@ func hurt(damage,weapon_position):
 			$Tween.start()
 
 	yield($TimerHurt,"timeout")
+	
 	random_move()
 	cE.update_facing(self,$Sprite)
 	$Sprite.modulate = Color(1,1,1,1)
 
 func start_spawn():
-	if cE.state != "dead" and player is NodePath:
+	if cE.state != "dead" and player is NodePath and modulate.a == 1:
 		get_node(invoke_object).global_position = get_node(player).global_position
 		get_node(invoke_object).invoke()
 		#print("hacer aparecer skeleton, state:"+state)
@@ -197,7 +199,8 @@ func _on_Tween_tween_completed(_object, _key):
 
 func _on_TimerAutoInvoke_timeout():
 	if cE.state != "dead" and cE.hp_now > 0 and cE.state != "spawn":
-		change_state("spawn")
+#		change_state("spawn")
+		change_state("fly")
 		received_hits = 0
 		$Tween.stop_all()
 		#mover a posicion central

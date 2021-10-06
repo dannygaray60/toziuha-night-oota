@@ -523,7 +523,6 @@ __meta__ = {
 
 [node name="the_mystic_forest" type="AudioStreamPlayer" parent="music"]
 stream = ExtResource( 81 )
-volume_db = -2.0
 bus = "Music"
 __meta__ = {
 "_editor_description_": ""

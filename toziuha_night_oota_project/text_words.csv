@@ -107,6 +107,7 @@ TRANSPARENCY;Transparency;Transparencia;Transparencia
 SIZE;Size;Tamaño;Tamanho
 CONF_BTN_ICNS;Change Gamepad icons;Cambiar iconos gamepad;Alterar Icones do Gamepad
 SHOW_GAMPD_ICNS;Gamepad Icons;Iconos Gamepad;Icones do Gamepad
+HIDE_GAMPD_ICNS;No Gamepad Icons;No Iconos Gamepad;Não Icones do Gamepad
 SHOW_KYBRD_ICNS;Keyboard Icons;Iconos Teclado;Icones do Teclado
 HIDE_BTN_ICNS;Hide Icons;Ocultar Iconos;Ocultar Icones
 POTION;Potion;Poción;Poção
@@ -145,6 +146,7 @@ IRIDIUM;Iridium;Iridio;Iridio
 TITANIUM;Titanium;Titanio;Titanio
 OXYGEN;Oxygen;Óxigeno;Óxigenio
 COPPER;Copper;Cobre;Cobre
+COMINGSOON;Coming Soon;Próximamente;Proximamente
 PHRASE_SLIDE;Press «Down» + «Jump» to slide.;Presiona «Abajo» + «Salto» para deslizarte.;Pressione «Abaixo» + «Pular» para deslizar.
 PHRASEWANTLOADORNEWGAME;Do you want continue from a save file or start new game?;¿Desea continuar desde un punto de guardado o comenzar de nuevo?;Quer continuar a partir de um arquivo salvo ou iniciar um novo jogo?
 PHRASEABOUTQUICKSAVE;Note: The quick save just create a temporal file. If you lose all health points (HP) the last save point (from statues) will be loaded, otherwise the whole level will be restarted.;Nota: El guardado rápido crea un archivo temporal que se elimina al ser cargado. Al perder toda la salud (HP) solo puede regresar a los puntos de guardado realizados con las estatuas, en caso contrario el nivel entero será reiniciado.;O salvamento rápido apenas cria um arquivo temporal. Se você perder todos os pontos de saúde (HP), o último ponto de salvamento (das estátuas) será carregado, caso contrário, todo o nível será reiniciado.

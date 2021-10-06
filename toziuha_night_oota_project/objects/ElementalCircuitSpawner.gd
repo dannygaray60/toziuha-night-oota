@@ -52,8 +52,8 @@ func start_circuit():
 			$CircuitProgressBar.fill_mode = 0
 		
 		#reestablecer los decibelios por defecto ya que se usará fadein de sonido
-		Audio.get_node("sfx/charging_elemental_circuit2").volume_db = 0
-		Audio.play_sfx("charging_elemental_circuit2")
+#		Audio.get_node("sfx/charging_elemental_circuit2").volume_db = 0
+#		Audio.play_sfx("charging_elemental_circuit2")
 		
 		$CircuitProgressBar.value = 0
 		
@@ -76,7 +76,7 @@ func cancel_circuit():
 	if Vars.joy_vibrate:
 		Input.stop_joy_vibration(0)
 	
-	Audio.stop_sfx("charging_elemental_circuit2")
+	#Audio.stop_sfx("charging_elemental_circuit2")
 	
 	changing_circuit = false
 	hide_circuit()
@@ -151,7 +151,7 @@ func activate_circuit():
 			get_parent().get_parent().emit_signal("stats_changed")
 		"hydro_amnis":
 			#limitar la cantidad de veces para spawnear, máximo 3
-			if get_tree().get_nodes_in_group("hydro_amnis").size() > 3:
+			if get_tree().get_nodes_in_group("hydro_amnis").size() > 1:
 				Audio.play_sfx("btn_incorrect")
 				return
 			#restar el costo de maná del circuito
@@ -164,8 +164,8 @@ func activate_circuit():
 			object_instance.direction = get_parent().get_parent().facing
 			Functions.get_main_level_scene().add_child(object_instance)
 		"fulgur_sphaera":
-			#limitar la cantidad de veces para spawnear, máximo 3
-			if get_tree().get_nodes_in_group("fulgur_sphaera").size() > 3:
+			#limitar la cantidad de veces para spawnear
+			if get_tree().get_nodes_in_group("fulgur_sphaera").size() > 2:
 				Audio.play_sfx("btn_incorrect")
 				return
 			#restar el costo de maná del circuito

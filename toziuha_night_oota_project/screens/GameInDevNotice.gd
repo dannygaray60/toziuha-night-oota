@@ -2,6 +2,12 @@ extends Control
 
 var Conf = load("res://scripts/config.gd").new()
 
+func _enter_tree():
+	if Input.get_connected_joypads().size() > 0: #si hay un gamepad conectado
+		Conf.set_conf_value("video", "icons_buttons", "gamepad")
+	else:
+		Conf.set_conf_value("video", "icons_buttons", "keyboard")
+
 func _ready():
 	#ocultar mouse
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

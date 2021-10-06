@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/img/iron_texture.jpg" type="Texture" id=1]
 [ext_resource path="res://content/custom_levels/Dracula'sRevengeTrailer/oJ_qHy.png" type="Texture" id=2]
@@ -314,7 +314,7 @@ tracks/19/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="Shader" id=3]
+[sub_resource type="Shader" id=2]
 code = "/*
 Shader from Godot Shaders - the free shader library.
 godotshaders.com/shader/pixelate
@@ -337,17 +337,27 @@ void fragment()
 	COLOR = text;
 }"
 
-[sub_resource type="ShaderMaterial" id=4]
-shader = SubResource( 3 )
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
 shader_param/amount = 476
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
 size = 48
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 extra_spacing_top = -7
 extra_spacing_bottom = -7
 font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=5]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = -7
+extra_spacing_bottom = -7
+font_data = ExtResource( 5 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 100, 30 )
 
 [node name="main" type="Node2D"]
 script = ExtResource( 4 )
@@ -356,6 +366,7 @@ script = ExtResource( 4 )
 modulate = Color( 1, 0.501961, 0.141176, 1 )
 margin_right = 688.0
 margin_bottom = 392.0
+mouse_filter = 2
 texture = ExtResource( 1 )
 expand = true
 stretch_mode = 7
@@ -372,19 +383,19 @@ autoplay = true
 
 [node name="impale" type="Sprite" parent="."]
 self_modulate = Color( 0.486275, 0.486275, 0.486275, 1 )
-material = SubResource( 4 )
+material = SubResource( 3 )
 position = Vector2( 544, 112 )
 texture = ExtResource( 7 )
 
 [node name="xandria1" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 515.831, 216 )
+position = Vector2( 544, 216 )
 scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 6 )
 
 [node name="castle" type="Sprite" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 1096, 264 )
+position = Vector2( 1092.85, 263.73 )
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 
@@ -405,13 +416,13 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 10 )
 
 [node name="i1" type="Sprite" parent="."]
-position = Vector2( -208.363, 208 )
+position = Vector2( -211.065, 208 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 11 )
 
 [node name="i2" type="Sprite" parent="."]
 visible = false
-position = Vector2( 863.111, 200 )
+position = Vector2( 836.444, 200 )
 scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 12 )
 
@@ -420,7 +431,7 @@ margin_left = 24.0
 margin_top = 40.0
 margin_right = 656.0
 margin_bottom = 360.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 text = "Text"
 align = 1
 valign = 1
@@ -453,6 +464,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label2comingsoon" type="Label" parent="kZyCbs"]
+margin_left = -580.0
+margin_top = 32.0
+margin_right = -238.0
+margin_bottom = 156.0
+custom_fonts/font = SubResource( 5 )
+text = "COMINGSOON"
+align = 1
+valign = 2
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Label2" type="Label" parent="kZyCbs"]
 margin_left = -314.5
 margin_top = 184.0
@@ -476,6 +501,12 @@ action = "ui_select"
 modulate = Color( 1, 1, 1, 0 )
 margin_right = 704.0
 margin_bottom = 400.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+position = Vector2( 488, 328 )
+shape = SubResource( 6 )
+action = "ui_select"

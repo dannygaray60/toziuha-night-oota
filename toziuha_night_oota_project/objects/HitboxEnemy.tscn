@@ -13,7 +13,7 @@ script = ExtResource( 1 )
 wait_time = 0.3
 one_shot = true
 __meta__ = {
-"_editor_description_": ""
+"_editor_description_": ".3"
 }
 
 [node name="TimerContinuousDamage" type="Timer" parent="."]

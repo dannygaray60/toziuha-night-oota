@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/sprites/movingplatform.png" type="Texture" id=1]
 [ext_resource path="res://scripts/MovingPlatform.gd" type="Script" id=2]
@@ -27,8 +27,12 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 23.0779, 8.19975 )
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 18.6391, 4.89812 )
+
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 4.96909
+height = 0.0
 
 [sub_resource type="Curve2D" id=7]
 _data = {
@@ -80,12 +84,22 @@ motion/sync_to_physics = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="KinematicBody2D"]
 position = Vector2( 0, 9 )
 frames = SubResource( 5 )
-frame = 2
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-position = Vector2( 0, 9.19612 )
-shape = SubResource( 6 )
+position = Vector2( 0, 4.95563 )
+shape = SubResource( 10 )
+one_way_collision = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 19, 4.95563 )
+shape = SubResource( 11 )
+one_way_collision = true
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( -19, 4.95563 )
+shape = SubResource( 11 )
 one_way_collision = true
 
 [node name="Path2D" type="Path2D" parent="."]

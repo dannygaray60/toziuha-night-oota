@@ -38,9 +38,13 @@ func _ready():
 	#y opciones de teclado
 	if OS.get_name() in ["Android", "iOS"]:
 		$Margin/HBx/VBx/Panel/Margin/VBx/BtnControls.visible = false
-		$Margin/HBx/PanelVideo/Margin/VBx/ShowKeyboardIcons.visible = false
+		#en dispositivos moviles en vez de que diga teclado, diga hide buttons
+		$Margin/HBx/PanelVideo/Margin/VBx/ShowKeyboardIcons/Label.text = tr("HIDE_GAMPD_ICNS")
 		$Margin/HBx/PanelVideo/Margin/VBx/FullScr.visible = false
 		$Margin/HBx/PanelVideo/Margin/VBx/Borderless.visible = false
+		#en android da conflictos usar un input de texto (para mapping string)
+		#esta opcion no estara disponible
+		$Margin/HBx/PanelGamepad/Margin/VBx/HBoxContainer.visible = false
 	
 	#si no hay al menos un gamepad conectado
 	#se desactivan opciones sobre gamepad
@@ -299,3 +303,13 @@ func _notification(what):
 
 func _on_CheckBox_vibration_toggled(button_pressed):
 	Conf.set_conf_value("other","gamepad_vibration",button_pressed)
+
+
+func _on_TouchScreenHideRemapWindow_pressed():
+	pass # Replace with function body.
+
+
+func _on_TouchScreenButtonRemapString_pressed():
+	if $Margin/HBx/PanelGamepad.visible:
+		Audio.play_sfx("btn_accept")
+		SceneChanger.change_scene("res://screens/ApplyMappingString.tscn")

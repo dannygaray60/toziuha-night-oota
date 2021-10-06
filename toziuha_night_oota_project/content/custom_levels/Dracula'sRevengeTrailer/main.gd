@@ -1,6 +1,8 @@
 extends Node2D
 
 func _ready():
+	#ocultar botones
+	ControlsOnscreen.show_buttons(false)
 	Tr._load("res://content/custom_levels/Dracula'sRevengeTrailer/text.ini")
 	Audio.stop_music()
 	$AnimationPlayer.play("show")

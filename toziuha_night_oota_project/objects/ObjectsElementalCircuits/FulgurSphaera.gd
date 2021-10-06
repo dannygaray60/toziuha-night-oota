@@ -33,6 +33,8 @@ func _on_AnimSprites_animation_finished(anim_name):
 
 
 func _on_Sphaera_area_entered(area_body,area_name):
+	get_node(area_name).set_deferred("monitoring",false)
+	get_node(area_name).set_deferred("monitoring",true)
 #	if area_body.is_in_group("torch"):
 #		Audio.play_sfx("electric_zap")
 #		area_body.destroy()

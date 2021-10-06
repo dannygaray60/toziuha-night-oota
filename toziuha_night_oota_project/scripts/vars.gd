@@ -112,14 +112,14 @@ var elemental_circuits = {
 		"passive" : false, #false si el circuito es para un ataque especial (y no habilidad pasiva)
 		"frame_icon": 7,
 		"time": 1, #tiempo necesario para usar circuito, 0 significa también pasivo
-		"mp_cost": 8, #costo de maná
+		"mp_cost": 10, #costo de maná
 	},
 	"vita_pecunia" : {
 		"name" : "Vita Pecunia",
 		"description" : "DESC_VITAPECUNIA",
 		"passive" : false, #false si el circuito es para un ataque especial (y no habilidad pasiva)
 		"frame_icon": 8,
-		"time": 1, #tiempo necesario para usar circuito, 0 significa también pasivo
+		"time": 2, #tiempo necesario para usar circuito, 0 significa también pasivo
 		"mp_cost": 10, #costo de maná
 	},
 	"fulgur_sphaera" : {
@@ -128,7 +128,7 @@ var elemental_circuits = {
 		"passive" : false, #false si el circuito es para un ataque especial (y no habilidad pasiva)
 		"frame_icon": 9,
 		"time": 1, #tiempo necesario para usar circuito, 0 significa también pasivo
-		"mp_cost": 5, #costo de maná
+		"mp_cost": 17, #costo de maná
 	},
 	
 	

@@ -90,11 +90,10 @@ func _on_HitboxEnemy_area_body_entered(area):
 			get_parent().hurt(total_atk,area.global_position)
 		
 		#daño de fulgur sphaera
-		elif area.name in ["Sphaera1", "Sphaera1"]:
+		elif area.name in ["Sphaera1", "Sphaera2"]:
 			if get_parent().cE.hp_now > 0:
 				Audio.play_sfx("electric_zap")
 			get_parent().hurt(int(Vars.player["atk"]*4),area.global_position)
-		
 		#hydro amnis
 #		elif area.name == "HydroAmnisArea":
 #			get_parent().hurt(int(Vars.player["atk"]*2.5),area.global_position)

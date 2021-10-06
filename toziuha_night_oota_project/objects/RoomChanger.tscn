@@ -28,4 +28,8 @@ __meta__ = {
 "_gizmo_extents_": 30.0
 }
 
+[node name="TimerRetryChangeRoom" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="_on_RoomChanger_body_entered"]
+[connection signal="timeout" from="TimerRetryChangeRoom" to="." method="_on_TimerRetryChangeRoom_timeout"]
