@@ -305,6 +305,10 @@ func _get_input():
 	#accion para usar un item curativo
 	if Input.is_action_pressed("ui_down") and Input.is_action_just_pressed("ui_focus_next"):
 		_use_health_item()
+	
+	#Couldn't figure out how to make this also crouch while it's pressed -Mauno
+	if Input.is_action_just_pressed("potion"):
+		_use_health_item()
 		
 	#accion para lanzar subarma
 	if !Input.is_action_pressed("ui_down") and !$Sprite/RayCastUp.is_colliding() and Input.is_action_just_pressed("ui_focus_next") and state != "attack-crouch" and state != "crouch" and state != "charging":
